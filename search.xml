@@ -343,6 +343,125 @@
       </tags>
   </entry>
   <entry>
+    <title>循环和switch</title>
+    <url>/2021/09/01/day03_%E5%BE%AA%E7%8E%AF/</url>
+    <content><![CDATA[<h5 id="4-2-switch语句"><a href="#4-2-switch语句" class="headerlink" title="4.2 switch语句"></a>4.2 switch语句</h5><p>​    格式：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">switch</span>(表达式)&#123;</span><br><span class="line">	<span class="keyword">case</span> 值<span class="number">1</span>：</span><br><span class="line">	语句体 <span class="number">1</span>；</span><br><span class="line">	<span class="keyword">break</span>；</span><br><span class="line">	<span class="keyword">case</span> 值<span class="number">2</span>：</span><br><span class="line">	语句体 <span class="number">2</span>；</span><br><span class="line">	<span class="keyword">break</span>；</span><br><span class="line">	……</span><br><span class="line">	<span class="keyword">case</span> 值n：</span><br><span class="line">	语句体 n；</span><br><span class="line">	<span class="keyword">break</span>；</span><br><span class="line">	<span class="keyword">default</span>:</span><br><span class="line">	语句体；</span><br><span class="line">     <span class="keyword">break</span>；</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+<p>​    表达式的结果只能是：byte,short,int,char 字符串，枚举</p>
+<p>​    先计算表达式的值，从上到下与case开始匹配,遇到相同的值，开始乡下执行对应的语句体，直到遇到break或者switch才结束，如果没有匹配到case，执行default语句，直到遇到break或switch语句结束才结束。</p>
+<p>​    switch 一定能被if取代，能用if的尽量用if，但是有一种情况你可以选择switch，就是做选择的时候，这样的代码看起来比较清爽。</p>
+<p>​    </p>
+<p>​    case穿透：当语句出现break的时候，就会出现穿透现象</p>
+<p>​    当省略break的时候，会继续执行，直到执行到break的时候才会结束；</p>
+<p>​    出现多个重复的语句，可以考虑使用case穿透</p>
+<h3 id="5-循环语句"><a href="#5-循环语句" class="headerlink" title="5.循环语句"></a>5.循环语句</h3><p>​    循环是可以钱傲的，但是不要去数；</p>
+<p>​    嵌套不要超过两次，最多三次；</p>
+<p>​    嵌套就要去找规律，然后拼接；</p>
+<p>​    外层循环执行一次，内层循环执行一圈；</p>
+<h5 id="5-1-for语句"><a href="#5-1-for语句" class="headerlink" title="5.1 for语句"></a>5.1 for语句</h5><p>​    格式： </p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">for(初始化；条件判断语句;条件控制语句)&#123;</span><br><span class="line">  循环体；</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>1.首先执行初始化语句；</p>
+<p>2.执行条件判断语句</p>
+<p>​    true：继续执行</p>
+<p>​    false：结束执行</p>
+<p>可以和if或者for语句继续嵌套使用</p>
+<p>案例：水仙花数：每个位数的立方和等于原数</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">for(int num&#x3D;100;num&lt;&#x3D;999;num+&#x3D;1)&#123;</span><br><span class="line">			int a &#x3D; num % 10; </span><br><span class="line">			int b &#x3D; num &#x2F; 10 % 10; </span><br><span class="line">			int c &#x3D; num &#x2F; 10 &#x2F; 10 % 10;</span><br><span class="line">			if(a*a*a+b*b*b+c*c*c&#x3D;&#x3D;num)&#123;</span><br><span class="line">				System.out.println(num);</span><br><span class="line">		&#125;</span><br><span class="line">		&#125;</span><br></pre></td></tr></table></figure>
+
+<p>键盘输入：Scanner</p>
+<p>求和：sum</p>
+<p>统计数：count</p>
+<p>随机：Random</p>
+<p>案例二：每行打印两个水仙花数</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"> int count &#x3D; 0 ;</span><br><span class="line"> for(int num&#x3D;100;num&lt;&#x3D;999;num+&#x3D;1)&#123;</span><br><span class="line">			int a &#x3D; num % 10; </span><br><span class="line">			int b &#x3D; num &#x2F; 10 % 10; </span><br><span class="line">			int c &#x3D; num &#x2F; 10 &#x2F; 10 % 10;</span><br><span class="line">			if(a*a*a+b*b*b+c*c*c&#x3D;&#x3D;num)&#123;</span><br><span class="line">				System.out.println(num);</span><br><span class="line">				count++;</span><br><span class="line">				if(count%2&#x3D;&#x3D;0)&#123;</span><br><span class="line">System.out.println(num);</span><br><span class="line">&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="5-2-while-语句"><a href="#5-2-while-语句" class="headerlink" title="5.2 while 语句"></a>5.2 while 语句</h5><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">while(条件判断语句)&#123;</span><br><span class="line">		循环体；</span><br><span class="line">		条件控制语句；</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+<p>和for的操作一致；</p>
+<h5 id="5-3-do-while-语句"><a href="#5-3-do-while-语句" class="headerlink" title="5.3 do-while 语句"></a>5.3 do-while 语句</h5><p>​    格式：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">do</span>&#123;</span><br><span class="line">  循环体；</span><br><span class="line">&#125;<span class="keyword">while</span>(判断语句)&#123;  &#125;</span><br></pre></td></tr></table></figure>
+
+<p>​    特点：无论循环条件是否满足，至少会执行一次循环体</p>
+<h5 id="5-4-三者的区别"><a href="#5-4-三者的区别" class="headerlink" title="5.4 三者的区别"></a>5.4 三者的区别</h5><p>​    for 和 while：</p>
+<p>​    在for语句内的定义的变量，只能在语句内使用，之后就不能够使用了；</p>
+<p>​    在while语句内定义的变量，可以在语句外使用，并且不能重复使用；</p>
+<h5 id="5-5-死循环"><a href="#5-5-死循环" class="headerlink" title="5.5 死循环"></a>5.5 死循环</h5><p>​    格式：</p>
+<p>​    while(true){}</p>
+<p>​    for(;;){}</p>
+<p>​    do{}while(true){}</p>
+<p>应用场景：可以筛选符合对应条件的对象；</p>
+<h5 id="5-6-跳转控制语句"><a href="#5-6-跳转控制语句" class="headerlink" title="5.6 跳转控制语句"></a>5.6 跳转控制语句</h5><p>​    countinue; 跳过这次循环</p>
+<p>​    break;  结束当前循环</p>
+<p>​    只能在循环或switch里面使用</p>
+<h3 id="6-Random-产生随机数"><a href="#6-Random-产生随机数" class="headerlink" title="6.Random 产生随机数"></a>6.Random 产生随机数</h3><h5 id="6-1-Random"><a href="#6-1-Random" class="headerlink" title="6.1 Random"></a>6.1 Random</h5><p>​    格式：</p>
+<p>​    1.导包 <code>import java.unitl.Random;</code></p>
+<p>​    2.创建对象 <code>Random i = new Random();</code></p>
+<p>​    3.接受随机数 <code>int num = i.nextInt(整数);</code></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//1-10</span></span><br><span class="line"><span class="keyword">int</span> num = i.nextInt((<span class="number">10</span>-<span class="number">1</span>))+<span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+
+
+
+]]></content>
+      <tags>
+        <tag>后端学习</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>java基础语句</title>
+    <url>/2021/08/30/day01-Java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%20/</url>
+    <content><![CDATA[<h1 id="多看-多练-多查-多记"><a href="#多看-多练-多查-多记" class="headerlink" title="多看 多练 多查  多记"></a>多看 多练 多查  多记</h1><p>jdk：开发工具</p>
+<p>jre:运行环境</p>
+<p>jvm:虚拟机</p>
+<p><strong>1.1 数据类型：基本数据类型和引用数据类型（数组，类，接口）</strong></p>
+<p>关键字：被java特殊定义，编码工具特殊标识</p>
+<p>基本数据类型：</p>
+<p>整数型：byte(1)  short (2)  <strong>int(4)</strong>  long(8)  </p>
+<p>byte的范围：-128~127</p>
+<p>小数型：float(4) <strong>double(8)</strong></p>
+<p>字符：char(2)</p>
+<p>布尔：boolean(1)<br> <img src="image%5C%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%8F%96%E5%80%BC%E8%8C%83%E5%9B%B4.png" alt="数据类型取值范围"></p>
+<p><strong>1.2 变量</strong></p>
+<p>​    格式 ： 数据类型 变量名=数据值；</p>
+<p>数据类型 变量名1=数据值1,变量2=数据值2,…..；</p>
+<ul>
+<li>一个 变量不能在同一个大括号重复命名</li>
+</ul>
+<ul>
+<li><p>一条语句可以定义多个变量，需要使用逗号进行分割，使用分号进行结束；</p>
+</li>
+<li><p>变量在使用之前一定要赋值</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">public static void main(String[] args)&#123;</span><br><span class="line">	int a &#x3D; 10;</span><br><span class="line">	System.out.println(a);	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>float后的数据值需要加F</p>
+</li>
+<li><p>long在使用的时候需要加L</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">public static void main(String[] args)&#123;</span><br><span class="line">	float a &#x3D; 1.6F;</span><br><span class="line">	long b &#x3D; 10000000000000000L;</span><br><span class="line">	System.out.println(a,b);	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>​</p>
+</li>
+<li><p>变量的作用区域范围只在他所在的大括号中有效</p>
+<hr>
+<p><strong>1.3 键盘录入</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">import java.util.Scanner;  &#x2F;&#x2F;导包，需要写在class的上面</span><br><span class="line">Scanner sc&#x3D;new Scanner(System.in);  &#x2F;&#x2F; 创建对象，只有sc可以改变，其他属于固定格式</span><br><span class="line">	int a &#x3D; sc.nextInt(); &#x2F;&#x2F; 接受对象；只有变量 a 可以改变，其他属于固定格式</span><br><span class="line">	System.out.println(a);  &#x2F;&#x2F; 打印变量 a</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p><strong>1.4 标识符</strong></p>
+<p> 我们给程序内容自己起的名字</p>
+<p>1.数字，下划线或美元</p>
+<p>2.不能数字开头</p>
+<p>3.不能是关键字</p>
+<p>规范：小驼峰（方法）开头小写，其余开头大写<br>​        大驼峰（类）开头均大写</p>
+]]></content>
+      <tags>
+        <tag>后端学习</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>java的方法的使用</title>
     <url>/2021/09/04/day05-%E6%96%B9%E6%B3%95%E7%9A%84%E4%BD%BF%E7%94%A8/</url>
     <content><![CDATA[<h3 id="8-方法"><a href="#8-方法" class="headerlink" title="8.方法"></a>8.方法</h3><p>​    前提须知：</p>
@@ -587,190 +706,6 @@
 <p>  4.数组的索引是从0开始，到长度-1结束.</p>
 <p>  5.我们可以通过数组名.length这个属性来获取数组的长度。</p>
 <p>  6.获取数组对应索引空间上的数据：数组名[当前的索引]</p>
-]]></content>
-      <tags>
-        <tag>后端学习</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>java基础语句</title>
-    <url>/2021/08/30/day01-Java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%20/</url>
-    <content><![CDATA[<h1 id="多看-多练-多查-多记"><a href="#多看-多练-多查-多记" class="headerlink" title="多看 多练 多查  多记"></a>多看 多练 多查  多记</h1><p>jdk：开发工具</p>
-<p>jre:运行环境</p>
-<p>jvm:虚拟机</p>
-<p><strong>1.1 数据类型：基本数据类型和引用数据类型（数组，类，接口）</strong></p>
-<p>关键字：被java特殊定义，编码工具特殊标识</p>
-<p>基本数据类型：</p>
-<p>整数型：byte(1)  short (2)  <strong>int(4)</strong>  long(8)  </p>
-<p>byte的范围：-128~127</p>
-<p>小数型：float(4) <strong>double(8)</strong></p>
-<p>字符：char(2)</p>
-<p>布尔：boolean(1)<br> <img src="image%5C%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%8F%96%E5%80%BC%E8%8C%83%E5%9B%B4.png" alt="数据类型取值范围"></p>
-<p><strong>1.2 变量</strong></p>
-<p>​    格式 ： 数据类型 变量名=数据值；</p>
-<p>数据类型 变量名1=数据值1,变量2=数据值2,…..；</p>
-<ul>
-<li>一个 变量不能在同一个大括号重复命名</li>
-</ul>
-<ul>
-<li><p>一条语句可以定义多个变量，需要使用逗号进行分割，使用分号进行结束；</p>
-</li>
-<li><p>变量在使用之前一定要赋值</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">public static void main(String[] args)&#123;</span><br><span class="line">	int a &#x3D; 10;</span><br><span class="line">	System.out.println(a);	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>float后的数据值需要加F</p>
-</li>
-<li><p>long在使用的时候需要加L</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">public static void main(String[] args)&#123;</span><br><span class="line">	float a &#x3D; 1.6F;</span><br><span class="line">	long b &#x3D; 10000000000000000L;</span><br><span class="line">	System.out.println(a,b);	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>​</p>
-</li>
-<li><p>变量的作用区域范围只在他所在的大括号中有效</p>
-<hr>
-<p><strong>1.3 键盘录入</strong></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">import java.util.Scanner;  &#x2F;&#x2F;导包，需要写在class的上面</span><br><span class="line">Scanner sc&#x3D;new Scanner(System.in);  &#x2F;&#x2F; 创建对象，只有sc可以改变，其他属于固定格式</span><br><span class="line">	int a &#x3D; sc.nextInt(); &#x2F;&#x2F; 接受对象；只有变量 a 可以改变，其他属于固定格式</span><br><span class="line">	System.out.println(a);  &#x2F;&#x2F; 打印变量 a</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<p><strong>1.4 标识符</strong></p>
-<p> 我们给程序内容自己起的名字</p>
-<p>1.数字，下划线或美元</p>
-<p>2.不能数字开头</p>
-<p>3.不能是关键字</p>
-<p>规范：小驼峰（方法）开头小写，其余开头大写<br>​        大驼峰（类）开头均大写</p>
-]]></content>
-      <tags>
-        <tag>后端学习</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>循环和switch</title>
-    <url>/2021/09/01/day03_%E5%BE%AA%E7%8E%AF/</url>
-    <content><![CDATA[<h5 id="4-2-switch语句"><a href="#4-2-switch语句" class="headerlink" title="4.2 switch语句"></a>4.2 switch语句</h5><p>​    格式：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">switch</span>(表达式)&#123;</span><br><span class="line">	<span class="keyword">case</span> 值<span class="number">1</span>：</span><br><span class="line">	语句体 <span class="number">1</span>；</span><br><span class="line">	<span class="keyword">break</span>；</span><br><span class="line">	<span class="keyword">case</span> 值<span class="number">2</span>：</span><br><span class="line">	语句体 <span class="number">2</span>；</span><br><span class="line">	<span class="keyword">break</span>；</span><br><span class="line">	……</span><br><span class="line">	<span class="keyword">case</span> 值n：</span><br><span class="line">	语句体 n；</span><br><span class="line">	<span class="keyword">break</span>；</span><br><span class="line">	<span class="keyword">default</span>:</span><br><span class="line">	语句体；</span><br><span class="line">     <span class="keyword">break</span>；</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
-
-<p>​    表达式的结果只能是：byte,short,int,char 字符串，枚举</p>
-<p>​    先计算表达式的值，从上到下与case开始匹配,遇到相同的值，开始乡下执行对应的语句体，直到遇到break或者switch才结束，如果没有匹配到case，执行default语句，直到遇到break或switch语句结束才结束。</p>
-<p>​    switch 一定能被if取代，能用if的尽量用if，但是有一种情况你可以选择switch，就是做选择的时候，这样的代码看起来比较清爽。</p>
-<p>​    </p>
-<p>​    case穿透：当语句出现break的时候，就会出现穿透现象</p>
-<p>​    当省略break的时候，会继续执行，直到执行到break的时候才会结束；</p>
-<p>​    出现多个重复的语句，可以考虑使用case穿透</p>
-<h3 id="5-循环语句"><a href="#5-循环语句" class="headerlink" title="5.循环语句"></a>5.循环语句</h3><p>​    循环是可以钱傲的，但是不要去数；</p>
-<p>​    嵌套不要超过两次，最多三次；</p>
-<p>​    嵌套就要去找规律，然后拼接；</p>
-<p>​    外层循环执行一次，内层循环执行一圈；</p>
-<h5 id="5-1-for语句"><a href="#5-1-for语句" class="headerlink" title="5.1 for语句"></a>5.1 for语句</h5><p>​    格式： </p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">for(初始化；条件判断语句;条件控制语句)&#123;</span><br><span class="line">  循环体；</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>1.首先执行初始化语句；</p>
-<p>2.执行条件判断语句</p>
-<p>​    true：继续执行</p>
-<p>​    false：结束执行</p>
-<p>可以和if或者for语句继续嵌套使用</p>
-<p>案例：水仙花数：每个位数的立方和等于原数</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">for(int num&#x3D;100;num&lt;&#x3D;999;num+&#x3D;1)&#123;</span><br><span class="line">			int a &#x3D; num % 10; </span><br><span class="line">			int b &#x3D; num &#x2F; 10 % 10; </span><br><span class="line">			int c &#x3D; num &#x2F; 10 &#x2F; 10 % 10;</span><br><span class="line">			if(a*a*a+b*b*b+c*c*c&#x3D;&#x3D;num)&#123;</span><br><span class="line">				System.out.println(num);</span><br><span class="line">		&#125;</span><br><span class="line">		&#125;</span><br></pre></td></tr></table></figure>
-
-<p>键盘输入：Scanner</p>
-<p>求和：sum</p>
-<p>统计数：count</p>
-<p>随机：Random</p>
-<p>案例二：每行打印两个水仙花数</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"> int count &#x3D; 0 ;</span><br><span class="line"> for(int num&#x3D;100;num&lt;&#x3D;999;num+&#x3D;1)&#123;</span><br><span class="line">			int a &#x3D; num % 10; </span><br><span class="line">			int b &#x3D; num &#x2F; 10 % 10; </span><br><span class="line">			int c &#x3D; num &#x2F; 10 &#x2F; 10 % 10;</span><br><span class="line">			if(a*a*a+b*b*b+c*c*c&#x3D;&#x3D;num)&#123;</span><br><span class="line">				System.out.println(num);</span><br><span class="line">				count++;</span><br><span class="line">				if(count%2&#x3D;&#x3D;0)&#123;</span><br><span class="line">System.out.println(num);</span><br><span class="line">&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h5 id="5-2-while-语句"><a href="#5-2-while-语句" class="headerlink" title="5.2 while 语句"></a>5.2 while 语句</h5><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">while(条件判断语句)&#123;</span><br><span class="line">		循环体；</span><br><span class="line">		条件控制语句；</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
-
-<p>和for的操作一致；</p>
-<h5 id="5-3-do-while-语句"><a href="#5-3-do-while-语句" class="headerlink" title="5.3 do-while 语句"></a>5.3 do-while 语句</h5><p>​    格式：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">do</span>&#123;</span><br><span class="line">  循环体；</span><br><span class="line">&#125;<span class="keyword">while</span>(判断语句)&#123;  &#125;</span><br></pre></td></tr></table></figure>
-
-<p>​    特点：无论循环条件是否满足，至少会执行一次循环体</p>
-<h5 id="5-4-三者的区别"><a href="#5-4-三者的区别" class="headerlink" title="5.4 三者的区别"></a>5.4 三者的区别</h5><p>​    for 和 while：</p>
-<p>​    在for语句内的定义的变量，只能在语句内使用，之后就不能够使用了；</p>
-<p>​    在while语句内定义的变量，可以在语句外使用，并且不能重复使用；</p>
-<h5 id="5-5-死循环"><a href="#5-5-死循环" class="headerlink" title="5.5 死循环"></a>5.5 死循环</h5><p>​    格式：</p>
-<p>​    while(true){}</p>
-<p>​    for(;;){}</p>
-<p>​    do{}while(true){}</p>
-<p>应用场景：可以筛选符合对应条件的对象；</p>
-<h5 id="5-6-跳转控制语句"><a href="#5-6-跳转控制语句" class="headerlink" title="5.6 跳转控制语句"></a>5.6 跳转控制语句</h5><p>​    countinue; 跳过这次循环</p>
-<p>​    break;  结束当前循环</p>
-<p>​    只能在循环或switch里面使用</p>
-<h3 id="6-Random-产生随机数"><a href="#6-Random-产生随机数" class="headerlink" title="6.Random 产生随机数"></a>6.Random 产生随机数</h3><h5 id="6-1-Random"><a href="#6-1-Random" class="headerlink" title="6.1 Random"></a>6.1 Random</h5><p>​    格式：</p>
-<p>​    1.导包 <code>import java.unitl.Random;</code></p>
-<p>​    2.创建对象 <code>Random i = new Random();</code></p>
-<p>​    3.接受随机数 <code>int num = i.nextInt(整数);</code></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//1-10</span></span><br><span class="line"><span class="keyword">int</span> num = i.nextInt((<span class="number">10</span>-<span class="number">1</span>))+<span class="number">1</span>;</span><br></pre></td></tr></table></figure>
-
-
-
-]]></content>
-      <tags>
-        <tag>后端学习</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>java进制的学习</title>
-    <url>/2021/09/06/day06-%E8%BF%9B%E5%88%B6/</url>
-    <content><![CDATA[<h3 id="9-进制"><a href="#9-进制" class="headerlink" title="9. 进制"></a>9. 进制</h3><h5 id="9-1-基本概念"><a href="#9-1-基本概念" class="headerlink" title="9.1 基本概念"></a>9.1 基本概念</h5><p>​        进制： 二进制 、十进制、十六进制</p>
-<p>​    计算机数据在底层运算的时候，都是<u>二进制的形式</u>的</p>
-<p>​    进制：逢几进1，借1当几，就是几进制</p>
-<p>​    二进制 ： 0和1构成   逢2 进 1</p>
-<p>​    十进制：Java中，数值默认都是10进制，不需要加修饰</p>
-<p>​    二进制：数值前面0b开头，b大小写都可以</p>
-<p>​    八进制：数值前面以0开头</p>
-<p>​    十六进制：数值前面以0x开头，x大小写都可以</p>
-<p>​    注意：书写的时候，虽然加入了进制的表示，但是在控制台，都是十进制的形式输出</p>
-<p>​     </p>
-<h5 id="9-2-进制转换"><a href="#9-2-进制转换" class="headerlink" title="9.2 进制转换"></a>9.2 进制转换</h5><p>​    任意进制到十进制的转换</p>
-<p>​    系数*基数的权次幂</p>
-<p>​    系数：每一位上的数</p>
-<p>​    基数：几进制就是几</p>
-<p>​    权次幂：从右往左，从0开始依次加一</p>
-<p>​    </p>
-<p>​    十进制转任意进制的</p>
-<p>​    公式： 除基取余，直到商为0，倒着把余数拼接起来</p>
-<p>​    </p>
-<p>​    二进制转任意进制的</p>
-<p>​    0000 0000</p>
-<p>​    8421 8421</p>
-<p>​    几进制的就对位之和，转换为该进制的书写</p>
-<p>​    八进制取三位，十六进制取四位</p>
-<h5 id="9-3-原码-反码-补码"><a href="#9-3-原码-反码-补码" class="headerlink" title="9.3 原码 反码 补码"></a>9.3 原码 反码 补码</h5><p>​        计算机中的数据，都是以二进制补码的形式在运算，而补码则是通过反码和原码推算出来的。</p>
-<p>​    原码：（看数据）</p>
-<p>​    反码：（转数据）原码0变1，1变</p>
-<p>​    补码：（运算数据）反码各位加1<br>​    </p>
-<p>​    byte -128~127</p>
-<p>​    (正数的原反补是一样的，负的的0和正的0没有意义，就把负数的0，成为-128)</p>
-<h5 id="9-4-位运算符"><a href="#9-4-位运算符" class="headerlink" title="9.4 位运算符"></a>9.4 位运算符</h5><p>​    位运算符：二进制位的运算，先将十进制转成二进制后在进行运算</p>
-<p>​            在二进制运算中，1表示true ，0表示false</p>
-<p>​    &amp;位与：遇到false就是false，遇到0就是0；</p>
-<p>​    |位或：遇到true则true,遇到1则1</p>
-<p>​    ^位异或：相同为false,不同的为true ；  一个数被另一个数异或两次，得到的还是该数</p>
-<p>​    ~ 取反：全部取反，0变1，1变0；</p>
-<p>​    </p>
-<p>​    <strong>一个数和本身异或结果是 0</strong></p>
-<p>​    <strong>任何数和0异或的到任何数</strong></p>
-<p>​    </p>
-<p>​    位移运算</p>
-<p>​    &lt;&lt; : 左移几位，乘2的几次方</p>
-<p>​    &gt;&gt;：右移几位，除2的几次方</p>
-<p> <img src="%E4%BD%8D%E8%BF%90%E7%AE%97%E7%AC%A6.png" alt="位运算符"></p>
-<h3 id="10-二维数组"><a href="#10-二维数组" class="headerlink" title="10. 二维数组"></a>10. 二维数组</h3><h5 id="10-1-二维数组概念"><a href="#10-1-二维数组概念" class="headerlink" title="10.1 二维数组概念"></a>10.1 二维数组概念</h5><p>​        概念： 存储多个一维数组的容器</p>
-<p>​                    二维数组里面存在的一堆数组的地址         </p>
-<p>​        格式： 数据类型 <code>[]</code> <code>[]</code> 变量名 = new 数据类型<code>[m]</code> <code>[n]</code></p>
-<p>​        </p>
-<p>​    遍历</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">for(int i&#x3D;0;i&lt;arr.length;i++)&#123;</span><br><span class="line">  for(int j&#x3D;0;j&lt;arr[i].length;j++)&#123;</span><br><span class="line">  System.out.println(arr[i][j]);</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-
-
 ]]></content>
       <tags>
         <tag>后端学习</tag>
@@ -1074,6 +1009,71 @@
       </tags>
   </entry>
   <entry>
+    <title>java进制的学习</title>
+    <url>/2021/09/06/day06-%E8%BF%9B%E5%88%B6/</url>
+    <content><![CDATA[<h3 id="9-进制"><a href="#9-进制" class="headerlink" title="9. 进制"></a>9. 进制</h3><h5 id="9-1-基本概念"><a href="#9-1-基本概念" class="headerlink" title="9.1 基本概念"></a>9.1 基本概念</h5><p>​        进制： 二进制 、十进制、十六进制</p>
+<p>​    计算机数据在底层运算的时候，都是<u>二进制的形式</u>的</p>
+<p>​    进制：逢几进1，借1当几，就是几进制</p>
+<p>​    二进制 ： 0和1构成   逢2 进 1</p>
+<p>​    十进制：Java中，数值默认都是10进制，不需要加修饰</p>
+<p>​    二进制：数值前面0b开头，b大小写都可以</p>
+<p>​    八进制：数值前面以0开头</p>
+<p>​    十六进制：数值前面以0x开头，x大小写都可以</p>
+<p>​    注意：书写的时候，虽然加入了进制的表示，但是在控制台，都是十进制的形式输出</p>
+<p>​     </p>
+<h5 id="9-2-进制转换"><a href="#9-2-进制转换" class="headerlink" title="9.2 进制转换"></a>9.2 进制转换</h5><p>​    任意进制到十进制的转换</p>
+<p>​    系数*基数的权次幂</p>
+<p>​    系数：每一位上的数</p>
+<p>​    基数：几进制就是几</p>
+<p>​    权次幂：从右往左，从0开始依次加一</p>
+<p>​    </p>
+<p>​    十进制转任意进制的</p>
+<p>​    公式： 除基取余，直到商为0，倒着把余数拼接起来</p>
+<p>​    </p>
+<p>​    二进制转任意进制的</p>
+<p>​    0000 0000</p>
+<p>​    8421 8421</p>
+<p>​    几进制的就对位之和，转换为该进制的书写</p>
+<p>​    八进制取三位，十六进制取四位</p>
+<h5 id="9-3-原码-反码-补码"><a href="#9-3-原码-反码-补码" class="headerlink" title="9.3 原码 反码 补码"></a>9.3 原码 反码 补码</h5><p>​        计算机中的数据，都是以二进制补码的形式在运算，而补码则是通过反码和原码推算出来的。</p>
+<p>​    原码：（看数据）</p>
+<p>​    反码：（转数据）原码0变1，1变</p>
+<p>​    补码：（运算数据）反码各位加1<br>​    </p>
+<p>​    byte -128~127</p>
+<p>​    (正数的原反补是一样的，负的的0和正的0没有意义，就把负数的0，成为-128)</p>
+<h5 id="9-4-位运算符"><a href="#9-4-位运算符" class="headerlink" title="9.4 位运算符"></a>9.4 位运算符</h5><p>​    位运算符：二进制位的运算，先将十进制转成二进制后在进行运算</p>
+<p>​            在二进制运算中，1表示true ，0表示false</p>
+<p>​    &amp;位与：遇到false就是false，遇到0就是0；</p>
+<p>​    |位或：遇到true则true,遇到1则1</p>
+<p>​    ^位异或：相同为false,不同的为true ；  一个数被另一个数异或两次，得到的还是该数</p>
+<p>​    ~ 取反：全部取反，0变1，1变0；</p>
+<p>​    </p>
+<p>​    <strong>一个数和本身异或结果是 0</strong></p>
+<p>​    <strong>任何数和0异或的到任何数</strong></p>
+<p>​    </p>
+<p>​    位移运算</p>
+<p>​    &lt;&lt; : 左移几位，乘2的几次方</p>
+<p>​    &gt;&gt;：右移几位，除2的几次方</p>
+<p> <img src="%E4%BD%8D%E8%BF%90%E7%AE%97%E7%AC%A6.png" alt="位运算符"></p>
+<h3 id="10-二维数组"><a href="#10-二维数组" class="headerlink" title="10. 二维数组"></a>10. 二维数组</h3><h5 id="10-1-二维数组概念"><a href="#10-1-二维数组概念" class="headerlink" title="10.1 二维数组概念"></a>10.1 二维数组概念</h5><p>​        概念： 存储多个一维数组的容器</p>
+<p>​                    二维数组里面存在的一堆数组的地址         </p>
+<p>​        格式： 数据类型 <code>[]</code> <code>[]</code> 变量名 = new 数据类型<code>[m]</code> <code>[n]</code></p>
+<p>​        </p>
+<p>​    遍历</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">for(int i&#x3D;0;i&lt;arr.length;i++)&#123;</span><br><span class="line">  for(int j&#x3D;0;j&lt;arr[i].length;j++)&#123;</span><br><span class="line">  System.out.println(arr[i][j]);</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+]]></content>
+      <tags>
+        <tag>后端学习</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>分类和Static</title>
     <url>/2021/09/13/day10-%E5%88%86%E7%B1%BB%E5%92%8Cstatic/</url>
     <content><![CDATA[<h2 id="1-案例驱动模式"><a href="#1-案例驱动模式" class="headerlink" title="1.案例驱动模式"></a>1.案例驱动模式</h2><h3 id="1-1案例驱动模式概述-理解"><a href="#1-1案例驱动模式概述-理解" class="headerlink" title="1.1案例驱动模式概述 (理解)"></a>1.1案例驱动模式概述 (理解)</h3><p>通过我们已掌握的知识点,先实现一个案例,然后找出这个案例中,存在的一些问题,在通过新知识点解决问题</p>
@@ -1341,27 +1341,6 @@
       </tags>
   </entry>
   <entry>
-    <title>递归排序</title>
-    <url>/2021/09/09/%E9%80%92%E5%BD%92%E6%8E%92%E5%BA%8F/</url>
-    <content><![CDATA[<h3 id="递归排序"><a href="#递归排序" class="headerlink" title="递归排序"></a>递归排序</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Demo5</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> [] arr = &#123;<span class="number">12</span>,<span class="number">4</span>,<span class="number">67</span>,<span class="number">89</span>,<span class="number">34</span>,<span class="number">25</span>&#125;;</span><br><span class="line">        <span class="comment">//哪些索引需要往后比</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; arr.length-<span class="number">1</span>; i++) &#123;</span><br><span class="line">            <span class="comment">//每一次从哪开始比的位置</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = i+<span class="number">1</span>; j &lt; arr.length; j++) &#123;</span><br><span class="line">                <span class="keyword">if</span>(arr[i]&lt;arr[j])&#123;</span><br><span class="line">                    <span class="keyword">int</span> temp = arr[j];</span><br><span class="line">                    arr[j]=arr[i];</span><br><span class="line">                    arr[i]=temp;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">            System.out.print(arr[i]+<span class="string">" "</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <tags>
-        <tag>后端学习</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>冒泡排序</title>
-    <url>/2021/09/09/%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/</url>
-    <content><![CDATA[<p>冒泡排序</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Demo4</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> [] arr = &#123;<span class="number">12</span>,<span class="number">4</span>,<span class="number">67</span>,<span class="number">89</span>,<span class="number">34</span>,<span class="number">25</span>&#125;;</span><br><span class="line">        <span class="comment">//排序  冒泡排序  选</span></span><br><span class="line">        <span class="comment">//冒泡了几次</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; arr.length-<span class="number">1</span>; i++) &#123;</span><br><span class="line">                <span class="comment">//每一次冒泡了几次</span></span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; arr.length-<span class="number">1</span>-i; j++) &#123;</span><br><span class="line">                    <span class="keyword">if</span>(arr[j]&gt;arr[j+<span class="number">1</span>])&#123;</span><br><span class="line">                        <span class="keyword">int</span> temp = arr[j];</span><br><span class="line">                        arr[j]=arr[j+<span class="number">1</span>];</span><br><span class="line">                        arr[j+<span class="number">1</span>]=temp;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">            System.out.print(arr[i]+<span class="string">" "</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <tags>
-        <tag>后端学习</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Arrlist实例</title>
     <url>/2021/09/10/day09%20ArrayList%E9%9B%86%E5%90%88&amp;%E5%AD%A6%E7%94%9F%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/</url>
     <content><![CDATA[<h2 id="1-ArrayList"><a href="#1-ArrayList" class="headerlink" title="1.ArrayList"></a>1.ArrayList</h2><p><strong>集合和数组的区别 :</strong> </p>
@@ -1527,6 +1506,27 @@
 <h3 id="2-2-学生类的定义"><a href="#2-2-学生类的定义" class="headerlink" title="2.2 学生类的定义"></a>2.2 学生类的定义</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.itheima.domain;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Student</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String sid; <span class="comment">// 学号</span></span><br><span class="line">    <span class="keyword">private</span> String name; <span class="comment">// 姓名</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> age; <span class="comment">// 年龄</span></span><br><span class="line">    <span class="keyword">private</span> String birthday; <span class="comment">// 生日</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Student</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Student</span><span class="params">(String sid, String name, <span class="keyword">int</span> age, String birthday)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.sid = sid;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">        <span class="keyword">this</span>.age = age;</span><br><span class="line">        <span class="keyword">this</span>.birthday = birthday;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getSid</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> sid;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setSid</span><span class="params">(String sid)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.sid = sid;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getAge</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> age;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAge</span><span class="params">(<span class="keyword">int</span> age)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.age = age;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getBirthday</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> birthday;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setBirthday</span><span class="params">(String birthday)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.birthday = birthday;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h3 id="2-3-测试类的定义"><a href="#2-3-测试类的定义" class="headerlink" title="2.3 测试类的定义"></a>2.3 测试类的定义</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.itheima.test;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.itheima.domain.Student;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StudentManager</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        Scanner sc = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 创建集合容器对象</span></span><br><span class="line">        ArrayList&lt;Student&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line"></span><br><span class="line">        lo:</span><br><span class="line">        <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">            <span class="comment">// 1. 搭建主界面菜单</span></span><br><span class="line">            System.out.println(<span class="string">"--------欢迎来到学生管理系统--------"</span>);</span><br><span class="line">            System.out.println(<span class="string">"1 添加学生"</span>);</span><br><span class="line">            System.out.println(<span class="string">"2 删除学生"</span>);</span><br><span class="line">            System.out.println(<span class="string">"3 修改学生"</span>);</span><br><span class="line">            System.out.println(<span class="string">"4 查看学生"</span>);</span><br><span class="line">            System.out.println(<span class="string">"5 退出"</span>);</span><br><span class="line">            System.out.println(<span class="string">"请输入您的选择:"</span>);</span><br><span class="line"></span><br><span class="line">            String choice = sc.next();</span><br><span class="line"></span><br><span class="line">            <span class="keyword">switch</span> (choice) &#123;</span><br><span class="line">                <span class="keyword">case</span> <span class="string">"1"</span>:</span><br><span class="line">                    <span class="comment">//System.out.println("添加学生");</span></span><br><span class="line">                    addStudent(list);</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">case</span> <span class="string">"2"</span>:</span><br><span class="line">                    <span class="comment">//System.out.println("删除学生");</span></span><br><span class="line">                    deleteStudent(list);</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">case</span> <span class="string">"3"</span>:</span><br><span class="line">                    <span class="comment">//System.out.println("修改学生");</span></span><br><span class="line">                    updateStudent(list);</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">case</span> <span class="string">"4"</span>:</span><br><span class="line">                    <span class="comment">// System.out.println("查看学生");</span></span><br><span class="line">                    queryStudents(list);</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">case</span> <span class="string">"5"</span>:</span><br><span class="line">                    System.out.println(<span class="string">"感谢您的使用"</span>);</span><br><span class="line">                    <span class="keyword">break</span> lo;</span><br><span class="line">                <span class="keyword">default</span>:</span><br><span class="line">                    System.out.println(<span class="string">"您的输入有误"</span>);</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 修改学生的方法</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">updateStudent</span><span class="params">(ArrayList&lt;Student&gt; list)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"请输入您要修改的学生学号:"</span>);</span><br><span class="line">        Scanner sc = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">        String updateSid = sc.next();</span><br><span class="line">        <span class="comment">// 3. 调用getIndex方法, 查找该学号在集合中出现的索引位置</span></span><br><span class="line">        <span class="keyword">int</span> index = getIndex(list,updateSid);</span><br><span class="line">        <span class="comment">// 4. 根据索引判断, 学号在集合中是否存在</span></span><br><span class="line">        <span class="keyword">if</span>(index == -<span class="number">1</span>)&#123;</span><br><span class="line">            <span class="comment">// 不存在: 给出提示</span></span><br><span class="line">            System.out.println(<span class="string">"查无信息, 请重新输入"</span>);</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="comment">// 存在: 接收新的学生信息</span></span><br><span class="line">            System.out.println(<span class="string">"请输入新的学生姓名:"</span>);</span><br><span class="line">            String name = sc.next();</span><br><span class="line">            System.out.println(<span class="string">"请输入新的学生年龄:"</span>);</span><br><span class="line">            <span class="keyword">int</span> age = sc.nextInt();</span><br><span class="line">            System.out.println(<span class="string">"请输入新的学生生日:"</span>);</span><br><span class="line">            String birthday = sc.next();</span><br><span class="line">            <span class="comment">// 封装为新的学生对象</span></span><br><span class="line">            Student stu = <span class="keyword">new</span> Student(updateSid, name, age, birthday);</span><br><span class="line">            <span class="comment">// 调用集合的set方法, 完成修改</span></span><br><span class="line">            list.set(index, stu);</span><br><span class="line">            System.out.println(<span class="string">"修改成功!"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 删除学生的方法</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">deleteStudent</span><span class="params">(ArrayList&lt;Student&gt; list)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 1. 给出提示信息 (请输入您要删除的学号)</span></span><br><span class="line">        System.out.println(<span class="string">"请输入您要删除的学生学号:"</span>);</span><br><span class="line">        <span class="comment">// 2. 键盘接收要删除的学号</span></span><br><span class="line">        Scanner sc = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">        String deleteSid = sc.next();</span><br><span class="line">        <span class="comment">// 3. 调用getIndex方法, 查找该学号在集合中出现的索引位置</span></span><br><span class="line">        <span class="keyword">int</span> index = getIndex(list,deleteSid);</span><br><span class="line">        <span class="comment">// 4. 根据索引判断, 学号在集合中是否存在</span></span><br><span class="line">        <span class="keyword">if</span>(index == -<span class="number">1</span>)&#123;</span><br><span class="line">            <span class="comment">// 不存在: 给出提示</span></span><br><span class="line">            System.out.println(<span class="string">"查无信息, 请重新输入"</span>);</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="comment">// 存在:删除</span></span><br><span class="line">            list.remove(index);</span><br><span class="line">            System.out.println(<span class="string">"删除成功!"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 查看学生的方法</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">queryStudents</span><span class="params">(ArrayList&lt;Student&gt; list)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 1. 判断集合中是否存在数据, 如果不存在直接给出提示</span></span><br><span class="line">        <span class="keyword">if</span>(list.size() == <span class="number">0</span>)&#123;</span><br><span class="line">            System.out.println(<span class="string">"无信息, 请添加后重新查询"</span>);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 2. 存在: 展示表头数据</span></span><br><span class="line">        System.out.println(<span class="string">"学号\t\t姓名\t年龄\t生日"</span>);</span><br><span class="line">        <span class="comment">// 3. 遍历集合, 获取每一个学生对象的信息, 打印在控制台</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; list.size(); i++) &#123;</span><br><span class="line">            Student stu = list.get(i);</span><br><span class="line">            System.out.println(stu.getSid() + <span class="string">"\t"</span> + stu.getName() + <span class="string">"\t"</span> + stu.getAge() + <span class="string">"\t\t"</span> + stu.getBirthday());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 添加学生的方法</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">addStudent</span><span class="params">(ArrayList&lt;Student&gt; list)</span> </span>&#123;</span><br><span class="line">        Scanner sc = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">        <span class="comment">// 1. 给出录入的提示信息</span></span><br><span class="line"></span><br><span class="line">        String sid;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span>(<span class="keyword">true</span>)&#123;</span><br><span class="line">            System.out.println(<span class="string">"请输入学号:"</span>);</span><br><span class="line">            sid = sc.next();</span><br><span class="line"></span><br><span class="line">            <span class="keyword">int</span> index = getIndex(list, sid);</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span>(index == -<span class="number">1</span>)&#123;</span><br><span class="line">                <span class="comment">// sid不存在, 学号可以使用</span></span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">"请输入姓名:"</span>);</span><br><span class="line">        String name = sc.next();</span><br><span class="line">        System.out.println(<span class="string">"请输入年龄:"</span>);</span><br><span class="line">        <span class="keyword">int</span> age = sc.nextInt();</span><br><span class="line">        System.out.println(<span class="string">"请输入生日:"</span>);</span><br><span class="line">        String birthday = sc.next();</span><br><span class="line">        <span class="comment">// 2. 将键盘录入的信息封装为学生对象</span></span><br><span class="line">        Student stu = <span class="keyword">new</span> Student(sid,name,age,birthday);</span><br><span class="line">        <span class="comment">// 3. 将封装好的学生对象, 添加到集合容器当中</span></span><br><span class="line">        list.add(stu);</span><br><span class="line">        <span class="comment">// 4. 给出添加成功的提示信息</span></span><br><span class="line">        System.out.println(<span class="string">"添加成功!"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">        getIndex : 接收一个集合对象, 接收一个学生学号</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">        查找这个学号, 在集合中出现的索引位置</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">getIndex</span><span class="params">(ArrayList&lt;Student&gt; list, String sid)</span></span>&#123;</span><br><span class="line">        <span class="comment">// 1. 假设传入的学号, 在集合中不存在</span></span><br><span class="line">        <span class="keyword">int</span> index = -<span class="number">1</span>;</span><br><span class="line">        <span class="comment">// 2. 遍历集合, 获取每一个学生对象, 准备进行查找</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; list.size(); i++) &#123;</span><br><span class="line">            Student stu = list.get(i);</span><br><span class="line">            <span class="comment">// 3. 获取每一个学生对象的学号</span></span><br><span class="line">            String id = stu.getSid();</span><br><span class="line">            <span class="comment">// 4. 使用获取出的学生学号, 和传入的学号(查找的学号)进行比对</span></span><br><span class="line">            <span class="keyword">if</span>(id.equals(sid))&#123;</span><br><span class="line">                <span class="comment">// 存在: 让index变量记录正确的索引位置</span></span><br><span class="line">                index = i;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> index;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <tags>
+        <tag>后端学习</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>冒泡排序</title>
+    <url>/2021/09/09/%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/</url>
+    <content><![CDATA[<p>冒泡排序</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Demo4</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> [] arr = &#123;<span class="number">12</span>,<span class="number">4</span>,<span class="number">67</span>,<span class="number">89</span>,<span class="number">34</span>,<span class="number">25</span>&#125;;</span><br><span class="line">        <span class="comment">//排序  冒泡排序  选</span></span><br><span class="line">        <span class="comment">//冒泡了几次</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; arr.length-<span class="number">1</span>; i++) &#123;</span><br><span class="line">                <span class="comment">//每一次冒泡了几次</span></span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; arr.length-<span class="number">1</span>-i; j++) &#123;</span><br><span class="line">                    <span class="keyword">if</span>(arr[j]&gt;arr[j+<span class="number">1</span>])&#123;</span><br><span class="line">                        <span class="keyword">int</span> temp = arr[j];</span><br><span class="line">                        arr[j]=arr[j+<span class="number">1</span>];</span><br><span class="line">                        arr[j+<span class="number">1</span>]=temp;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">            System.out.print(arr[i]+<span class="string">" "</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <tags>
+        <tag>后端学习</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>递归排序</title>
+    <url>/2021/09/09/%E9%80%92%E5%BD%92%E6%8E%92%E5%BA%8F/</url>
+    <content><![CDATA[<h3 id="递归排序"><a href="#递归排序" class="headerlink" title="递归排序"></a>递归排序</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Demo5</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> [] arr = &#123;<span class="number">12</span>,<span class="number">4</span>,<span class="number">67</span>,<span class="number">89</span>,<span class="number">34</span>,<span class="number">25</span>&#125;;</span><br><span class="line">        <span class="comment">//哪些索引需要往后比</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; arr.length-<span class="number">1</span>; i++) &#123;</span><br><span class="line">            <span class="comment">//每一次从哪开始比的位置</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = i+<span class="number">1</span>; j &lt; arr.length; j++) &#123;</span><br><span class="line">                <span class="keyword">if</span>(arr[i]&lt;arr[j])&#123;</span><br><span class="line">                    <span class="keyword">int</span> temp = arr[j];</span><br><span class="line">                    arr[j]=arr[i];</span><br><span class="line">                    arr[i]=temp;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">            System.out.print(arr[i]+<span class="string">" "</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 ]]></content>
       <tags>
         <tag>后端学习</tag>
