@@ -76,6 +76,130 @@
     
     
     
+    <article id="post-day03_循环" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2021/09/01/day03_%E5%BE%AA%E7%8E%AF/"
+    >循环和switch</a
+  >
+</h2>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2021/09/01/day03_%E5%BE%AA%E7%8E%AF/" class="article-date">
+  <time datetime="2021-09-01T06:13:19.000Z" itemprop="datePublished">2021-09-01</time>
+</a>
+      
+      
+      
+      
+    </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h5 id="4-2-switch语句"><a href="#4-2-switch语句" class="headerlink" title="4.2 switch语句"></a>4.2 switch语句</h5><p>​    格式：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">switch</span>(表达式)&#123;</span><br><span class="line">	<span class="keyword">case</span> 值<span class="number">1</span>：</span><br><span class="line">	语句体 <span class="number">1</span>；</span><br><span class="line">	<span class="keyword">break</span>；</span><br><span class="line">	<span class="keyword">case</span> 值<span class="number">2</span>：</span><br><span class="line">	语句体 <span class="number">2</span>；</span><br><span class="line">	<span class="keyword">break</span>；</span><br><span class="line">	……</span><br><span class="line">	<span class="keyword">case</span> 值n：</span><br><span class="line">	语句体 n；</span><br><span class="line">	<span class="keyword">break</span>；</span><br><span class="line">	<span class="keyword">default</span>:</span><br><span class="line">	语句体；</span><br><span class="line">     <span class="keyword">break</span>；</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+<p>​    表达式的结果只能是：byte,short,int,char 字符串，枚举</p>
+<p>​    先计算表达式的值，从上到下与case开始匹配,遇到相同的值，开始乡下执行对应的语句体，直到遇到break或者switch才结束，如果没有匹配到case，执行default语句，直到遇到break或switch语句结束才结束。</p>
+<p>​    switch 一定能被if取代，能用if的尽量用if，但是有一种情况你可以选择switch，就是做选择的时候，这样的代码看起来比较清爽。</p>
+<p>​    </p>
+<p>​    case穿透：当语句出现break的时候，就会出现穿透现象</p>
+<p>​    当省略break的时候，会继续执行，直到执行到break的时候才会结束；</p>
+<p>​    出现多个重复的语句，可以考虑使用case穿透</p>
+<h3 id="5-循环语句"><a href="#5-循环语句" class="headerlink" title="5.循环语句"></a>5.循环语句</h3><p>​    循环是可以钱傲的，但是不要去数；</p>
+<p>​    嵌套不要超过两次，最多三次；</p>
+<p>​    嵌套就要去找规律，然后拼接；</p>
+<p>​    外层循环执行一次，内层循环执行一圈；</p>
+<h5 id="5-1-for语句"><a href="#5-1-for语句" class="headerlink" title="5.1 for语句"></a>5.1 for语句</h5><p>​    格式： </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">for(初始化；条件判断语句;条件控制语句)&#123;</span><br><span class="line">  循环体；</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>1.首先执行初始化语句；</p>
+<p>2.执行条件判断语句</p>
+<p>​    true：继续执行</p>
+<p>​    false：结束执行</p>
+<p>可以和if或者for语句继续嵌套使用</p>
+<p>案例：水仙花数：每个位数的立方和等于原数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">for(int num&#x3D;100;num&lt;&#x3D;999;num+&#x3D;1)&#123;</span><br><span class="line">			int a &#x3D; num % 10; </span><br><span class="line">			int b &#x3D; num &#x2F; 10 % 10; </span><br><span class="line">			int c &#x3D; num &#x2F; 10 &#x2F; 10 % 10;</span><br><span class="line">			if(a*a*a+b*b*b+c*c*c&#x3D;&#x3D;num)&#123;</span><br><span class="line">				System.out.println(num);</span><br><span class="line">		&#125;</span><br><span class="line">		&#125;</span><br></pre></td></tr></table></figure>
+
+<p>键盘输入：Scanner</p>
+<p>求和：sum</p>
+<p>统计数：count</p>
+<p>随机：Random</p>
+<p>案例二：每行打印两个水仙花数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"> int count &#x3D; 0 ;</span><br><span class="line"> for(int num&#x3D;100;num&lt;&#x3D;999;num+&#x3D;1)&#123;</span><br><span class="line">			int a &#x3D; num % 10; </span><br><span class="line">			int b &#x3D; num &#x2F; 10 % 10; </span><br><span class="line">			int c &#x3D; num &#x2F; 10 &#x2F; 10 % 10;</span><br><span class="line">			if(a*a*a+b*b*b+c*c*c&#x3D;&#x3D;num)&#123;</span><br><span class="line">				System.out.println(num);</span><br><span class="line">				count++;</span><br><span class="line">				if(count%2&#x3D;&#x3D;0)&#123;</span><br><span class="line">System.out.println(num);</span><br><span class="line">&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="5-2-while-语句"><a href="#5-2-while-语句" class="headerlink" title="5.2 while 语句"></a>5.2 while 语句</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">while(条件判断语句)&#123;</span><br><span class="line">		循环体；</span><br><span class="line">		条件控制语句；</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+<p>和for的操作一致；</p>
+<h5 id="5-3-do-while-语句"><a href="#5-3-do-while-语句" class="headerlink" title="5.3 do-while 语句"></a>5.3 do-while 语句</h5><p>​    格式：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">do</span>&#123;</span><br><span class="line">  循环体；</span><br><span class="line">&#125;<span class="keyword">while</span>(判断语句)&#123;  &#125;</span><br></pre></td></tr></table></figure>
+
+<p>​    特点：无论循环条件是否满足，至少会执行一次循环体</p>
+<h5 id="5-4-三者的区别"><a href="#5-4-三者的区别" class="headerlink" title="5.4 三者的区别"></a>5.4 三者的区别</h5><p>​    for 和 while：</p>
+<p>​    在for语句内的定义的变量，只能在语句内使用，之后就不能够使用了；</p>
+<p>​    在while语句内定义的变量，可以在语句外使用，并且不能重复使用；</p>
+<h5 id="5-5-死循环"><a href="#5-5-死循环" class="headerlink" title="5.5 死循环"></a>5.5 死循环</h5><p>​    格式：</p>
+<p>​    while(true){}</p>
+<p>​    for(;;){}</p>
+<p>​    do{}while(true){}</p>
+<p>应用场景：可以筛选符合对应条件的对象；</p>
+<h5 id="5-6-跳转控制语句"><a href="#5-6-跳转控制语句" class="headerlink" title="5.6 跳转控制语句"></a>5.6 跳转控制语句</h5><p>​    countinue; 跳过这次循环</p>
+<p>​    break;  结束当前循环</p>
+<p>​    只能在循环或switch里面使用</p>
+<h3 id="6-Random-产生随机数"><a href="#6-Random-产生随机数" class="headerlink" title="6.Random 产生随机数"></a>6.Random 产生随机数</h3><h5 id="6-1-Random"><a href="#6-1-Random" class="headerlink" title="6.1 Random"></a>6.1 Random</h5><p>​    格式：</p>
+<p>​    1.导包 <code>import java.unitl.Random;</code></p>
+<p>​    2.创建对象 <code>Random i = new Random();</code></p>
+<p>​    3.接受随机数 <code>int num = i.nextInt(整数);</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//1-10</span></span><br><span class="line"><span class="keyword">int</span> num = i.nextInt((<span class="number">10</span>-<span class="number">1</span>))+<span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+
+
+
+
+      
+      <!-- 打赏 -->
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2021/09/01/day03_%E5%BE%AA%E7%8E%AF/" data-id="cktmnrsv00004jcuecoaag834"
+        class="article-share-link">分享</a>
+        
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%90%8E%E7%AB%AF%E5%AD%A6%E4%B9%A0/" rel="tag">后端学习</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+
+</article>
+    
     <article id="post-day02-Java基础语法" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
@@ -454,7 +578,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2021/08/31/day02-Java%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/" data-id="cktmnphp3000arsue2hh9d6ax"
+      <a data-url="http://yoursite.com/2021/08/31/day02-Java%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/" data-id="cktmnrsv20005jcue48451tro"
         class="article-share-link">分享</a>
         
       
@@ -561,7 +685,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2021/08/30/day01-Java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%20/" data-id="cktmnphoo0002rsueeqk72ka2"
+      <a data-url="http://yoursite.com/2021/08/30/day01-Java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%20/" data-id="cktmnrsux0002jcuea2o40z9a"
         class="article-share-link">分享</a>
         
       

@@ -76,6 +76,202 @@
     
     
     
+    <article id="post-Day11_继承" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2021/09/15/Day11_%E7%BB%A7%E6%89%BF/"
+    >继承</a
+  >
+</h2>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2021/09/15/Day11_%E7%BB%A7%E6%89%BF/" class="article-date">
+  <time datetime="2021-09-15T11:53:19.000Z" itemprop="datePublished">2021-09-15</time>
+</a>
+      
+      
+      
+      
+    </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h3 id="15-继承"><a href="#15-继承" class="headerlink" title="15. 继承"></a>15. 继承</h3><h5 id="15-1-继承概述"><a href="#15-1-继承概述" class="headerlink" title="15.1  继承概述"></a>15.1  继承概述</h5><h6 id="15-1-1-继承："><a href="#15-1-1-继承：" class="headerlink" title="15.1.1 继承："></a>15.1.1 继承：</h6><p>​            让<font color= "red">类与类之间产生关系</font>（子父类关系），子类可以直接使用父类中非私有的成员</p>
+<p>​            格式：通过’ extends ‘实现</p>
+<ul>
+<li>​    public class 子类名 extends 父类名｛｝</li>
+<li>​    public class Zi extends Fu {}<ul>
+<li>父类又称 基类或超类</li>
+<li>子类又称 派生类</li>
+</ul>
+</li>
+</ul>
+<p>Object类是所有类的超类，无论是否显式的写出</p>
+<h6 id="15-1-2-优势："><a href="#15-1-2-优势：" class="headerlink" title="15.1.2 优势："></a>15.1.2 优势：</h6><ul>
+<li><p>提高代码的复用性</p>
+</li>
+<li><p>提高代码的维护性</p>
+</li>
+<li><p>让类和类之间产生的关系，是多态的前提 </p>
+</li>
+</ul>
+<pre><code>###### 15.1.3 弊端：</code></pre><ul>
+<li><p>提高了代码的耦合性</p>
+</li>
+<li><p>降低了代码的灵活性</p>
+</li>
+</ul>
+<ul>
+<li>当类和类，存在相同（共性）的内容，并且产生了is a（前者是后者的一种）的关系，就可以考虑使用继承，来优化代码</li>
+</ul>
+<h6 id="15-1-4-特点："><a href="#15-1-4-特点：" class="headerlink" title="15.1.4 特点："></a>15.1.4 特点：</h6><ul>
+<li>Java只支持单继承，不支持多继承，但是只是多层继承</li>
+</ul>
+<h3 id="16-子类和父类"><a href="#16-子类和父类" class="headerlink" title="16. 子类和父类"></a>16. 子类和父类</h3><p>成员变量： 就近原则</p>
+<ul>
+<li>子类的局部范围</li>
+<li>子类的成员范围</li>
+<li>父类的成员范围</li>
+</ul>
+<p>如果子父类中，出现重名的成员变量，通过就近原则，会优先使用子类的</p>
+<p>​    如果一定要会用父类的，可以使用super关键字，进行区分</p>
+<p>this:代表本类对象的引用</p>
+<p>super：代表父类存储空间的标识</p>
+<p><img src="E:%5CHEIMA%5CNOTE%5Cimage%5Cthis%E3%80%81super%E7%9A%84%E5%8C%BA%E5%88%AB.png" alt=""></p>
+<h3 id="17-方法重写"><a href="#17-方法重写" class="headerlink" title="17. 方法重写"></a>17. 方法重写</h3><h5 id="17-1-方法重写概念"><a href="#17-1-方法重写概念" class="headerlink" title="17.1 方法重写概念"></a>17.1 方法重写概念</h5><p>​    在继承体系中，子类中出现了父类中一模一样的方法声明（方法名、参数列表、返回值类型）</p>
+<hr>
+<p>​    方法重载：在同个类中，存在方法名，参数列表不同的多个方法，和返回值无关，之间的关系叫重载</p>
+<hr>
+<h5 id="17-2-重写应用场景"><a href="#17-2-重写应用场景" class="headerlink" title="17.2 重写应用场景"></a>17.2 重写应用场景</h5><p>​    当子类需要父类的功能，而功能主体子类有自己的特色内容</p>
+<p>可以重写父类中的方法，这样，即沿袭了父类的功能，有定义子类特有内容</p>
+<h5 id="17-3-注意事项"><a href="#17-3-注意事项" class="headerlink" title="17.3 注意事项"></a>17.3 注意事项</h5><ul>
+<li><p>子父类的方法声明必须一致</p>
+</li>
+<li><p>父类中私有方法不能被重写</p>
+</li>
+<li><p>父类的静态方法，父类必须通过静态方法进行重写，父类非静态，子类也要非静态</p>
+<ul>
+<li><p><font color = "red">注意：静态方法不能被重写，只是覆盖！如果子类中，也存在一个方法声明一模一样方法</font></p>
+</li>
+<li><p>@Override // 注解检查当前的成员方法是否一个正确的重写方法</p>
+</li>
+</ul>
+</li>
+<li><p>子类重写父类方法时，访问权限必须大于等于父类</p>
+</li>
+<li><p>权限修饰符</p>
+</li>
+</ul>
+<p><img src="E:%5CHEIMA%5CNOTE%5Cimage%5C%E8%AE%BF%E9%97%AE%E6%9D%83%E9%99%90%E4%BF%AE%E9%A5%B0%E7%AC%A6.png" alt=""></p>
+<h5 id="17-4-继承中构造方法的访问特点"><a href="#17-4-继承中构造方法的访问特点" class="headerlink" title="17.4 继承中构造方法的访问特点"></a>17.4 继承中构造方法的访问特点</h5><ul>
+<li>子类初始化之前，一定要先完成父类数据的初始化.</li>
+<li>构造方法的第一条语句默认都是：super();<ul>
+<li>必须出现在方法的第一行</li>
+</ul>
+</li>
+<li>子类初始化之前，一定先访问道父类的构造方法</li>
+<li>this() 和super()不能出现在同一个构造方法中,但凡出现一个，系统将不再提供默认的super();<ul>
+<li>this() 和super()关键字可以出现在同一个构造方法中</li>
+</ul>
+</li>
+</ul>
+<h5 id="17-5-特殊情况"><a href="#17-5-特殊情况" class="headerlink" title="17.5 特殊情况"></a>17.5 特殊情况</h5><p>当父类中没有空参构造时，在子类的构造方法首行手动调动父类中的有参构造，或在子类中通过this调用本类的其他构造方法，被调用的构造方法</p>
+<h5 id="17-6-抽象类"><a href="#17-6-抽象类" class="headerlink" title="17.6 抽象类"></a>17.6 抽象类</h5><p>​     抽象方法：将共性的行为（方法）抽取到父类之后，发现该方法的实现逻辑，无法在父类中给出具体明确，该方法就可以定义为抽象方法，被<font color= 'pink'>abstract</font>修饰</p>
+<p>​    抽象类：如果一个类中存在抽象方法，那么该类就必须声明为抽象类</p>
+<p>​    特点：</p>
+<ul>
+<li>抽象类不能实例化（实例化就是创建对象）</li>
+<li>抽象类中可以没有抽象方法，有抽象方法的类一定是抽象类</li>
+<li>抽象类可以有构造方法<ul>
+<li>但是无法创建对象</li>
+<li>构造方法主要用于初始化父类成员变量，以供子类使用</li>
+</ul>
+</li>
+<li>抽象类的子类<ul>
+<li>要么重写父类所有的抽象方法（推荐）</li>
+<li>要么自己也是一个抽象类（工作中可能会使用到）</li>
+</ul>
+</li>
+</ul>
+<h3 id="18-模板设计模式"><a href="#18-模板设计模式" class="headerlink" title="18. 模板设计模式"></a>18. 模板设计模式</h3><h5 id="18-1-设计模式"><a href="#18-1-设计模式" class="headerlink" title="18.1 设计模式"></a>18.1 设计模式</h5><p>​        设计模式就是成熟的解决方案/思路</p>
+<h5 id="18-2-final-关键字"><a href="#18-2-final-关键字" class="headerlink" title="18.2 final 关键字"></a>18.2 final 关键字</h5><p>​        final 关键字是最终的意思，可以修饰（方法、变量、类）；</p>
+<p>​        </p>
+<p>​        final 修饰的特点</p>
+<ul>
+<li>修饰方法：表示该方法是最终方法，不能被重写</li>
+<li>修饰变量：表示该变量是常量，不能再次被赋值<ul>
+<li>在创建的时候，直接给值</li>
+<li>在构造方法结束之前，完成赋值                          </li>
+</ul>
+</li>
+<li>修饰类：表明该类是最终类，不能被继承</li>
+</ul>
+<h3 id="19-代码块"><a href="#19-代码块" class="headerlink" title="19. 代码块"></a>19. 代码块</h3><h5 id="19-1-概念"><a href="#19-1-概念" class="headerlink" title="19.1 概念"></a>19.1 概念</h5><p>​        在java中被｛｝起来的的代码被称为代码块</p>
+<p>​        分类：</p>
+<ul>
+<li>局部代码块<ul>
+<li>方法中定义</li>
+<li>限定变量的生命周期、作用范，及早释放，提高内存的释放率</li>
+</ul>
+</li>
+<li>构造代码块<ul>
+<li>类中方法外</li>
+<li>每次执行构造方法时，先执行代码块</li>
+<li>多个构造方法相同的方法，抽取到代码块中，提高代码的复用性</li>
+</ul>
+</li>
+<li>静态代码<ul>
+<li>类中方法外</li>
+<li>需要通过static修饰，随着类的加载而加载，并且只执行一次</li>
+<li>类加载的时候，做一些数据初始化的操作</li>
+</ul>
+</li>
+</ul>
+<p>​    19.2</p>
+
+      
+      <!-- 打赏 -->
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2021/09/15/Day11_%E7%BB%A7%E6%89%BF/" data-id="cktmnrsur0000jcue0v0hbmxo"
+        class="article-share-link">分享</a>
+        
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%90%8E%E7%AB%AF%E5%AD%A6%E4%B9%A0/" rel="tag">后端学习</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+
+</article>
+    
     <article id="post-day10-分类和static" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
@@ -379,7 +575,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2021/09/13/day10-%E5%88%86%E7%B1%BB%E5%92%8Cstatic/" data-id="cktmnphps000orsueebftaq8i"
+      <a data-url="http://yoursite.com/2021/09/13/day10-%E5%88%86%E7%B1%BB%E5%92%8Cstatic/" data-id="cktmnrsvc000mjcueb804au0p"
         class="article-share-link">分享</a>
         
       
@@ -606,7 +802,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2021/09/10/day09%20ArrayList%E9%9B%86%E5%90%88&%E5%AD%A6%E7%94%9F%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/" data-id="cktmnphpe000irsue3twkhaoj"
+      <a data-url="http://yoursite.com/2021/09/10/day09%20ArrayList%E9%9B%86%E5%90%88&%E5%AD%A6%E7%94%9F%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/" data-id="cktmnrsv9000ijcue33on4ozc"
         class="article-share-link">分享</a>
         
       
@@ -895,7 +1091,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2021/09/09/day08-String%E7%9A%84%E4%BD%BF%E7%94%A8/" data-id="cktmnphpb000ersue04e53yrv"
+      <a data-url="http://yoursite.com/2021/09/09/day08-String%E7%9A%84%E4%BD%BF%E7%94%A8/" data-id="cktmnrsv8000gjcue7kmvbyej"
         class="article-share-link">分享</a>
         
       
@@ -961,7 +1157,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2021/09/09/%E9%80%92%E5%BD%92%E6%8E%92%E5%BA%8F/" data-id="cktmnphpp000lrsue07vq4t3g"
+      <a data-url="http://yoursite.com/2021/09/09/%E9%80%92%E5%BD%92%E6%8E%92%E5%BA%8F/" data-id="cktmnrsvd000ojcuefm5s8kir"
         class="article-share-link">分享</a>
         
       
@@ -1028,7 +1224,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2021/09/09/%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/" data-id="cktmnphpq000mrsue0u43h49w"
+      <a data-url="http://yoursite.com/2021/09/09/%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/" data-id="cktmnrsva000kjcue45rtckd9"
         class="article-share-link">分享</a>
         
       
@@ -1148,7 +1344,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2021/09/07/day07-%E9%9D%A2%E5%AF%B9%E5%AF%B9%E8%B1%A1/" data-id="cktmnphpd000grsue4f0s4mfb"
+      <a data-url="http://yoursite.com/2021/09/07/day07-%E9%9D%A2%E5%AF%B9%E5%AF%B9%E8%B1%A1/" data-id="cktmnrsv7000ejcue7e365b32"
         class="article-share-link">分享</a>
         
       
@@ -1269,7 +1465,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2021/09/06/day06-%E8%BF%9B%E5%88%B6/" data-id="cktmnphp10006rsueeqd0brx3"
+      <a data-url="http://yoursite.com/2021/09/06/day06-%E8%BF%9B%E5%88%B6/" data-id="cktmnrsv6000bjcue7jpgajkh"
         class="article-share-link">分享</a>
         
       
@@ -1381,7 +1577,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2021/09/04/day05-%E6%96%B9%E6%B3%95%E7%9A%84%E4%BD%BF%E7%94%A8/" data-id="cktmnphp20008rsue7zjo9hrz"
+      <a data-url="http://yoursite.com/2021/09/04/day05-%E6%96%B9%E6%B3%95%E7%9A%84%E4%BD%BF%E7%94%A8/" data-id="cktmnrsv30006jcuedqr0b2ux"
         class="article-share-link">分享</a>
         
       
@@ -1631,131 +1827,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2021/09/03/day04-IDEA%E5%92%8C%E6%95%B0%E7%BB%84/" data-id="cktmnphpa000crsue1gridp1h"
-        class="article-share-link">分享</a>
-        
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%90%8E%E7%AB%AF%E5%AD%A6%E4%B9%A0/" rel="tag">后端学习</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-  
-  
-
-  
-
-</article>
-    
-    <article id="post-day03_循环" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2021/09/01/day03_%E5%BE%AA%E7%8E%AF/"
-    >循环和switch</a
-  >
-</h2>
-  
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2021/09/01/day03_%E5%BE%AA%E7%8E%AF/" class="article-date">
-  <time datetime="2021-09-01T06:13:19.000Z" itemprop="datePublished">2021-09-01</time>
-</a>
-      
-      
-      
-      
-    </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-      <h5 id="4-2-switch语句"><a href="#4-2-switch语句" class="headerlink" title="4.2 switch语句"></a>4.2 switch语句</h5><p>​    格式：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">switch</span>(表达式)&#123;</span><br><span class="line">	<span class="keyword">case</span> 值<span class="number">1</span>：</span><br><span class="line">	语句体 <span class="number">1</span>；</span><br><span class="line">	<span class="keyword">break</span>；</span><br><span class="line">	<span class="keyword">case</span> 值<span class="number">2</span>：</span><br><span class="line">	语句体 <span class="number">2</span>；</span><br><span class="line">	<span class="keyword">break</span>；</span><br><span class="line">	……</span><br><span class="line">	<span class="keyword">case</span> 值n：</span><br><span class="line">	语句体 n；</span><br><span class="line">	<span class="keyword">break</span>；</span><br><span class="line">	<span class="keyword">default</span>:</span><br><span class="line">	语句体；</span><br><span class="line">     <span class="keyword">break</span>；</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
-
-<p>​    表达式的结果只能是：byte,short,int,char 字符串，枚举</p>
-<p>​    先计算表达式的值，从上到下与case开始匹配,遇到相同的值，开始乡下执行对应的语句体，直到遇到break或者switch才结束，如果没有匹配到case，执行default语句，直到遇到break或switch语句结束才结束。</p>
-<p>​    switch 一定能被if取代，能用if的尽量用if，但是有一种情况你可以选择switch，就是做选择的时候，这样的代码看起来比较清爽。</p>
-<p>​    </p>
-<p>​    case穿透：当语句出现break的时候，就会出现穿透现象</p>
-<p>​    当省略break的时候，会继续执行，直到执行到break的时候才会结束；</p>
-<p>​    出现多个重复的语句，可以考虑使用case穿透</p>
-<h3 id="5-循环语句"><a href="#5-循环语句" class="headerlink" title="5.循环语句"></a>5.循环语句</h3><p>​    循环是可以钱傲的，但是不要去数；</p>
-<p>​    嵌套不要超过两次，最多三次；</p>
-<p>​    嵌套就要去找规律，然后拼接；</p>
-<p>​    外层循环执行一次，内层循环执行一圈；</p>
-<h5 id="5-1-for语句"><a href="#5-1-for语句" class="headerlink" title="5.1 for语句"></a>5.1 for语句</h5><p>​    格式： </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">for(初始化；条件判断语句;条件控制语句)&#123;</span><br><span class="line">  循环体；</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>1.首先执行初始化语句；</p>
-<p>2.执行条件判断语句</p>
-<p>​    true：继续执行</p>
-<p>​    false：结束执行</p>
-<p>可以和if或者for语句继续嵌套使用</p>
-<p>案例：水仙花数：每个位数的立方和等于原数</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">for(int num&#x3D;100;num&lt;&#x3D;999;num+&#x3D;1)&#123;</span><br><span class="line">			int a &#x3D; num % 10; </span><br><span class="line">			int b &#x3D; num &#x2F; 10 % 10; </span><br><span class="line">			int c &#x3D; num &#x2F; 10 &#x2F; 10 % 10;</span><br><span class="line">			if(a*a*a+b*b*b+c*c*c&#x3D;&#x3D;num)&#123;</span><br><span class="line">				System.out.println(num);</span><br><span class="line">		&#125;</span><br><span class="line">		&#125;</span><br></pre></td></tr></table></figure>
-
-<p>键盘输入：Scanner</p>
-<p>求和：sum</p>
-<p>统计数：count</p>
-<p>随机：Random</p>
-<p>案例二：每行打印两个水仙花数</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"> int count &#x3D; 0 ;</span><br><span class="line"> for(int num&#x3D;100;num&lt;&#x3D;999;num+&#x3D;1)&#123;</span><br><span class="line">			int a &#x3D; num % 10; </span><br><span class="line">			int b &#x3D; num &#x2F; 10 % 10; </span><br><span class="line">			int c &#x3D; num &#x2F; 10 &#x2F; 10 % 10;</span><br><span class="line">			if(a*a*a+b*b*b+c*c*c&#x3D;&#x3D;num)&#123;</span><br><span class="line">				System.out.println(num);</span><br><span class="line">				count++;</span><br><span class="line">				if(count%2&#x3D;&#x3D;0)&#123;</span><br><span class="line">System.out.println(num);</span><br><span class="line">&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h5 id="5-2-while-语句"><a href="#5-2-while-语句" class="headerlink" title="5.2 while 语句"></a>5.2 while 语句</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">while(条件判断语句)&#123;</span><br><span class="line">		循环体；</span><br><span class="line">		条件控制语句；</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
-
-<p>和for的操作一致；</p>
-<h5 id="5-3-do-while-语句"><a href="#5-3-do-while-语句" class="headerlink" title="5.3 do-while 语句"></a>5.3 do-while 语句</h5><p>​    格式：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">do</span>&#123;</span><br><span class="line">  循环体；</span><br><span class="line">&#125;<span class="keyword">while</span>(判断语句)&#123;  &#125;</span><br></pre></td></tr></table></figure>
-
-<p>​    特点：无论循环条件是否满足，至少会执行一次循环体</p>
-<h5 id="5-4-三者的区别"><a href="#5-4-三者的区别" class="headerlink" title="5.4 三者的区别"></a>5.4 三者的区别</h5><p>​    for 和 while：</p>
-<p>​    在for语句内的定义的变量，只能在语句内使用，之后就不能够使用了；</p>
-<p>​    在while语句内定义的变量，可以在语句外使用，并且不能重复使用；</p>
-<h5 id="5-5-死循环"><a href="#5-5-死循环" class="headerlink" title="5.5 死循环"></a>5.5 死循环</h5><p>​    格式：</p>
-<p>​    while(true){}</p>
-<p>​    for(;;){}</p>
-<p>​    do{}while(true){}</p>
-<p>应用场景：可以筛选符合对应条件的对象；</p>
-<h5 id="5-6-跳转控制语句"><a href="#5-6-跳转控制语句" class="headerlink" title="5.6 跳转控制语句"></a>5.6 跳转控制语句</h5><p>​    countinue; 跳过这次循环</p>
-<p>​    break;  结束当前循环</p>
-<p>​    只能在循环或switch里面使用</p>
-<h3 id="6-Random-产生随机数"><a href="#6-Random-产生随机数" class="headerlink" title="6.Random 产生随机数"></a>6.Random 产生随机数</h3><h5 id="6-1-Random"><a href="#6-1-Random" class="headerlink" title="6.1 Random"></a>6.1 Random</h5><p>​    格式：</p>
-<p>​    1.导包 <code>import java.unitl.Random;</code></p>
-<p>​    2.创建对象 <code>Random i = new Random();</code></p>
-<p>​    3.接受随机数 <code>int num = i.nextInt(整数);</code></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//1-10</span></span><br><span class="line"><span class="keyword">int</span> num = i.nextInt((<span class="number">10</span>-<span class="number">1</span>))+<span class="number">1</span>;</span><br></pre></td></tr></table></figure>
-
-
-
-
-      
-      <!-- 打赏 -->
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2021/09/01/day03_%E5%BE%AA%E7%8E%AF/" data-id="cktmnphp00005rsuefyz02y0l"
+      <a data-url="http://yoursite.com/2021/09/03/day04-IDEA%E5%92%8C%E6%95%B0%E7%BB%84/" data-id="cktmnrsv50009jcuedu9q58m7"
         class="article-share-link">分享</a>
         
       
