@@ -1,6 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>循环和switch</title>
+    <url>/2021/09/01/day03_%E5%BE%AA%E7%8E%AF/</url>
+    <content><![CDATA[<h5 id="4-2-switch语句"><a href="#4-2-switch语句" class="headerlink" title="4.2 switch语句"></a>4.2 switch语句</h5><p>​    格式：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">switch</span>(表达式)&#123;</span><br><span class="line">	<span class="keyword">case</span> 值<span class="number">1</span>：</span><br><span class="line">	语句体 <span class="number">1</span>；</span><br><span class="line">	<span class="keyword">break</span>；</span><br><span class="line">	<span class="keyword">case</span> 值<span class="number">2</span>：</span><br><span class="line">	语句体 <span class="number">2</span>；</span><br><span class="line">	<span class="keyword">break</span>；</span><br><span class="line">	……</span><br><span class="line">	<span class="keyword">case</span> 值n：</span><br><span class="line">	语句体 n；</span><br><span class="line">	<span class="keyword">break</span>；</span><br><span class="line">	<span class="keyword">default</span>:</span><br><span class="line">	语句体；</span><br><span class="line">     <span class="keyword">break</span>；</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+<p>​    表达式的结果只能是：byte,short,int,char 字符串，枚举</p>
+<p>​    先计算表达式的值，从上到下与case开始匹配,遇到相同的值，开始乡下执行对应的语句体，直到遇到break或者switch才结束，如果没有匹配到case，执行default语句，直到遇到break或switch语句结束才结束。</p>
+<p>​    switch 一定能被if取代，能用if的尽量用if，但是有一种情况你可以选择switch，就是做选择的时候，这样的代码看起来比较清爽。</p>
+<p>​    </p>
+<p>​    case穿透：当语句出现break的时候，就会出现穿透现象</p>
+<p>​    当省略break的时候，会继续执行，直到执行到break的时候才会结束；</p>
+<p>​    出现多个重复的语句，可以考虑使用case穿透</p>
+<h3 id="5-循环语句"><a href="#5-循环语句" class="headerlink" title="5.循环语句"></a>5.循环语句</h3><p>​    循环是可以钱傲的，但是不要去数；</p>
+<p>​    嵌套不要超过两次，最多三次；</p>
+<p>​    嵌套就要去找规律，然后拼接；</p>
+<p>​    外层循环执行一次，内层循环执行一圈；</p>
+<h5 id="5-1-for语句"><a href="#5-1-for语句" class="headerlink" title="5.1 for语句"></a>5.1 for语句</h5><p>​    格式： </p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">for(初始化；条件判断语句;条件控制语句)&#123;</span><br><span class="line">  循环体；</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>1.首先执行初始化语句；</p>
+<p>2.执行条件判断语句</p>
+<p>​    true：继续执行</p>
+<p>​    false：结束执行</p>
+<p>可以和if或者for语句继续嵌套使用</p>
+<p>案例：水仙花数：每个位数的立方和等于原数</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">for(int num&#x3D;100;num&lt;&#x3D;999;num+&#x3D;1)&#123;</span><br><span class="line">			int a &#x3D; num % 10; </span><br><span class="line">			int b &#x3D; num &#x2F; 10 % 10; </span><br><span class="line">			int c &#x3D; num &#x2F; 10 &#x2F; 10 % 10;</span><br><span class="line">			if(a*a*a+b*b*b+c*c*c&#x3D;&#x3D;num)&#123;</span><br><span class="line">				System.out.println(num);</span><br><span class="line">		&#125;</span><br><span class="line">		&#125;</span><br></pre></td></tr></table></figure>
+
+<p>键盘输入：Scanner</p>
+<p>求和：sum</p>
+<p>统计数：count</p>
+<p>随机：Random</p>
+<p>案例二：每行打印两个水仙花数</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"> int count &#x3D; 0 ;</span><br><span class="line"> for(int num&#x3D;100;num&lt;&#x3D;999;num+&#x3D;1)&#123;</span><br><span class="line">			int a &#x3D; num % 10; </span><br><span class="line">			int b &#x3D; num &#x2F; 10 % 10; </span><br><span class="line">			int c &#x3D; num &#x2F; 10 &#x2F; 10 % 10;</span><br><span class="line">			if(a*a*a+b*b*b+c*c*c&#x3D;&#x3D;num)&#123;</span><br><span class="line">				System.out.println(num);</span><br><span class="line">				count++;</span><br><span class="line">				if(count%2&#x3D;&#x3D;0)&#123;</span><br><span class="line">System.out.println(num);</span><br><span class="line">&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="5-2-while-语句"><a href="#5-2-while-语句" class="headerlink" title="5.2 while 语句"></a>5.2 while 语句</h5><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">while(条件判断语句)&#123;</span><br><span class="line">		循环体；</span><br><span class="line">		条件控制语句；</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+<p>和for的操作一致；</p>
+<h5 id="5-3-do-while-语句"><a href="#5-3-do-while-语句" class="headerlink" title="5.3 do-while 语句"></a>5.3 do-while 语句</h5><p>​    格式：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">do</span>&#123;</span><br><span class="line">  循环体；</span><br><span class="line">&#125;<span class="keyword">while</span>(判断语句)&#123;  &#125;</span><br></pre></td></tr></table></figure>
+
+<p>​    特点：无论循环条件是否满足，至少会执行一次循环体</p>
+<h5 id="5-4-三者的区别"><a href="#5-4-三者的区别" class="headerlink" title="5.4 三者的区别"></a>5.4 三者的区别</h5><p>​    for 和 while：</p>
+<p>​    在for语句内的定义的变量，只能在语句内使用，之后就不能够使用了；</p>
+<p>​    在while语句内定义的变量，可以在语句外使用，并且不能重复使用；</p>
+<h5 id="5-5-死循环"><a href="#5-5-死循环" class="headerlink" title="5.5 死循环"></a>5.5 死循环</h5><p>​    格式：</p>
+<p>​    while(true){}</p>
+<p>​    for(;;){}</p>
+<p>​    do{}while(true){}</p>
+<p>应用场景：可以筛选符合对应条件的对象；</p>
+<h5 id="5-6-跳转控制语句"><a href="#5-6-跳转控制语句" class="headerlink" title="5.6 跳转控制语句"></a>5.6 跳转控制语句</h5><p>​    countinue; 跳过这次循环</p>
+<p>​    break;  结束当前循环</p>
+<p>​    只能在循环或switch里面使用</p>
+<h3 id="6-Random-产生随机数"><a href="#6-Random-产生随机数" class="headerlink" title="6.Random 产生随机数"></a>6.Random 产生随机数</h3><h5 id="6-1-Random"><a href="#6-1-Random" class="headerlink" title="6.1 Random"></a>6.1 Random</h5><p>​    格式：</p>
+<p>​    1.导包 <code>import java.unitl.Random;</code></p>
+<p>​    2.创建对象 <code>Random i = new Random();</code></p>
+<p>​    3.接受随机数 <code>int num = i.nextInt(整数);</code></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//1-10</span></span><br><span class="line"><span class="keyword">int</span> num = i.nextInt((<span class="number">10</span>-<span class="number">1</span>))+<span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+
+
+
+]]></content>
+      <tags>
+        <tag>后端学习</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>运算符和分支语句</title>
     <url>/2021/08/31/day02-Java%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/</url>
     <content><![CDATA[<h1 id="day02-Java基础语法"><a href="#day02-Java基础语法" class="headerlink" title="day02 - Java基础语法"></a>day02 - Java基础语法</h1><h2 id="1-类型转换"><a href="#1-类型转换" class="headerlink" title="1 类型转换"></a>1 类型转换</h2><p>在Java中，一些数据类型之间是可以相互转换的。分为两种情况：自动类型转换和强制类型转换。</p>
@@ -394,68 +462,56 @@
       </tags>
   </entry>
   <entry>
-    <title>循环和switch</title>
-    <url>/2021/09/01/day03_%E5%BE%AA%E7%8E%AF/</url>
-    <content><![CDATA[<h5 id="4-2-switch语句"><a href="#4-2-switch语句" class="headerlink" title="4.2 switch语句"></a>4.2 switch语句</h5><p>​    格式：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">switch</span>(表达式)&#123;</span><br><span class="line">	<span class="keyword">case</span> 值<span class="number">1</span>：</span><br><span class="line">	语句体 <span class="number">1</span>；</span><br><span class="line">	<span class="keyword">break</span>；</span><br><span class="line">	<span class="keyword">case</span> 值<span class="number">2</span>：</span><br><span class="line">	语句体 <span class="number">2</span>；</span><br><span class="line">	<span class="keyword">break</span>；</span><br><span class="line">	……</span><br><span class="line">	<span class="keyword">case</span> 值n：</span><br><span class="line">	语句体 n；</span><br><span class="line">	<span class="keyword">break</span>；</span><br><span class="line">	<span class="keyword">default</span>:</span><br><span class="line">	语句体；</span><br><span class="line">     <span class="keyword">break</span>；</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+    <title>java的方法的使用</title>
+    <url>/2021/09/04/day05-%E6%96%B9%E6%B3%95%E7%9A%84%E4%BD%BF%E7%94%A8/</url>
+    <content><![CDATA[<h3 id="8-方法"><a href="#8-方法" class="headerlink" title="8.方法"></a>8.方法</h3><p>​    前提须知：</p>
+<p>​    需要先定义，后使用</p>
+<p>​    需要手动调用<br>​    方法不能嵌套定义；</p>
+<p>​    方法的返回值类型为void的时候，表示该方法么有返回值</p>
+<p>​    return语句下面，不能编译代码，和break类似</p>
+<h5 id="8-1-基本概念"><a href="#8-1-基本概念" class="headerlink" title="8.1 基本概念"></a>8.1 基本概念</h5><p>​        概念：具有独立功能的代码块，不调用就不执行</p>
+<p>​        作用：提高代码的复用性</p>
+<h5 id="8-2-定义和使用"><a href="#8-2-定义和使用" class="headerlink" title="8.2 定义和使用"></a>8.2 定义和使用</h5><p>​        方法之间是平级关系，不能嵌套；</p>
+<p>​        格式：</p>
+<p>​    <code>public static void 方法名(){ 方法体 }</code></p>
+<p>​        调用方法：</p>
+<p>​        方法名();</p>
+<h5 id="8-3-带参数的定义和使用"><a href="#8-3-带参数的定义和使用" class="headerlink" title="8.3 带参数的定义和使用"></a>8.3 带参数的定义和使用</h5><p>​        格式：<br>​             <code>public static void 方法名(数据类型 变量名 ){ 方法体 }</code></p>
+<p>​        多个参数之间用逗号分隔</p>
+<p>​        调用方法：</p>
+<p>​        方法名(参数)；</p>
+<h6 id="8-3-1-形参和实参"><a href="#8-3-1-形参和实参" class="headerlink" title="8.3.1 形参和实参"></a>8.3.1 形参和实参</h6><p>​        形式参数：方法定义中的参数</p>
+<p>​        <code>方法名(数据类型 变量名 )</code>   // 这里面的变量名就是形参</p>
+<p>​        实际参数： 方法的调用中的参数</p>
+<p>​        <code>方法名(数据1)；</code> // 这里面调用的数据1就是实参</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">##### 	8.4 带返回值方法的定义和调用</span><br></pre></td></tr></table></figure>
 
-<p>​    表达式的结果只能是：byte,short,int,char 字符串，枚举</p>
-<p>​    先计算表达式的值，从上到下与case开始匹配,遇到相同的值，开始乡下执行对应的语句体，直到遇到break或者switch才结束，如果没有匹配到case，执行default语句，直到遇到break或switch语句结束才结束。</p>
-<p>​    switch 一定能被if取代，能用if的尽量用if，但是有一种情况你可以选择switch，就是做选择的时候，这样的代码看起来比较清爽。</p>
-<p>​    </p>
-<p>​    case穿透：当语句出现break的时候，就会出现穿透现象</p>
-<p>​    当省略break的时候，会继续执行，直到执行到break的时候才会结束；</p>
-<p>​    出现多个重复的语句，可以考虑使用case穿透</p>
-<h3 id="5-循环语句"><a href="#5-循环语句" class="headerlink" title="5.循环语句"></a>5.循环语句</h3><p>​    循环是可以钱傲的，但是不要去数；</p>
-<p>​    嵌套不要超过两次，最多三次；</p>
-<p>​    嵌套就要去找规律，然后拼接；</p>
-<p>​    外层循环执行一次，内层循环执行一圈；</p>
-<h5 id="5-1-for语句"><a href="#5-1-for语句" class="headerlink" title="5.1 for语句"></a>5.1 for语句</h5><p>​    格式： </p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">for(初始化；条件判断语句;条件控制语句)&#123;</span><br><span class="line">  循环体；</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>​    格式：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">public static 数据类型 方法名（参数）&#123; </span><br><span class="line">方法体 </span><br><span class="line">return 数据值；</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>1.首先执行初始化语句；</p>
-<p>2.执行条件判断语句</p>
-<p>​    true：继续执行</p>
-<p>​    false：结束执行</p>
-<p>可以和if或者for语句继续嵌套使用</p>
-<p>案例：水仙花数：每个位数的立方和等于原数</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">for(int num&#x3D;100;num&lt;&#x3D;999;num+&#x3D;1)&#123;</span><br><span class="line">			int a &#x3D; num % 10; </span><br><span class="line">			int b &#x3D; num &#x2F; 10 % 10; </span><br><span class="line">			int c &#x3D; num &#x2F; 10 &#x2F; 10 % 10;</span><br><span class="line">			if(a*a*a+b*b*b+c*c*c&#x3D;&#x3D;num)&#123;</span><br><span class="line">				System.out.println(num);</span><br><span class="line">		&#125;</span><br><span class="line">		&#125;</span><br></pre></td></tr></table></figure>
-
-<p>键盘输入：Scanner</p>
-<p>求和：sum</p>
-<p>统计数：count</p>
-<p>随机：Random</p>
-<p>案例二：每行打印两个水仙花数</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"> int count &#x3D; 0 ;</span><br><span class="line"> for(int num&#x3D;100;num&lt;&#x3D;999;num+&#x3D;1)&#123;</span><br><span class="line">			int a &#x3D; num % 10; </span><br><span class="line">			int b &#x3D; num &#x2F; 10 % 10; </span><br><span class="line">			int c &#x3D; num &#x2F; 10 &#x2F; 10 % 10;</span><br><span class="line">			if(a*a*a+b*b*b+c*c*c&#x3D;&#x3D;num)&#123;</span><br><span class="line">				System.out.println(num);</span><br><span class="line">				count++;</span><br><span class="line">				if(count%2&#x3D;&#x3D;0)&#123;</span><br><span class="line">System.out.println(num);</span><br><span class="line">&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h5 id="5-2-while-语句"><a href="#5-2-while-语句" class="headerlink" title="5.2 while 语句"></a>5.2 while 语句</h5><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">while(条件判断语句)&#123;</span><br><span class="line">		循环体；</span><br><span class="line">		条件控制语句；</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
-
-<p>和for的操作一致；</p>
-<h5 id="5-3-do-while-语句"><a href="#5-3-do-while-语句" class="headerlink" title="5.3 do-while 语句"></a>5.3 do-while 语句</h5><p>​    格式：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">do</span>&#123;</span><br><span class="line">  循环体；</span><br><span class="line">&#125;<span class="keyword">while</span>(判断语句)&#123;  &#125;</span><br></pre></td></tr></table></figure>
-
-<p>​    特点：无论循环条件是否满足，至少会执行一次循环体</p>
-<h5 id="5-4-三者的区别"><a href="#5-4-三者的区别" class="headerlink" title="5.4 三者的区别"></a>5.4 三者的区别</h5><p>​    for 和 while：</p>
-<p>​    在for语句内的定义的变量，只能在语句内使用，之后就不能够使用了；</p>
-<p>​    在while语句内定义的变量，可以在语句外使用，并且不能重复使用；</p>
-<h5 id="5-5-死循环"><a href="#5-5-死循环" class="headerlink" title="5.5 死循环"></a>5.5 死循环</h5><p>​    格式：</p>
-<p>​    while(true){}</p>
-<p>​    for(;;){}</p>
-<p>​    do{}while(true){}</p>
-<p>应用场景：可以筛选符合对应条件的对象；</p>
-<h5 id="5-6-跳转控制语句"><a href="#5-6-跳转控制语句" class="headerlink" title="5.6 跳转控制语句"></a>5.6 跳转控制语句</h5><p>​    countinue; 跳过这次循环</p>
-<p>​    break;  结束当前循环</p>
-<p>​    只能在循环或switch里面使用</p>
-<h3 id="6-Random-产生随机数"><a href="#6-Random-产生随机数" class="headerlink" title="6.Random 产生随机数"></a>6.Random 产生随机数</h3><h5 id="6-1-Random"><a href="#6-1-Random" class="headerlink" title="6.1 Random"></a>6.1 Random</h5><p>​    格式：</p>
-<p>​    1.导包 <code>import java.unitl.Random;</code></p>
-<p>​    2.创建对象 <code>Random i = new Random();</code></p>
-<p>​    3.接受随机数 <code>int num = i.nextInt(整数);</code></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//1-10</span></span><br><span class="line"><span class="keyword">int</span> num = i.nextInt((<span class="number">10</span>-<span class="number">1</span>))+<span class="number">1</span>;</span><br></pre></td></tr></table></figure>
-
-
-
+<p>​    调用：</p>
+<p>​    <code>方法名（参数）；</code></p>
+<p>​    <code>数据类型 变量名 = 方法名（变量名/常量值）；</code></p>
+<ul>
+<li>public static 修饰符</li>
+</ul>
+<ul>
+<li>方法操作完毕之后，返回的结果数据，所对应的数据类型</li>
+</ul>
+<ul>
+<li>如果方法结束后，没有数据返回，就是用void,而且方法体重一般不写return</li>
+</ul>
+<p>作用：把返回值返回给调用者</p>
+<p>注意：只要执行了return语句，该方法就结束了</p>
+<h5 id="8-5-方法的重载"><a href="#8-5-方法的重载" class="headerlink" title="8.5 方法的重载"></a>8.5 方法的重载</h5><p>​        </p>
+<p>​        方法的重复定义：方法名相同，参数也相同   // 冲突性错误       </p>
+<p>​        概述：同一个类中，方法名相同，参数不同的方法</p>
+<p>​            参数不同；个数不听、类型不同、顺序不同</p>
+<p>​        注意：识别方法之间是否是重载关系，只看方法名和参数，和返回值无关</p>
+<p>​    优点：不用记忆过多的方法民资</p>
+<h5 id="8-6-方法的参数传递"><a href="#8-6-方法的参数传递" class="headerlink" title="8.6 方法的参数传递"></a>8.6 方法的参数传递</h5><p>​        结论：</p>
+<p>​        如果方法参数是基本数据类型，形参的改变，不会影响到实参</p>
+<p>​        如果方法参数是引用数据类型，形参的改变，会影响到实参</p>
 ]]></content>
       <tags>
         <tag>后端学习</tag>
@@ -650,126 +706,6 @@
 <p>  4.数组的索引是从0开始，到长度-1结束.</p>
 <p>  5.我们可以通过数组名.length这个属性来获取数组的长度。</p>
 <p>  6.获取数组对应索引空间上的数据：数组名[当前的索引]</p>
-]]></content>
-      <tags>
-        <tag>后端学习</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>java的方法的使用</title>
-    <url>/2021/09/04/day05-%E6%96%B9%E6%B3%95%E7%9A%84%E4%BD%BF%E7%94%A8/</url>
-    <content><![CDATA[<h3 id="8-方法"><a href="#8-方法" class="headerlink" title="8.方法"></a>8.方法</h3><p>​    前提须知：</p>
-<p>​    需要先定义，后使用</p>
-<p>​    需要手动调用<br>​    方法不能嵌套定义；</p>
-<p>​    方法的返回值类型为void的时候，表示该方法么有返回值</p>
-<p>​    return语句下面，不能编译代码，和break类似</p>
-<h5 id="8-1-基本概念"><a href="#8-1-基本概念" class="headerlink" title="8.1 基本概念"></a>8.1 基本概念</h5><p>​        概念：具有独立功能的代码块，不调用就不执行</p>
-<p>​        作用：提高代码的复用性</p>
-<h5 id="8-2-定义和使用"><a href="#8-2-定义和使用" class="headerlink" title="8.2 定义和使用"></a>8.2 定义和使用</h5><p>​        方法之间是平级关系，不能嵌套；</p>
-<p>​        格式：</p>
-<p>​    <code>public static void 方法名(){ 方法体 }</code></p>
-<p>​        调用方法：</p>
-<p>​        方法名();</p>
-<h5 id="8-3-带参数的定义和使用"><a href="#8-3-带参数的定义和使用" class="headerlink" title="8.3 带参数的定义和使用"></a>8.3 带参数的定义和使用</h5><p>​        格式：<br>​             <code>public static void 方法名(数据类型 变量名 ){ 方法体 }</code></p>
-<p>​        多个参数之间用逗号分隔</p>
-<p>​        调用方法：</p>
-<p>​        方法名(参数)；</p>
-<h6 id="8-3-1-形参和实参"><a href="#8-3-1-形参和实参" class="headerlink" title="8.3.1 形参和实参"></a>8.3.1 形参和实参</h6><p>​        形式参数：方法定义中的参数</p>
-<p>​        <code>方法名(数据类型 变量名 )</code>   // 这里面的变量名就是形参</p>
-<p>​        实际参数： 方法的调用中的参数</p>
-<p>​        <code>方法名(数据1)；</code> // 这里面调用的数据1就是实参</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">##### 	8.4 带返回值方法的定义和调用</span><br></pre></td></tr></table></figure>
-
-<p>​    格式：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">public static 数据类型 方法名（参数）&#123; </span><br><span class="line">方法体 </span><br><span class="line">return 数据值；</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>​    调用：</p>
-<p>​    <code>方法名（参数）；</code></p>
-<p>​    <code>数据类型 变量名 = 方法名（变量名/常量值）；</code></p>
-<ul>
-<li>public static 修饰符</li>
-</ul>
-<ul>
-<li>方法操作完毕之后，返回的结果数据，所对应的数据类型</li>
-</ul>
-<ul>
-<li>如果方法结束后，没有数据返回，就是用void,而且方法体重一般不写return</li>
-</ul>
-<p>作用：把返回值返回给调用者</p>
-<p>注意：只要执行了return语句，该方法就结束了</p>
-<h5 id="8-5-方法的重载"><a href="#8-5-方法的重载" class="headerlink" title="8.5 方法的重载"></a>8.5 方法的重载</h5><p>​        </p>
-<p>​        方法的重复定义：方法名相同，参数也相同   // 冲突性错误       </p>
-<p>​        概述：同一个类中，方法名相同，参数不同的方法</p>
-<p>​            参数不同；个数不听、类型不同、顺序不同</p>
-<p>​        注意：识别方法之间是否是重载关系，只看方法名和参数，和返回值无关</p>
-<p>​    优点：不用记忆过多的方法民资</p>
-<h5 id="8-6-方法的参数传递"><a href="#8-6-方法的参数传递" class="headerlink" title="8.6 方法的参数传递"></a>8.6 方法的参数传递</h5><p>​        结论：</p>
-<p>​        如果方法参数是基本数据类型，形参的改变，不会影响到实参</p>
-<p>​        如果方法参数是引用数据类型，形参的改变，会影响到实参</p>
-]]></content>
-      <tags>
-        <tag>后端学习</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>面向对象</title>
-    <url>/2021/09/07/day07-%E9%9D%A2%E5%AF%B9%E5%AF%B9%E8%B1%A1/</url>
-    <content><![CDATA[<h3 id="11-类和对象"><a href="#11-类和对象" class="headerlink" title="11. 类和对象"></a>11. 类和对象</h3><p>三大特征：封装、继承、多态</p>
-<p>面对过程思想：自己一步步实现需求<br>面向对象思想：指挥别人干活</p>
-<h5 id="11-1-类"><a href="#11-1-类" class="headerlink" title="11.1 类"></a>11.1 类</h5><p>​    11.1.1 类的组成</p>
-<p>​        类：现实生活中具有共同属性和行为事物的抽象<br>​    用java语言去对一类事物的共性（属性和行为）进行总结和描述，类似于一类事物的模板；</p>
-<p>​        对象：真实存在的个体</p>
-<p>​    在java中，用new关键字创建出来的实体，在堆内存中产生<br>​    </p>
-<p>​    <strong>定义：</strong></p>
-<p>​    类的属性：成员变量（类中方法外的变量）</p>
-<p>​    行为：成员方法（去掉static的方法）</p>
-<p>​    使用属性：对象名、属性名 既可以存值也可以取值</p>
-<p>​    属性行为：对象名、方法名（）</p>
-<p>​    自定义类  模板类  没有住方法  不需要运行</p>
-<p>​    垃圾回收</p>
-<p>​    注意：当堆内存中，对象或数组产生的地址，通过任何方式都不能被找到后，就会被判定为内存找那个的’垃圾’ ，垃圾会被java垃圾回收器，空闲的时候自动进行清理</p>
-<h5 id="11-2-局部变量和成员变量"><a href="#11-2-局部变量和成员变量" class="headerlink" title="11.2 局部变量和成员变量"></a>11.2 局部变量和成员变量</h5><p>​    1.局部变量：方法中的变量<br>​    2.成员变量：类中方法外的变量</p>
-<p><img src="%E5%B1%80%E9%83%A8%E5%8F%98%E9%87%8F%E5%92%8C%E6%88%90%E5%91%98%E5%8F%98%E9%87%8F.png" alt="局部变量和成员变量"></p>
-<h5 id="11-3-封装"><a href="#11-3-封装" class="headerlink" title="11.3 封装"></a>11.3 封装</h5><p>​    隐藏实现细节，仅对外暴露公共的访问方式<br>​    体现：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1. 私有成员变量，提供setXxx和getXxx</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">2. 将代码抽取到方法中，这是对代码的一种分装</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">3. 将属性抽取到类当中，这是对数据表的一种分装</span><br></pre></td></tr></table></figure>
-
-<p>​      </p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">优点： 安全 提高复用性</span><br></pre></td></tr></table></figure>
-
-<p>​    </p>
-<h6 id="11-3-1-private私有化"><a href="#11-3-1-private私有化" class="headerlink" title="11.3.1 private私有化"></a><strong>11.3.1 private私有化</strong></h6><p>​    关键字：private</p>
-<p>​    是一个权限修饰符<br>​    私有化，只能在本类中使用变量</p>
-<h6 id="11-3-2-this关键字"><a href="#11-3-2-this关键字" class="headerlink" title="11.3.2 this关键字"></a>11.3.2 this关键字</h6><p>​    方法名中的变量名和私有化的变量名相同的时候，使用this关键字</p>
-<p>​    this.变量名</p>
-<p><code>return age</code>     //  <code>this this.age</code></p>
-<p>​    概念:代表所在类的对象的引用</p>
-<p>​        方法被哪个对象调动，this就代表那个对象</p>
-<h5 id="11-4-构造方法"><a href="#11-4-构造方法" class="headerlink" title="11.4 构造方法"></a>11.4 构造方法</h5><p>​        分别提供一个有参的，和无参的 方法</p>
-<h6 id="11-4-1-基本概念"><a href="#11-4-1-基本概念" class="headerlink" title="11.4.1 基本概念"></a>11.4.1 基本概念</h6><p>​            基本概念：构建、构造对象的时候，所调用的方法；</p>
-<p>​            格式：</p>
-<p>​            1.方法名和类名相同，大小也要一致</p>
-<p>​            2.没有返回值的类型，连void都没有</p>
-<p>​            3.没有具体的返回值（不能有return带回具体的结果）</p>
-<p>​    </p>
-<p>​    执行时机：没有构造的时候，系统默认提供一个无参构造：</p>
-<p>​        1.创建对象的时候调用，每创建一次对象的时候，就会执行一次构造方法；</p>
-<p>​        2.不能手动调用构造方法；</p>
-<p>​    </p>
-<p>​        格式：</p>
-<p>​    public  变量名(){    }</p>
-<p>​        </p>
-<p>​        作用： 用于给对象的数据(属性)进行初始化</p>
-<p>​    <strong>JavaBean类：封装数据</strong></p>
-<p>​    标准类的书写</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">pubic <span class="class"><span class="keyword">class</span> 类名</span>&#123;</span><br><span class="line">  <span class="comment">// 私有化属性</span></span><br><span class="line"> <span class="comment">// 无参构造</span></span><br><span class="line"> <span class="comment">// 满参构造</span></span><br><span class="line"> <span class="comment">// get/set方法</span></span><br><span class="line"> <span class="comment">// 行为</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>​        </p>
 ]]></content>
       <tags>
         <tag>后端学习</tag>
@@ -1068,6 +1004,70 @@
 <p><strong>代码实现 :</strong> </p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;*    思路：     </span><br><span class="line">1:定义一个 int 类型的数组，用静态初始化完成数组元素的初始化  </span><br><span class="line">2:定义一个方法，用于把 int 数组中的数据按照指定格式拼接成一个字符串返回。          返回值类型 String，参数列表 int[] arr      </span><br><span class="line">3:在方法中用 StringBuilder 按照要求进行拼接，并把结果转成 String 返回 4:调用方法，用一个变量接收结果        </span><br><span class="line">5:输出结果 *&#x2F;</span><br><span class="line">public class StringBuilderTest01 &#123;    </span><br><span class="line">public static void main(String[] args) &#123;      </span><br><span class="line">&#x2F;&#x2F;定义一个 int 类型的数组，用静态初始化完成数组元素的初始化        int[] arr &#x3D; &#123;1, 2, 3&#125;;        &#x2F;&#x2F;调用方法，用一个变量接收结果        String s &#x3D; arrayToString(arr);        &#x2F;&#x2F;输出结果        System.out.println(&quot;s:&quot; + s);    &#125;    &#x2F;&#x2F;定义一个方法，用于把 int 数组中的数据按照指定格式拼接成一个字符串返回   </span><br><span class="line">&#x2F;*        两个明确：            返回值类型：String            参数：int[] arr     *&#x2F;   </span><br><span class="line">public static String arrayToString(int[] arr) &#123;   </span><br><span class="line">&#x2F;&#x2F;在方法中用 StringBuilder 按照要求进行拼接，并把结果转成 String 返回  StringBuilder sb &#x3D; new StringBuilder();       </span><br><span class="line">sb.append(&quot;[&quot;);      </span><br><span class="line">for(int i&#x3D;0; i&lt;arr.length; i++) &#123;      </span><br><span class="line">if(i &#x3D;&#x3D; arr.length-1) &#123;            </span><br><span class="line">sb.append(arr[i]);         </span><br><span class="line">&#125; else &#123;               </span><br><span class="line">sb.append(arr[i]).append(&quot;, &quot;);      </span><br><span class="line">&#125;        &#125;       </span><br><span class="line">sb.append(&quot;]&quot;);     </span><br><span class="line">String s &#x3D; sb.toString();    </span><br><span class="line">return  s;    </span><br><span class="line">&#125;&#125;</span><br></pre></td></tr></table></figure>
 
+]]></content>
+      <tags>
+        <tag>后端学习</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>面向对象</title>
+    <url>/2021/09/07/day07-%E9%9D%A2%E5%AF%B9%E5%AF%B9%E8%B1%A1/</url>
+    <content><![CDATA[<h3 id="11-类和对象"><a href="#11-类和对象" class="headerlink" title="11. 类和对象"></a>11. 类和对象</h3><p>三大特征：封装、继承、多态</p>
+<p>面对过程思想：自己一步步实现需求<br>面向对象思想：指挥别人干活</p>
+<h5 id="11-1-类"><a href="#11-1-类" class="headerlink" title="11.1 类"></a>11.1 类</h5><p>​    11.1.1 类的组成</p>
+<p>​        类：现实生活中具有共同属性和行为事物的抽象<br>​    用java语言去对一类事物的共性（属性和行为）进行总结和描述，类似于一类事物的模板；</p>
+<p>​        对象：真实存在的个体</p>
+<p>​    在java中，用new关键字创建出来的实体，在堆内存中产生<br>​    </p>
+<p>​    <strong>定义：</strong></p>
+<p>​    类的属性：成员变量（类中方法外的变量）</p>
+<p>​    行为：成员方法（去掉static的方法）</p>
+<p>​    使用属性：对象名、属性名 既可以存值也可以取值</p>
+<p>​    属性行为：对象名、方法名（）</p>
+<p>​    自定义类  模板类  没有住方法  不需要运行</p>
+<p>​    垃圾回收</p>
+<p>​    注意：当堆内存中，对象或数组产生的地址，通过任何方式都不能被找到后，就会被判定为内存找那个的’垃圾’ ，垃圾会被java垃圾回收器，空闲的时候自动进行清理</p>
+<h5 id="11-2-局部变量和成员变量"><a href="#11-2-局部变量和成员变量" class="headerlink" title="11.2 局部变量和成员变量"></a>11.2 局部变量和成员变量</h5><p>​    1.局部变量：方法中的变量<br>​    2.成员变量：类中方法外的变量</p>
+<p><img src="%E5%B1%80%E9%83%A8%E5%8F%98%E9%87%8F%E5%92%8C%E6%88%90%E5%91%98%E5%8F%98%E9%87%8F.png" alt="局部变量和成员变量"></p>
+<h5 id="11-3-封装"><a href="#11-3-封装" class="headerlink" title="11.3 封装"></a>11.3 封装</h5><p>​    隐藏实现细节，仅对外暴露公共的访问方式<br>​    体现：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1. 私有成员变量，提供setXxx和getXxx</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">2. 将代码抽取到方法中，这是对代码的一种分装</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">3. 将属性抽取到类当中，这是对数据表的一种分装</span><br></pre></td></tr></table></figure>
+
+<p>​      </p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">优点： 安全 提高复用性</span><br></pre></td></tr></table></figure>
+
+<p>​    </p>
+<h6 id="11-3-1-private私有化"><a href="#11-3-1-private私有化" class="headerlink" title="11.3.1 private私有化"></a><strong>11.3.1 private私有化</strong></h6><p>​    关键字：private</p>
+<p>​    是一个权限修饰符<br>​    私有化，只能在本类中使用变量</p>
+<h6 id="11-3-2-this关键字"><a href="#11-3-2-this关键字" class="headerlink" title="11.3.2 this关键字"></a>11.3.2 this关键字</h6><p>​    方法名中的变量名和私有化的变量名相同的时候，使用this关键字</p>
+<p>​    this.变量名</p>
+<p><code>return age</code>     //  <code>this this.age</code></p>
+<p>​    概念:代表所在类的对象的引用</p>
+<p>​        方法被哪个对象调动，this就代表那个对象</p>
+<h5 id="11-4-构造方法"><a href="#11-4-构造方法" class="headerlink" title="11.4 构造方法"></a>11.4 构造方法</h5><p>​        分别提供一个有参的，和无参的 方法</p>
+<h6 id="11-4-1-基本概念"><a href="#11-4-1-基本概念" class="headerlink" title="11.4.1 基本概念"></a>11.4.1 基本概念</h6><p>​            基本概念：构建、构造对象的时候，所调用的方法；</p>
+<p>​            格式：</p>
+<p>​            1.方法名和类名相同，大小也要一致</p>
+<p>​            2.没有返回值的类型，连void都没有</p>
+<p>​            3.没有具体的返回值（不能有return带回具体的结果）</p>
+<p>​    </p>
+<p>​    执行时机：没有构造的时候，系统默认提供一个无参构造：</p>
+<p>​        1.创建对象的时候调用，每创建一次对象的时候，就会执行一次构造方法；</p>
+<p>​        2.不能手动调用构造方法；</p>
+<p>​    </p>
+<p>​        格式：</p>
+<p>​    public  变量名(){    }</p>
+<p>​        </p>
+<p>​        作用： 用于给对象的数据(属性)进行初始化</p>
+<p>​    <strong>JavaBean类：封装数据</strong></p>
+<p>​    标准类的书写</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">pubic <span class="class"><span class="keyword">class</span> 类名</span>&#123;</span><br><span class="line">  <span class="comment">// 私有化属性</span></span><br><span class="line"> <span class="comment">// 无参构造</span></span><br><span class="line"> <span class="comment">// 满参构造</span></span><br><span class="line"> <span class="comment">// get/set方法</span></span><br><span class="line"> <span class="comment">// 行为</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>​        </p>
 ]]></content>
       <tags>
         <tag>后端学习</tag>
@@ -1652,9 +1652,10 @@
       </tags>
   </entry>
   <entry>
-    <title>递归排序</title>
-    <url>/2021/09/09/%E9%80%92%E5%BD%92%E6%8E%92%E5%BA%8F/</url>
-    <content><![CDATA[<h3 id="递归排序"><a href="#递归排序" class="headerlink" title="递归排序"></a>递归排序</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Demo5</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> [] arr = &#123;<span class="number">12</span>,<span class="number">4</span>,<span class="number">67</span>,<span class="number">89</span>,<span class="number">34</span>,<span class="number">25</span>&#125;;</span><br><span class="line">        <span class="comment">//哪些索引需要往后比</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; arr.length-<span class="number">1</span>; i++) &#123;</span><br><span class="line">            <span class="comment">//每一次从哪开始比的位置</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = i+<span class="number">1</span>; j &lt; arr.length; j++) &#123;</span><br><span class="line">                <span class="keyword">if</span>(arr[i]&lt;arr[j])&#123;</span><br><span class="line">                    <span class="keyword">int</span> temp = arr[j];</span><br><span class="line">                    arr[j]=arr[i];</span><br><span class="line">                    arr[i]=temp;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">            System.out.print(arr[i]+<span class="string">" "</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    <title>冒泡排序</title>
+    <url>/2021/09/09/%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/</url>
+    <content><![CDATA[<p>冒泡排序</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Demo4</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> [] arr = &#123;<span class="number">12</span>,<span class="number">4</span>,<span class="number">67</span>,<span class="number">89</span>,<span class="number">34</span>,<span class="number">25</span>&#125;;</span><br><span class="line">        <span class="comment">//排序  冒泡排序  选</span></span><br><span class="line">        <span class="comment">//冒泡了几次</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; arr.length-<span class="number">1</span>; i++) &#123;</span><br><span class="line">                <span class="comment">//每一次冒泡了几次</span></span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; arr.length-<span class="number">1</span>-i; j++) &#123;</span><br><span class="line">                    <span class="keyword">if</span>(arr[j]&gt;arr[j+<span class="number">1</span>])&#123;</span><br><span class="line">                        <span class="keyword">int</span> temp = arr[j];</span><br><span class="line">                        arr[j]=arr[j+<span class="number">1</span>];</span><br><span class="line">                        arr[j+<span class="number">1</span>]=temp;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">            System.out.print(arr[i]+<span class="string">" "</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 ]]></content>
       <tags>
@@ -1662,10 +1663,9 @@
       </tags>
   </entry>
   <entry>
-    <title>冒泡排序</title>
-    <url>/2021/09/09/%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/</url>
-    <content><![CDATA[<p>冒泡排序</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Demo4</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> [] arr = &#123;<span class="number">12</span>,<span class="number">4</span>,<span class="number">67</span>,<span class="number">89</span>,<span class="number">34</span>,<span class="number">25</span>&#125;;</span><br><span class="line">        <span class="comment">//排序  冒泡排序  选</span></span><br><span class="line">        <span class="comment">//冒泡了几次</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; arr.length-<span class="number">1</span>; i++) &#123;</span><br><span class="line">                <span class="comment">//每一次冒泡了几次</span></span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; arr.length-<span class="number">1</span>-i; j++) &#123;</span><br><span class="line">                    <span class="keyword">if</span>(arr[j]&gt;arr[j+<span class="number">1</span>])&#123;</span><br><span class="line">                        <span class="keyword">int</span> temp = arr[j];</span><br><span class="line">                        arr[j]=arr[j+<span class="number">1</span>];</span><br><span class="line">                        arr[j+<span class="number">1</span>]=temp;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">            System.out.print(arr[i]+<span class="string">" "</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    <title>递归排序</title>
+    <url>/2021/09/09/%E9%80%92%E5%BD%92%E6%8E%92%E5%BA%8F/</url>
+    <content><![CDATA[<h3 id="递归排序"><a href="#递归排序" class="headerlink" title="递归排序"></a>递归排序</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Demo5</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> [] arr = &#123;<span class="number">12</span>,<span class="number">4</span>,<span class="number">67</span>,<span class="number">89</span>,<span class="number">34</span>,<span class="number">25</span>&#125;;</span><br><span class="line">        <span class="comment">//哪些索引需要往后比</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; arr.length-<span class="number">1</span>; i++) &#123;</span><br><span class="line">            <span class="comment">//每一次从哪开始比的位置</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = i+<span class="number">1</span>; j &lt; arr.length; j++) &#123;</span><br><span class="line">                <span class="keyword">if</span>(arr[i]&lt;arr[j])&#123;</span><br><span class="line">                    <span class="keyword">int</span> temp = arr[j];</span><br><span class="line">                    arr[j]=arr[i];</span><br><span class="line">                    arr[i]=temp;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">            System.out.print(arr[i]+<span class="string">" "</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 ]]></content>
       <tags>
