@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    常用的Api-02 |  ONE PEAC
+  </title>
+  <meta name="generator" content="hexo-theme-yilia-plus">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+<script src="/js/pace.min.js"></script>
+
+
+  
+
+  
+
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    <main class="content">
+      <section class="outer">
+  <article id="post-DAY15_JDK8时间日期类" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  常用的Api-02
+</h1>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2021/09/22/DAY15_JDK8%E6%97%B6%E9%97%B4%E6%97%A5%E6%9C%9F%E7%B1%BB/" class="article-date">
+  <time datetime="2021-09-22T09:28:19.000Z" itemprop="datePublished">2021-09-22</time>
+</a>
+      
+      
+      
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">2.9k字</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">12分钟</span>
+        </span>
+    </span>
+</div>
+
+      
+    </div>
+    
+
+    
+    
+    <div class="tocbot"></div>
+
+
+
+
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h3 id="25-常见的API-02"><a href="#25-常见的API-02" class="headerlink" title="25. 常见的API-02"></a>25. 常见的API-02</h3><h4 id="25-1-日期类"><a href="#25-1-日期类" class="headerlink" title="25.1 日期类"></a>25.1 日期类</h4><p>​            计算机的时间原点：1970年1月1日  00：00：00</p>
+<h5 id="25-1-1-Date类概述和构造方法"><a href="#25-1-1-Date类概述和构造方法" class="headerlink" title="25.1.1 Date类概述和构造方法"></a>25.1.1 Date类概述和构造方法</h5><p>​        <strong>1. JDK8之前用于表示日期时间的类</strong></p>
+<p>​        其对象可以表示特定的时刻，精确到毫秒（yyyy-MM-dd HH:mm:ss 000）</p>
+<p>​        <strong>2. 构造方法</strong>    </p>
+<table>
+<thead>
+<tr>
+<th>方法名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>public Date()</td>
+<td>创建一个Date对象，表示默认时间</td>
+</tr>
+<tr>
+<td>public Date(long date)</td>
+<td>创建一个Date对象，表示指定时间</td>
+</tr>
+</tbody></table>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//输出默认时间</span></span><br><span class="line">      Date date1 = <span class="keyword">new</span> Date();</span><br><span class="line">      System.out.println(date1);</span><br><span class="line"></span><br><span class="line">      <span class="comment">//输出指定时间 </span></span><br><span class="line">      Date date2 = <span class="keyword">new</span> Date(<span class="number">0L</span>);</span><br><span class="line">      System.out.println(date2);</span><br></pre></td></tr></table></figure>
+
+<p>​        <strong>3.常用方法</strong></p>
+<p>​            setTime–设置从远点时间过了多少毫秒值</p>
+<p>​            getTime–获取时间的毫秒值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 获取date对象的毫秒值--当前时间的毫秒值</span><br><span class="line">long time &#x3D; date1.getTime();</span><br><span class="line">      System.out.println(time);</span><br><span class="line">&#x2F;&#x2F; 设置date对象从原点时间过了多少毫秒值</span><br><span class="line">     date1.setTime(2000000000000L);</span><br><span class="line">      System.out.println(date1);</span><br></pre></td></tr></table></figure>
+
+<h5 id="25-1-2-SimpleDateFormat-类概述"><a href="#25-1-2-SimpleDateFormat-类概述" class="headerlink" title="25.1.2 SimpleDateFormat 类概述"></a>25.1.2 SimpleDateFormat 类概述</h5><p>​         SimpleDateFormat可以对Date对象，进行<font color = "red">格式化解析</font></p>
+<p>字符串和Date对象转化过程的中相关概念</p>
+<ul>
+<li><p>String -&gt; Date 解析 parse</p>
+</li>
+<li><pre><code class="java"> <span class="comment">// String -&gt; Date  解析</span>
+ String str = <span class="string">"2021-9-22"</span>;
+ SimpleDateFormat sdf02 = <span class="keyword">new</span> SimpleDateFormat(<span class="string">"yyyy-MM-dd"</span>);
+ Date result2 = sdf02.parse(str);
+ System.out.println(result2);
+&lt;!--￼<span class="number">2</span>--&gt;
+</code></pre>
+</li>
+</ul>
+<p>​        <strong>2. 构造方法</strong>    </p>
+<table>
+<thead>
+<tr>
+<th>方法名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>public SimpleDateFormat()</td>
+<td>创建一个SimpleDateFormat，使用默认格式</td>
+</tr>
+<tr>
+<td>public SimpleDateFormat(String pattern)</td>
+<td>创建一个SimpleDateFormat，表示指定格式</td>
+</tr>
+</tbody></table>
+<p>​    <strong>3.小结</strong></p>
+<table>
+<thead>
+<tr>
+<th>转向流向</th>
+<th>设计方法</th>
+<th>方法所属类</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>long ==&gt; Date</td>
+<td>new Date(long ms)/setTime(long ms)创建Date对象/为Date对象设置时间</td>
+<td>Date</td>
+</tr>
+<tr>
+<td>Date ==&gt; long</td>
+<td>getTime()获取指定时间对象的毫秒值</td>
+<td>Date</td>
+</tr>
+<tr>
+<td>String ==&gt; Date</td>
+<td>解析，sdfObj.parse(dateStr)</td>
+<td>SimpleDateFormat</td>
+</tr>
+<tr>
+<td>Date ==&gt; String</td>
+<td>格式化，sdfObj.format(dateObj)</td>
+<td>SimpleDateFormat</td>
+</tr>
+</tbody></table>
+<h5 id="25-1-3-JDK8新增日期类-LocaDateTime"><a href="#25-1-3-JDK8新增日期类-LocaDateTime" class="headerlink" title="25.1.3 JDK8新增日期类-LocaDateTime"></a>25.1.3 JDK8新增日期类-LocaDateTime</h5><ul>
+<li>LocaDateTime</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>fa方法名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>public static LocalDateTime now()</td>
+<td>获取当前系统时间</td>
+</tr>
+<tr>
+<td>public static LocalDateTime of(年，月，日，时，分，秒)</td>
+<td>使用指定年月日和时分秒初始化一个LocalDateTime对象</td>
+</tr>
+</tbody></table>
+<h6 id="25-1-3-1-localDateTime的常用方法"><a href="#25-1-3-1-localDateTime的常用方法" class="headerlink" title="25.1.3.1 localDateTime的常用方法"></a>25.1.3.1 localDateTime的常用方法</h6><p>示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//设置时间</span></span><br><span class="line">LocalDateTime localDateTime = LocalDateTime.of(<span class="number">2020</span>,<span class="number">12</span>,<span class="number">22</span>,<span class="number">5</span>,<span class="number">2</span>,<span class="number">2</span>);</span><br><span class="line"><span class="comment">//获得年</span></span><br><span class="line"><span class="keyword">int</span> year = localDateTime.getYear();</span><br><span class="line">System.out.println(year);</span><br><span class="line"><span class="comment">//获取月份</span></span><br><span class="line"><span class="keyword">int</span> monthValue = localDateTime.getMonthValue();</span><br><span class="line">System.out.println(monthValue);</span><br><span class="line"><span class="comment">//获取月份中的第几天</span></span><br><span class="line"><span class="keyword">int</span> dayOfMonth = localDateTime.getDayOfMonth();</span><br><span class="line">System.out.println(dayOfMonth);</span><br><span class="line"><span class="comment">//获取一年中的第几天</span></span><br><span class="line"><span class="keyword">int</span> dayOfYear = localDateTime.getDayOfYear();</span><br><span class="line">System.out.println(dayOfYear);</span><br><span class="line"><span class="comment">//获取星期</span></span><br><span class="line">DayOfWeek dayOfWeek =localDateTime.getDayOfWeek();</span><br><span class="line">System.out.println(dayOfWeek);</span><br><span class="line"><span class="comment">//获取分钟</span></span><br><span class="line"><span class="keyword">int</span> minute = localDateTime.getMinute();</span><br><span class="line">System.out.println(minute);</span><br><span class="line"><span class="comment">//获取小时</span></span><br><span class="line"><span class="keyword">int</span> hour = localDateTime.getHour();</span><br><span class="line">System.out.println(hour);</span><br></pre></td></tr></table></figure>
+
+
+
+<h6 id="25-1-3-2-LocalDateTime转换方法"><a href="#25-1-3-2-LocalDateTime转换方法" class="headerlink" title="25.1.3.2 LocalDateTime转换方法"></a>25.1.3.2 LocalDateTime转换方法</h6><p>方法说明：</p>
+<table>
+<thead>
+<tr>
+<th>方法名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>public LocalDate  toLocalDate ()</td>
+<td>转换成为一个LocalDate对象</td>
+</tr>
+<tr>
+<td>public LocalTime toLocalTime ()</td>
+<td>转换成为一个LocalTime对象</td>
+</tr>
+</tbody></table>
+<p>​    示例代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JDK8DateDemo4</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        LocalDateTime localDateTime = LocalDateTime.of(<span class="number">2020</span>, <span class="number">12</span>, <span class="number">12</span>, <span class="number">8</span>, <span class="number">10</span>, <span class="number">12</span>);</span><br><span class="line">        <span class="comment">//public LocalDate toLocalDate ()    转换成为一个LocalDate对象</span></span><br><span class="line">        LocalDate localDate = localDateTime.toLocalDate();</span><br><span class="line">        System.out.println(localDate);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//public LocalTime toLocalTime ()    转换成为一个LocalTime对象</span></span><br><span class="line">        LocalTime localTime = localDateTime.toLocalTime();</span><br><span class="line">        System.out.println(localTime);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h6 id="25-1-3-3-LocalDatTime的解析和格式化"><a href="#25-1-3-3-LocalDatTime的解析和格式化" class="headerlink" title="25.1.3.3 LocalDatTime的解析和格式化"></a>25.1.3.3 LocalDatTime的解析和格式化</h6><p>方法说明：</p>
+<table>
+<thead>
+<tr>
+<th>方法名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>public String format (指定格式)</td>
+<td>把一个LocalDateTime格式化成为一个字符串</td>
+</tr>
+<tr>
+<td>public LocalDateTime parse (准备解析的字符串, 解析格式)</td>
+<td>把一个日期字符串解析成为一个LocalDateTime对象</td>
+</tr>
+<tr>
+<td>public static DateTimeFormatter ofPattern(String pattern)</td>
+<td>使用指定的日期模板获取一个日期格式化器DateTimeFormatter对象</td>
+</tr>
+</tbody></table>
+<p>解析示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span>  <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">method2</span><span class="params">()</span></span>&#123;</span><br><span class="line">    String s = <span class="string">"2020年11月12日 11:01:10"</span>;</span><br><span class="line">    DateTimeFormatter patten = DateTimeFormatter.ofPattern(<span class="string">"yyyy年MM月dd日 HH:mm:ss"</span>);</span><br><span class="line">    LocalDateTime parse = LocalDateTime.parse(s,patten);</span><br><span class="line">    System.out.println(parse);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>​    格式化示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span>  <span class="keyword">static</span>  <span class="keyword">void</span> <span class="title">method1</span><span class="params">()</span></span>&#123;</span><br><span class="line">        LocalDateTime localDateTime = LocalDateTime.now();</span><br><span class="line">    System.out.println(localDateTime);</span><br><span class="line">    DateTimeFormatter patten = DateTimeFormatter.ofPattern(<span class="string">"yyyy年MM月dd日 HH:mm:ss"</span>);</span><br><span class="line">    String s = localDateTime.format(patten);</span><br><span class="line">    System.out.println(s);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h6 id="25-1-3-4-LocaDateTime增加或者减少时间方法"><a href="#25-1-3-4-LocaDateTime增加或者减少时间方法" class="headerlink" title="25.1.3.4 LocaDateTime增加或者减少时间方法"></a>25.1.3.4 <strong>LocaDateTime增加或者减少时间方法</strong></h6><ol>
+<li>方法返回一个新的ocalDateTime对象，返回值就是修改之后的结果</li>
+<li>参数为正，就是往后加</li>
+<li>参数为负，就是往后减</li>
+</ol>
+<p><strong>plus基本方法说明：</strong></p>
+<table>
+<thead>
+<tr>
+<th>方法名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>public LocalDateTime plusYears (long years)</td>
+<td>添加或者减去年</td>
+</tr>
+<tr>
+<td>public LocalDateTime plusMonths(long months)</td>
+<td>添加或者减去月</td>
+</tr>
+<tr>
+<td>public LocalDateTime plusDays(long days)</td>
+<td>添加或者减去日</td>
+</tr>
+<tr>
+<td>public LocalDateTime plusHours(long hours)</td>
+<td>添加或者减去时</td>
+</tr>
+<tr>
+<td>public LocalDateTime plusMinutes(long minutes)</td>
+<td>添加或者减去分</td>
+</tr>
+<tr>
+<td>public LocalDateTime plusSeconds(long seconds)</td>
+<td>添加或者减去秒</td>
+</tr>
+<tr>
+<td>public LocalDateTime plusWeeks(long weeks)</td>
+<td>添加或者减去周</td>
+</tr>
+</tbody></table>
+<p><strong>minus基本方法说明：</strong></p>
+<table>
+<thead>
+<tr>
+<th>方法名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>public LocalDateTime  minusYears (long years)</td>
+<td>减去或者添加年</td>
+</tr>
+<tr>
+<td>public LocalDateTime  minusMonths(long months)</td>
+<td>减去或者添加月</td>
+</tr>
+<tr>
+<td>public LocalDateTime minusDays(long days)</td>
+<td>减去或者添加日</td>
+</tr>
+<tr>
+<td>public LocalDateTime minusHours(long hours)</td>
+<td>减去或者添加时</td>
+</tr>
+<tr>
+<td>public LocalDateTime minusMinutes(long minutes)</td>
+<td>减去或者添加分</td>
+</tr>
+<tr>
+<td>public LocalDateTime minusSeconds(long seconds)</td>
+<td>减去或者添加秒</td>
+</tr>
+<tr>
+<td>public LocalDateTime minusWeeks(long weeks)</td>
+<td>减去或者添加周</td>
+</tr>
+</tbody></table>
+<h6 id="25-1-3-5-LocalDateTime修改方法"><a href="#25-1-3-5-LocalDateTime修改方法" class="headerlink" title="25.1.3.5 LocalDateTime修改方法"></a>25.1.3.5 <strong>LocalDateTime修改方法</strong></h6><p>方法说明</p>
+<table>
+<thead>
+<tr>
+<th>方法名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>public LocalDateTime withYear(int year)</td>
+<td>直接修改年</td>
+</tr>
+<tr>
+<td>public LocalDateTime withMonth(int month)</td>
+<td>直接修改月</td>
+</tr>
+<tr>
+<td>public LocalDateTime withDayOfMonth(int dayofmonth)</td>
+<td>直接修改日期(一个月中的第几天)</td>
+</tr>
+<tr>
+<td>public LocalDateTime withDayOfYear(int dayOfYear)</td>
+<td>直接修改日期(一年中的第几天)</td>
+</tr>
+<tr>
+<td>public LocalDateTime withHour(int hour)</td>
+<td>直接修改小时</td>
+</tr>
+<tr>
+<td>public LocalDateTime withMinute(int minute)</td>
+<td>直接修改分钟</td>
+</tr>
+<tr>
+<td>public LocalDateTime withSecond(int second)</td>
+<td>直接修改秒</td>
+</tr>
+</tbody></table>
+<p>注意：直接修改，不会和of一样会会根据情况报错</p>
+<h5 id="23-1-4-时间间隔的计算"><a href="#23-1-4-时间间隔的计算" class="headerlink" title="23.1.4 时间间隔的计算"></a>23.1.4 时间间隔的计算</h5><ul>
+<li>Period方法说明：</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>方法名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>public static Period between(开始时间,结束时间)</td>
+<td>计算两个“时间”的间隔</td>
+</tr>
+<tr>
+<td>public int getYears()</td>
+<td>获得这段时间的年数</td>
+</tr>
+<tr>
+<td>public int getMonths()</td>
+<td>获得此期间的月数</td>
+</tr>
+<tr>
+<td>public int getDays()</td>
+<td>获得此期间的天数</td>
+</tr>
+<tr>
+<td>public long toTotalMonths()</td>
+<td>获取此期间的总月数</td>
+</tr>
+</tbody></table>
+<p>示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">LocalDate localDate1 &#x3D; LocalDate.of(2020, 1, 1);</span><br><span class="line">       LocalDate localDate2 &#x3D; LocalDate.of(2048, 12, 12);</span><br><span class="line">       Period period &#x3D; Period.between(localDate1, localDate2);</span><br><span class="line">       System.out.println(period);&#x2F;&#x2F;P28Y11M11D</span><br><span class="line"></span><br><span class="line">       &#x2F;&#x2F;public int getYears()         获得这段时间的年数</span><br><span class="line">       System.out.println(period.getYears());&#x2F;&#x2F;28</span><br><span class="line">       &#x2F;&#x2F;public int getMonths()        获得此期间的月数</span><br><span class="line">       System.out.println(period.getMonths());&#x2F;&#x2F;11</span><br><span class="line">       &#x2F;&#x2F;public int getDays()          获得此期间的天数</span><br><span class="line">       System.out.println(period.getDays());&#x2F;&#x2F;11</span><br><span class="line"></span><br><span class="line">       &#x2F;&#x2F;public long toTotalMonths()   获取此期间的总月数</span><br><span class="line">       System.out.println(period.toTotalMonths());&#x2F;&#x2F;347</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>Duration方法说明</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>方法名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>public static Durationbetween(开始时间,结束时间)</td>
+<td>计算两个“时间”的间隔</td>
+</tr>
+<tr>
+<td>public long toSeconds()</td>
+<td>获得此时间间隔的秒</td>
+</tr>
+<tr>
+<td>public int toMillis()</td>
+<td>获得此时间间隔的毫秒</td>
+</tr>
+<tr>
+<td>public int toNanos()</td>
+<td>获得此时间间隔的纳秒</td>
+</tr>
+</tbody></table>
+<p>示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">LocalDateTime localDateTime1 = LocalDateTime.of(<span class="number">2020</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">13</span>, <span class="number">14</span>, <span class="number">15</span>);</span><br><span class="line">        LocalDateTime localDateTime2 = LocalDateTime.of(<span class="number">2020</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">11</span>, <span class="number">12</span>, <span class="number">13</span>);</span><br><span class="line">        Duration duration = Duration.between(localDateTime1, localDateTime2);</span><br><span class="line">        System.out.println(duration);<span class="comment">//PT21H57M58S</span></span><br><span class="line">        <span class="comment">//public long toSeconds()	       获得此时间间隔的秒</span></span><br><span class="line">        System.out.println(duration.toSeconds());<span class="comment">//79078</span></span><br><span class="line">        <span class="comment">//public int toMillis()	           获得此时间间隔的毫秒</span></span><br><span class="line">        System.out.println(duration.toMillis());<span class="comment">//79078000</span></span><br><span class="line">        <span class="comment">//public int toNanos()             获得此时间间隔的纳秒</span></span><br><span class="line">        System.out.println(duration.toNanos());<span class="comment">//79078000000000</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>注意：<font color= "red">Period方法只能精确到年月日，Duration方法可以精确到纳秒位</font></p>
+<h5 id="25-1-5-小结"><a href="#25-1-5-小结" class="headerlink" title="25.1.5 小结"></a>25.1.5 小结</h5><ul>
+<li>创建时间对象（now、of）</li>
+<li>获取时间对象中的年，月，日，时，分，秒</li>
+<li>格式化（format）</li>
+<li>解析（parse）</li>
+<li>增加或减少时间的方法（plus开头，minus开头）</li>
+<li>修改时间（with开头+对象）</li>
+<li>计算时间间隔的两个类：<ul>
+<li>Period</li>
+<li>Duration</li>
+</ul>
+</li>
+</ul>
+<h4 id="25-2-异常概述"><a href="#25-2-异常概述" class="headerlink" title="25.2 异常概述"></a>25.2 异常概述</h4><h5 id="25-2-1-基本概述"><a href="#25-2-1-基本概述" class="headerlink" title="25.2.1 基本概述"></a>25.2.1 基本概述</h5><p>​        概述：就是程序中出现了不正常的情况。程序在执行过程中，出现的非正常的情况，就会导致JVM的非正常停止</p>
+<p>​        <font color= "red">注意：</font>语法错误不算在异常体系中</p>
+<p>异常体系：</p>
+<p>Thorwable：</p>
+<ul>
+<li><p>Error：严重错误，通过代码无法处理  — 内存溢出</p>
+</li>
+<li><p>Exception：称为异常类，表示程序本身可以处理的问题    </p>
+<ul>
+<li>RuntimeExcetion及其子类：运行时异常。（空指针异常、数组索引越界异常）</li>
+<li>除RuntimeExcetion之外所有的异常：编译时异常。在编译期必须处理，否则不能通过编译</li>
+</ul>
+</li>
+</ul>
+<h5 id="25-2-2-JVM默认处理异常的方式"><a href="#25-2-2-JVM默认处理异常的方式" class="headerlink" title="25.2.2 JVM默认处理异常的方式"></a>25.2.2 JVM默认处理异常的方式</h5><ul>
+<li>如果程序出现了问题，我们没有做任何处理时，最终JVM会做默认的处理：<ul>
+<li>把异常的名称，错误原因及异常出现的位置等信息输出在控制台</li>
+<li>程序停止执行，出现异常之后的所有代码不会执行</li>
+</ul>
+</li>
+</ul>
+<h5 id="25-2-3-异常处理方式"><a href="#25-2-3-异常处理方式" class="headerlink" title="25.2.3 异常处理方式"></a>25.2.3 异常处理方式</h5><h6 id="25-2-3-1-Thorws处理方式"><a href="#25-2-3-1-Thorws处理方式" class="headerlink" title="25.2.3.1.  Thorws处理方式"></a>25.2.3.1.  <strong>Thorws处理方式</strong></h6><p>​        格式：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> 方法名()  thorws 异常类名&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 用在方法声明后面，跟的是异常类名</span></span><br><span class="line"><span class="comment">// 表示什么异常，调用该方法有可能会出现这样的异常</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>​        注意事项：表示声明一个异常</p>
+<ul>
+<li>编译异常因为在编译时就会检查，所以必须要写在方法后面进行显示声明</li>
+<li>运行时异常因为在运行时才会发生，所以方法后面可以不写</li>
+</ul>
+<h6 id="25-2-3-2-Thorw处理方式"><a href="#25-2-3-2-Thorw处理方式" class="headerlink" title="25.2.3.2. Thorw处理方式"></a>25.2.3.2. <strong>Thorw处理方式</strong></h6><p>​            格式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">thorw new 异常对象;</span><br><span class="line">&#x2F;&#x2F;用在方法体内，跟的是异常对象名</span><br><span class="line">&#x2F;&#x2F;表示手动抛出异常对象，由方法体内的语句处理</span><br></pre></td></tr></table></figure>
+
+
+
+<p>​        意义：</p>
+<pre><code>1. 在方法中，参数传递有误，没有继续执行的意义了
+ 2. 我们根据业务需要，定义一些业务相关的一类，可以在核实的时机手动创建这些类的对象并抛出</code></pre><h6 id="25-2-3-3-try…-catch…处理方式"><a href="#25-2-3-3-try…-catch…处理方式" class="headerlink" title="25.2.3.3 try… catch…处理方式"></a>25.2.3.3 try… catch…处理方式</h6><p>​            格式：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span>&#123;</span><br><span class="line">可能出现的异常的代码；</span><br><span class="line"><span class="comment">//异常</span></span><br><span class="line"><span class="comment">//try中异常之后的代码不会执行了</span></span><br><span class="line">&#125;<span class="keyword">catch</span>(异常类名  变量名 )&#123;</span><br><span class="line"><span class="comment">//使用变量名，获得本次异常的各种信息</span></span><br><span class="line">异常的处理代码；</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//下面的代码会继续执行</span></span><br></pre></td></tr></table></figure>
+
+<p>​        </p>
+<p>​            示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span>[] arr = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">try</span>&#123;</span><br><span class="line">            printArr(arr);<span class="comment">// 可能会尝试异常的代码</span></span><br><span class="line">        &#125;<span class="keyword">catch</span> (NullPointerException e)&#123;</span><br><span class="line">            System.out.println(<span class="string">"不能为Null"</span>);<span class="comment">// 处理异常的代码</span></span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">"大牛皮"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">printArr</span><span class="params">(<span class="keyword">int</span>[] arr)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(arr == <span class="keyword">null</span>)&#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> NullPointerException();<span class="comment">//当参数为null的时候，手动创建一个异常对象，抛给调用者，产生了一个异常</span></span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">                System.out.println(arr[i]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h6 id="25-2-3-4-try…cath…常见问题"><a href="#25-2-3-4-try…cath…常见问题" class="headerlink" title="25.2.3.4 try…cath…常见问题"></a>25.2.3.4 try…cath…常见问题</h6><ul>
+<li><p>如果try中没有遇到问题，怎么执行</p>
+<ul>
+<li>会把try中的所有代码全部执行完毕，catch中的不执行</li>
+</ul>
+</li>
+<li><p>如果try中遇到问题，try下面的代码还会执行么</p>
+<ul>
+<li>直接跳转到catch语句中，try中的下面的代码就不会再执行了</li>
+<li>catch执行完毕，表示try…catch体系全部执行完毕，继续执行下面的代码</li>
+</ul>
+</li>
+<li><p>如果出现的问题没有被捕获，那么程序如何运行</p>
+<ul>
+<li>那么相当于异常没有处理到，try…catch就没有处理到异常</li>
+<li>默认交给JVM处理</li>
+</ul>
+</li>
+<li><p>同时出现多个异常怎么处理</p>
+<ul>
+<li><p>添加多个catch语句</p>
+</li>
+<li><pre><code class="java"><span class="keyword">try</span>{
+可能出现的异常的代码；
+}<span class="keyword">catch</span>(异常类名<span class="number">1</span>  变量名){
+该异常的处理代码；
+}<span class="keyword">catch</span>(异常类名<span class="number">2</span>  变量名){
+    <span class="comment">//针对不同的异常，有不同的处理方法</span>
+该异常的处理代码；
+}……
+&lt;!--￼<span class="number">13</span>--&gt;
+<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>{
+<span class="keyword">try</span> {
+    <span class="keyword">int</span>[] arr = {<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>};
+    System.out.println(arr[<span class="number">10</span>]);
+} <span class="keyword">catch</span> (Exception e) {
+    <span class="comment">//返回此throwable的详细信息字符串</span>
+    e.getMessage();
+    <span class="comment">//返回此可抛出的简短描述</span>
+    e.toString();
+    <span class="comment">// 把异常的信息输出到控制台（字体为红色）</span>
+    e.printStackTrace();
+}
+&lt;!--￼<span class="number">14</span>--&gt;
+</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+<p>对象类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TryStudent</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> age;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">TryStudent</span><span class="params">(String name, <span class="keyword">int</span> age)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">        <span class="keyword">this</span>.age = age;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">TryStudent</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getAge</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> age;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAge</span><span class="params">(<span class="keyword">int</span> age)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (age &gt;=<span class="number">18</span> &amp;&amp; age&lt;=<span class="number">25</span>) &#123;</span><br><span class="line">            <span class="keyword">this</span>.age = age;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">throw</span>  <span class="keyword">new</span> AgeOutOfBoundsException();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"TryStudent&#123;"</span> +</span><br><span class="line">                <span class="string">"name='"</span> + name + <span class="string">'\''</span> +</span><br><span class="line">                <span class="string">", age='"</span> + age + <span class="string">'\''</span> +</span><br><span class="line">                <span class="string">'&#125;'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>自定义异常类：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AgeOutOfBoundsException</span> <span class="keyword">extends</span>  <span class="title">RuntimeException</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">AgeOutOfBoundsException</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">AgeOutOfBoundsException</span><span class="params">(String message)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(message);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+      <!-- 打赏 -->
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2021/09/22/DAY15_JDK8%E6%97%B6%E9%97%B4%E6%97%A5%E6%9C%9F%E7%B1%BB/" data-id="cktvnmfic0003zkue343405c3"
+        class="article-share-link">分享</a>
+        
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%90%8E%E7%AB%AF%E5%AD%A6%E4%B9%A0/" rel="tag">后端学习</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+  
+  <nav class="article-nav">
+    
+    
+      <a href="/2021/09/20/DAY14_API%E5%92%8C%E6%95%B0%E7%BB%84%E9%AB%98%E7%BA%A7%E6%93%8D%E4%BD%9C/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">常用的Api-01</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+  
+<!-- valine评论 -->
+<div id="vcomments-box">
+    <div id="vcomments">
+    </div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js'></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        notify: false,
+        verify: '',
+        app_id: '',
+        app_key: '',
+        path: window.location.pathname,
+        avatar: 'mp',
+        placeholder: '给我的文章加点评论吧~',
+        recordIP: true
+    });
+    const infoEle = document.querySelector('#vcomments .info');
+    if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+        infoEle.childNodes.forEach(function (item) {
+            item.parentNode.removeChild(item);
+        });
+    }
+</script>
+<style>
+    #vcomments-box {
+        padding: 5px 30px;
+    }
+
+    @media screen and (max-width: 800px) {
+        #vcomments-box {
+            padding: 5px 0px;
+        }
+    }
+
+    #vcomments-box #vcomments {
+        background-color: #fff;
+    }
+
+    .v .vlist .vcard .vh {
+        padding-right: 20px;
+    }
+
+    .v .vlist .vcard {
+        padding-left: 10px;
+    }
+</style>
+
+  
+
+  
+  
+  
+
+</article>
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul class="list-inline">
+      <li>
+        &copy;
+        2020-2021
+        ff
+      </li>
+      <li>
+        
+          Powered by
+        
+        
+        <a href="https://hexo.io" target="_blank">Hexo</a> Theme <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul class="list-inline">
+      <li>
+        
+        
+        <ul class="list-inline">
+  <li>PV:<span id="busuanzi_value_page_pv"></span></li>
+  <li>UV:<span id="busuanzi_value_site_uv"></span></li>
+</ul>
+        
+      </li>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+    <div class="to_top">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+      </div>
+    </main>
+      <aside class="sidebar">
+        <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="ONE PEAC"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/2019/about">关于我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜索">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+      </aside>
+      <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+      
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script>
+  try {
+    var typed = new Typed("#subtitle", {
+    strings: ['面朝大海，春暖花开','愿你一生努力，一生被爱','想要的都拥有，得不到的都释怀'],
+    startDelay: 0,
+    typeSpeed: 200,
+    loop: true,
+    backSpeed: 100,
+    showCursor: true
+    });
+  } catch (err) {
+  }
+  
+</script>
+
+
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer:'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto',
+    onClick: (e) => {
+      $('.toc-link').removeClass('is-active-link');
+      $(`a[href=${e.target.hash}]`).addClass('is-active-link');
+      $(e.target.hash).scrollIntoView();
+      return false;
+    }
+  });
+</script>
+
+
+<script>
+  var ayerConfig = {
+    mathjax: false
+  }
+</script>
+
+
+<script src="/js/ayer.js"></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+
+
+
+<script type="text/javascript" src="https://js.users.51.la/20544303.js"></script>
+  </div>
+</body>
+
+</html>
