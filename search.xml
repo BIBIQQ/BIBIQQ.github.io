@@ -1212,7 +1212,7 @@ System.out.println(divide);
 <p>byte的范围：-128~127</p>
 <p>小数型：float(4) <strong>double(8)</strong></p>
 <p>字符：char(2)</p>
-<p>布尔：boolean(1)<br> <img src="/.com//%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%8F%96%E5%80%BC%E8%8C%83%E5%9B%B4.png" alt="数据类型取值范围"></p>
+<p>布尔：boolean(1)<br> 数据类型取值范围](/day01-Java基础知识/数据类型取值范围.png)</p>
 <p><strong>1.2 变量</strong></p>
 <p>​    格式 ： 数据类型 变量名=数据值；</p>
 <p>数据类型 变量名1=数据值1,变量2=数据值2,…..；</p>
