@@ -60,7 +60,7 @@
 </tr>
 <tr>
 <td>public   static long currentTimeMillis()</td>
-<td>获取当前时间距离计算机时间元年的差值毫秒值<br>GMT时间(格林威治时间):<code>1970-01-01 00:00:00 000</code><br/>注意时区  中国// 东8区  +8小时</td>
+<td>获取当前时间距离计算机时间元年的差值毫秒值<br>GMT时间(格林威治时间):<code>1970-01-01 00:00:00 000</code><br>注意时区  中国// 东8区  +8小时</td>
 </tr>
 <tr>
 <td>static arraycopy(数据源数组, 起始索引, <br>目的地数组, 起始索引, 拷贝元素个数)</td>
@@ -241,7 +241,7 @@ System.out.println(divide);
 
 
 <h6 id="24-7-3-递归"><a href="#24-7-3-递归" class="headerlink" title="24.7.3 递归"></a>24.7.3 递归</h6><p>​    概述：以编程的角度，递归指的是方法定义中调用方法本身的现象</p>
-<p>​    思路：把一个复杂的问题层层转化为一个与<font color = "red">原问题相似的规模较小</font>的问题来求解，递归策略只需<font color = "red">少量的程序</font>就可以描述出解题过程所需要的多次重复计算</p>
+<p>​    思路：把一个复杂的问题层层转化为一个与<font color="red">原问题相似的规模较小</font>的问题来求解，递归策略只需<font color="red">少量的程序</font>就可以描述出解题过程所需要的多次重复计算</p>
 <p>​    核心：</p>
 <ul>
 <li>一定要有出口，否则无限调用自己，会造成内存溢出</li>
@@ -287,7 +287,7 @@ System.out.println(divide);
 </ol>
 <ul>
 <li>集合长度可变，数组长度不可变</li>
-<li>集合只能存储引用数据类型或者<font color = "red">存储基本数据类型的包装类</font>，集合可以存储引用数据类型和基本数据类型</li>
+<li>集合只能存储引用数据类型或者<font color="red">存储基本数据类型的包装类</font>，集合可以存储引用数据类型和基本数据类型</li>
 </ul>
 <ol start="2">
 <li>集合类体系结构</li>
@@ -357,7 +357,7 @@ System.out.println(divide);
 <ul>
 <li><p>Iterator:迭代器，集合的专用遍历方式</p>
 <ul>
-<li>Iterator<E> itertor(): 返回集合中的迭代器对象，该迭代器对象默认指向当前集合的0索引位置</li>
+<li>Iterator<E> itertor(): 返回集合中的迭代器对象，该迭代器对象默认指向当前集合的0索引位置</E></li>
 </ul>
 </li>
 <li><p>Iterator中的常用方法</p>
@@ -528,9 +528,9 @@ System.out.println(divide);
 <ul>
 <li>增删快，查询慢</li>
 </ul>
-<img src="E:\HEIMA\NOTE\image\链表-单项链表.png" alt="单向链表"  />
+<img src="/.com//HEIMA\NOTE\image\链表-单项链表.png" alt="单向链表">
 
-<img src="E:\HEIMA\NOTE\image\链表-双向链表.png" alt="双向链表"  />
+<img src="/.com//HEIMA\NOTE\image\链表-双向链表.png" alt="双向链表">
 </blockquote>
 <ul>
 <li>数组在执行查询时效率很高</li>
@@ -573,7 +573,7 @@ System.out.println(divide);
 <p>​            getTime–获取时间的毫秒值</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;&#x2F; 获取date对象的毫秒值--当前时间的毫秒值</span><br><span class="line">long time &#x3D; date1.getTime();</span><br><span class="line">      System.out.println(time);</span><br><span class="line">&#x2F;&#x2F; 设置date对象从原点时间过了多少毫秒值</span><br><span class="line">     date1.setTime(2000000000000L);</span><br><span class="line">      System.out.println(date1);</span><br></pre></td></tr></table></figure>
 
-<h5 id="25-1-2-SimpleDateFormat-类概述"><a href="#25-1-2-SimpleDateFormat-类概述" class="headerlink" title="25.1.2 SimpleDateFormat 类概述"></a>25.1.2 SimpleDateFormat 类概述</h5><p>​         SimpleDateFormat可以对Date对象，进行<font color = "red">格式化解析</font></p>
+<h5 id="25-1-2-SimpleDateFormat-类概述"><a href="#25-1-2-SimpleDateFormat-类概述" class="headerlink" title="25.1.2 SimpleDateFormat 类概述"></a>25.1.2 SimpleDateFormat 类概述</h5><p>​         SimpleDateFormat可以对Date对象，进行<font color="red">格式化解析</font></p>
 <p>字符串和Date对象转化过程的中相关概念</p>
 <ul>
 <li><p>String -&gt; Date 解析 parse</p>
@@ -894,7 +894,7 @@ System.out.println(divide);
 
 
 
-<p>注意：<font color= "red">Period方法只能精确到年月日，Duration方法可以精确到纳秒位</font></p>
+<p>注意：<font color="red">Period方法只能精确到年月日，Duration方法可以精确到纳秒位</font></p>
 <h5 id="25-1-5-小结"><a href="#25-1-5-小结" class="headerlink" title="25.1.5 小结"></a>25.1.5 小结</h5><ul>
 <li>创建时间对象（now、of）</li>
 <li>获取时间对象中的年，月，日，时，分，秒</li>
@@ -909,7 +909,7 @@ System.out.println(divide);
 </li>
 </ul>
 <h4 id="25-2-异常概述"><a href="#25-2-异常概述" class="headerlink" title="25.2 异常概述"></a>25.2 异常概述</h4><h5 id="25-2-1-基本概述"><a href="#25-2-1-基本概述" class="headerlink" title="25.2.1 基本概述"></a>25.2.1 基本概述</h5><p>​        概述：就是程序中出现了不正常的情况。程序在执行过程中，出现的非正常的情况，就会导致JVM的非正常停止</p>
-<p>​        <font color= "red">注意：</font>语法错误不算在异常体系中</p>
+<p>​        <font color="red">注意：</font>语法错误不算在异常体系中</p>
 <p>异常体系：</p>
 <p>Thorwable：</p>
 <ul>
@@ -1328,6 +1328,12 @@ System.out.println(divide);
       </tags>
   </entry>
   <entry>
+    <title>ceshi02</title>
+    <url>/2021/09/23/ceshi02/</url>
+    <content><![CDATA[<p><img src="/.com//E:%5CHexo%5Csource_posts%5Cimage%5Cjava%E7%9A%84%E6%A6%82%E5%86%B5.png" alt>)<img src="/.com//E:%5CHexo%5Csource_posts%5Cceshi02%5Cjava%E7%9A%84%E6%A6%82%E5%86%B5.png" alt="java的概况"></p>
+]]></content>
+  </entry>
+  <entry>
     <title>java基础语句</title>
     <url>/2021/08/30/day01-Java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%20/</url>
     <content><![CDATA[<h1 id="多看-多练-多查-多记"><a href="#多看-多练-多查-多记" class="headerlink" title="多看 多练 多查  多记"></a>多看 多练 多查  多记</h1><p>jdk：开发工具</p>
@@ -1340,7 +1346,7 @@ System.out.println(divide);
 <p>byte的范围：-128~127</p>
 <p>小数型：float(4) <strong>double(8)</strong></p>
 <p>字符：char(2)</p>
-<p>布尔：boolean(1)<br> <img src="image%5C%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%8F%96%E5%80%BC%E8%8C%83%E5%9B%B4.png" alt="数据类型取值范围"></p>
+<p>布尔：boolean(1)<br> <img src="/.com//image%5C%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%8F%96%E5%80%BC%E8%8C%83%E5%9B%B4.png" alt="数据类型取值范围"></p>
 <p><strong>1.2 变量</strong></p>
 <p>​    格式 ： 数据类型 变量名=数据值；</p>
 <p>数据类型 变量名1=数据值1,变量2=数据值2,…..；</p>
@@ -1379,74 +1385,6 @@ System.out.println(divide);
       </tags>
   </entry>
   <entry>
-    <title>循环和switch</title>
-    <url>/2021/09/01/day03_%E5%BE%AA%E7%8E%AF/</url>
-    <content><![CDATA[<h5 id="4-2-switch语句"><a href="#4-2-switch语句" class="headerlink" title="4.2 switch语句"></a>4.2 switch语句</h5><p>​    格式：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">switch</span>(表达式)&#123;</span><br><span class="line">	<span class="keyword">case</span> 值<span class="number">1</span>：</span><br><span class="line">	语句体 <span class="number">1</span>；</span><br><span class="line">	<span class="keyword">break</span>；</span><br><span class="line">	<span class="keyword">case</span> 值<span class="number">2</span>：</span><br><span class="line">	语句体 <span class="number">2</span>；</span><br><span class="line">	<span class="keyword">break</span>；</span><br><span class="line">	……</span><br><span class="line">	<span class="keyword">case</span> 值n：</span><br><span class="line">	语句体 n；</span><br><span class="line">	<span class="keyword">break</span>；</span><br><span class="line">	<span class="keyword">default</span>:</span><br><span class="line">	语句体；</span><br><span class="line">     <span class="keyword">break</span>；</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
-
-<p>​    表达式的结果只能是：byte,short,int,char 字符串，枚举</p>
-<p>​    先计算表达式的值，从上到下与case开始匹配,遇到相同的值，开始乡下执行对应的语句体，直到遇到break或者switch才结束，如果没有匹配到case，执行default语句，直到遇到break或switch语句结束才结束。</p>
-<p>​    switch 一定能被if取代，能用if的尽量用if，但是有一种情况你可以选择switch，就是做选择的时候，这样的代码看起来比较清爽。</p>
-<p>​    </p>
-<p>​    case穿透：当语句出现break的时候，就会出现穿透现象</p>
-<p>​    当省略break的时候，会继续执行，直到执行到break的时候才会结束；</p>
-<p>​    出现多个重复的语句，可以考虑使用case穿透</p>
-<h3 id="5-循环语句"><a href="#5-循环语句" class="headerlink" title="5.循环语句"></a>5.循环语句</h3><p>​    循环是可以钱傲的，但是不要去数；</p>
-<p>​    嵌套不要超过两次，最多三次；</p>
-<p>​    嵌套就要去找规律，然后拼接；</p>
-<p>​    外层循环执行一次，内层循环执行一圈；</p>
-<h5 id="5-1-for语句"><a href="#5-1-for语句" class="headerlink" title="5.1 for语句"></a>5.1 for语句</h5><p>​    格式： </p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">for(初始化；条件判断语句;条件控制语句)&#123;</span><br><span class="line">  循环体；</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>1.首先执行初始化语句；</p>
-<p>2.执行条件判断语句</p>
-<p>​    true：继续执行</p>
-<p>​    false：结束执行</p>
-<p>可以和if或者for语句继续嵌套使用</p>
-<p>案例：水仙花数：每个位数的立方和等于原数</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">for(int num&#x3D;100;num&lt;&#x3D;999;num+&#x3D;1)&#123;</span><br><span class="line">			int a &#x3D; num % 10; </span><br><span class="line">			int b &#x3D; num &#x2F; 10 % 10; </span><br><span class="line">			int c &#x3D; num &#x2F; 10 &#x2F; 10 % 10;</span><br><span class="line">			if(a*a*a+b*b*b+c*c*c&#x3D;&#x3D;num)&#123;</span><br><span class="line">				System.out.println(num);</span><br><span class="line">		&#125;</span><br><span class="line">		&#125;</span><br></pre></td></tr></table></figure>
-
-<p>键盘输入：Scanner</p>
-<p>求和：sum</p>
-<p>统计数：count</p>
-<p>随机：Random</p>
-<p>案例二：每行打印两个水仙花数</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"> int count &#x3D; 0 ;</span><br><span class="line"> for(int num&#x3D;100;num&lt;&#x3D;999;num+&#x3D;1)&#123;</span><br><span class="line">			int a &#x3D; num % 10; </span><br><span class="line">			int b &#x3D; num &#x2F; 10 % 10; </span><br><span class="line">			int c &#x3D; num &#x2F; 10 &#x2F; 10 % 10;</span><br><span class="line">			if(a*a*a+b*b*b+c*c*c&#x3D;&#x3D;num)&#123;</span><br><span class="line">				System.out.println(num);</span><br><span class="line">				count++;</span><br><span class="line">				if(count%2&#x3D;&#x3D;0)&#123;</span><br><span class="line">System.out.println(num);</span><br><span class="line">&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h5 id="5-2-while-语句"><a href="#5-2-while-语句" class="headerlink" title="5.2 while 语句"></a>5.2 while 语句</h5><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">while(条件判断语句)&#123;</span><br><span class="line">		循环体；</span><br><span class="line">		条件控制语句；</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
-
-<p>和for的操作一致；</p>
-<h5 id="5-3-do-while-语句"><a href="#5-3-do-while-语句" class="headerlink" title="5.3 do-while 语句"></a>5.3 do-while 语句</h5><p>​    格式：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">do</span>&#123;</span><br><span class="line">  循环体；</span><br><span class="line">&#125;<span class="keyword">while</span>(判断语句)&#123;  &#125;</span><br></pre></td></tr></table></figure>
-
-<p>​    特点：无论循环条件是否满足，至少会执行一次循环体</p>
-<h5 id="5-4-三者的区别"><a href="#5-4-三者的区别" class="headerlink" title="5.4 三者的区别"></a>5.4 三者的区别</h5><p>​    for 和 while：</p>
-<p>​    在for语句内的定义的变量，只能在语句内使用，之后就不能够使用了；</p>
-<p>​    在while语句内定义的变量，可以在语句外使用，并且不能重复使用；</p>
-<h5 id="5-5-死循环"><a href="#5-5-死循环" class="headerlink" title="5.5 死循环"></a>5.5 死循环</h5><p>​    格式：</p>
-<p>​    while(true){}</p>
-<p>​    for(;;){}</p>
-<p>​    do{}while(true){}</p>
-<p>应用场景：可以筛选符合对应条件的对象；</p>
-<h5 id="5-6-跳转控制语句"><a href="#5-6-跳转控制语句" class="headerlink" title="5.6 跳转控制语句"></a>5.6 跳转控制语句</h5><p>​    countinue; 跳过这次循环</p>
-<p>​    break;  结束当前循环</p>
-<p>​    只能在循环或switch里面使用</p>
-<h3 id="6-Random-产生随机数"><a href="#6-Random-产生随机数" class="headerlink" title="6.Random 产生随机数"></a>6.Random 产生随机数</h3><h5 id="6-1-Random"><a href="#6-1-Random" class="headerlink" title="6.1 Random"></a>6.1 Random</h5><p>​    格式：</p>
-<p>​    1.导包 <code>import java.unitl.Random;</code></p>
-<p>​    2.创建对象 <code>Random i = new Random();</code></p>
-<p>​    3.接受随机数 <code>int num = i.nextInt(整数);</code></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//1-10</span></span><br><span class="line"><span class="keyword">int</span> num = i.nextInt((<span class="number">10</span>-<span class="number">1</span>))+<span class="number">1</span>;</span><br></pre></td></tr></table></figure>
-
-
-
-]]></content>
-      <tags>
-        <tag>后端学习</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>运算符和分支语句</title>
     <url>/2021/08/31/day02-Java%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/</url>
     <content><![CDATA[<h1 id="day02-Java基础语法"><a href="#day02-Java基础语法" class="headerlink" title="day02 - Java基础语法"></a>day02 - Java基础语法</h1><h2 id="1-类型转换"><a href="#1-类型转换" class="headerlink" title="1 类型转换"></a>1 类型转换</h2><p>在Java中，一些数据类型之间是可以相互转换的。分为两种情况：自动类型转换和强制类型转换。</p>
@@ -1454,7 +1392,7 @@ System.out.println(divide);
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">double</span> num = <span class="number">10</span>; <span class="comment">// 将int类型的10直接赋值给double类型</span></span><br><span class="line">System.out.println(num); <span class="comment">// 输出10.0</span></span><br></pre></td></tr></table></figure>
 
 <p>​    类型从小到大关系图：</p>
-<p>​    <img src="img%5C%E5%9B%BE%E7%89%871.png" alt=""></p>
+<p>​    <img src="/.com//img%5C%E5%9B%BE%E7%89%871.png" alt></p>
 <p>说明：</p>
 <ol>
 <li>整数默认是int类型，byte、short和char类型数据参与运算均会自动转换为int类型。</li>
@@ -1738,7 +1676,7 @@ System.out.println(divide);
 <p>​    循环结构(for, while, do…while)</p>
 <h3 id="3-2-顺序结构-了解"><a href="#3-2-顺序结构-了解" class="headerlink" title="3.2 顺序结构(了解)"></a>3.2 顺序结构(了解)</h3><p>顺序结构是程序中最简单最基本的流程控制，没有特定的语法结构，按照代码的先后顺序，依次执行，程序中大多数的代码都是这样执行的。</p>
 <p>顺序结构执行流程图：</p>
-<p><img src="img/%E5%9B%BE%E7%89%872.png" alt="1545615769372"></p>
+<p><img src="/.com//%E5%9B%BE%E7%89%872.png" alt="1545615769372"></p>
 <h3 id="3-3-分支结构之if语句"><a href="#3-3-分支结构之if语句" class="headerlink" title="3.3 分支结构之if语句"></a>3.3 分支结构之if语句</h3><h4 id="3-3-1-if语句格式1（理解）"><a href="#3-3-1-if语句格式1（理解）" class="headerlink" title="3.3.1 if语句格式1（理解）"></a>3.3.1 if语句格式1（理解）</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">格式：</span><br><span class="line"><span class="keyword">if</span> (关系表达式) &#123;</span><br><span class="line">    语句体;	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>执行流程：</p>
@@ -1746,7 +1684,7 @@ System.out.println(divide);
 <p>②如果关系表达式的值为true就执行语句体</p>
 <p>③如果关系表达式的值为false就不执行语句体</p>
 <p>④继续执行后面的语句内容</p>
-<p><img src="img/%E5%9B%BE%E7%89%873.png" alt="1545616039363"></p>
+<p><img src="/.com//%E5%9B%BE%E7%89%873.png" alt="1545616039363"></p>
 <p>示例：</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">IfDemo</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		System.out.println(<span class="string">"开始"</span>);</span><br><span class="line">        </span><br><span class="line">		<span class="comment">// 如果年龄大于18岁, 就可以上网吧</span></span><br><span class="line">		<span class="keyword">int</span> age = <span class="number">17</span>;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">if</span>(age &gt;= <span class="number">18</span>)&#123;</span><br><span class="line">			<span class="comment">// int a = 10;</span></span><br><span class="line">			System.out.println(<span class="string">"可以上网吧"</span>);</span><br><span class="line">		&#125;</span><br><span class="line">			</span><br><span class="line">		System.out.println(<span class="string">"结束"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -1757,7 +1695,7 @@ System.out.println(divide);
 <p>②如果关系表达式的值为true就执行语句体1</p>
 <p>③如果关系表达式的值为false就执行语句体2</p>
 <p>④继续执行后面的语句内容</p>
-<p><img src="img/%E5%9B%BE%E7%89%874.png" alt="1545616221283"></p>
+<p><img src="/.com//%E5%9B%BE%E7%89%874.png" alt="1545616221283"></p>
 <p>示例：奇偶数</p>
 <p>​    任意给出一个整数，请用程序实现判断该整数是奇数还是偶数，并在控制台输出该整数是奇数还是偶数。</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Demo2If</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		<span class="comment">// 程序判断一个数, 是奇数还是偶数</span></span><br><span class="line">		<span class="keyword">int</span> num = <span class="number">9</span>;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">if</span>(num % <span class="number">2</span> == <span class="number">0</span>)&#123;</span><br><span class="line">			System.out.println(<span class="string">"偶数"</span>);</span><br><span class="line">		&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">			System.out.println(<span class="string">"奇数"</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -1770,7 +1708,7 @@ System.out.println(divide);
 <p>③如果值为true就执行语句体2；如果值为false就计算关系表达式3的值</p>
 <p>④…</p>
 <p>⑤如果没有任何关系表达式为true，就执行语句体n+1。</p>
-<p><img src="img%5C%E5%9B%BE%E7%89%875.png" alt="1545616667104"></p>
+<p><img src="/.com//img%5C%E5%9B%BE%E7%89%875.png" alt="1545616667104"></p>
 <p>示例：</p>
 <p>​    定义一个在0<del>100之间的变量a, 90</del>100优秀，80<del>89良好，70</del>79中等，60<del>69及格，0</del>59请努力加油！</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Demo3If</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">		<span class="keyword">int</span> score = <span class="number">65</span>;</span><br><span class="line">		<span class="keyword">if</span>(score &gt;= <span class="number">90</span> &amp;&amp; score &lt;= <span class="number">100</span>)&#123;</span><br><span class="line">			System.out.println(<span class="string">"优秀"</span>);</span><br><span class="line">		&#125;<span class="keyword">else</span> <span class="keyword">if</span> (score &gt;= <span class="number">80</span> &amp;&amp; score &lt;= <span class="number">89</span>)&#123;</span><br><span class="line">			System.out.println(<span class="string">"良好"</span>);</span><br><span class="line">		&#125;<span class="keyword">else</span> <span class="keyword">if</span> (score &gt;= <span class="number">70</span> &amp;&amp; score &lt;= <span class="number">79</span>)&#123;</span><br><span class="line">			System.out.println(<span class="string">"中等"</span>);</span><br><span class="line">		&#125;<span class="keyword">else</span> <span class="keyword">if</span> (score &gt;= <span class="number">60</span> &amp;&amp; score &lt;= <span class="number">69</span>)&#123;</span><br><span class="line">			System.out.println(<span class="string">"及格"</span>);</span><br><span class="line">		&#125;<span class="keyword">else</span> <span class="keyword">if</span> (score &gt;= <span class="number">0</span> &amp;&amp; score &lt;= <span class="number">59</span>)&#123;</span><br><span class="line">			System.out.println(<span class="string">"请努力加油"</span>);</span><br><span class="line">		&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">			System.out.println(<span class="string">"成绩有误!"</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -1782,6 +1720,74 @@ System.out.println(divide);
 <p>​    ③为每种判断设置对应的条件</p>
 <p>​    ④为每种判断设置对应的奖励</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">IfTest02</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">		<span class="comment">// 1. 使用Scanner录入考试成绩</span></span><br><span class="line">		Scanner sc = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">		System.out.println(<span class="string">"请输入您的成绩:"</span>);</span><br><span class="line">		<span class="keyword">int</span> score = sc.nextInt();</span><br><span class="line">		<span class="comment">// 2. 判断成绩是否在合法范围内 0~100</span></span><br><span class="line">		<span class="keyword">if</span>(score &gt;=<span class="number">0</span> &amp;&amp; score &lt;= <span class="number">100</span>)&#123;</span><br><span class="line">			<span class="comment">// 合法成绩</span></span><br><span class="line">			<span class="comment">// 3. 在合法的语句块中判断成绩范围符合哪一个奖励</span></span><br><span class="line">			<span class="keyword">if</span>(score &gt;= <span class="number">95</span> &amp;&amp; score &lt;= <span class="number">100</span>)&#123;</span><br><span class="line">				System.out.println(<span class="string">"自行车一辆"</span>);</span><br><span class="line">			&#125;<span class="keyword">else</span> <span class="keyword">if</span>(score &gt;= <span class="number">90</span> &amp;&amp; score &lt;= <span class="number">94</span>)&#123;</span><br><span class="line">				System.out.println(<span class="string">"游乐场一次"</span>);</span><br><span class="line">			&#125;<span class="keyword">else</span> <span class="keyword">if</span>(score &gt;= <span class="number">80</span> &amp;&amp; score &lt;= <span class="number">89</span>)&#123;</span><br><span class="line">				System.out.println(<span class="string">"变形金刚一个"</span>);</span><br><span class="line">			&#125;<span class="keyword">else</span> &#123;</span><br><span class="line">				System.out.println(<span class="string">"挨顿揍, 这座城市又多了一个伤心的人~"</span>);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">			<span class="comment">// 非法的话, 给出错误提示</span></span><br><span class="line">			System.out.println(<span class="string">"您的成绩输入有误!"</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <tags>
+        <tag>后端学习</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>循环和switch</title>
+    <url>/2021/09/01/day03_%E5%BE%AA%E7%8E%AF/</url>
+    <content><![CDATA[<h5 id="4-2-switch语句"><a href="#4-2-switch语句" class="headerlink" title="4.2 switch语句"></a>4.2 switch语句</h5><p>​    格式：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">switch</span>(表达式)&#123;</span><br><span class="line">	<span class="keyword">case</span> 值<span class="number">1</span>：</span><br><span class="line">	语句体 <span class="number">1</span>；</span><br><span class="line">	<span class="keyword">break</span>；</span><br><span class="line">	<span class="keyword">case</span> 值<span class="number">2</span>：</span><br><span class="line">	语句体 <span class="number">2</span>；</span><br><span class="line">	<span class="keyword">break</span>；</span><br><span class="line">	……</span><br><span class="line">	<span class="keyword">case</span> 值n：</span><br><span class="line">	语句体 n；</span><br><span class="line">	<span class="keyword">break</span>；</span><br><span class="line">	<span class="keyword">default</span>:</span><br><span class="line">	语句体；</span><br><span class="line">     <span class="keyword">break</span>；</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+<p>​    表达式的结果只能是：byte,short,int,char 字符串，枚举</p>
+<p>​    先计算表达式的值，从上到下与case开始匹配,遇到相同的值，开始乡下执行对应的语句体，直到遇到break或者switch才结束，如果没有匹配到case，执行default语句，直到遇到break或switch语句结束才结束。</p>
+<p>​    switch 一定能被if取代，能用if的尽量用if，但是有一种情况你可以选择switch，就是做选择的时候，这样的代码看起来比较清爽。</p>
+<p>​    </p>
+<p>​    case穿透：当语句出现break的时候，就会出现穿透现象</p>
+<p>​    当省略break的时候，会继续执行，直到执行到break的时候才会结束；</p>
+<p>​    出现多个重复的语句，可以考虑使用case穿透</p>
+<h3 id="5-循环语句"><a href="#5-循环语句" class="headerlink" title="5.循环语句"></a>5.循环语句</h3><p>​    循环是可以钱傲的，但是不要去数；</p>
+<p>​    嵌套不要超过两次，最多三次；</p>
+<p>​    嵌套就要去找规律，然后拼接；</p>
+<p>​    外层循环执行一次，内层循环执行一圈；</p>
+<h5 id="5-1-for语句"><a href="#5-1-for语句" class="headerlink" title="5.1 for语句"></a>5.1 for语句</h5><p>​    格式： </p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">for(初始化；条件判断语句;条件控制语句)&#123;</span><br><span class="line">  循环体；</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>1.首先执行初始化语句；</p>
+<p>2.执行条件判断语句</p>
+<p>​    true：继续执行</p>
+<p>​    false：结束执行</p>
+<p>可以和if或者for语句继续嵌套使用</p>
+<p>案例：水仙花数：每个位数的立方和等于原数</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">for(int num&#x3D;100;num&lt;&#x3D;999;num+&#x3D;1)&#123;</span><br><span class="line">			int a &#x3D; num % 10; </span><br><span class="line">			int b &#x3D; num &#x2F; 10 % 10; </span><br><span class="line">			int c &#x3D; num &#x2F; 10 &#x2F; 10 % 10;</span><br><span class="line">			if(a*a*a+b*b*b+c*c*c&#x3D;&#x3D;num)&#123;</span><br><span class="line">				System.out.println(num);</span><br><span class="line">		&#125;</span><br><span class="line">		&#125;</span><br></pre></td></tr></table></figure>
+
+<p>键盘输入：Scanner</p>
+<p>求和：sum</p>
+<p>统计数：count</p>
+<p>随机：Random</p>
+<p>案例二：每行打印两个水仙花数</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"> int count &#x3D; 0 ;</span><br><span class="line"> for(int num&#x3D;100;num&lt;&#x3D;999;num+&#x3D;1)&#123;</span><br><span class="line">			int a &#x3D; num % 10; </span><br><span class="line">			int b &#x3D; num &#x2F; 10 % 10; </span><br><span class="line">			int c &#x3D; num &#x2F; 10 &#x2F; 10 % 10;</span><br><span class="line">			if(a*a*a+b*b*b+c*c*c&#x3D;&#x3D;num)&#123;</span><br><span class="line">				System.out.println(num);</span><br><span class="line">				count++;</span><br><span class="line">				if(count%2&#x3D;&#x3D;0)&#123;</span><br><span class="line">System.out.println(num);</span><br><span class="line">&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="5-2-while-语句"><a href="#5-2-while-语句" class="headerlink" title="5.2 while 语句"></a>5.2 while 语句</h5><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">while(条件判断语句)&#123;</span><br><span class="line">		循环体；</span><br><span class="line">		条件控制语句；</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+<p>和for的操作一致；</p>
+<h5 id="5-3-do-while-语句"><a href="#5-3-do-while-语句" class="headerlink" title="5.3 do-while 语句"></a>5.3 do-while 语句</h5><p>​    格式：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">do</span>&#123;</span><br><span class="line">  循环体；</span><br><span class="line">&#125;<span class="keyword">while</span>(判断语句)&#123;  &#125;</span><br></pre></td></tr></table></figure>
+
+<p>​    特点：无论循环条件是否满足，至少会执行一次循环体</p>
+<h5 id="5-4-三者的区别"><a href="#5-4-三者的区别" class="headerlink" title="5.4 三者的区别"></a>5.4 三者的区别</h5><p>​    for 和 while：</p>
+<p>​    在for语句内的定义的变量，只能在语句内使用，之后就不能够使用了；</p>
+<p>​    在while语句内定义的变量，可以在语句外使用，并且不能重复使用；</p>
+<h5 id="5-5-死循环"><a href="#5-5-死循环" class="headerlink" title="5.5 死循环"></a>5.5 死循环</h5><p>​    格式：</p>
+<p>​    while(true){}</p>
+<p>​    for(;;){}</p>
+<p>​    do{}while(true){}</p>
+<p>应用场景：可以筛选符合对应条件的对象；</p>
+<h5 id="5-6-跳转控制语句"><a href="#5-6-跳转控制语句" class="headerlink" title="5.6 跳转控制语句"></a>5.6 跳转控制语句</h5><p>​    countinue; 跳过这次循环</p>
+<p>​    break;  结束当前循环</p>
+<p>​    只能在循环或switch里面使用</p>
+<h3 id="6-Random-产生随机数"><a href="#6-Random-产生随机数" class="headerlink" title="6.Random 产生随机数"></a>6.Random 产生随机数</h3><h5 id="6-1-Random"><a href="#6-1-Random" class="headerlink" title="6.1 Random"></a>6.1 Random</h5><p>​    格式：</p>
+<p>​    1.导包 <code>import java.unitl.Random;</code></p>
+<p>​    2.创建对象 <code>Random i = new Random();</code></p>
+<p>​    3.接受随机数 <code>int num = i.nextInt(整数);</code></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//1-10</span></span><br><span class="line"><span class="keyword">int</span> num = i.nextInt((<span class="number">10</span>-<span class="number">1</span>))+<span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+
+
 
 ]]></content>
       <tags>
@@ -1867,9 +1873,9 @@ System.out.println(divide);
 <td>方法运行时使用的内存，比如main方法运行，进入方法栈中执行。</td>
 </tr>
 </tbody></table>
-<h3 id="1-6-Java内存分配-一个数组内存图"><a href="#1-6-Java内存分配-一个数组内存图" class="headerlink" title="1.6 Java内存分配-一个数组内存图"></a>1.6 Java内存分配-一个数组内存图</h3><p><img src=".%5Cimg%5C1591007817165.png" alt="1591007817165"></p>
-<h3 id="1-7-两个数组内存图"><a href="#1-7-两个数组内存图" class="headerlink" title="1.7 两个数组内存图"></a>1.7 两个数组内存图</h3><p><img src=".%5Cimg%5C1591007925899.png" alt="1591007925899"></p>
-<h3 id="1-8-多个数组指向相同内存图"><a href="#1-8-多个数组指向相同内存图" class="headerlink" title="1.8 多个数组指向相同内存图"></a>1.8 多个数组指向相同内存图</h3><p><img src=".%5Cimg%5C1591007957052.png" alt="1591007957052"></p>
+<h3 id="1-6-Java内存分配-一个数组内存图"><a href="#1-6-Java内存分配-一个数组内存图" class="headerlink" title="1.6 Java内存分配-一个数组内存图"></a>1.6 Java内存分配-一个数组内存图</h3><p><img src="/.com//.%5Cimg%5C1591007817165.png" alt="1591007817165"></p>
+<h3 id="1-7-两个数组内存图"><a href="#1-7-两个数组内存图" class="headerlink" title="1.7 两个数组内存图"></a>1.7 两个数组内存图</h3><p><img src="/.com//.%5Cimg%5C1591007925899.png" alt="1591007925899"></p>
+<h3 id="1-8-多个数组指向相同内存图"><a href="#1-8-多个数组指向相同内存图" class="headerlink" title="1.8 多个数组指向相同内存图"></a>1.8 多个数组指向相同内存图</h3><p><img src="/.com//.%5Cimg%5C1591007957052.png" alt="1591007957052"></p>
 <h3 id="1-9-数组的静态初始化"><a href="#1-9-数组的静态初始化" class="headerlink" title="1.9 数组的静态初始化"></a>1.9 数组的静态初始化</h3><h4 id="1-9-1-什么是静态初始化"><a href="#1-9-1-什么是静态初始化" class="headerlink" title="1.9.1 什么是静态初始化"></a>1.9.1 什么是静态初始化</h4><p>​    在创建数组时，直接将元素确定    </p>
 <h4 id="1-9-2-静态初始化格式"><a href="#1-9-2-静态初始化格式" class="headerlink" title="1.9.2 静态初始化格式"></a>1.9.2 静态初始化格式</h4><ul>
 <li><p>完整版格式</p>
@@ -2084,7 +2090,7 @@ System.out.println(divide);
 <p>​    位移运算</p>
 <p>​    &lt;&lt; : 左移几位，乘2的几次方</p>
 <p>​    &gt;&gt;：右移几位，除2的几次方</p>
-<p> <img src="%E4%BD%8D%E8%BF%90%E7%AE%97%E7%AC%A6.png" alt="位运算符"></p>
+<p> <img src="/.com//%E4%BD%8D%E8%BF%90%E7%AE%97%E7%AC%A6.png" alt="位运算符"></p>
 <h3 id="10-二维数组"><a href="#10-二维数组" class="headerlink" title="10. 二维数组"></a>10. 二维数组</h3><h5 id="10-1-二维数组概念"><a href="#10-1-二维数组概念" class="headerlink" title="10.1 二维数组概念"></a>10.1 二维数组概念</h5><p>​        概念： 存储多个一维数组的容器</p>
 <p>​                    二维数组里面存在的一堆数组的地址         </p>
 <p>​        格式： 数据类型 <code>[]</code> <code>[]</code> 变量名 = new 数据类型<code>[m]</code> <code>[n]</code></p>
@@ -2121,7 +2127,7 @@ System.out.println(divide);
 <p>​    垃圾回收</p>
 <p>​    注意：当堆内存中，对象或数组产生的地址，通过任何方式都不能被找到后，就会被判定为内存找那个的’垃圾’ ，垃圾会被java垃圾回收器，空闲的时候自动进行清理</p>
 <h5 id="11-2-局部变量和成员变量"><a href="#11-2-局部变量和成员变量" class="headerlink" title="11.2 局部变量和成员变量"></a>11.2 局部变量和成员变量</h5><p>​    1.局部变量：方法中的变量<br>​    2.成员变量：类中方法外的变量</p>
-<p><img src="%E5%B1%80%E9%83%A8%E5%8F%98%E9%87%8F%E5%92%8C%E6%88%90%E5%91%98%E5%8F%98%E9%87%8F.png" alt="局部变量和成员变量"></p>
+<p><img src="/.com//%E5%B1%80%E9%83%A8%E5%8F%98%E9%87%8F%E5%92%8C%E6%88%90%E5%91%98%E5%8F%98%E9%87%8F.png" alt="局部变量和成员变量"></p>
 <h5 id="11-3-封装"><a href="#11-3-封装" class="headerlink" title="11.3 封装"></a>11.3 封装</h5><p>​    隐藏实现细节，仅对外暴露公共的访问方式<br>​    体现：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1. 私有成员变量，提供setXxx和getXxx</span><br></pre></td></tr></table></figure>
 
@@ -2162,273 +2168,6 @@ System.out.println(divide);
 
 
 <p>​        </p>
-]]></content>
-      <tags>
-        <tag>后端学习</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>分类和Static</title>
-    <url>/2021/09/13/day10-%E5%88%86%E7%B1%BB%E5%92%8Cstatic/</url>
-    <content><![CDATA[<h2 id="1-案例驱动模式"><a href="#1-案例驱动模式" class="headerlink" title="1.案例驱动模式"></a>1.案例驱动模式</h2><h3 id="1-1案例驱动模式概述-理解"><a href="#1-1案例驱动模式概述-理解" class="headerlink" title="1.1案例驱动模式概述 (理解)"></a>1.1案例驱动模式概述 (理解)</h3><p>通过我们已掌握的知识点,先实现一个案例,然后找出这个案例中,存在的一些问题,在通过新知识点解决问题</p>
-<h3 id="1-2案例驱动模式的好处-理解"><a href="#1-2案例驱动模式的好处-理解" class="headerlink" title="1.2案例驱动模式的好处 (理解)"></a>1.2案例驱动模式的好处 (理解)</h3><ul>
-<li>解决重复代码过多的冗余,提高代码的复用性</li>
-<li>解决业务逻辑聚集紧密导致的可读性差,提高代码的可读性</li>
-<li>解决代码可维护性差,提高代码的维护性</li>
-</ul>
-<h2 id="2-分类思想"><a href="#2-分类思想" class="headerlink" title="2.分类思想"></a>2.分类思想</h2><h3 id="2-1分类思想概述-理解"><a href="#2-1分类思想概述-理解" class="headerlink" title="2.1分类思想概述 (理解)"></a>2.1分类思想概述 (理解)</h3><p>分工协作,专人干专事</p>
-<h3 id="2-2信息管理系统-理解"><a href="#2-2信息管理系统-理解" class="headerlink" title="2.2信息管理系统 (理解)"></a>2.2信息管理系统 (理解)</h3><ul>
-<li><p>Student类  标准学生类,封装键盘录入的学生信息(id , name , age , birthday)</p>
-</li>
-<li><p>StudentDao类  Dao : (Data Access Object 缩写) 用于访问存储数据的数组或集合</p>
-</li>
-<li><p>StudentService类  用来进行业务逻辑的处理(例如: 判断录入的id是否存在)</p>
-</li>
-<li><p>StudentController类  和用户打交道(接收用户需求,采集用户信息,打印数据到控制台)</p>
-<p><img src=".%5Cimg%5C01_%E9%BB%91%E9%A9%AC%E4%BF%A1%E6%81%AF%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%E5%88%86%E7%B1%BB.png" alt="01_黑马信息管理系统分类"></p>
-</li>
-</ul>
-<h2 id="3-分包思想"><a href="#3-分包思想" class="headerlink" title="3.分包思想"></a>3.分包思想</h2><h3 id="3-1分包思想概述-理解"><a href="#3-1分包思想概述-理解" class="headerlink" title="3.1分包思想概述 (理解)"></a>3.1分包思想概述 (理解)</h3><p>如果将所有的类文件都放在同一个包下,不利于管理和后期维护,所以,对于不同功能的类文件,可以放在不同的包下进行管理</p>
-<h3 id="3-2包的概述-记忆"><a href="#3-2包的概述-记忆" class="headerlink" title="3.2包的概述 (记忆)"></a>3.2包的概述 (记忆)</h3><ul>
-<li><p>包</p>
-<p>本质上就是文件夹</p>
-</li>
-<li><p>创建包</p>
-<p>多级包之间使用 “ . “ 进行分割<br>多级包的定义规范：公司的网站地址翻转(去掉www)<br>比如：黑马程序员的网站址为<a href="http://www.itheima.com" target="_blank" rel="noopener">www.itheima.com</a><br>后期我们所定义的包的结构就是：com.itheima.其他的包名</p>
-</li>
-<li><p>包的命名规则</p>
-<p>字母都是小写</p>
-</li>
-</ul>
-<h3 id="3-3包的注意事项-理解"><a href="#3-3包的注意事项-理解" class="headerlink" title="3.3包的注意事项 (理解)"></a>3.3包的注意事项 (理解)</h3><ul>
-<li>package语句必须是程序的第一条可执行的代码 </li>
-<li>package语句在一个java文件中只能有一个 </li>
-<li>如果没有package,默认表示无包名 </li>
-</ul>
-<h3 id="3-4类与类之间的访问-理解"><a href="#3-4类与类之间的访问-理解" class="headerlink" title="3.4类与类之间的访问 (理解)"></a>3.4类与类之间的访问 (理解)</h3><ul>
-<li><p>同一个包下的访问</p>
-<p>不需要导包，直接使用即可</p>
-</li>
-<li><p>不同包下的访问</p>
-<p>1.import 导包后访问</p>
-<p>2.通过全类名（包名 + 类名）访问</p>
-</li>
-<li><p>注意：import 、package 、class 三个关键字的摆放位置存在顺序关系</p>
-<p>package 必须是程序的第一条可执行的代码</p>
-<p>import 需要写在 package 下面</p>
-<p>class 需要在 import 下面</p>
-</li>
-</ul>
-<h2 id="4-信息管理系统"><a href="#4-信息管理系统" class="headerlink" title="4.信息管理系统"></a>4.信息管理系统</h2><h3 id="4-1系统介绍-理解"><a href="#4-1系统介绍-理解" class="headerlink" title="4.1系统介绍 (理解)"></a>4.1系统介绍 (理解)</h3><p><img src=".%5Cimg%5C02_%E9%BB%91%E9%A9%AC%E4%BF%A1%E6%81%AF%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%E4%BB%8B%E7%BB%8D.png" alt="02_黑马信息管理系统介绍"></p>
-<h3 id="4-2学生管理系统-应用"><a href="#4-2学生管理系统-应用" class="headerlink" title="4.2学生管理系统 (应用)"></a>4.2学生管理系统 (应用)</h3><h4 id="4-2-1需求说明"><a href="#4-2-1需求说明" class="headerlink" title="4.2.1需求说明"></a>4.2.1需求说明</h4><ul>
-<li><p>添加学生: 键盘录入学生信息(id，name，age，birthday)</p>
-<p>使用数组存储学生信息,要求学生的id不能重复</p>
-</li>
-<li><p>删除学生: 键盘录入要删除学生的id值,将该学生从数组中移除,如果录入的id在数组中不存在,需要重新录入</p>
-</li>
-<li><p>修改学生: 键盘录入要修改学生的id值和修改后的学生信息</p>
-<p>将数组中该学生的信息修改,如果录入的id在数组中不存在,需要重新录入</p>
-</li>
-<li><p>查询学生: 将数组中存储的所有学生的信息输出到控制台</p>
-</li>
-</ul>
-<h4 id="4-2-2实现步骤"><a href="#4-2-2实现步骤" class="headerlink" title="4.2.2实现步骤"></a>4.2.2实现步骤</h4><ul>
-<li><p>环境搭建实现步骤 </p>
-<table>
-<thead>
-<tr>
-<th>包</th>
-<th>存储的类</th>
-<th>作用</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>com.itheima.edu.info.manager.domain</td>
-<td>Student.java</td>
-<td>封装学生信息</td>
-</tr>
-<tr>
-<td>com.itheima.edu.info.manager.dao</td>
-<td>StudentDao.java</td>
-<td>访问存储数据的数组，进行赠删改查（库管）</td>
-</tr>
-<tr>
-<td>com.itheima.edu.info.manager.service</td>
-<td>StudentService.java</td>
-<td>业务的逻辑处理（业务员）</td>
-</tr>
-<tr>
-<td>com.itheima.edu.info.manager.controller</td>
-<td>StudentController.java</td>
-<td>和用户打交道（客服接待）</td>
-</tr>
-<tr>
-<td>com.itheima.edu.info.manager.entry</td>
-<td>InfoManagerEntry.java</td>
-<td>程序的入口类，提供一个main方法</td>
-</tr>
-</tbody></table>
-</li>
-<li><p>菜单搭建实现步骤 </p>
-<ul>
-<li>需求<ul>
-<li>黑马管理系统菜单搭建</li>
-<li>学生管理系统菜单搭建</li>
-</ul>
-</li>
-<li>实现步骤<ol>
-<li>展示欢迎页面,用输出语句完成主界面的编写</li>
-<li>获取用户的选择,用Scanner实现键盘录入数据</li>
-<li>根据用户的选择执行对应的操作,用switch语句完成操作的选择</li>
-</ol>
-</li>
-</ul>
-</li>
-<li><p>添加功能实现步骤 </p>
-<p><img src=".%5Cimg%5C03_%E6%B7%BB%E5%8A%A0%E5%8A%9F%E8%83%BD%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90.png" alt="03_添加功能需求分析"></p>
-</li>
-</ul>
-<ul>
-<li><p>添加功能优化:判断id是否存在</p>
-<p><img src=".%5Cimg%5C04_%E5%88%A4%E6%96%ADid%E6%98%AF%E5%90%A6%E5%AD%98%E5%9C%A8.png" alt="04_判断id是否存在"></p>
-</li>
-<li><p>查询功能实现步骤</p>
-<p><img src=".%5Cimg%5C05_%E6%9F%A5%E8%AF%A2%E5%8A%9F%E8%83%BD%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90.png" alt="05_查询功能需求分析"></p>
-</li>
-<li><p>删除功能实现步骤</p>
-<p><img src=".%5Cimg%5C06_%E5%88%A0%E9%99%A4%E5%8A%9F%E8%83%BD%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90.png" alt="06_删除功能需求分析"></p>
-</li>
-<li><p>修改功能实现步骤 </p>
-<p><img src=".%5Cimg%5C07_%E4%BF%AE%E6%94%B9%E5%8A%9F%E8%83%BD%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90.png" alt="07_修改功能需求分析"></p>
-</li>
-<li><p>系统优化 </p>
-<ul>
-<li>把updateStudent和deleteStudentById中录入学生id代码抽取到一个方法(inputStudentId)中<br>该方法的主要作用就是录入学生的id，方法的返回值为String类型</li>
-</ul>
-</li>
-</ul>
-<ul>
-<li>把addStudent和updateStudent中录入学生信息的代码抽取到一个方法(inputStudentInfo)中<br>该方法的主要作用就是录入学生的信息，并封装为学生对象，方法的返回值为Student类型 </li>
-</ul>
-<h4 id="4-2-3代码实现"><a href="#4-2-3代码实现" class="headerlink" title="4.2.3代码实现"></a>4.2.3代码实现</h4><p>学生类</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Student</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String id;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> String age;</span><br><span class="line">    <span class="keyword">private</span> String birthday;</span><br><span class="line">    String address;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Student</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Student</span><span class="params">(String id, String name, String age, String birthday)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.id = id;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">        <span class="keyword">this</span>.age = age;</span><br><span class="line">        <span class="keyword">this</span>.birthday = birthday;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getId</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> id;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setId</span><span class="params">(String id)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.id = id;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getAge</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> age;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAge</span><span class="params">(String age)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.age = age;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getBirthday</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> birthday;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setBirthday</span><span class="params">(String birthday)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.birthday = birthday;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>程序入口InfoManagerEntry类</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">InfoManagerEntry</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Scanner sc = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">        <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">            <span class="comment">// 主菜单搭建</span></span><br><span class="line">            System.out.println(<span class="string">"--------欢迎来到黑马信息管理系统--------"</span>);</span><br><span class="line">            System.out.println(<span class="string">"请输入您的选择: 1.学生管理  2.老师管理  3.退出"</span>);</span><br><span class="line">            String choice = sc.next();</span><br><span class="line">            <span class="keyword">switch</span> (choice) &#123;</span><br><span class="line">                <span class="keyword">case</span> <span class="string">"1"</span>:</span><br><span class="line">                    <span class="comment">// System.out.println("学生管理");</span></span><br><span class="line">                    <span class="comment">// 开启学生管理系统</span></span><br><span class="line">                    StudentController studentController = <span class="keyword">new</span> StudentController();</span><br><span class="line">                    studentController.start();</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">case</span> <span class="string">"2"</span>:</span><br><span class="line">                    System.out.println(<span class="string">"老师管理"</span>);</span><br><span class="line">                    TeacherController teacherController = <span class="keyword">new</span> TeacherController();</span><br><span class="line">                    teacherController.start();</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">case</span> <span class="string">"3"</span>:</span><br><span class="line">                    System.out.println(<span class="string">"感谢您的使用"</span>);</span><br><span class="line">                    <span class="comment">// 退出当前正在运行的JVM虚拟机</span></span><br><span class="line">                    System.exit(<span class="number">0</span>);</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">default</span>:</span><br><span class="line">                    System.out.println(<span class="string">"您的输入有误, 请重新输入"</span>);</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>StudentController类</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StudentController</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 业务员对象</span></span><br><span class="line">    <span class="keyword">private</span> StudentService studentService = <span class="keyword">new</span> StudentService();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Scanner sc = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 开启学生管理系统, 并展示学生管理系统菜单</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">start</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">//Scanner sc = new Scanner(System.in);</span></span><br><span class="line">        studentLoop:</span><br><span class="line">        <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">            System.out.println(<span class="string">"--------欢迎来到 &lt;学生&gt; 管理系统--------"</span>);</span><br><span class="line">            System.out.println(<span class="string">"请输入您的选择: 1.添加学生  2.删除学生  3.修改学生  4.查看学生  5.退出"</span>);</span><br><span class="line">            String choice = sc.next();</span><br><span class="line">            <span class="keyword">switch</span> (choice) &#123;</span><br><span class="line">                <span class="keyword">case</span> <span class="string">"1"</span>:</span><br><span class="line">                    <span class="comment">// System.out.println("添加");</span></span><br><span class="line">                    addStudent();</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">case</span> <span class="string">"2"</span>:</span><br><span class="line">                    <span class="comment">// System.out.println("删除");</span></span><br><span class="line">                    deleteStudentById();</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">case</span> <span class="string">"3"</span>:</span><br><span class="line">                    <span class="comment">// System.out.println("修改");</span></span><br><span class="line">                    updateStudent();</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">case</span> <span class="string">"4"</span>:</span><br><span class="line">                    <span class="comment">// System.out.println("查询");</span></span><br><span class="line">                    findAllStudent();</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">case</span> <span class="string">"5"</span>:</span><br><span class="line">                    System.out.println(<span class="string">"感谢您使用学生管理系统, 再见!"</span>);</span><br><span class="line">                    <span class="keyword">break</span> studentLoop;</span><br><span class="line">                <span class="keyword">default</span>:</span><br><span class="line">                    System.out.println(<span class="string">"您的输入有误, 请重新输入"</span>);</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 修改学生方法</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">updateStudent</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        String updateId = inputStudentId();</span><br><span class="line">        Student newStu = inputStudentInfo(updateId);</span><br><span class="line">        studentService.updateStudent(updateId, newStu);</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">"修改成功!"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 删除学生方法</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">deleteStudentById</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        String delId = inputStudentId();</span><br><span class="line">        <span class="comment">// 3. 调用业务员中的deleteStudentById根据id, 删除学生</span></span><br><span class="line">        studentService.deleteStudentById(delId);</span><br><span class="line">        <span class="comment">// 4. 提示删除成功</span></span><br><span class="line">        System.out.println(<span class="string">"删除成功!"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 查看学生方法</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">findAllStudent</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 1. 调用业务员中的获取方法, 得到学生的对象数组</span></span><br><span class="line">        Student[] stus = studentService.findAllStudent();</span><br><span class="line">        <span class="comment">// 2. 判断数组的内存地址, 是否为null</span></span><br><span class="line">        <span class="keyword">if</span> (stus == <span class="keyword">null</span>) &#123;</span><br><span class="line">            System.out.println(<span class="string">"查无信息, 请添加后重试"</span>);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 3. 遍历数组, 获取学生信息并打印在控制台</span></span><br><span class="line">        System.out.println(<span class="string">"学号\t\t姓名\t年龄\t生日"</span>);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; stus.length; i++) &#123;</span><br><span class="line">            Student stu = stus[i];</span><br><span class="line">            <span class="keyword">if</span> (stu != <span class="keyword">null</span>) &#123;</span><br><span class="line">                System.out.println(stu.getId() + <span class="string">"\t"</span> + stu.getName() + <span class="string">"\t"</span> + stu.getAge() + <span class="string">"\t\t"</span> + stu.getBirthday());</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 添加学生方法</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addStudent</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">// StudentService studentService = new StudentService();</span></span><br><span class="line">        <span class="comment">// 1. 键盘接收学生信息</span></span><br><span class="line">        String id;</span><br><span class="line">        <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">            System.out.println(<span class="string">"请输入学生id:"</span>);</span><br><span class="line">            id = sc.next();</span><br><span class="line">           </span><br><span class="line">            <span class="keyword">if</span> (flag) &#123;</span><br><span class="line">                System.out.println(<span class="string">"学号已被占用, 请重新输入"</span>);</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        Student stu = inputStudentInfo(id);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 3. 将学生对象,传递给StudentService(业务员)中的addStudent方法</span></span><br><span class="line">        <span class="keyword">boolean</span> result = studentService.addStudent(stu);</span><br><span class="line">        <span class="comment">// 4. 根据返回的boolean类型结果, 在控制台打印成功\失败</span></span><br><span class="line">        <span class="keyword">if</span> (result) &#123;</span><br><span class="line">            System.out.println(<span class="string">"添加成功"</span>);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            System.out.println(<span class="string">"添加失败"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 键盘录入学生id</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">inputStudentId</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        String id;</span><br><span class="line">        <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">            System.out.println(<span class="string">"请输入学生id:"</span>);</span><br><span class="line">            id = sc.next();</span><br><span class="line">            <span class="keyword">boolean</span> exists = studentService.isExists(id);</span><br><span class="line">            <span class="keyword">if</span> (!exists) &#123;</span><br><span class="line">                System.out.println(<span class="string">"您输入的id不存在, 请重新输入:"</span>);</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> id;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 键盘录入学生信息</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Student <span class="title">inputStudentInfo</span><span class="params">(String id)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"请输入学生姓名:"</span>);</span><br><span class="line">        String name = sc.next();</span><br><span class="line">        System.out.println(<span class="string">"请输入学生年龄:"</span>);</span><br><span class="line">        String age = sc.next();</span><br><span class="line">        System.out.println(<span class="string">"请输入学生生日:"</span>);</span><br><span class="line">        String birthday = sc.next();</span><br><span class="line">        Student stu = <span class="keyword">new</span> Student();</span><br><span class="line">        stu.setId(id);</span><br><span class="line">        stu.setName(name);</span><br><span class="line">        stu.setAge(age);</span><br><span class="line">        stu.setBirthday(birthday);</span><br><span class="line">        <span class="keyword">return</span> stu;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>StudentService类</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StudentService</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 创建StudentDao (库管)</span></span><br><span class="line">    <span class="keyword">private</span> StudentDao studentDao = <span class="keyword">new</span> StudentDao();</span><br><span class="line">    <span class="comment">// 添加学生方法</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">addStudent</span><span class="params">(Student stu)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 2. 将学生对象, 传递给StudentDao 库管中的addStudent方法</span></span><br><span class="line">        <span class="comment">// 3. 将返回的boolean类型结果, 返还给StudentController</span></span><br><span class="line">        <span class="keyword">return</span> studentDao.addStudent(stu);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 判断学号是否存在方法</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isExists</span><span class="params">(String id)</span> </span>&#123;</span><br><span class="line">        Student[] stus = studentDao.findAllStudent();</span><br><span class="line">        <span class="comment">// 假设id在数组中不存在</span></span><br><span class="line">        <span class="keyword">boolean</span> exists = <span class="keyword">false</span>;</span><br><span class="line">        <span class="comment">// 遍历数组, 获取每一个学生对象, 准备进行判断</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; stus.length; i++) &#123;</span><br><span class="line">            Student student = stus[i];</span><br><span class="line">            <span class="keyword">if</span>(student != <span class="keyword">null</span> &amp;&amp; student.getId().equals(id))&#123;</span><br><span class="line">                exists = <span class="keyword">true</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> exists;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 查看学生方法</span></span><br><span class="line">    <span class="keyword">public</span> Student[] findAllStudent() &#123;</span><br><span class="line">        <span class="comment">// 1. 调用库管对象的findAllStudent获取学生对象数组</span></span><br><span class="line">        Student[] allStudent = studentDao.findAllStudent();</span><br><span class="line">        <span class="comment">// 2. 判断数组中是否有学生信息 (有: 返回地址,  没有: 返回null)</span></span><br><span class="line">        <span class="comment">// 思路: 数组中只要存在一个不是null的元素, 那就代表有学生信息</span></span><br><span class="line">        <span class="keyword">boolean</span> flag = <span class="keyword">false</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; allStudent.length; i++) &#123;</span><br><span class="line">            Student stu = allStudent[i];</span><br><span class="line">            <span class="keyword">if</span>(stu != <span class="keyword">null</span>)&#123;</span><br><span class="line">                flag = <span class="keyword">true</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(flag)&#123;</span><br><span class="line">            <span class="comment">// 有信息</span></span><br><span class="line">            <span class="keyword">return</span> allStudent;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="comment">// 没有信息</span></span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">deleteStudentById</span><span class="params">(String delId)</span> </span>&#123;</span><br><span class="line">        studentDao.deleteStudentById(delId);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">updateStudent</span><span class="params">(String updateId, Student newStu)</span> </span>&#123;</span><br><span class="line">        studentDao.updateStudent(updateId, newStu);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>StudentDao类</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StudentDao</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 创建学生对象数组</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Student[] stus = <span class="keyword">new</span> Student[<span class="number">5</span>];</span><br><span class="line">    <span class="comment">// 添加学生方法</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">addStudent</span><span class="params">(Student stu)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 2. 添加学生到数组</span></span><br><span class="line">        <span class="comment">//2.1 定义变量index为-1，假设数组已经全部存满，没有null的元素</span></span><br><span class="line">        <span class="keyword">int</span> index = -<span class="number">1</span>;</span><br><span class="line">        <span class="comment">//2.2 遍历数组取出每一个元素，判断是否是null</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; stus.length; i++) &#123;</span><br><span class="line">            Student student = stus[i];</span><br><span class="line">            <span class="keyword">if</span>(student == <span class="keyword">null</span>)&#123;</span><br><span class="line">                index = i;</span><br><span class="line">                <span class="comment">//2.3 如果为null，让index变量记录当前索引位置，并使用break结束循环遍历</span></span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 3. 返回是否添加成功的boolean类型状态</span></span><br><span class="line">        <span class="keyword">if</span>(index == -<span class="number">1</span>)&#123;</span><br><span class="line">            <span class="comment">// 装满了</span></span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="comment">// 没有装满, 正常添加, 返回true</span></span><br><span class="line">            stus[index] = stu;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 查看学生方法</span></span><br><span class="line">    <span class="keyword">public</span> Student[] findAllStudent() &#123;</span><br><span class="line">        <span class="keyword">return</span> stus;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">deleteStudentById</span><span class="params">(String delId)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 1. 查找id在容器中所在的索引位置</span></span><br><span class="line">        <span class="keyword">int</span> index = getIndex(delId);</span><br><span class="line">        <span class="comment">// 2. 将该索引位置,使用null元素进行覆盖</span></span><br><span class="line">        stus[index] = <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getIndex</span><span class="params">(String id)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> index = -<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; stus.length; i++) &#123;</span><br><span class="line">            Student stu = stus[i];</span><br><span class="line">            <span class="keyword">if</span>(stu != <span class="keyword">null</span> &amp;&amp; stu.getId().equals(id))&#123;</span><br><span class="line">                index = i;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> index;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">updateStudent</span><span class="params">(String updateId, Student newStu)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 1. 查找updateId, 在容器中的索引位置</span></span><br><span class="line">        <span class="keyword">int</span> index = getIndex(updateId);</span><br><span class="line">        <span class="comment">// 2. 将该索引位置, 使用新的学生对象替换</span></span><br><span class="line">        stus[index] = newStu;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="4-3老师管理系统-应用"><a href="#4-3老师管理系统-应用" class="headerlink" title="4.3老师管理系统 (应用)"></a>4.3老师管理系统 (应用)</h3><h4 id="4-3-1需求说明"><a href="#4-3-1需求说明" class="headerlink" title="4.3.1需求说明"></a>4.3.1需求说明</h4><ul>
-<li><p>添加老师: 通过键盘录入老师信息(id，name，age，birthday)</p>
-<p>使用数组存储老师信息,要求老师的id不能重复</p>
-</li>
-<li><p>删除老师: 通过键盘录入要删除老师的id值,将该老师从数组中移除,如果录入的id在数组中不存在,需要重新录入</p>
-</li>
-<li><p>修改老师: 通过键盘录入要修改老师的id值和修改后的老师信息</p>
-<p>将数组中该老师的信息修改,如果录入的id在数组中不存在,需要重新录入</p>
-</li>
-<li><p>查询老师: 将数组中存储的所有老师的信息输出到控制台</p>
-</li>
-</ul>
-<h4 id="4-3-2实现步骤"><a href="#4-3-2实现步骤" class="headerlink" title="4.3.2实现步骤"></a>4.3.2实现步骤</h4><ul>
-<li><p>环境搭建实现步骤</p>
-<table>
-<thead>
-<tr>
-<th>包</th>
-<th>存储的类</th>
-<th>作用</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>com.itheima.edu.info.manager.domain</td>
-<td>Student.java   Teacher.java</td>
-<td>封装学生信息  封装老师信息</td>
-</tr>
-<tr>
-<td>com.itheima.edu.info.manager.dao</td>
-<td>StudentDao.java  TeacherDao.java</td>
-<td>访问存储数据的数组,进行赠删改查（库管）</td>
-</tr>
-<tr>
-<td>com.itheima.edu.info.manager.service</td>
-<td>StudentService.java  TeacherService.java</td>
-<td>业务的逻辑处理（业务员）</td>
-</tr>
-<tr>
-<td>com.itheima.edu.info.manager.controller</td>
-<td>StudentController.java  TeacherController.java</td>
-<td>和用户打交道（客服接待）</td>
-</tr>
-<tr>
-<td>com.itheima.edu.info.manager.entry</td>
-<td>InfoManagerEntry.java</td>
-<td>程序的入口类,提供一个main方法</td>
-</tr>
-</tbody></table>
-</li>
-<li><p>菜单搭建实现步骤</p>
-<ol>
-<li>展示欢迎页面,用输出语句完成主界面的编写</li>
-<li>获取用户的选择,用Scanner实现键盘录入数据</li>
-<li>根据用户的选择执行对应的操作,用switch语句完成操作的选择</li>
-</ol>
-</li>
-<li><p>添加功能实现步骤</p>
-<p><img src=".%5Cimg%5C10_%E6%B7%BB%E5%8A%A0%E8%80%81%E5%B8%88%E5%8A%9F%E8%83%BD%E5%AE%9E%E7%8E%B0%E6%AD%A5%E9%AA%A4.png" alt="10_添加老师功能实现步骤"></p>
-</li>
-<li><p>查询功能实现步骤</p>
-<p><img src=".%5Cimg%5C11_%E6%9F%A5%E8%AF%A2%E8%80%81%E5%B8%88%E5%8A%9F%E8%83%BD%E5%AE%9E%E7%8E%B0%E6%AD%A5%E9%AA%A4.png" alt="11_查询老师功能实现步骤"></p>
-</li>
-<li><p>删除功能实现步骤</p>
-<p><img src=".%5Cimg%5C12_%E5%88%A0%E9%99%A4%E8%80%81%E5%B8%88%E5%8A%9F%E8%83%BD%E5%AE%9E%E7%8E%B0%E6%AD%A5%E9%AA%A4.png" alt="12_删除老师功能实现步骤"></p>
-</li>
-<li><p>修改功能实现步骤</p>
-<p><img src=".%5Cimg%5C13_%E4%BF%AE%E6%94%B9%E8%80%81%E5%B8%88%E5%8A%9F%E8%83%BD%E5%AE%9E%E7%8E%B0%E6%AD%A5%E9%AA%A4.png" alt="13_修改老师功能实现步骤"></p>
-</li>
-<li><p>系统优化</p>
-<ul>
-<li>把updateTeacher和deleteTeacherById中录入老师id代码抽取到一个方法(inputTeacherId)中<br>该方法的主要作用就是录入老师的id,方法的返回值为String类型</li>
-<li>把addTeacher和updateTeacher中录入老师信息的代码抽取到一个方法(inputTeacherInfo)中<br>该方法的主要作用就是录入老师的信息,并封装为老师对象,方法的返回值为Teacher类型</li>
-</ul>
-</li>
-</ul>
-<h4 id="4-3-3代码实现"><a href="#4-3-3代码实现" class="headerlink" title="4.3.3代码实现"></a>4.3.3代码实现</h4><p>老师类</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Teacher</span> <span class="keyword">extends</span> <span class="title">Person</span></span>&#123;</span><br><span class="line">	<span class="keyword">private</span> String id;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> String age;</span><br><span class="line">    <span class="keyword">private</span> String birthday;</span><br><span class="line">    String address;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Teacher</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Teacher</span><span class="params">(String id, String name, String age, String birthday)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.id = id;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">        <span class="keyword">this</span>.age = age;</span><br><span class="line">        <span class="keyword">this</span>.birthday = birthday;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getId</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> id;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setId</span><span class="params">(String id)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.id = id;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getAge</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> age;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAge</span><span class="params">(String age)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.age = age;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getBirthday</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> birthday;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setBirthday</span><span class="params">(String birthday)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.birthday = birthday;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>TeacherController类</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TeacherController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Scanner sc = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">    <span class="keyword">private</span> TeacherService teacherService = <span class="keyword">new</span> TeacherService();</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">start</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        teacherLoop:</span><br><span class="line">        <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">            System.out.println(<span class="string">"--------欢迎来到 &lt;老师&gt; 管理系统--------"</span>);</span><br><span class="line">            System.out.println(<span class="string">"请输入您的选择: 1.添加老师  2.删除老师  3.修改老师  4.查看老师  5.退出"</span>);</span><br><span class="line">            String choice = sc.next();</span><br><span class="line">            <span class="keyword">switch</span> (choice) &#123;</span><br><span class="line">                <span class="keyword">case</span> <span class="string">"1"</span>:</span><br><span class="line">                    <span class="comment">// System.out.println("添加老师");</span></span><br><span class="line">                    addTeacher();</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">case</span> <span class="string">"2"</span>:</span><br><span class="line">                    <span class="comment">// System.out.println("删除老师");</span></span><br><span class="line">                    deleteTeacherById();</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">case</span> <span class="string">"3"</span>:</span><br><span class="line">                    <span class="comment">// System.out.println("修改老师");</span></span><br><span class="line">                    updateTeacher();</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">case</span> <span class="string">"4"</span>:</span><br><span class="line">                    <span class="comment">// System.out.println("查看老师");</span></span><br><span class="line">                    findAllTeacher();</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">case</span> <span class="string">"5"</span>:</span><br><span class="line">                    System.out.println(<span class="string">"感谢您使用老师管理系统, 再见!"</span>);</span><br><span class="line">                    <span class="keyword">break</span> teacherLoop;</span><br><span class="line">                <span class="keyword">default</span>:</span><br><span class="line">                    System.out.println(<span class="string">"您的输入有误, 请重新输入"</span>);</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">updateTeacher</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        String id = inputTeacherId();</span><br><span class="line"></span><br><span class="line">        Teacher newTeacher = inputTeacherInfo(id);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 调用业务员的修改方法</span></span><br><span class="line">        teacherService.updateTeacher(id,newTeacher);</span><br><span class="line">        System.out.println(<span class="string">"修改成功"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">deleteTeacherById</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        String id = inputTeacherId();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 2. 调用业务员中的删除方法, 根据id, 删除老师</span></span><br><span class="line">        teacherService.deleteTeacherById(id);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 3. 提示删除成功</span></span><br><span class="line">        System.out.println(<span class="string">"删除成功"</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">findAllTeacher</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 1. 从业务员中, 获取老师对象数组</span></span><br><span class="line">        Teacher[] teachers = teacherService.findAllTeacher();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 2. 判断数组中是否有元素</span></span><br><span class="line">        <span class="keyword">if</span> (teachers == <span class="keyword">null</span>) &#123;</span><br><span class="line">            System.out.println(<span class="string">"查无信息, 请添加后重试"</span>);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 3. 遍历数组, 取出元素, 并打印在控制台</span></span><br><span class="line">        System.out.println(<span class="string">"学号\t\t姓名\t年龄\t生日"</span>);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; teachers.length; i++) &#123;</span><br><span class="line">            Teacher t = teachers[i];</span><br><span class="line">            <span class="keyword">if</span> (t != <span class="keyword">null</span>) &#123;</span><br><span class="line">                System.out.println(t.getId() + <span class="string">"\t"</span> + t.getName() + <span class="string">"\t"</span> + t.getAge() + <span class="string">"\t\t"</span> + t.getBirthday());</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addTeacher</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        String id;</span><br><span class="line">        <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">            <span class="comment">// 1. 接收不存在的老师id</span></span><br><span class="line">            System.out.println(<span class="string">"请输入老师id:"</span>);</span><br><span class="line">            id = sc.next();</span><br><span class="line">            <span class="comment">// 2. 判断id是否存在</span></span><br><span class="line">            <span class="keyword">boolean</span> exists = teacherService.isExists(id);</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (exists) &#123;</span><br><span class="line">                System.out.println(<span class="string">"id已被占用, 请重新输入:"</span>);</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        Teacher t = inputTeacherInfo(id);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 5. 将封装好的老师对象, 传递给TeacherService继续完成添加操作</span></span><br><span class="line">        <span class="keyword">boolean</span> result = teacherService.addTeacher(t);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (result) &#123;</span><br><span class="line">            System.out.println(<span class="string">"添加成功"</span>);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            System.out.println(<span class="string">"添加失败"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 录入老师id</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">inputTeacherId</span><span class="params">()</span></span>&#123;</span><br><span class="line">        String id;</span><br><span class="line">        <span class="keyword">while</span>(<span class="keyword">true</span>)&#123;</span><br><span class="line">            System.out.println(<span class="string">"请输入id"</span>);</span><br><span class="line">            id = sc.next();</span><br><span class="line">            <span class="keyword">boolean</span> exists = teacherService.isExists(id);</span><br><span class="line">            <span class="keyword">if</span>(!exists)&#123;</span><br><span class="line">                System.out.println(<span class="string">"您输入的id不存在, 请重新输入:"</span>);</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> id;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 录入老师信息, 封装为老师对象</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Teacher <span class="title">inputTeacherInfo</span><span class="params">(String id)</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"请输入老师姓名:"</span>);</span><br><span class="line">        String name = sc.next();</span><br><span class="line">        System.out.println(<span class="string">"请输入老师年龄:"</span>);</span><br><span class="line">        String age = sc.next();</span><br><span class="line">        System.out.println(<span class="string">"请输入老师生日:"</span>);</span><br><span class="line">        String birthday = sc.next();</span><br><span class="line"></span><br><span class="line">        Teacher t = <span class="keyword">new</span> Teacher();</span><br><span class="line">        t.setId(id);</span><br><span class="line">        t.setName(name);</span><br><span class="line">        t.setAge(age);</span><br><span class="line">        t.setBirthday(birthday);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> t;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>TeacherService类</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TeacherService</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> TeacherDao teacherDao = <span class="keyword">new</span> TeacherDao();</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">addTeacher</span><span class="params">(Teacher t)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> teacherDao.addTeacher(t);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isExists</span><span class="params">(String id)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 1. 获取库管对象中的数组</span></span><br><span class="line">        Teacher[] teachers = teacherDao.findAllTeacher();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">boolean</span> exists = <span class="keyword">false</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 2. 遍历数组, 取出每一个元素, 进行判断</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; teachers.length; i++) &#123;</span><br><span class="line">            Teacher teacher = teachers[i];</span><br><span class="line">            <span class="keyword">if</span>(teacher != <span class="keyword">null</span> &amp;&amp; teacher.getId().equals(id))&#123;</span><br><span class="line">                exists = <span class="keyword">true</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> exists;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> Teacher[] findAllTeacher() &#123;</span><br><span class="line">        Teacher[] allTeacher = teacherDao.findAllTeacher();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">boolean</span> flag = <span class="keyword">false</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; allTeacher.length; i++) &#123;</span><br><span class="line">            Teacher t = allTeacher[i];</span><br><span class="line">            <span class="keyword">if</span>(t != <span class="keyword">null</span>)&#123;</span><br><span class="line">                flag = <span class="keyword">true</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(flag)&#123;</span><br><span class="line">            <span class="keyword">return</span> allTeacher;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">deleteTeacherById</span><span class="params">(String id)</span> </span>&#123;</span><br><span class="line">        teacherDao.deleteTeacherById(id);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">updateTeacher</span><span class="params">(String id, Teacher newTeacher)</span> </span>&#123;</span><br><span class="line">        teacherDao.updateTeacher(id,newTeacher);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>TeacherDao类</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TeacherDao</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Teacher[] teachers = <span class="keyword">new</span> Teacher[<span class="number">5</span>];</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">addTeacher</span><span class="params">(Teacher t)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> index = -<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; teachers.length; i++) &#123;</span><br><span class="line">            Teacher teacher = teachers[i];</span><br><span class="line">            <span class="keyword">if</span>(teacher == <span class="keyword">null</span>)&#123;</span><br><span class="line">                index = i;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(index == -<span class="number">1</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            teachers[index] = t;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> Teacher[] findAllTeacher() &#123;</span><br><span class="line">        <span class="keyword">return</span> teachers;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">deleteTeacherById</span><span class="params">(String id)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 1. 查询id在数组中的索引位置</span></span><br><span class="line">        <span class="keyword">int</span> index = getIndex(id);</span><br><span class="line">        <span class="comment">// 2. 将该索引位置的元素, 使用null进行替换</span></span><br><span class="line">        teachers[index] = <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getIndex</span><span class="params">(String id)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> index = -<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; teachers.length; i++) &#123;</span><br><span class="line">            Teacher t = teachers[i];</span><br><span class="line">            <span class="keyword">if</span>(t != <span class="keyword">null</span> &amp;&amp; t.getId().equals(id))&#123;</span><br><span class="line">                index = i;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> index;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">updateTeacher</span><span class="params">(String id, Teacher newTeacher)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> index = getIndex(id);</span><br><span class="line">        teachers[index] = newTeacher;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="5-static关键字"><a href="#5-static关键字" class="headerlink" title="5.static关键字"></a>5.static关键字</h2><h3 id="5-1static关键字概述-理解"><a href="#5-1static关键字概述-理解" class="headerlink" title="5.1static关键字概述 (理解)"></a>5.1static关键字概述 (理解)</h3><p>static 关键字是静态的意思,是Java中的一个修饰符,可以修饰成员方法,成员变量</p>
-<h3 id="5-2static修饰的特点-记忆"><a href="#5-2static修饰的特点-记忆" class="headerlink" title="5.2static修饰的特点 (记忆)"></a>5.2static修饰的特点 (记忆)</h3><ul>
-<li><p>被类的所有对象共享</p>
-<p>是我们判断是否使用静态关键字的条件</p>
-</li>
-<li><p>随着类的加载而加载，优先于对象存在</p>
-<p>对象需要类被加载后，才能创建</p>
-</li>
-<li><p>可以通过类名调用</p>
-<p>也可以通过对象名调用</p>
-</li>
-</ul>
-<h3 id="5-3static关键字注意事项-理解"><a href="#5-3static关键字注意事项-理解" class="headerlink" title="5.3static关键字注意事项 (理解)"></a>5.3static关键字注意事项 (理解)</h3><ul>
-<li>静态方法只能访问静态的成员</li>
-<li>非静态方法可以访问静态的成员，也可以访问非静态的成员</li>
-<li>静态方法中是没有this关键字 </li>
-</ul>
 ]]></content>
       <tags>
         <tag>后端学习</tag>
@@ -2689,12 +2428,12 @@ System.out.println(divide);
 <td>在此集合中的指定位置插入指定的元素</td>
 </tr>
 </tbody></table>
-<p><strong>ArrayList<E> ：</strong> </p>
+<p><strong>ArrayList<E> ：</E></strong> </p>
 <p>​    可调整大小的数组实现 </p>
-<p>​    <E> : 是一种特殊的数据类型，泛型。</p>
+<p>​    <E> : 是一种特殊的数据类型，泛型。</E></p>
 <p><strong>怎么用呢 ?</strong>    </p>
 <p>​    在出现E的地方我们使用引用数据类型替换即可    </p>
-<p>​    举例：ArrayList<String>, ArrayList<Student></p>
+<p>​    举例：ArrayList<String>, ArrayList<Student></Student></String></p>
 <h3 id="1-2ArrayList类常用方法【应用】"><a href="#1-2ArrayList类常用方法【应用】" class="headerlink" title="1.2ArrayList类常用方法【应用】"></a>1.2ArrayList类常用方法【应用】</h3><p>*<em>成员方法 : *</em></p>
 <table>
 <thead>
@@ -2839,9 +2578,276 @@ System.out.println(divide);
       </tags>
   </entry>
   <entry>
+    <title>分类和Static</title>
+    <url>/2021/09/13/day10-%E5%88%86%E7%B1%BB%E5%92%8Cstatic/</url>
+    <content><![CDATA[<h2 id="1-案例驱动模式"><a href="#1-案例驱动模式" class="headerlink" title="1.案例驱动模式"></a>1.案例驱动模式</h2><h3 id="1-1案例驱动模式概述-理解"><a href="#1-1案例驱动模式概述-理解" class="headerlink" title="1.1案例驱动模式概述 (理解)"></a>1.1案例驱动模式概述 (理解)</h3><p>通过我们已掌握的知识点,先实现一个案例,然后找出这个案例中,存在的一些问题,在通过新知识点解决问题</p>
+<h3 id="1-2案例驱动模式的好处-理解"><a href="#1-2案例驱动模式的好处-理解" class="headerlink" title="1.2案例驱动模式的好处 (理解)"></a>1.2案例驱动模式的好处 (理解)</h3><ul>
+<li>解决重复代码过多的冗余,提高代码的复用性</li>
+<li>解决业务逻辑聚集紧密导致的可读性差,提高代码的可读性</li>
+<li>解决代码可维护性差,提高代码的维护性</li>
+</ul>
+<h2 id="2-分类思想"><a href="#2-分类思想" class="headerlink" title="2.分类思想"></a>2.分类思想</h2><h3 id="2-1分类思想概述-理解"><a href="#2-1分类思想概述-理解" class="headerlink" title="2.1分类思想概述 (理解)"></a>2.1分类思想概述 (理解)</h3><p>分工协作,专人干专事</p>
+<h3 id="2-2信息管理系统-理解"><a href="#2-2信息管理系统-理解" class="headerlink" title="2.2信息管理系统 (理解)"></a>2.2信息管理系统 (理解)</h3><ul>
+<li><p>Student类  标准学生类,封装键盘录入的学生信息(id , name , age , birthday)</p>
+</li>
+<li><p>StudentDao类  Dao : (Data Access Object 缩写) 用于访问存储数据的数组或集合</p>
+</li>
+<li><p>StudentService类  用来进行业务逻辑的处理(例如: 判断录入的id是否存在)</p>
+</li>
+<li><p>StudentController类  和用户打交道(接收用户需求,采集用户信息,打印数据到控制台)</p>
+<p><img src="/.com//.%5Cimg%5C01_%E9%BB%91%E9%A9%AC%E4%BF%A1%E6%81%AF%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%E5%88%86%E7%B1%BB.png" alt="01_黑马信息管理系统分类"></p>
+</li>
+</ul>
+<h2 id="3-分包思想"><a href="#3-分包思想" class="headerlink" title="3.分包思想"></a>3.分包思想</h2><h3 id="3-1分包思想概述-理解"><a href="#3-1分包思想概述-理解" class="headerlink" title="3.1分包思想概述 (理解)"></a>3.1分包思想概述 (理解)</h3><p>如果将所有的类文件都放在同一个包下,不利于管理和后期维护,所以,对于不同功能的类文件,可以放在不同的包下进行管理</p>
+<h3 id="3-2包的概述-记忆"><a href="#3-2包的概述-记忆" class="headerlink" title="3.2包的概述 (记忆)"></a>3.2包的概述 (记忆)</h3><ul>
+<li><p>包</p>
+<p>本质上就是文件夹</p>
+</li>
+<li><p>创建包</p>
+<p>多级包之间使用 “ . “ 进行分割<br>多级包的定义规范：公司的网站地址翻转(去掉www)<br>比如：黑马程序员的网站址为<a href="http://www.itheima.com" target="_blank" rel="noopener">www.itheima.com</a><br>后期我们所定义的包的结构就是：com.itheima.其他的包名</p>
+</li>
+<li><p>包的命名规则</p>
+<p>字母都是小写</p>
+</li>
+</ul>
+<h3 id="3-3包的注意事项-理解"><a href="#3-3包的注意事项-理解" class="headerlink" title="3.3包的注意事项 (理解)"></a>3.3包的注意事项 (理解)</h3><ul>
+<li>package语句必须是程序的第一条可执行的代码 </li>
+<li>package语句在一个java文件中只能有一个 </li>
+<li>如果没有package,默认表示无包名 </li>
+</ul>
+<h3 id="3-4类与类之间的访问-理解"><a href="#3-4类与类之间的访问-理解" class="headerlink" title="3.4类与类之间的访问 (理解)"></a>3.4类与类之间的访问 (理解)</h3><ul>
+<li><p>同一个包下的访问</p>
+<p>不需要导包，直接使用即可</p>
+</li>
+<li><p>不同包下的访问</p>
+<p>1.import 导包后访问</p>
+<p>2.通过全类名（包名 + 类名）访问</p>
+</li>
+<li><p>注意：import 、package 、class 三个关键字的摆放位置存在顺序关系</p>
+<p>package 必须是程序的第一条可执行的代码</p>
+<p>import 需要写在 package 下面</p>
+<p>class 需要在 import 下面</p>
+</li>
+</ul>
+<h2 id="4-信息管理系统"><a href="#4-信息管理系统" class="headerlink" title="4.信息管理系统"></a>4.信息管理系统</h2><h3 id="4-1系统介绍-理解"><a href="#4-1系统介绍-理解" class="headerlink" title="4.1系统介绍 (理解)"></a>4.1系统介绍 (理解)</h3><p><img src="/.com//.%5Cimg%5C02_%E9%BB%91%E9%A9%AC%E4%BF%A1%E6%81%AF%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%E4%BB%8B%E7%BB%8D.png" alt="02_黑马信息管理系统介绍"></p>
+<h3 id="4-2学生管理系统-应用"><a href="#4-2学生管理系统-应用" class="headerlink" title="4.2学生管理系统 (应用)"></a>4.2学生管理系统 (应用)</h3><h4 id="4-2-1需求说明"><a href="#4-2-1需求说明" class="headerlink" title="4.2.1需求说明"></a>4.2.1需求说明</h4><ul>
+<li><p>添加学生: 键盘录入学生信息(id，name，age，birthday)</p>
+<p>使用数组存储学生信息,要求学生的id不能重复</p>
+</li>
+<li><p>删除学生: 键盘录入要删除学生的id值,将该学生从数组中移除,如果录入的id在数组中不存在,需要重新录入</p>
+</li>
+<li><p>修改学生: 键盘录入要修改学生的id值和修改后的学生信息</p>
+<p>将数组中该学生的信息修改,如果录入的id在数组中不存在,需要重新录入</p>
+</li>
+<li><p>查询学生: 将数组中存储的所有学生的信息输出到控制台</p>
+</li>
+</ul>
+<h4 id="4-2-2实现步骤"><a href="#4-2-2实现步骤" class="headerlink" title="4.2.2实现步骤"></a>4.2.2实现步骤</h4><ul>
+<li><p>环境搭建实现步骤 </p>
+<table>
+<thead>
+<tr>
+<th>包</th>
+<th>存储的类</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>com.itheima.edu.info.manager.domain</td>
+<td>Student.java</td>
+<td>封装学生信息</td>
+</tr>
+<tr>
+<td>com.itheima.edu.info.manager.dao</td>
+<td>StudentDao.java</td>
+<td>访问存储数据的数组，进行赠删改查（库管）</td>
+</tr>
+<tr>
+<td>com.itheima.edu.info.manager.service</td>
+<td>StudentService.java</td>
+<td>业务的逻辑处理（业务员）</td>
+</tr>
+<tr>
+<td>com.itheima.edu.info.manager.controller</td>
+<td>StudentController.java</td>
+<td>和用户打交道（客服接待）</td>
+</tr>
+<tr>
+<td>com.itheima.edu.info.manager.entry</td>
+<td>InfoManagerEntry.java</td>
+<td>程序的入口类，提供一个main方法</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>菜单搭建实现步骤 </p>
+<ul>
+<li>需求<ul>
+<li>黑马管理系统菜单搭建</li>
+<li>学生管理系统菜单搭建</li>
+</ul>
+</li>
+<li>实现步骤<ol>
+<li>展示欢迎页面,用输出语句完成主界面的编写</li>
+<li>获取用户的选择,用Scanner实现键盘录入数据</li>
+<li>根据用户的选择执行对应的操作,用switch语句完成操作的选择</li>
+</ol>
+</li>
+</ul>
+</li>
+<li><p>添加功能实现步骤 </p>
+<p><img src="/.com//.%5Cimg%5C03_%E6%B7%BB%E5%8A%A0%E5%8A%9F%E8%83%BD%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90.png" alt="03_添加功能需求分析"></p>
+</li>
+</ul>
+<ul>
+<li><p>添加功能优化:判断id是否存在</p>
+<p><img src="/.com//.%5Cimg%5C04_%E5%88%A4%E6%96%ADid%E6%98%AF%E5%90%A6%E5%AD%98%E5%9C%A8.png" alt="04_判断id是否存在"></p>
+</li>
+<li><p>查询功能实现步骤</p>
+<p><img src="/.com//.%5Cimg%5C05_%E6%9F%A5%E8%AF%A2%E5%8A%9F%E8%83%BD%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90.png" alt="05_查询功能需求分析"></p>
+</li>
+<li><p>删除功能实现步骤</p>
+<p><img src="/.com//.%5Cimg%5C06_%E5%88%A0%E9%99%A4%E5%8A%9F%E8%83%BD%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90.png" alt="06_删除功能需求分析"></p>
+</li>
+<li><p>修改功能实现步骤 </p>
+<p><img src="/.com//.%5Cimg%5C07_%E4%BF%AE%E6%94%B9%E5%8A%9F%E8%83%BD%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90.png" alt="07_修改功能需求分析"></p>
+</li>
+<li><p>系统优化 </p>
+<ul>
+<li>把updateStudent和deleteStudentById中录入学生id代码抽取到一个方法(inputStudentId)中<br>该方法的主要作用就是录入学生的id，方法的返回值为String类型</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>把addStudent和updateStudent中录入学生信息的代码抽取到一个方法(inputStudentInfo)中<br>该方法的主要作用就是录入学生的信息，并封装为学生对象，方法的返回值为Student类型 </li>
+</ul>
+<h4 id="4-2-3代码实现"><a href="#4-2-3代码实现" class="headerlink" title="4.2.3代码实现"></a>4.2.3代码实现</h4><p>学生类</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Student</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String id;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> String age;</span><br><span class="line">    <span class="keyword">private</span> String birthday;</span><br><span class="line">    String address;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Student</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Student</span><span class="params">(String id, String name, String age, String birthday)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.id = id;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">        <span class="keyword">this</span>.age = age;</span><br><span class="line">        <span class="keyword">this</span>.birthday = birthday;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getId</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> id;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setId</span><span class="params">(String id)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.id = id;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getAge</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> age;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAge</span><span class="params">(String age)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.age = age;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getBirthday</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> birthday;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setBirthday</span><span class="params">(String birthday)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.birthday = birthday;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>程序入口InfoManagerEntry类</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">InfoManagerEntry</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Scanner sc = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">        <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">            <span class="comment">// 主菜单搭建</span></span><br><span class="line">            System.out.println(<span class="string">"--------欢迎来到黑马信息管理系统--------"</span>);</span><br><span class="line">            System.out.println(<span class="string">"请输入您的选择: 1.学生管理  2.老师管理  3.退出"</span>);</span><br><span class="line">            String choice = sc.next();</span><br><span class="line">            <span class="keyword">switch</span> (choice) &#123;</span><br><span class="line">                <span class="keyword">case</span> <span class="string">"1"</span>:</span><br><span class="line">                    <span class="comment">// System.out.println("学生管理");</span></span><br><span class="line">                    <span class="comment">// 开启学生管理系统</span></span><br><span class="line">                    StudentController studentController = <span class="keyword">new</span> StudentController();</span><br><span class="line">                    studentController.start();</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">case</span> <span class="string">"2"</span>:</span><br><span class="line">                    System.out.println(<span class="string">"老师管理"</span>);</span><br><span class="line">                    TeacherController teacherController = <span class="keyword">new</span> TeacherController();</span><br><span class="line">                    teacherController.start();</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">case</span> <span class="string">"3"</span>:</span><br><span class="line">                    System.out.println(<span class="string">"感谢您的使用"</span>);</span><br><span class="line">                    <span class="comment">// 退出当前正在运行的JVM虚拟机</span></span><br><span class="line">                    System.exit(<span class="number">0</span>);</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">default</span>:</span><br><span class="line">                    System.out.println(<span class="string">"您的输入有误, 请重新输入"</span>);</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>StudentController类</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StudentController</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 业务员对象</span></span><br><span class="line">    <span class="keyword">private</span> StudentService studentService = <span class="keyword">new</span> StudentService();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Scanner sc = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 开启学生管理系统, 并展示学生管理系统菜单</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">start</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">//Scanner sc = new Scanner(System.in);</span></span><br><span class="line">        studentLoop:</span><br><span class="line">        <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">            System.out.println(<span class="string">"--------欢迎来到 &lt;学生&gt; 管理系统--------"</span>);</span><br><span class="line">            System.out.println(<span class="string">"请输入您的选择: 1.添加学生  2.删除学生  3.修改学生  4.查看学生  5.退出"</span>);</span><br><span class="line">            String choice = sc.next();</span><br><span class="line">            <span class="keyword">switch</span> (choice) &#123;</span><br><span class="line">                <span class="keyword">case</span> <span class="string">"1"</span>:</span><br><span class="line">                    <span class="comment">// System.out.println("添加");</span></span><br><span class="line">                    addStudent();</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">case</span> <span class="string">"2"</span>:</span><br><span class="line">                    <span class="comment">// System.out.println("删除");</span></span><br><span class="line">                    deleteStudentById();</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">case</span> <span class="string">"3"</span>:</span><br><span class="line">                    <span class="comment">// System.out.println("修改");</span></span><br><span class="line">                    updateStudent();</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">case</span> <span class="string">"4"</span>:</span><br><span class="line">                    <span class="comment">// System.out.println("查询");</span></span><br><span class="line">                    findAllStudent();</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">case</span> <span class="string">"5"</span>:</span><br><span class="line">                    System.out.println(<span class="string">"感谢您使用学生管理系统, 再见!"</span>);</span><br><span class="line">                    <span class="keyword">break</span> studentLoop;</span><br><span class="line">                <span class="keyword">default</span>:</span><br><span class="line">                    System.out.println(<span class="string">"您的输入有误, 请重新输入"</span>);</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 修改学生方法</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">updateStudent</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        String updateId = inputStudentId();</span><br><span class="line">        Student newStu = inputStudentInfo(updateId);</span><br><span class="line">        studentService.updateStudent(updateId, newStu);</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">"修改成功!"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 删除学生方法</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">deleteStudentById</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        String delId = inputStudentId();</span><br><span class="line">        <span class="comment">// 3. 调用业务员中的deleteStudentById根据id, 删除学生</span></span><br><span class="line">        studentService.deleteStudentById(delId);</span><br><span class="line">        <span class="comment">// 4. 提示删除成功</span></span><br><span class="line">        System.out.println(<span class="string">"删除成功!"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 查看学生方法</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">findAllStudent</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 1. 调用业务员中的获取方法, 得到学生的对象数组</span></span><br><span class="line">        Student[] stus = studentService.findAllStudent();</span><br><span class="line">        <span class="comment">// 2. 判断数组的内存地址, 是否为null</span></span><br><span class="line">        <span class="keyword">if</span> (stus == <span class="keyword">null</span>) &#123;</span><br><span class="line">            System.out.println(<span class="string">"查无信息, 请添加后重试"</span>);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 3. 遍历数组, 获取学生信息并打印在控制台</span></span><br><span class="line">        System.out.println(<span class="string">"学号\t\t姓名\t年龄\t生日"</span>);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; stus.length; i++) &#123;</span><br><span class="line">            Student stu = stus[i];</span><br><span class="line">            <span class="keyword">if</span> (stu != <span class="keyword">null</span>) &#123;</span><br><span class="line">                System.out.println(stu.getId() + <span class="string">"\t"</span> + stu.getName() + <span class="string">"\t"</span> + stu.getAge() + <span class="string">"\t\t"</span> + stu.getBirthday());</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 添加学生方法</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addStudent</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">// StudentService studentService = new StudentService();</span></span><br><span class="line">        <span class="comment">// 1. 键盘接收学生信息</span></span><br><span class="line">        String id;</span><br><span class="line">        <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">            System.out.println(<span class="string">"请输入学生id:"</span>);</span><br><span class="line">            id = sc.next();</span><br><span class="line">           </span><br><span class="line">            <span class="keyword">if</span> (flag) &#123;</span><br><span class="line">                System.out.println(<span class="string">"学号已被占用, 请重新输入"</span>);</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        Student stu = inputStudentInfo(id);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 3. 将学生对象,传递给StudentService(业务员)中的addStudent方法</span></span><br><span class="line">        <span class="keyword">boolean</span> result = studentService.addStudent(stu);</span><br><span class="line">        <span class="comment">// 4. 根据返回的boolean类型结果, 在控制台打印成功\失败</span></span><br><span class="line">        <span class="keyword">if</span> (result) &#123;</span><br><span class="line">            System.out.println(<span class="string">"添加成功"</span>);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            System.out.println(<span class="string">"添加失败"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 键盘录入学生id</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">inputStudentId</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        String id;</span><br><span class="line">        <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">            System.out.println(<span class="string">"请输入学生id:"</span>);</span><br><span class="line">            id = sc.next();</span><br><span class="line">            <span class="keyword">boolean</span> exists = studentService.isExists(id);</span><br><span class="line">            <span class="keyword">if</span> (!exists) &#123;</span><br><span class="line">                System.out.println(<span class="string">"您输入的id不存在, 请重新输入:"</span>);</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> id;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 键盘录入学生信息</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Student <span class="title">inputStudentInfo</span><span class="params">(String id)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"请输入学生姓名:"</span>);</span><br><span class="line">        String name = sc.next();</span><br><span class="line">        System.out.println(<span class="string">"请输入学生年龄:"</span>);</span><br><span class="line">        String age = sc.next();</span><br><span class="line">        System.out.println(<span class="string">"请输入学生生日:"</span>);</span><br><span class="line">        String birthday = sc.next();</span><br><span class="line">        Student stu = <span class="keyword">new</span> Student();</span><br><span class="line">        stu.setId(id);</span><br><span class="line">        stu.setName(name);</span><br><span class="line">        stu.setAge(age);</span><br><span class="line">        stu.setBirthday(birthday);</span><br><span class="line">        <span class="keyword">return</span> stu;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>StudentService类</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StudentService</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 创建StudentDao (库管)</span></span><br><span class="line">    <span class="keyword">private</span> StudentDao studentDao = <span class="keyword">new</span> StudentDao();</span><br><span class="line">    <span class="comment">// 添加学生方法</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">addStudent</span><span class="params">(Student stu)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 2. 将学生对象, 传递给StudentDao 库管中的addStudent方法</span></span><br><span class="line">        <span class="comment">// 3. 将返回的boolean类型结果, 返还给StudentController</span></span><br><span class="line">        <span class="keyword">return</span> studentDao.addStudent(stu);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 判断学号是否存在方法</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isExists</span><span class="params">(String id)</span> </span>&#123;</span><br><span class="line">        Student[] stus = studentDao.findAllStudent();</span><br><span class="line">        <span class="comment">// 假设id在数组中不存在</span></span><br><span class="line">        <span class="keyword">boolean</span> exists = <span class="keyword">false</span>;</span><br><span class="line">        <span class="comment">// 遍历数组, 获取每一个学生对象, 准备进行判断</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; stus.length; i++) &#123;</span><br><span class="line">            Student student = stus[i];</span><br><span class="line">            <span class="keyword">if</span>(student != <span class="keyword">null</span> &amp;&amp; student.getId().equals(id))&#123;</span><br><span class="line">                exists = <span class="keyword">true</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> exists;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 查看学生方法</span></span><br><span class="line">    <span class="keyword">public</span> Student[] findAllStudent() &#123;</span><br><span class="line">        <span class="comment">// 1. 调用库管对象的findAllStudent获取学生对象数组</span></span><br><span class="line">        Student[] allStudent = studentDao.findAllStudent();</span><br><span class="line">        <span class="comment">// 2. 判断数组中是否有学生信息 (有: 返回地址,  没有: 返回null)</span></span><br><span class="line">        <span class="comment">// 思路: 数组中只要存在一个不是null的元素, 那就代表有学生信息</span></span><br><span class="line">        <span class="keyword">boolean</span> flag = <span class="keyword">false</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; allStudent.length; i++) &#123;</span><br><span class="line">            Student stu = allStudent[i];</span><br><span class="line">            <span class="keyword">if</span>(stu != <span class="keyword">null</span>)&#123;</span><br><span class="line">                flag = <span class="keyword">true</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(flag)&#123;</span><br><span class="line">            <span class="comment">// 有信息</span></span><br><span class="line">            <span class="keyword">return</span> allStudent;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="comment">// 没有信息</span></span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">deleteStudentById</span><span class="params">(String delId)</span> </span>&#123;</span><br><span class="line">        studentDao.deleteStudentById(delId);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">updateStudent</span><span class="params">(String updateId, Student newStu)</span> </span>&#123;</span><br><span class="line">        studentDao.updateStudent(updateId, newStu);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>StudentDao类</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StudentDao</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 创建学生对象数组</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Student[] stus = <span class="keyword">new</span> Student[<span class="number">5</span>];</span><br><span class="line">    <span class="comment">// 添加学生方法</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">addStudent</span><span class="params">(Student stu)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 2. 添加学生到数组</span></span><br><span class="line">        <span class="comment">//2.1 定义变量index为-1，假设数组已经全部存满，没有null的元素</span></span><br><span class="line">        <span class="keyword">int</span> index = -<span class="number">1</span>;</span><br><span class="line">        <span class="comment">//2.2 遍历数组取出每一个元素，判断是否是null</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; stus.length; i++) &#123;</span><br><span class="line">            Student student = stus[i];</span><br><span class="line">            <span class="keyword">if</span>(student == <span class="keyword">null</span>)&#123;</span><br><span class="line">                index = i;</span><br><span class="line">                <span class="comment">//2.3 如果为null，让index变量记录当前索引位置，并使用break结束循环遍历</span></span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 3. 返回是否添加成功的boolean类型状态</span></span><br><span class="line">        <span class="keyword">if</span>(index == -<span class="number">1</span>)&#123;</span><br><span class="line">            <span class="comment">// 装满了</span></span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="comment">// 没有装满, 正常添加, 返回true</span></span><br><span class="line">            stus[index] = stu;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 查看学生方法</span></span><br><span class="line">    <span class="keyword">public</span> Student[] findAllStudent() &#123;</span><br><span class="line">        <span class="keyword">return</span> stus;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">deleteStudentById</span><span class="params">(String delId)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 1. 查找id在容器中所在的索引位置</span></span><br><span class="line">        <span class="keyword">int</span> index = getIndex(delId);</span><br><span class="line">        <span class="comment">// 2. 将该索引位置,使用null元素进行覆盖</span></span><br><span class="line">        stus[index] = <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getIndex</span><span class="params">(String id)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> index = -<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; stus.length; i++) &#123;</span><br><span class="line">            Student stu = stus[i];</span><br><span class="line">            <span class="keyword">if</span>(stu != <span class="keyword">null</span> &amp;&amp; stu.getId().equals(id))&#123;</span><br><span class="line">                index = i;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> index;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">updateStudent</span><span class="params">(String updateId, Student newStu)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 1. 查找updateId, 在容器中的索引位置</span></span><br><span class="line">        <span class="keyword">int</span> index = getIndex(updateId);</span><br><span class="line">        <span class="comment">// 2. 将该索引位置, 使用新的学生对象替换</span></span><br><span class="line">        stus[index] = newStu;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-3老师管理系统-应用"><a href="#4-3老师管理系统-应用" class="headerlink" title="4.3老师管理系统 (应用)"></a>4.3老师管理系统 (应用)</h3><h4 id="4-3-1需求说明"><a href="#4-3-1需求说明" class="headerlink" title="4.3.1需求说明"></a>4.3.1需求说明</h4><ul>
+<li><p>添加老师: 通过键盘录入老师信息(id，name，age，birthday)</p>
+<p>使用数组存储老师信息,要求老师的id不能重复</p>
+</li>
+<li><p>删除老师: 通过键盘录入要删除老师的id值,将该老师从数组中移除,如果录入的id在数组中不存在,需要重新录入</p>
+</li>
+<li><p>修改老师: 通过键盘录入要修改老师的id值和修改后的老师信息</p>
+<p>将数组中该老师的信息修改,如果录入的id在数组中不存在,需要重新录入</p>
+</li>
+<li><p>查询老师: 将数组中存储的所有老师的信息输出到控制台</p>
+</li>
+</ul>
+<h4 id="4-3-2实现步骤"><a href="#4-3-2实现步骤" class="headerlink" title="4.3.2实现步骤"></a>4.3.2实现步骤</h4><ul>
+<li><p>环境搭建实现步骤</p>
+<table>
+<thead>
+<tr>
+<th>包</th>
+<th>存储的类</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>com.itheima.edu.info.manager.domain</td>
+<td>Student.java   Teacher.java</td>
+<td>封装学生信息  封装老师信息</td>
+</tr>
+<tr>
+<td>com.itheima.edu.info.manager.dao</td>
+<td>StudentDao.java  TeacherDao.java</td>
+<td>访问存储数据的数组,进行赠删改查（库管）</td>
+</tr>
+<tr>
+<td>com.itheima.edu.info.manager.service</td>
+<td>StudentService.java  TeacherService.java</td>
+<td>业务的逻辑处理（业务员）</td>
+</tr>
+<tr>
+<td>com.itheima.edu.info.manager.controller</td>
+<td>StudentController.java  TeacherController.java</td>
+<td>和用户打交道（客服接待）</td>
+</tr>
+<tr>
+<td>com.itheima.edu.info.manager.entry</td>
+<td>InfoManagerEntry.java</td>
+<td>程序的入口类,提供一个main方法</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>菜单搭建实现步骤</p>
+<ol>
+<li>展示欢迎页面,用输出语句完成主界面的编写</li>
+<li>获取用户的选择,用Scanner实现键盘录入数据</li>
+<li>根据用户的选择执行对应的操作,用switch语句完成操作的选择</li>
+</ol>
+</li>
+<li><p>添加功能实现步骤</p>
+<p><img src="/.com//.%5Cimg%5C10_%E6%B7%BB%E5%8A%A0%E8%80%81%E5%B8%88%E5%8A%9F%E8%83%BD%E5%AE%9E%E7%8E%B0%E6%AD%A5%E9%AA%A4.png" alt="10_添加老师功能实现步骤"></p>
+</li>
+<li><p>查询功能实现步骤</p>
+<p><img src="/.com//.%5Cimg%5C11_%E6%9F%A5%E8%AF%A2%E8%80%81%E5%B8%88%E5%8A%9F%E8%83%BD%E5%AE%9E%E7%8E%B0%E6%AD%A5%E9%AA%A4.png" alt="11_查询老师功能实现步骤"></p>
+</li>
+<li><p>删除功能实现步骤</p>
+<p><img src="/.com//.%5Cimg%5C12_%E5%88%A0%E9%99%A4%E8%80%81%E5%B8%88%E5%8A%9F%E8%83%BD%E5%AE%9E%E7%8E%B0%E6%AD%A5%E9%AA%A4.png" alt="12_删除老师功能实现步骤"></p>
+</li>
+<li><p>修改功能实现步骤</p>
+<p><img src="/.com//.%5Cimg%5C13_%E4%BF%AE%E6%94%B9%E8%80%81%E5%B8%88%E5%8A%9F%E8%83%BD%E5%AE%9E%E7%8E%B0%E6%AD%A5%E9%AA%A4.png" alt="13_修改老师功能实现步骤"></p>
+</li>
+<li><p>系统优化</p>
+<ul>
+<li>把updateTeacher和deleteTeacherById中录入老师id代码抽取到一个方法(inputTeacherId)中<br>该方法的主要作用就是录入老师的id,方法的返回值为String类型</li>
+<li>把addTeacher和updateTeacher中录入老师信息的代码抽取到一个方法(inputTeacherInfo)中<br>该方法的主要作用就是录入老师的信息,并封装为老师对象,方法的返回值为Teacher类型</li>
+</ul>
+</li>
+</ul>
+<h4 id="4-3-3代码实现"><a href="#4-3-3代码实现" class="headerlink" title="4.3.3代码实现"></a>4.3.3代码实现</h4><p>老师类</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Teacher</span> <span class="keyword">extends</span> <span class="title">Person</span></span>&#123;</span><br><span class="line">	<span class="keyword">private</span> String id;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> String age;</span><br><span class="line">    <span class="keyword">private</span> String birthday;</span><br><span class="line">    String address;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Teacher</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Teacher</span><span class="params">(String id, String name, String age, String birthday)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.id = id;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">        <span class="keyword">this</span>.age = age;</span><br><span class="line">        <span class="keyword">this</span>.birthday = birthday;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getId</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> id;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setId</span><span class="params">(String id)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.id = id;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getAge</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> age;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAge</span><span class="params">(String age)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.age = age;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getBirthday</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> birthday;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setBirthday</span><span class="params">(String birthday)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.birthday = birthday;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>TeacherController类</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TeacherController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Scanner sc = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">    <span class="keyword">private</span> TeacherService teacherService = <span class="keyword">new</span> TeacherService();</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">start</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        teacherLoop:</span><br><span class="line">        <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">            System.out.println(<span class="string">"--------欢迎来到 &lt;老师&gt; 管理系统--------"</span>);</span><br><span class="line">            System.out.println(<span class="string">"请输入您的选择: 1.添加老师  2.删除老师  3.修改老师  4.查看老师  5.退出"</span>);</span><br><span class="line">            String choice = sc.next();</span><br><span class="line">            <span class="keyword">switch</span> (choice) &#123;</span><br><span class="line">                <span class="keyword">case</span> <span class="string">"1"</span>:</span><br><span class="line">                    <span class="comment">// System.out.println("添加老师");</span></span><br><span class="line">                    addTeacher();</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">case</span> <span class="string">"2"</span>:</span><br><span class="line">                    <span class="comment">// System.out.println("删除老师");</span></span><br><span class="line">                    deleteTeacherById();</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">case</span> <span class="string">"3"</span>:</span><br><span class="line">                    <span class="comment">// System.out.println("修改老师");</span></span><br><span class="line">                    updateTeacher();</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">case</span> <span class="string">"4"</span>:</span><br><span class="line">                    <span class="comment">// System.out.println("查看老师");</span></span><br><span class="line">                    findAllTeacher();</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">case</span> <span class="string">"5"</span>:</span><br><span class="line">                    System.out.println(<span class="string">"感谢您使用老师管理系统, 再见!"</span>);</span><br><span class="line">                    <span class="keyword">break</span> teacherLoop;</span><br><span class="line">                <span class="keyword">default</span>:</span><br><span class="line">                    System.out.println(<span class="string">"您的输入有误, 请重新输入"</span>);</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">updateTeacher</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        String id = inputTeacherId();</span><br><span class="line"></span><br><span class="line">        Teacher newTeacher = inputTeacherInfo(id);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 调用业务员的修改方法</span></span><br><span class="line">        teacherService.updateTeacher(id,newTeacher);</span><br><span class="line">        System.out.println(<span class="string">"修改成功"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">deleteTeacherById</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        String id = inputTeacherId();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 2. 调用业务员中的删除方法, 根据id, 删除老师</span></span><br><span class="line">        teacherService.deleteTeacherById(id);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 3. 提示删除成功</span></span><br><span class="line">        System.out.println(<span class="string">"删除成功"</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">findAllTeacher</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 1. 从业务员中, 获取老师对象数组</span></span><br><span class="line">        Teacher[] teachers = teacherService.findAllTeacher();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 2. 判断数组中是否有元素</span></span><br><span class="line">        <span class="keyword">if</span> (teachers == <span class="keyword">null</span>) &#123;</span><br><span class="line">            System.out.println(<span class="string">"查无信息, 请添加后重试"</span>);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 3. 遍历数组, 取出元素, 并打印在控制台</span></span><br><span class="line">        System.out.println(<span class="string">"学号\t\t姓名\t年龄\t生日"</span>);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; teachers.length; i++) &#123;</span><br><span class="line">            Teacher t = teachers[i];</span><br><span class="line">            <span class="keyword">if</span> (t != <span class="keyword">null</span>) &#123;</span><br><span class="line">                System.out.println(t.getId() + <span class="string">"\t"</span> + t.getName() + <span class="string">"\t"</span> + t.getAge() + <span class="string">"\t\t"</span> + t.getBirthday());</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addTeacher</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        String id;</span><br><span class="line">        <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">            <span class="comment">// 1. 接收不存在的老师id</span></span><br><span class="line">            System.out.println(<span class="string">"请输入老师id:"</span>);</span><br><span class="line">            id = sc.next();</span><br><span class="line">            <span class="comment">// 2. 判断id是否存在</span></span><br><span class="line">            <span class="keyword">boolean</span> exists = teacherService.isExists(id);</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (exists) &#123;</span><br><span class="line">                System.out.println(<span class="string">"id已被占用, 请重新输入:"</span>);</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        Teacher t = inputTeacherInfo(id);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 5. 将封装好的老师对象, 传递给TeacherService继续完成添加操作</span></span><br><span class="line">        <span class="keyword">boolean</span> result = teacherService.addTeacher(t);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (result) &#123;</span><br><span class="line">            System.out.println(<span class="string">"添加成功"</span>);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            System.out.println(<span class="string">"添加失败"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 录入老师id</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">inputTeacherId</span><span class="params">()</span></span>&#123;</span><br><span class="line">        String id;</span><br><span class="line">        <span class="keyword">while</span>(<span class="keyword">true</span>)&#123;</span><br><span class="line">            System.out.println(<span class="string">"请输入id"</span>);</span><br><span class="line">            id = sc.next();</span><br><span class="line">            <span class="keyword">boolean</span> exists = teacherService.isExists(id);</span><br><span class="line">            <span class="keyword">if</span>(!exists)&#123;</span><br><span class="line">                System.out.println(<span class="string">"您输入的id不存在, 请重新输入:"</span>);</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> id;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 录入老师信息, 封装为老师对象</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Teacher <span class="title">inputTeacherInfo</span><span class="params">(String id)</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"请输入老师姓名:"</span>);</span><br><span class="line">        String name = sc.next();</span><br><span class="line">        System.out.println(<span class="string">"请输入老师年龄:"</span>);</span><br><span class="line">        String age = sc.next();</span><br><span class="line">        System.out.println(<span class="string">"请输入老师生日:"</span>);</span><br><span class="line">        String birthday = sc.next();</span><br><span class="line"></span><br><span class="line">        Teacher t = <span class="keyword">new</span> Teacher();</span><br><span class="line">        t.setId(id);</span><br><span class="line">        t.setName(name);</span><br><span class="line">        t.setAge(age);</span><br><span class="line">        t.setBirthday(birthday);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> t;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>TeacherService类</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TeacherService</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> TeacherDao teacherDao = <span class="keyword">new</span> TeacherDao();</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">addTeacher</span><span class="params">(Teacher t)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> teacherDao.addTeacher(t);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isExists</span><span class="params">(String id)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 1. 获取库管对象中的数组</span></span><br><span class="line">        Teacher[] teachers = teacherDao.findAllTeacher();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">boolean</span> exists = <span class="keyword">false</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 2. 遍历数组, 取出每一个元素, 进行判断</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; teachers.length; i++) &#123;</span><br><span class="line">            Teacher teacher = teachers[i];</span><br><span class="line">            <span class="keyword">if</span>(teacher != <span class="keyword">null</span> &amp;&amp; teacher.getId().equals(id))&#123;</span><br><span class="line">                exists = <span class="keyword">true</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> exists;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> Teacher[] findAllTeacher() &#123;</span><br><span class="line">        Teacher[] allTeacher = teacherDao.findAllTeacher();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">boolean</span> flag = <span class="keyword">false</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; allTeacher.length; i++) &#123;</span><br><span class="line">            Teacher t = allTeacher[i];</span><br><span class="line">            <span class="keyword">if</span>(t != <span class="keyword">null</span>)&#123;</span><br><span class="line">                flag = <span class="keyword">true</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(flag)&#123;</span><br><span class="line">            <span class="keyword">return</span> allTeacher;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">deleteTeacherById</span><span class="params">(String id)</span> </span>&#123;</span><br><span class="line">        teacherDao.deleteTeacherById(id);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">updateTeacher</span><span class="params">(String id, Teacher newTeacher)</span> </span>&#123;</span><br><span class="line">        teacherDao.updateTeacher(id,newTeacher);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>TeacherDao类</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TeacherDao</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Teacher[] teachers = <span class="keyword">new</span> Teacher[<span class="number">5</span>];</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">addTeacher</span><span class="params">(Teacher t)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> index = -<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; teachers.length; i++) &#123;</span><br><span class="line">            Teacher teacher = teachers[i];</span><br><span class="line">            <span class="keyword">if</span>(teacher == <span class="keyword">null</span>)&#123;</span><br><span class="line">                index = i;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(index == -<span class="number">1</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            teachers[index] = t;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> Teacher[] findAllTeacher() &#123;</span><br><span class="line">        <span class="keyword">return</span> teachers;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">deleteTeacherById</span><span class="params">(String id)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 1. 查询id在数组中的索引位置</span></span><br><span class="line">        <span class="keyword">int</span> index = getIndex(id);</span><br><span class="line">        <span class="comment">// 2. 将该索引位置的元素, 使用null进行替换</span></span><br><span class="line">        teachers[index] = <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getIndex</span><span class="params">(String id)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> index = -<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; teachers.length; i++) &#123;</span><br><span class="line">            Teacher t = teachers[i];</span><br><span class="line">            <span class="keyword">if</span>(t != <span class="keyword">null</span> &amp;&amp; t.getId().equals(id))&#123;</span><br><span class="line">                index = i;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> index;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">updateTeacher</span><span class="params">(String id, Teacher newTeacher)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> index = getIndex(id);</span><br><span class="line">        teachers[index] = newTeacher;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="5-static关键字"><a href="#5-static关键字" class="headerlink" title="5.static关键字"></a>5.static关键字</h2><h3 id="5-1static关键字概述-理解"><a href="#5-1static关键字概述-理解" class="headerlink" title="5.1static关键字概述 (理解)"></a>5.1static关键字概述 (理解)</h3><p>static 关键字是静态的意思,是Java中的一个修饰符,可以修饰成员方法,成员变量</p>
+<h3 id="5-2static修饰的特点-记忆"><a href="#5-2static修饰的特点-记忆" class="headerlink" title="5.2static修饰的特点 (记忆)"></a>5.2static修饰的特点 (记忆)</h3><ul>
+<li><p>被类的所有对象共享</p>
+<p>是我们判断是否使用静态关键字的条件</p>
+</li>
+<li><p>随着类的加载而加载，优先于对象存在</p>
+<p>对象需要类被加载后，才能创建</p>
+</li>
+<li><p>可以通过类名调用</p>
+<p>也可以通过对象名调用</p>
+</li>
+</ul>
+<h3 id="5-3static关键字注意事项-理解"><a href="#5-3static关键字注意事项-理解" class="headerlink" title="5.3static关键字注意事项 (理解)"></a>5.3static关键字注意事项 (理解)</h3><ul>
+<li>静态方法只能访问静态的成员</li>
+<li>非静态方法可以访问静态的成员，也可以访问非静态的成员</li>
+<li>静态方法中是没有this关键字 </li>
+</ul>
+]]></content>
+      <tags>
+        <tag>后端学习</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>继承</title>
     <url>/2021/09/15/day11_%E7%BB%A7%E6%89%BF/</url>
-    <content><![CDATA[<h3 id="15-继承"><a href="#15-继承" class="headerlink" title="15. 继承"></a>15. 继承</h3><h5 id="15-1-继承概述"><a href="#15-1-继承概述" class="headerlink" title="15.1  继承概述"></a>15.1  继承概述</h5><h6 id="15-1-1-继承："><a href="#15-1-1-继承：" class="headerlink" title="15.1.1 继承："></a>15.1.1 继承：</h6><p>​            让<font color= "red">类与类之间产生关系</font>（子父类关系），子类可以直接使用父类中非私有的成员</p>
+    <content><![CDATA[<h3 id="15-继承"><a href="#15-继承" class="headerlink" title="15. 继承"></a>15. 继承</h3><h5 id="15-1-继承概述"><a href="#15-1-继承概述" class="headerlink" title="15.1  继承概述"></a>15.1  继承概述</h5><h6 id="15-1-1-继承："><a href="#15-1-1-继承：" class="headerlink" title="15.1.1 继承："></a>15.1.1 继承：</h6><p>​            让<font color="red">类与类之间产生关系</font>（子父类关系），子类可以直接使用父类中非私有的成员</p>
 <p>​            格式：通过’ extends ‘实现</p>
 <ul>
 <li>​    public class 子类名 extends 父类名｛｝</li>
@@ -2882,7 +2888,7 @@ System.out.println(divide);
 <p>​    如果一定要会用父类的，可以使用super关键字，进行区分</p>
 <p>this:代表本类对象的引用</p>
 <p>super：代表父类存储空间的标识</p>
-<p><img src="E:%5CHEIMA%5CNOTE%5Cimage%5Cthis%E3%80%81super%E7%9A%84%E5%8C%BA%E5%88%AB.png" alt=""></p>
+<p><img src="/.com//E:%5CHEIMA%5CNOTE%5Cimage%5Cthis%E3%80%81super%E7%9A%84%E5%8C%BA%E5%88%AB.png" alt></p>
 <h3 id="17-方法重写"><a href="#17-方法重写" class="headerlink" title="17. 方法重写"></a>17. 方法重写</h3><h5 id="17-1-方法重写概念"><a href="#17-1-方法重写概念" class="headerlink" title="17.1 方法重写概念"></a>17.1 方法重写概念</h5><p>​    在继承体系中，子类中出现了父类中一模一样的方法声明（方法名、参数列表、返回值类型）</p>
 <hr>
 <p>​    方法重载：在同个类中，存在方法名，参数列表不同的多个方法，和返回值无关，之间的关系叫重载</p>
@@ -2896,7 +2902,7 @@ System.out.println(divide);
 </li>
 <li><p>父类的静态方法，父类必须通过静态方法进行重写，父类非静态，子类也要非静态</p>
 <ul>
-<li><p><font color = "red">注意：静态方法不能被重写，只是覆盖！如果子类中，也存在一个方法声明一模一样方法</font></p>
+<li><p><font color="red">注意：静态方法不能被重写，只是覆盖！如果子类中，也存在一个方法声明一模一样方法</font></p>
 </li>
 <li><p>@Override // 注解检查当前的成员方法是否一个正确的重写方法</p>
 </li>
@@ -2907,7 +2913,7 @@ System.out.println(divide);
 <li><p>权限修饰符</p>
 </li>
 </ul>
-<p><img src="E:%5CHEIMA%5CNOTE%5Cimage%5C%E8%AE%BF%E9%97%AE%E6%9D%83%E9%99%90%E4%BF%AE%E9%A5%B0%E7%AC%A6.png" alt=""></p>
+<p><img src="/.com//E:%5CHEIMA%5CNOTE%5Cimage%5C%E8%AE%BF%E9%97%AE%E6%9D%83%E9%99%90%E4%BF%AE%E9%A5%B0%E7%AC%A6.png" alt></p>
 <h5 id="17-4-继承中构造方法的访问特点"><a href="#17-4-继承中构造方法的访问特点" class="headerlink" title="17.4 继承中构造方法的访问特点"></a>17.4 继承中构造方法的访问特点</h5><ul>
 <li>子类初始化之前，一定要先完成父类数据的初始化.</li>
 <li>构造方法的第一条语句默认都是：super();<ul>
@@ -2921,7 +2927,7 @@ System.out.println(divide);
 </li>
 </ul>
 <h5 id="17-5-特殊情况"><a href="#17-5-特殊情况" class="headerlink" title="17.5 特殊情况"></a>17.5 特殊情况</h5><p>当父类中没有空参构造时，在子类的构造方法首行手动调动父类中的有参构造，或在子类中通过this调用本类的其他构造方法，被调用的构造方法</p>
-<h5 id="17-6-抽象类"><a href="#17-6-抽象类" class="headerlink" title="17.6 抽象类"></a>17.6 抽象类</h5><p>​     抽象方法：将共性的行为（方法）抽取到父类之后，发现该方法的实现逻辑，无法在父类中给出具体明确，该方法就可以定义为抽象方法，被<font color= 'pink'>abstract</font>修饰</p>
+<h5 id="17-6-抽象类"><a href="#17-6-抽象类" class="headerlink" title="17.6 抽象类"></a>17.6 抽象类</h5><p>​     抽象方法：将共性的行为（方法）抽取到父类之后，发现该方法的实现逻辑，无法在父类中给出具体明确，该方法就可以定义为抽象方法，被<font color="pink">abstract</font>修饰</p>
 <p>​    抽象类：如果一个类中存在抽象方法，那么该类就必须声明为抽象类</p>
 <p>​    特点：</p>
 <ul>
@@ -2979,9 +2985,10 @@ System.out.println(divide);
       </tags>
   </entry>
   <entry>
-    <title>递归排序</title>
-    <url>/2021/09/09/%E9%80%92%E5%BD%92%E6%8E%92%E5%BA%8F/</url>
-    <content><![CDATA[<h3 id="递归排序"><a href="#递归排序" class="headerlink" title="递归排序"></a>递归排序</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Demo5</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> [] arr = &#123;<span class="number">12</span>,<span class="number">4</span>,<span class="number">67</span>,<span class="number">89</span>,<span class="number">34</span>,<span class="number">25</span>&#125;;</span><br><span class="line">        <span class="comment">//哪些索引需要往后比</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; arr.length-<span class="number">1</span>; i++) &#123;</span><br><span class="line">            <span class="comment">//每一次从哪开始比的位置</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = i+<span class="number">1</span>; j &lt; arr.length; j++) &#123;</span><br><span class="line">                <span class="keyword">if</span>(arr[i]&lt;arr[j])&#123;</span><br><span class="line">                    <span class="keyword">int</span> temp = arr[j];</span><br><span class="line">                    arr[j]=arr[i];</span><br><span class="line">                    arr[i]=temp;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">            System.out.print(arr[i]+<span class="string">" "</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    <title>冒泡排序</title>
+    <url>/2021/09/09/%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/</url>
+    <content><![CDATA[<p>冒泡排序</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Demo4</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> [] arr = &#123;<span class="number">12</span>,<span class="number">4</span>,<span class="number">67</span>,<span class="number">89</span>,<span class="number">34</span>,<span class="number">25</span>&#125;;</span><br><span class="line">        <span class="comment">//排序  冒泡排序  选</span></span><br><span class="line">        <span class="comment">//冒泡了几次</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; arr.length-<span class="number">1</span>; i++) &#123;</span><br><span class="line">                <span class="comment">//每一次冒泡了几次</span></span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; arr.length-<span class="number">1</span>-i; j++) &#123;</span><br><span class="line">                    <span class="keyword">if</span>(arr[j]&gt;arr[j+<span class="number">1</span>])&#123;</span><br><span class="line">                        <span class="keyword">int</span> temp = arr[j];</span><br><span class="line">                        arr[j]=arr[j+<span class="number">1</span>];</span><br><span class="line">                        arr[j+<span class="number">1</span>]=temp;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">            System.out.print(arr[i]+<span class="string">" "</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 ]]></content>
       <tags>
@@ -2989,10 +2996,9 @@ System.out.println(divide);
       </tags>
   </entry>
   <entry>
-    <title>冒泡排序</title>
-    <url>/2021/09/09/%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/</url>
-    <content><![CDATA[<p>冒泡排序</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Demo4</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> [] arr = &#123;<span class="number">12</span>,<span class="number">4</span>,<span class="number">67</span>,<span class="number">89</span>,<span class="number">34</span>,<span class="number">25</span>&#125;;</span><br><span class="line">        <span class="comment">//排序  冒泡排序  选</span></span><br><span class="line">        <span class="comment">//冒泡了几次</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; arr.length-<span class="number">1</span>; i++) &#123;</span><br><span class="line">                <span class="comment">//每一次冒泡了几次</span></span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; arr.length-<span class="number">1</span>-i; j++) &#123;</span><br><span class="line">                    <span class="keyword">if</span>(arr[j]&gt;arr[j+<span class="number">1</span>])&#123;</span><br><span class="line">                        <span class="keyword">int</span> temp = arr[j];</span><br><span class="line">                        arr[j]=arr[j+<span class="number">1</span>];</span><br><span class="line">                        arr[j+<span class="number">1</span>]=temp;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">            System.out.print(arr[i]+<span class="string">" "</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    <title>递归排序</title>
+    <url>/2021/09/09/%E9%80%92%E5%BD%92%E6%8E%92%E5%BA%8F/</url>
+    <content><![CDATA[<h3 id="递归排序"><a href="#递归排序" class="headerlink" title="递归排序"></a>递归排序</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Demo5</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> [] arr = &#123;<span class="number">12</span>,<span class="number">4</span>,<span class="number">67</span>,<span class="number">89</span>,<span class="number">34</span>,<span class="number">25</span>&#125;;</span><br><span class="line">        <span class="comment">//哪些索引需要往后比</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; arr.length-<span class="number">1</span>; i++) &#123;</span><br><span class="line">            <span class="comment">//每一次从哪开始比的位置</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = i+<span class="number">1</span>; j &lt; arr.length; j++) &#123;</span><br><span class="line">                <span class="keyword">if</span>(arr[i]&lt;arr[j])&#123;</span><br><span class="line">                    <span class="keyword">int</span> temp = arr[j];</span><br><span class="line">                    arr[j]=arr[i];</span><br><span class="line">                    arr[i]=temp;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">            System.out.print(arr[i]+<span class="string">" "</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 ]]></content>
       <tags>
