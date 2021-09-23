@@ -99,7 +99,7 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">double</span> num = <span class="number">10</span>; <span class="comment">// 将int类型的10直接赋值给double类型</span></span><br><span class="line">System.out.println(num); <span class="comment">// 输出10.0</span></span><br></pre></td></tr></table></figure>
 
 <p>​    类型从小到大关系图：</p>
-<p>​    <img src="/.com//img%5C%E5%9B%BE%E7%89%871.png" alt></p>
+<p>​    <img src="img%5C%E5%9B%BE%E7%89%871.png" alt=""></p>
 <p>说明：</p>
 <ol>
 <li>整数默认是int类型，byte、short和char类型数据参与运算均会自动转换为int类型。</li>
@@ -383,7 +383,7 @@
 <p>​    循环结构(for, while, do…while)</p>
 <h3 id="3-2-顺序结构-了解"><a href="#3-2-顺序结构-了解" class="headerlink" title="3.2 顺序结构(了解)"></a>3.2 顺序结构(了解)</h3><p>顺序结构是程序中最简单最基本的流程控制，没有特定的语法结构，按照代码的先后顺序，依次执行，程序中大多数的代码都是这样执行的。</p>
 <p>顺序结构执行流程图：</p>
-<p><img src="/.com//%E5%9B%BE%E7%89%872.png" alt="1545615769372"></p>
+<p><img src="img/%E5%9B%BE%E7%89%872.png" alt="1545615769372"></p>
 <h3 id="3-3-分支结构之if语句"><a href="#3-3-分支结构之if语句" class="headerlink" title="3.3 分支结构之if语句"></a>3.3 分支结构之if语句</h3><h4 id="3-3-1-if语句格式1（理解）"><a href="#3-3-1-if语句格式1（理解）" class="headerlink" title="3.3.1 if语句格式1（理解）"></a>3.3.1 if语句格式1（理解）</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">格式：</span><br><span class="line"><span class="keyword">if</span> (关系表达式) &#123;</span><br><span class="line">    语句体;	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>执行流程：</p>
@@ -391,7 +391,7 @@
 <p>②如果关系表达式的值为true就执行语句体</p>
 <p>③如果关系表达式的值为false就不执行语句体</p>
 <p>④继续执行后面的语句内容</p>
-<p><img src="/.com//%E5%9B%BE%E7%89%873.png" alt="1545616039363"></p>
+<p><img src="img/%E5%9B%BE%E7%89%873.png" alt="1545616039363"></p>
 <p>示例：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">IfDemo</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		System.out.println(<span class="string">"开始"</span>);</span><br><span class="line">        </span><br><span class="line">		<span class="comment">// 如果年龄大于18岁, 就可以上网吧</span></span><br><span class="line">		<span class="keyword">int</span> age = <span class="number">17</span>;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">if</span>(age &gt;= <span class="number">18</span>)&#123;</span><br><span class="line">			<span class="comment">// int a = 10;</span></span><br><span class="line">			System.out.println(<span class="string">"可以上网吧"</span>);</span><br><span class="line">		&#125;</span><br><span class="line">			</span><br><span class="line">		System.out.println(<span class="string">"结束"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -402,7 +402,7 @@
 <p>②如果关系表达式的值为true就执行语句体1</p>
 <p>③如果关系表达式的值为false就执行语句体2</p>
 <p>④继续执行后面的语句内容</p>
-<p><img src="/.com//%E5%9B%BE%E7%89%874.png" alt="1545616221283"></p>
+<p><img src="img/%E5%9B%BE%E7%89%874.png" alt="1545616221283"></p>
 <p>示例：奇偶数</p>
 <p>​    任意给出一个整数，请用程序实现判断该整数是奇数还是偶数，并在控制台输出该整数是奇数还是偶数。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Demo2If</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		<span class="comment">// 程序判断一个数, 是奇数还是偶数</span></span><br><span class="line">		<span class="keyword">int</span> num = <span class="number">9</span>;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">if</span>(num % <span class="number">2</span> == <span class="number">0</span>)&#123;</span><br><span class="line">			System.out.println(<span class="string">"偶数"</span>);</span><br><span class="line">		&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">			System.out.println(<span class="string">"奇数"</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -415,7 +415,7 @@
 <p>③如果值为true就执行语句体2；如果值为false就计算关系表达式3的值</p>
 <p>④…</p>
 <p>⑤如果没有任何关系表达式为true，就执行语句体n+1。</p>
-<p><img src="/.com//img%5C%E5%9B%BE%E7%89%875.png" alt="1545616667104"></p>
+<p><img src="img%5C%E5%9B%BE%E7%89%875.png" alt="1545616667104"></p>
 <p>示例：</p>
 <p>​    定义一个在0<del>100之间的变量a, 90</del>100优秀，80<del>89良好，70</del>79中等，60<del>69及格，0</del>59请努力加油！</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Demo3If</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">		<span class="keyword">int</span> score = <span class="number">65</span>;</span><br><span class="line">		<span class="keyword">if</span>(score &gt;= <span class="number">90</span> &amp;&amp; score &lt;= <span class="number">100</span>)&#123;</span><br><span class="line">			System.out.println(<span class="string">"优秀"</span>);</span><br><span class="line">		&#125;<span class="keyword">else</span> <span class="keyword">if</span> (score &gt;= <span class="number">80</span> &amp;&amp; score &lt;= <span class="number">89</span>)&#123;</span><br><span class="line">			System.out.println(<span class="string">"良好"</span>);</span><br><span class="line">		&#125;<span class="keyword">else</span> <span class="keyword">if</span> (score &gt;= <span class="number">70</span> &amp;&amp; score &lt;= <span class="number">79</span>)&#123;</span><br><span class="line">			System.out.println(<span class="string">"中等"</span>);</span><br><span class="line">		&#125;<span class="keyword">else</span> <span class="keyword">if</span> (score &gt;= <span class="number">60</span> &amp;&amp; score &lt;= <span class="number">69</span>)&#123;</span><br><span class="line">			System.out.println(<span class="string">"及格"</span>);</span><br><span class="line">		&#125;<span class="keyword">else</span> <span class="keyword">if</span> (score &gt;= <span class="number">0</span> &amp;&amp; score &lt;= <span class="number">59</span>)&#123;</span><br><span class="line">			System.out.println(<span class="string">"请努力加油"</span>);</span><br><span class="line">		&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">			System.out.println(<span class="string">"成绩有误!"</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -434,7 +434,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2021/08/31/day02-Java%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/" data-id="cktx4v6ux000ausueaa2scbcs"
+      <a data-url="http://yoursite.com/2021/08/31/day02-Java%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/" data-id="cktx5gzo5000cg0ue6owjh2ix"
         class="article-share-link">分享</a>
         
       
