@@ -1199,6 +1199,322 @@ System.out.println(divide);
       </tags>
   </entry>
   <entry>
+    <title>循环和switch</title>
+    <url>/2021/09/01/day03_%E5%BE%AA%E7%8E%AF/</url>
+    <content><![CDATA[<h5 id="4-2-switch语句"><a href="#4-2-switch语句" class="headerlink" title="4.2 switch语句"></a>4.2 switch语句</h5><p>​    格式：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">switch</span>(表达式)&#123;</span><br><span class="line">	<span class="keyword">case</span> 值<span class="number">1</span>：</span><br><span class="line">	语句体 <span class="number">1</span>；</span><br><span class="line">	<span class="keyword">break</span>；</span><br><span class="line">	<span class="keyword">case</span> 值<span class="number">2</span>：</span><br><span class="line">	语句体 <span class="number">2</span>；</span><br><span class="line">	<span class="keyword">break</span>；</span><br><span class="line">	……</span><br><span class="line">	<span class="keyword">case</span> 值n：</span><br><span class="line">	语句体 n；</span><br><span class="line">	<span class="keyword">break</span>；</span><br><span class="line">	<span class="keyword">default</span>:</span><br><span class="line">	语句体；</span><br><span class="line">     <span class="keyword">break</span>；</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+<p>​    表达式的结果只能是：byte,short,int,char 字符串，枚举</p>
+<p>​    先计算表达式的值，从上到下与case开始匹配,遇到相同的值，开始乡下执行对应的语句体，直到遇到break或者switch才结束，如果没有匹配到case，执行default语句，直到遇到break或switch语句结束才结束。</p>
+<p>​    switch 一定能被if取代，能用if的尽量用if，但是有一种情况你可以选择switch，就是做选择的时候，这样的代码看起来比较清爽。</p>
+<p>​    </p>
+<p>​    case穿透：当语句出现break的时候，就会出现穿透现象</p>
+<p>​    当省略break的时候，会继续执行，直到执行到break的时候才会结束；</p>
+<p>​    出现多个重复的语句，可以考虑使用case穿透</p>
+<h3 id="5-循环语句"><a href="#5-循环语句" class="headerlink" title="5.循环语句"></a>5.循环语句</h3><p>​    循环是可以钱傲的，但是不要去数；</p>
+<p>​    嵌套不要超过两次，最多三次；</p>
+<p>​    嵌套就要去找规律，然后拼接；</p>
+<p>​    外层循环执行一次，内层循环执行一圈；</p>
+<h5 id="5-1-for语句"><a href="#5-1-for语句" class="headerlink" title="5.1 for语句"></a>5.1 for语句</h5><p>​    格式： </p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">for(初始化；条件判断语句;条件控制语句)&#123;</span><br><span class="line">  循环体；</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>1.首先执行初始化语句；</p>
+<p>2.执行条件判断语句</p>
+<p>​    true：继续执行</p>
+<p>​    false：结束执行</p>
+<p>可以和if或者for语句继续嵌套使用</p>
+<p>案例：水仙花数：每个位数的立方和等于原数</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">for(int num&#x3D;100;num&lt;&#x3D;999;num+&#x3D;1)&#123;</span><br><span class="line">			int a &#x3D; num % 10; </span><br><span class="line">			int b &#x3D; num &#x2F; 10 % 10; </span><br><span class="line">			int c &#x3D; num &#x2F; 10 &#x2F; 10 % 10;</span><br><span class="line">			if(a*a*a+b*b*b+c*c*c&#x3D;&#x3D;num)&#123;</span><br><span class="line">				System.out.println(num);</span><br><span class="line">		&#125;</span><br><span class="line">		&#125;</span><br></pre></td></tr></table></figure>
+
+<p>键盘输入：Scanner</p>
+<p>求和：sum</p>
+<p>统计数：count</p>
+<p>随机：Random</p>
+<p>案例二：每行打印两个水仙花数</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"> int count &#x3D; 0 ;</span><br><span class="line"> for(int num&#x3D;100;num&lt;&#x3D;999;num+&#x3D;1)&#123;</span><br><span class="line">			int a &#x3D; num % 10; </span><br><span class="line">			int b &#x3D; num &#x2F; 10 % 10; </span><br><span class="line">			int c &#x3D; num &#x2F; 10 &#x2F; 10 % 10;</span><br><span class="line">			if(a*a*a+b*b*b+c*c*c&#x3D;&#x3D;num)&#123;</span><br><span class="line">				System.out.println(num);</span><br><span class="line">				count++;</span><br><span class="line">				if(count%2&#x3D;&#x3D;0)&#123;</span><br><span class="line">System.out.println(num);</span><br><span class="line">&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="5-2-while-语句"><a href="#5-2-while-语句" class="headerlink" title="5.2 while 语句"></a>5.2 while 语句</h5><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">while(条件判断语句)&#123;</span><br><span class="line">		循环体；</span><br><span class="line">		条件控制语句；</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+<p>和for的操作一致；</p>
+<h5 id="5-3-do-while-语句"><a href="#5-3-do-while-语句" class="headerlink" title="5.3 do-while 语句"></a>5.3 do-while 语句</h5><p>​    格式：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">do</span>&#123;</span><br><span class="line">  循环体；</span><br><span class="line">&#125;<span class="keyword">while</span>(判断语句)&#123;  &#125;</span><br></pre></td></tr></table></figure>
+
+<p>​    特点：无论循环条件是否满足，至少会执行一次循环体</p>
+<h5 id="5-4-三者的区别"><a href="#5-4-三者的区别" class="headerlink" title="5.4 三者的区别"></a>5.4 三者的区别</h5><p>​    for 和 while：</p>
+<p>​    在for语句内的定义的变量，只能在语句内使用，之后就不能够使用了；</p>
+<p>​    在while语句内定义的变量，可以在语句外使用，并且不能重复使用；</p>
+<h5 id="5-5-死循环"><a href="#5-5-死循环" class="headerlink" title="5.5 死循环"></a>5.5 死循环</h5><p>​    格式：</p>
+<p>​    while(true){}</p>
+<p>​    for(;;){}</p>
+<p>​    do{}while(true){}</p>
+<p>应用场景：可以筛选符合对应条件的对象；</p>
+<h5 id="5-6-跳转控制语句"><a href="#5-6-跳转控制语句" class="headerlink" title="5.6 跳转控制语句"></a>5.6 跳转控制语句</h5><p>​    countinue; 跳过这次循环</p>
+<p>​    break;  结束当前循环</p>
+<p>​    只能在循环或switch里面使用</p>
+<h3 id="6-Random-产生随机数"><a href="#6-Random-产生随机数" class="headerlink" title="6.Random 产生随机数"></a>6.Random 产生随机数</h3><h5 id="6-1-Random"><a href="#6-1-Random" class="headerlink" title="6.1 Random"></a>6.1 Random</h5><p>​    格式：</p>
+<p>​    1.导包 <code>import java.unitl.Random;</code></p>
+<p>​    2.创建对象 <code>Random i = new Random();</code></p>
+<p>​    3.接受随机数 <code>int num = i.nextInt(整数);</code></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//1-10</span></span><br><span class="line"><span class="keyword">int</span> num = i.nextInt((<span class="number">10</span>-<span class="number">1</span>))+<span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+
+
+
+]]></content>
+      <tags>
+        <tag>后端学习</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Java基础知识</title>
+    <url>/2021/08/30/day01-Java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</url>
+    <content><![CDATA[<h3 id="多看-多练-多查-多记"><a href="#多看-多练-多查-多记" class="headerlink" title="多看 多练 多查  多记"></a><strong>多看 多练 多查  多记</strong></h3><p>复用性  维护性  可读性</p>
+<p>jdk：jre +开发工具</p>
+<p>jre:运行环境； jvm+核心类库</p>
+<p>jvm:虚拟机</p>
+<hr>
+<h3 id="1-java基础"><a href="#1-java基础" class="headerlink" title="1.java基础"></a>1.java基础</h3><h5 id="1-1-数据类型"><a href="#1-1-数据类型" class="headerlink" title="1.1 数据类型"></a>1.1 数据类型</h5><p>基本数据类型和引用数据类型（数组，类，接口）</p>
+<p>关键字：被java特殊定义，编码工具特殊标识</p>
+<p>基本数据类型：</p>
+<p>整数型：byte(1)  short (2)  <strong>int(4)</strong>  long(8)  </p>
+<p>byte的范围：-128~127</p>
+<p>小数型：float(4) <strong>double(8)</strong></p>
+<p>字符：char(2)</p>
+<p>布尔：boolean(1)<br> <img src="/image/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%8F%96%E5%80%BC%E8%8C%83%E5%9B%B4.png" alt="数据类型取值范围"></p>
+<h5 id="1-2-变量"><a href="#1-2-变量" class="headerlink" title="1.2 变量"></a>1.2 变量</h5><p>​    格式 ： 数据类型 变量名=数据值；</p>
+<p>数据类型 变量名1=数据值1,变量2=数据值2,…..；</p>
+<ul>
+<li>一个 变量不能在同一个大括号重复命名</li>
+</ul>
+<ul>
+<li><p>一条语句可以定义多个变量，需要使用逗号进行分割，使用分号进行结束；</p>
+</li>
+<li><p>变量在使用之前一定要赋值</p>
+<p>public static void main(String[] args){</p>
+<pre><code>    int a = 10;
+    System.out.println(a);    
+}</code></pre></li>
+<li><p>float后的数据值需要加F</p>
+</li>
+<li><p>long在使用的时候需要加L</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">public static void main(String[] args)&#123;</span><br><span class="line">	float a &#x3D; 1.6F;</span><br><span class="line">	long b &#x3D; 10000000000000000L;</span><br><span class="line">	System.out.println(a,b);	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+<ul>
+<li><p>变量的作用区域范围只在他所在的大括号中有效</p>
+<h5 id="1-3-键盘录入"><a href="#1-3-键盘录入" class="headerlink" title="1.3 键盘录入"></a>1.3 键盘录入</h5><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">import java.util.Scanner;  &#x2F;&#x2F;导包，需要写在class的上面</span><br><span class="line">Scanner sc&#x3D;new Scanner(System.in);  &#x2F;&#x2F; 创建对象，只有sc可以改变，其他属于固定格式</span><br><span class="line">	int a &#x3D; sc.nextInt(); &#x2F;&#x2F; 接受对象；只有变量 a 可以改变，其他属于固定格式</span><br><span class="line">	System.out.println(a);  &#x2F;&#x2F; 打印变量 a</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h5 id="1-4-标识符"><a href="#1-4-标识符" class="headerlink" title="1.4 标识符"></a>1.4 标识符</h5><p> 我们给程序内容自己起的名字</p>
+<p>1.数字，下划线或美元</p>
+<p>2.不能数字开头</p>
+<p>3.不能是关键字</p>
+<p>规范：小驼峰（方法）开头小写，其余开头大写<br>​        大驼峰（类）开头均大写</p>
+]]></content>
+      <tags>
+        <tag>后端学习</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>IDEA和数组</title>
+    <url>/2021/09/03/day04-IDEA%E5%92%8C%E6%95%B0%E7%BB%84/</url>
+    <content><![CDATA[<h2 id="第一部分-IDEA开发工具"><a href="#第一部分-IDEA开发工具" class="headerlink" title="第一部分 : IDEA开发工具"></a>第一部分 : IDEA开发工具</h2><p><strong>参见 ：IEDA的安装请参考文件夹PPT中的 04_IDEA.ppt</strong></p>
+<h2 id="1-数组"><a href="#1-数组" class="headerlink" title="1.数组"></a>1.数组</h2><h3 id="1-1-数组介绍"><a href="#1-1-数组介绍" class="headerlink" title="1.1 数组介绍"></a>1.1 数组介绍</h3><p>​    数组就是存储数据长度固定的容器，存储多个数据的数据类型要一致。 </p>
+<h3 id="1-2-数组的定义格式"><a href="#1-2-数组的定义格式" class="headerlink" title="1.2 数组的定义格式"></a>1.2 数组的定义格式</h3><h4 id="1-2-1-第一种格式"><a href="#1-2-1-第一种格式" class="headerlink" title="1.2.1 第一种格式"></a>1.2.1 第一种格式</h4><p>​    数据类型[] 数组名</p>
+<p>​    示例：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span>[] arr;        </span><br><span class="line"><span class="keyword">double</span>[] arr;      </span><br><span class="line"><span class="keyword">char</span>[] arr;</span><br></pre></td></tr></table></figure>
+
+<h4 id="1-2-2-第二种格式"><a href="#1-2-2-第二种格式" class="headerlink" title="1.2.2 第二种格式"></a>1.2.2 第二种格式</h4><p>​    数据类型 数组名[]</p>
+<p>​    示例：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> arr[];</span><br><span class="line"><span class="keyword">double</span> arr[];</span><br><span class="line"><span class="keyword">char</span> arr[];</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-3-数组的动态初始化"><a href="#1-3-数组的动态初始化" class="headerlink" title="1.3 数组的动态初始化"></a>1.3 数组的动态初始化</h3><h4 id="1-3-1-什么是动态初始化"><a href="#1-3-1-什么是动态初始化" class="headerlink" title="1.3.1 什么是动态初始化"></a>1.3.1 什么是动态初始化</h4><p>​    数组动态初始化就是只给定数组的长度，由系统给出默认初始化值</p>
+<h4 id="1-3-2-动态初始化格式"><a href="#1-3-2-动态初始化格式" class="headerlink" title="1.3.2 动态初始化格式"></a>1.3.2 动态初始化格式</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">数据类型[] 数组名 = <span class="keyword">new</span> 数据类型[数组长度];</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span>[] arr = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">3</span>];</span><br></pre></td></tr></table></figure>
+
+<h4 id="1-3-3-动态初始化格式详解"><a href="#1-3-3-动态初始化格式详解" class="headerlink" title="1.3.3 动态初始化格式详解"></a>1.3.3 动态初始化格式详解</h4><ul>
+<li>等号左边：<ul>
+<li>int:数组的数据类型</li>
+<li>[]:代表这是一个数组</li>
+<li>arr:代表数组的名称</li>
+</ul>
+</li>
+<li>等号右边：<ul>
+<li>new:为数组开辟内存空间</li>
+<li>int:数组的数据类型</li>
+<li>[]:代表这是一个数组</li>
+<li>3:代表数组的长度</li>
+</ul>
+</li>
+</ul>
+<p><strong>代码 :</strong> </p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.itheima.array;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Demo2Array</span> </span>&#123;</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">        数组的动态初始化:</span></span><br><span class="line"><span class="comment">                        在初始化的时候, 需要手动指定数组的长度, 系统会为数组容器分配初始值.</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">        动态初始化格式:</span></span><br><span class="line"><span class="comment">                        数据类型[] 数组名 = new 数据类型[数组的长度];</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">        注意:</span></span><br><span class="line"><span class="comment">                        打印数组变量的时候, 会打印出数组的内存地址</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">        [I@10f87f48 :</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">                        @ : 分隔符</span></span><br><span class="line"><span class="comment">                        [ : 当前的空间是一个数组类型</span></span><br><span class="line"><span class="comment">                        I : 当前数组容器中所存储的数据类型</span></span><br><span class="line"><span class="comment">                        10f87f48 : 十六进制内存地址</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">                                0 1 2 3 4 5 6 7 8 9 a b c d e f</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 数据类型[] 数组名 = new 数据类型[数组的长度];</span></span><br><span class="line">        <span class="comment">// 通过new关键字创建了一个int类型的数组容器, 该容器可以存储5个int类型的整数, 该容器被arr数组变量所记录</span></span><br><span class="line">        <span class="keyword">int</span>[] arr = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">5</span>];</span><br><span class="line">        <span class="comment">// [I@10f87f48</span></span><br><span class="line">        System.out.println(arr);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">byte</span>[] bArr = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">3</span>];</span><br><span class="line">        <span class="comment">// [B@b4c966a</span></span><br><span class="line">        System.out.println(bArr);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="1-4-数组元素访问"><a href="#1-4-数组元素访问" class="headerlink" title="1.4 数组元素访问"></a>1.4 数组元素访问</h3><h4 id="1-4-1-什么是索引"><a href="#1-4-1-什么是索引" class="headerlink" title="1.4.1 什么是索引"></a>1.4.1 什么是索引</h4><p>​    每一个存储到数组的元素，都会自动的拥有一个编号，从0开始,是连续的,不间断的,每次加1。</p>
+<p>​    这个自动编号称为数组索引(index)，可以通过数组的索引访问到数组中的元素。     </p>
+<h4 id="1-4-2访问数组元素格式"><a href="#1-4-2访问数组元素格式" class="headerlink" title="1.4.2访问数组元素格式"></a>1.4.2访问数组元素格式</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">数组名[索引];</span><br></pre></td></tr></table></figure>
+
+<h4 id="1-4-3示例代码"><a href="#1-4-3示例代码" class="headerlink" title="1.4.3示例代码"></a>1.4.3示例代码</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.itheima.array;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Demo3ArrayIndex</span> </span>&#123;</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">        数组动态初始化:</span></span><br><span class="line"><span class="comment">                初始化的时候, 手动指定数组长度, 系统会为数组容器分配初始值.</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">        数组的元素访问格式:</span></span><br><span class="line"><span class="comment">                数组名[索引]</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">                索引: 数组中数据的编号方式, 编号从0开始</span></span><br><span class="line"><span class="comment">                作用: 访问数组容器中的空间位置</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">        注意:</span></span><br><span class="line"><span class="comment">                数组在创建完毕后, 即使没有赋值, 也可以取出, 但取出的元素都是默认初始化值.</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span>[] arr = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">3</span>];         <span class="comment">// 0 1 2</span></span><br><span class="line">        System.out.println(arr);        <span class="comment">// 数组的内存地址  [I@10f87f48</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 数组名[索引]  访问数组容器中的空间位置</span></span><br><span class="line">        System.out.println(arr[<span class="number">0</span>]);     <span class="comment">// 0  系统自动分配的默认初始化值</span></span><br><span class="line">        System.out.println(arr[<span class="number">1</span>]);</span><br><span class="line">        System.out.println(arr[<span class="number">2</span>]);</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">"--------------"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 数组名[索引]</span></span><br><span class="line">        arr[<span class="number">0</span>] = <span class="number">11</span>;</span><br><span class="line">        arr[<span class="number">1</span>] = <span class="number">22</span>;</span><br><span class="line">        arr[<span class="number">2</span>] = <span class="number">33</span>;</span><br><span class="line"></span><br><span class="line">        System.out.println(arr[<span class="number">0</span>]);</span><br><span class="line">        System.out.println(arr[<span class="number">1</span>]);</span><br><span class="line">        System.out.println(arr[<span class="number">2</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-5-内存分配"><a href="#1-5-内存分配" class="headerlink" title="1.5 内存分配"></a>1.5 内存分配</h3><h4 id="1-5-1-内存概述"><a href="#1-5-1-内存概述" class="headerlink" title="1.5.1 内存概述"></a>1.5.1 内存概述</h4><p>​    内存是计算机中的重要原件，临时存储区域，作用是运行程序。</p>
+<p>​    我们编写的程序是存放在硬盘中的，在硬盘中的程序是不会运行的。</p>
+<p>​    必须放进内存中才能运行，运行完毕后会清空内存。 </p>
+<p>​    Java虚拟机要运行程序，必须要对内存进行空间的分配和管理。 </p>
+<h4 id="1-5-2-java中的内存分配"><a href="#1-5-2-java中的内存分配" class="headerlink" title="1.5.2 java中的内存分配"></a>1.5.2 java中的内存分配</h4><ul>
+<li>目前我们只需要记住两个内存，分别是：栈内存和堆内存</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>区域名称</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>寄存器</td>
+<td>给CPU使用，和我们开发无关。</td>
+</tr>
+<tr>
+<td>本地方法栈</td>
+<td>JVM在使用操作系统功能的时候使用，和我们开发无关。</td>
+</tr>
+<tr>
+<td>方法区</td>
+<td>存储可以运行的class文件。</td>
+</tr>
+<tr>
+<td>堆内存</td>
+<td>存储对象或者数组，new来创建的，都存储在堆内存。</td>
+</tr>
+<tr>
+<td>方法栈</td>
+<td>方法运行时使用的内存，比如main方法运行，进入方法栈中执行。</td>
+</tr>
+</tbody></table>
+<h3 id="1-6-Java内存分配-一个数组内存图"><a href="#1-6-Java内存分配-一个数组内存图" class="headerlink" title="1.6 Java内存分配-一个数组内存图"></a>1.6 Java内存分配-一个数组内存图</h3><p><img src=".%5Cimg%5C1591007817165.png" alt="1591007817165"></p>
+<h3 id="1-7-两个数组内存图"><a href="#1-7-两个数组内存图" class="headerlink" title="1.7 两个数组内存图"></a>1.7 两个数组内存图</h3><p><img src=".%5Cimg%5C1591007925899.png" alt="1591007925899"></p>
+<h3 id="1-8-多个数组指向相同内存图"><a href="#1-8-多个数组指向相同内存图" class="headerlink" title="1.8 多个数组指向相同内存图"></a>1.8 多个数组指向相同内存图</h3><p><img src=".%5Cimg%5C1591007957052.png" alt="1591007957052"></p>
+<h3 id="1-9-数组的静态初始化"><a href="#1-9-数组的静态初始化" class="headerlink" title="1.9 数组的静态初始化"></a>1.9 数组的静态初始化</h3><h4 id="1-9-1-什么是静态初始化"><a href="#1-9-1-什么是静态初始化" class="headerlink" title="1.9.1 什么是静态初始化"></a>1.9.1 什么是静态初始化</h4><p>​    在创建数组时，直接将元素确定    </p>
+<h4 id="1-9-2-静态初始化格式"><a href="#1-9-2-静态初始化格式" class="headerlink" title="1.9.2 静态初始化格式"></a>1.9.2 静态初始化格式</h4><ul>
+<li><p>完整版格式</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">数据类型[] 数组名 = <span class="keyword">new</span> 数据类型[]&#123;元素<span class="number">1</span>,元素<span class="number">2</span>,...&#125;;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>简化版格式</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">数据类型[] 数组名 = &#123;元素<span class="number">1</span>,元素<span class="number">2</span>,...&#125;;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h4 id="1-9-3示例代码"><a href="#1-9-3示例代码" class="headerlink" title="1.9.3示例代码"></a>1.9.3示例代码</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.itheima.array2;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Demo1Array</span> </span>&#123;</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">        数组静态初始化 : 初始化时指定每个数组元素的初始值，由系统决定数组长度</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">        完整格式:</span></span><br><span class="line"><span class="comment">                    数据类型[] 数组名 = new 数据类型[]&#123;数据1,数据2,数据3...&#125;;</span></span><br><span class="line"><span class="comment">        简化格式:</span></span><br><span class="line"><span class="comment">                    数据类型[] 数组名 = &#123;数据1,数据2,数据3...&#125;;</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 数据类型[] 数组名 = new 数据类型[]&#123;数据1,数据2,数据3...&#125;;</span></span><br><span class="line">        <span class="keyword">int</span>[] arr = <span class="keyword">new</span> <span class="keyword">int</span>[]&#123;<span class="number">11</span>,<span class="number">22</span>,<span class="number">33</span>&#125;;</span><br><span class="line">        System.out.println(arr[<span class="number">0</span>]);</span><br><span class="line">        System.out.println(arr[<span class="number">1</span>]);</span><br><span class="line">        System.out.println(arr[<span class="number">2</span>]);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 数据类型[] 数组名 = &#123;数据1,数据2,数据3...&#125;;</span></span><br><span class="line">        <span class="keyword">int</span>[] arr2 = &#123;<span class="number">44</span>,<span class="number">55</span>,<span class="number">66</span>&#125;;</span><br><span class="line">        System.out.println(arr2);</span><br><span class="line">        System.out.println(arr2[<span class="number">0</span>]);</span><br><span class="line">        System.out.println(arr2[<span class="number">1</span>]);</span><br><span class="line">        System.out.println(arr2[<span class="number">2</span>]);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-10-数组操作的两个常见问题"><a href="#1-10-数组操作的两个常见问题" class="headerlink" title="1.10 数组操作的两个常见问题"></a>1.10 数组操作的两个常见问题</h3><h4 id="1-10-1-索引越界异常"><a href="#1-10-1-索引越界异常" class="headerlink" title="1.10.1 索引越界异常"></a>1.10.1 索引越界异常</h4><ul>
+<li><p>出现原因</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ArrayDemo</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span>[] arr = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">3</span>];</span><br><span class="line">        System.out.println(arr[<span class="number">3</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>数组长度为3，索引范围是0~2，但是我们却访问了一个3的索引。</p>
+<p>程序运行后，将会抛出ArrayIndexOutOfBoundsException 数组越界异常。在开发中，数组的越界异常是不能出现的，一旦出现了，就必须要修改我们编写的代码。 </p>
+</li>
+<li><p>解决方案</p>
+<p>将错误的索引修改为正确的索引范围即可！</p>
+</li>
+</ul>
+<h4 id="1-10-2-空指针异常"><a href="#1-10-2-空指针异常" class="headerlink" title="1.10.2 空指针异常"></a>1.10.2 空指针异常</h4><ul>
+<li><p>出现原因</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ArrayDemo</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span>[] arr = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">3</span>];</span><br><span class="line"></span><br><span class="line">        <span class="comment">//把null赋值给数组</span></span><br><span class="line">        arr = <span class="keyword">null</span>;</span><br><span class="line">        System.out.println(arr[<span class="number">0</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>arr = null 这行代码，意味着变量arr将不会在保存数组的内存地址，也就不允许再操作数组了，因此运行的时候会抛出 NullPointerException 空指针异常。在开发中，数组的空指针是不能出现的，一旦出现了，就必须要修改我们编写的代码。</p>
+</li>
+<li><p>解决方案</p>
+<p>给数组一个真正的堆内存空间引用即可！</p>
+</li>
+</ul>
+<h3 id="1-11-数组遍历"><a href="#1-11-数组遍历" class="headerlink" title="1.11 数组遍历"></a>1.11 数组遍历</h3><ul>
+<li><p>数组遍历：就是将数组中的每个元素分别获取出来，就是遍历。遍历也是数组操作中的基石。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ArrayTest01</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">int</span>[] arr = &#123; <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span> &#125;;</span><br><span class="line">		System.out.println(arr[<span class="number">0</span>]);</span><br><span class="line">		System.out.println(arr[<span class="number">1</span>]);</span><br><span class="line">		System.out.println(arr[<span class="number">2</span>]);</span><br><span class="line">		System.out.println(arr[<span class="number">3</span>]);</span><br><span class="line">		System.out.println(arr[<span class="number">4</span>]);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 以上代码是可以将数组中每个元素全部遍历出来，但是如果数组元素非常多，这种写法肯定不行，因此我们需要改造成循环的写法。数组的索引是 0 到 lenght-1 ，可以作为循环的条件出现。 </p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ArrayTest01</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//定义数组</span></span><br><span class="line">        <span class="keyword">int</span>[] arr = &#123;<span class="number">11</span>, <span class="number">22</span>, <span class="number">33</span>, <span class="number">44</span>, <span class="number">55</span>&#125;;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//使用通用的遍历格式</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> x=<span class="number">0</span>; x&lt;arr.length; x++) &#123;</span><br><span class="line">            System.out.println(arr[x]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="1-12-数组获取最大值"><a href="#1-12-数组获取最大值" class="headerlink" title="1.12 数组获取最大值"></a>1.12 数组获取最大值</h3><ul>
+<li><p>最大值获取：从数组的所有元素中找出最大值。</p>
+</li>
+<li><p>实现思路：</p>
+<ul>
+<li>定义变量，保存数组0索引上的元素</li>
+<li>遍历数组，获取出数组中的每个元素</li>
+<li>将遍历到的元素和保存数组0索引上值的变量进行比较</li>
+<li>如果数组元素的值大于了变量的值，变量记录住新的值</li>
+<li>数组循环遍历结束，变量保存的就是数组中的最大值 </li>
+</ul>
+</li>
+<li><p>代码实现：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.itheima.test;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test2Array</span> </span>&#123;</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">        需求: 从数组中查找最大值</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">                int[] arr = &#123;12,45,98,73,60&#125;;</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">        实现步骤:</span></span><br><span class="line"><span class="comment">                1. 假设数组中的第一个元素为最大值</span></span><br><span class="line"><span class="comment">                2. 遍历数组, 获取每一个元素, 准备进行比较</span></span><br><span class="line"><span class="comment">                3. 如果比较的过程中, 出现了比max更大的, 让max记录更大的值</span></span><br><span class="line"><span class="comment">                4. 循环结束后, 打印最大值.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span>[] arr = &#123;<span class="number">12</span>,<span class="number">45</span>,<span class="number">98</span>,<span class="number">73</span>,<span class="number">60</span>&#125;;</span><br><span class="line">        <span class="comment">// 1. 假设数组中的第一个元素为最大值</span></span><br><span class="line">        <span class="keyword">int</span> max = arr[<span class="number">0</span>];</span><br><span class="line">        <span class="comment">// 2. 遍历数组, 获取每一个元素, 准备进行比较</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; arr.length; i++)&#123;</span><br><span class="line">            <span class="comment">// 3. 如果比较的过程中, 出现了比max更大的, 让max记录更大的值</span></span><br><span class="line">            <span class="keyword">if</span>(arr[i] &gt; max)&#123;</span><br><span class="line">                max = arr[i];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//  4. 循环结束后, 打印最大值.</span></span><br><span class="line">        System.out.println(<span class="string">"max:"</span> + max);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="1-13-数组元素求和"><a href="#1-13-数组元素求和" class="headerlink" title="1.13 数组元素求和"></a>1.13 数组元素求和</h3><ul>
+<li><p>需求：键盘录入5个整数，存储到数组中，并对数组求和</p>
+</li>
+<li><p>思路：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1.创建键盘录入对象，准备键盘录入</span><br><span class="line">2.定义一个求和变量，准备记录累加后的结果</span><br><span class="line">3.动态初始化一个长度为5的int数组，准备存储键盘录入的数值</span><br><span class="line">4.将键盘录入的数值存储到数组中</span><br><span class="line">5.遍历数组，取出每一个元素，并求和</span><br><span class="line">6.输出总和</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>代码实现：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.itheima.test;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test3Array</span> </span>&#123;</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">        需求：键盘录入5个整数，存储到数组中，并对数组求和</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">        思路：</span></span><br><span class="line"><span class="comment">            1.创建键盘录入对象，准备键盘录入</span></span><br><span class="line"><span class="comment">            2.定义一个求和变量，准备记录累加后的结果</span></span><br><span class="line"><span class="comment">            3.动态初始化一个长度为5的int数组，准备存储键盘录入的数值</span></span><br><span class="line"><span class="comment">            4.将键盘录入的数值存储到数组中</span></span><br><span class="line"><span class="comment">            5.遍历数组，取出每一个元素，并求和</span></span><br><span class="line"><span class="comment">            6.输出总和</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 1.创建键盘录入对象，准备键盘录入</span></span><br><span class="line">        Scanner sc = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">        <span class="comment">// 2.定义一个求和变量，准备记录累加后的结果</span></span><br><span class="line">        <span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">        <span class="comment">// 3.动态初始化一个长度为5的int数组，准备存储键盘录入的数值</span></span><br><span class="line">        <span class="keyword">int</span>[] arr = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">5</span>];</span><br><span class="line">        <span class="comment">// 4.将键盘录入的数值存储到数组中</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; arr.length; i++)&#123;</span><br><span class="line">            System.out.println(<span class="string">"请输入第"</span> + (i+<span class="number">1</span>) + <span class="string">"个整数:"</span>);</span><br><span class="line">            <span class="comment">//arr[i] = 10;</span></span><br><span class="line">            arr[i] = sc.nextInt();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 5.遍历数组，取出每一个元素，并求和</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">            sum += arr[i];</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 6.输出总和</span></span><br><span class="line">        System.out.println(<span class="string">"sum:"</span> + sum);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="1-14-数组基本查找【应用】"><a href="#1-14-数组基本查找【应用】" class="headerlink" title="1.14 数组基本查找【应用】"></a>1.14 数组基本查找【应用】</h3><ul>
+<li><p>需求：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">已知一个数组 arr &#x3D; &#123;19, 28, 37, 46, 50&#125;; 键盘录入一个数据，查找该数据在数组中的索引，并在控</span><br><span class="line">制台输出找到的索引值。</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>思路：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1.定义一个数组，用静态初始化完成数组元素的初始化</span><br><span class="line">2.键盘录入要查找的数据，用一个变量接收</span><br><span class="line">3.定义一个索引变量，初始值为-1</span><br><span class="line">4.遍历数组，获取到数组中的每一个元素</span><br><span class="line">5.拿键盘录入的数据和数组中的每一个元素进行比较，如果值相同，就把该值对应的索引赋值给索引变量，并结束循环</span><br><span class="line">6.输出索引变量</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>代码实现：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 1.定义一个数组，用静态初始化完成数组元素的初始化</span></span><br><span class="line">        <span class="keyword">int</span>[] arr = &#123;<span class="number">19</span>, <span class="number">28</span>, <span class="number">37</span>, <span class="number">46</span>, <span class="number">50</span>&#125;;</span><br><span class="line">        <span class="comment">// 2.键盘录入要查找的数据，用一个变量接收</span></span><br><span class="line">        Scanner sc = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">        System.out.println(<span class="string">"请输入您要查找的元素:"</span>);</span><br><span class="line">        <span class="keyword">int</span> num = sc.nextInt();</span><br><span class="line">        <span class="comment">// 3.定义一个索引变量，初始值为-1</span></span><br><span class="line">        <span class="comment">// 假设要查找的数据, 在数组中就是不存在的</span></span><br><span class="line">        <span class="keyword">int</span> index = -<span class="number">1</span>;</span><br><span class="line">        <span class="comment">// 4.遍历数组，获取到数组中的每一个元素</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">            <span class="comment">// 5.拿键盘录入的数据和数组中的每一个元素进行比较，如果值相同，就把该值对应的索引赋值给索引变量，并结束循环</span></span><br><span class="line">            <span class="keyword">if</span>(num == arr[i])&#123;</span><br><span class="line">                <span class="comment">// 如果值相同，就把该值对应的索引赋值给索引变量，并结束循环</span></span><br><span class="line">                index = i;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//  6.输出索引变量</span></span><br><span class="line">        System.out.println(index);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="1-15-评委打分【应用】"><a href="#1-15-评委打分【应用】" class="headerlink" title="1.15 评委打分【应用】"></a>1.15 评委打分【应用】</h3><ul>
+<li><p>需求：在编程竞赛中，有6个评委为参赛的选手打分，分数为0-100的整数分。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">选手的最后得分为：去掉一个最高分和一个最低分后 的4个评委平均值 (不考虑小数部分)。</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>思路：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1.定义一个数组，用动态初始化完成数组元素的初始化，长度为6</span><br><span class="line">2.键盘录入评委分数</span><br><span class="line">3.由于是6个评委打分，所以，接收评委分数的操作，用循环</span><br><span class="line">4.求出数组最大值</span><br><span class="line">5.求出数组最小值</span><br><span class="line">6.求出数组总和</span><br><span class="line">7.按照计算规则进行计算得到平均分</span><br><span class="line">8.输出平均分</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>代码实现：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 1.定义一个数组，用动态初始化完成数组元素的初始化，长度为6</span></span><br><span class="line">        <span class="keyword">int</span>[] arr = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">6</span>];</span><br><span class="line">        <span class="comment">// 2.键盘录入评委分数</span></span><br><span class="line">        Scanner sc = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">        <span class="comment">//  3.由于是6个评委打分，所以，接收评委分数的操作，用循环</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">            System.out.println(<span class="string">"请输入第"</span> + (i+<span class="number">1</span>) + <span class="string">"个评委的打分:"</span>);</span><br><span class="line">            <span class="keyword">int</span> score = sc.nextInt();</span><br><span class="line">            <span class="keyword">if</span>(score &gt;= <span class="number">0</span> &amp;&amp; score &lt;= <span class="number">100</span>)&#123;</span><br><span class="line">                <span class="comment">// 合法的分值</span></span><br><span class="line">                arr[i] = score;</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="comment">// 非法的分值</span></span><br><span class="line">                System.out.println(<span class="string">"您的打分输入有误, 请检查是否是0-100之间的"</span>);</span><br><span class="line">                i--;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 4.求出数组最大值</span></span><br><span class="line">        <span class="keyword">int</span> max = arr[<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span>(max &lt; arr[i])&#123;</span><br><span class="line">                max = arr[i];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 5.求出数组最小值</span></span><br><span class="line">        <span class="keyword">int</span> min = arr[<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span>(min &gt; arr[i])&#123;</span><br><span class="line">                min = arr[i];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 6.求出数组总和</span></span><br><span class="line">        <span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">            sum += arr[i];</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 7.按照计算规则进行计算得到平均分</span></span><br><span class="line">        <span class="keyword">int</span> avg = (sum - max - min ) / (arr.length-<span class="number">2</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 8.输出平均分</span></span><br><span class="line">        System.out.println(avg);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="总结数组"><a href="#总结数组" class="headerlink" title="总结数组"></a>总结数组</h3><p>  第一种：动态初始化格式</p>
+<p>  建议:数据类型 [] 数组名 = new 数据类型 [数组的长度];</p>
+<p>  数据类型  数组名  []  =  new    数据类型 [数组的长度]; </p>
+<p>  第二种：静态初始化格式</p>
+<p>  数据类型 数组名 [] = new 数据类型 [] {元素1，元素2，元素3…..};—-&gt;简化   </p>
+<p>  用的比较多的:数据类型  数组名 [] = {元素1，元素2，元素3…..};</p>
+<p>  数组的好处：</p>
+<p>  1.可以一次开辟多个空间</p>
+<p>  2.可以对这多个空间进行统一管理</p>
+<p>  3.数组定义好之后，每个数组空间都有一个唯一编号（索引，下标，角标），我们在操作数组的时候，都是对统一的数组名和对应的索引来操作数组的每一个空间。赋值:数组名[索引]=值;  拿值:数组名[索引]</p>
+<p>  4.数组的索引是从0开始，到长度-1结束.</p>
+<p>  5.我们可以通过数组名.length这个属性来获取数组的长度。</p>
+<p>  6.获取数组对应索引空间上的数据：数组名[当前的索引]</p>
+]]></content>
+      <tags>
+        <tag>后端学习</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>内部类和Lambda</title>
     <url>/2021/09/18/Day13_%E5%86%85%E9%83%A8%E5%92%8CLambda/</url>
     <content><![CDATA[<h3 id="22-内部类"><a href="#22-内部类" class="headerlink" title="22. 内部类"></a>22. 内部类</h3><h5 id="22-1-基础概述"><a href="#22-1-基础概述" class="headerlink" title="22.1 基础概述"></a>22.1 基础概述</h5><p>​    内部类：就是在一个类中定义的另一个类</p>
@@ -1327,54 +1643,121 @@ System.out.println(divide);
       </tags>
   </entry>
   <entry>
-    <title>Java基础知识</title>
-    <url>/2021/08/30/day01-Java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</url>
-    <content><![CDATA[<h3 id="多看-多练-多查-多记"><a href="#多看-多练-多查-多记" class="headerlink" title="多看 多练 多查  多记"></a><strong>多看 多练 多查  多记</strong></h3><p>复用性  维护性  可读性</p>
-<p>jdk：jre +开发工具</p>
-<p>jre:运行环境； jvm+核心类库</p>
-<p>jvm:虚拟机</p>
-<hr>
-<h3 id="1-java基础"><a href="#1-java基础" class="headerlink" title="1.java基础"></a>1.java基础</h3><h5 id="1-1-数据类型"><a href="#1-1-数据类型" class="headerlink" title="1.1 数据类型"></a>1.1 数据类型</h5><p>基本数据类型和引用数据类型（数组，类，接口）</p>
-<p>关键字：被java特殊定义，编码工具特殊标识</p>
-<p>基本数据类型：</p>
-<p>整数型：byte(1)  short (2)  <strong>int(4)</strong>  long(8)  </p>
-<p>byte的范围：-128~127</p>
-<p>小数型：float(4) <strong>double(8)</strong></p>
-<p>字符：char(2)</p>
-<p>布尔：boolean(1)<br> <img src="/image/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%8F%96%E5%80%BC%E8%8C%83%E5%9B%B4.png" alt="数据类型取值范围"></p>
-<h5 id="1-2-变量"><a href="#1-2-变量" class="headerlink" title="1.2 变量"></a>1.2 变量</h5><p>​    格式 ： 数据类型 变量名=数据值；</p>
-<p>数据类型 变量名1=数据值1,变量2=数据值2,…..；</p>
+    <title>java的方法的使用</title>
+    <url>/2021/09/04/day05-%E6%96%B9%E6%B3%95%E7%9A%84%E4%BD%BF%E7%94%A8/</url>
+    <content><![CDATA[<h3 id="8-方法"><a href="#8-方法" class="headerlink" title="8.方法"></a>8.方法</h3><p>​    前提须知：</p>
+<p>​    需要先定义，后使用</p>
+<p>​    需要手动调用<br>​    方法不能嵌套定义；</p>
+<p>​    方法的返回值类型为void的时候，表示该方法么有返回值</p>
+<p>​    return语句下面，不能编译代码，和break类似</p>
+<h5 id="8-1-基本概念"><a href="#8-1-基本概念" class="headerlink" title="8.1 基本概念"></a>8.1 基本概念</h5><p>​        概念：具有独立功能的代码块，不调用就不执行</p>
+<p>​        作用：提高代码的复用性</p>
+<h5 id="8-2-定义和使用"><a href="#8-2-定义和使用" class="headerlink" title="8.2 定义和使用"></a>8.2 定义和使用</h5><p>​        方法之间是平级关系，不能嵌套；</p>
+<p>​        格式：</p>
+<p>​    <code>public static void 方法名(){ 方法体 }</code></p>
+<p>​        调用方法：</p>
+<p>​        方法名();</p>
+<h5 id="8-3-带参数的定义和使用"><a href="#8-3-带参数的定义和使用" class="headerlink" title="8.3 带参数的定义和使用"></a>8.3 带参数的定义和使用</h5><p>​        格式：<br>​             <code>public static void 方法名(数据类型 变量名 ){ 方法体 }</code></p>
+<p>​        多个参数之间用逗号分隔</p>
+<p>​        调用方法：</p>
+<p>​        方法名(参数)；</p>
+<h6 id="8-3-1-形参和实参"><a href="#8-3-1-形参和实参" class="headerlink" title="8.3.1 形参和实参"></a>8.3.1 形参和实参</h6><p>​        形式参数：方法定义中的参数</p>
+<p>​        <code>方法名(数据类型 变量名 )</code>   // 这里面的变量名就是形参</p>
+<p>​        实际参数： 方法的调用中的参数</p>
+<p>​        <code>方法名(数据1)；</code> // 这里面调用的数据1就是实参</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">##### 	8.4 带返回值方法的定义和调用</span><br></pre></td></tr></table></figure>
+
+<p>​    格式：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">public static 数据类型 方法名（参数）&#123; </span><br><span class="line">方法体 </span><br><span class="line">return 数据值；</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>​    调用：</p>
+<p>​    <code>方法名（参数）；</code></p>
+<p>​    <code>数据类型 变量名 = 方法名（变量名/常量值）；</code></p>
 <ul>
-<li>一个 变量不能在同一个大括号重复命名</li>
+<li>public static 修饰符</li>
 </ul>
 <ul>
-<li><p>一条语句可以定义多个变量，需要使用逗号进行分割，使用分号进行结束；</p>
-</li>
-<li><p>变量在使用之前一定要赋值</p>
-<p>public static void main(String[] args){</p>
-<pre><code>    int a = 10;
-    System.out.println(a);    
-}</code></pre></li>
-<li><p>float后的数据值需要加F</p>
-</li>
-<li><p>long在使用的时候需要加L</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">public static void main(String[] args)&#123;</span><br><span class="line">	float a &#x3D; 1.6F;</span><br><span class="line">	long b &#x3D; 10000000000000000L;</span><br><span class="line">	System.out.println(a,b);	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-</li>
+<li>方法操作完毕之后，返回的结果数据，所对应的数据类型</li>
 </ul>
 <ul>
-<li><p>变量的作用区域范围只在他所在的大括号中有效</p>
-<h5 id="1-3-键盘录入"><a href="#1-3-键盘录入" class="headerlink" title="1.3 键盘录入"></a>1.3 键盘录入</h5><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">import java.util.Scanner;  &#x2F;&#x2F;导包，需要写在class的上面</span><br><span class="line">Scanner sc&#x3D;new Scanner(System.in);  &#x2F;&#x2F; 创建对象，只有sc可以改变，其他属于固定格式</span><br><span class="line">	int a &#x3D; sc.nextInt(); &#x2F;&#x2F; 接受对象；只有变量 a 可以改变，其他属于固定格式</span><br><span class="line">	System.out.println(a);  &#x2F;&#x2F; 打印变量 a</span><br></pre></td></tr></table></figure>
-
-</li>
+<li>如果方法结束后，没有数据返回，就是用void,而且方法体重一般不写return</li>
 </ul>
-<h5 id="1-4-标识符"><a href="#1-4-标识符" class="headerlink" title="1.4 标识符"></a>1.4 标识符</h5><p> 我们给程序内容自己起的名字</p>
-<p>1.数字，下划线或美元</p>
-<p>2.不能数字开头</p>
-<p>3.不能是关键字</p>
-<p>规范：小驼峰（方法）开头小写，其余开头大写<br>​        大驼峰（类）开头均大写</p>
+<p>作用：把返回值返回给调用者</p>
+<p>注意：只要执行了return语句，该方法就结束了</p>
+<h5 id="8-5-方法的重载"><a href="#8-5-方法的重载" class="headerlink" title="8.5 方法的重载"></a>8.5 方法的重载</h5><p>​        </p>
+<p>​        方法的重复定义：方法名相同，参数也相同   // 冲突性错误       </p>
+<p>​        概述：同一个类中，方法名相同，参数不同的方法</p>
+<p>​            参数不同；个数不听、类型不同、顺序不同</p>
+<p>​        注意：识别方法之间是否是重载关系，只看方法名和参数，和返回值无关</p>
+<p>​    优点：不用记忆过多的方法民资</p>
+<h5 id="8-6-方法的参数传递"><a href="#8-6-方法的参数传递" class="headerlink" title="8.6 方法的参数传递"></a>8.6 方法的参数传递</h5><p>​        结论：</p>
+<p>​        如果方法参数是基本数据类型，形参的改变，不会影响到实参</p>
+<p>​        如果方法参数是引用数据类型，形参的改变，会影响到实参</p>
+]]></content>
+      <tags>
+        <tag>后端学习</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>java进制的学习</title>
+    <url>/2021/09/06/day06-%E8%BF%9B%E5%88%B6/</url>
+    <content><![CDATA[<h3 id="9-进制"><a href="#9-进制" class="headerlink" title="9. 进制"></a>9. 进制</h3><h5 id="9-1-基本概念"><a href="#9-1-基本概念" class="headerlink" title="9.1 基本概念"></a>9.1 基本概念</h5><p>​        进制： 二进制 、十进制、十六进制</p>
+<p>​    计算机数据在底层运算的时候，都是<u>二进制的形式</u>的</p>
+<p>​    进制：逢几进1，借1当几，就是几进制</p>
+<p>​    二进制 ： 0和1构成   逢2 进 1</p>
+<p>​    十进制：Java中，数值默认都是10进制，不需要加修饰</p>
+<p>​    二进制：数值前面0b开头，b大小写都可以</p>
+<p>​    八进制：数值前面以0开头</p>
+<p>​    十六进制：数值前面以0x开头，x大小写都可以</p>
+<p>​    注意：书写的时候，虽然加入了进制的表示，但是在控制台，都是十进制的形式输出</p>
+<p>​     </p>
+<h5 id="9-2-进制转换"><a href="#9-2-进制转换" class="headerlink" title="9.2 进制转换"></a>9.2 进制转换</h5><p>​    任意进制到十进制的转换</p>
+<p>​    系数*基数的权次幂</p>
+<p>​    系数：每一位上的数</p>
+<p>​    基数：几进制就是几</p>
+<p>​    权次幂：从右往左，从0开始依次加一</p>
+<p>​    </p>
+<p>​    十进制转任意进制的</p>
+<p>​    公式： 除基取余，直到商为0，倒着把余数拼接起来</p>
+<p>​    </p>
+<p>​    二进制转任意进制的</p>
+<p>​    0000 0000</p>
+<p>​    8421 8421</p>
+<p>​    几进制的就对位之和，转换为该进制的书写</p>
+<p>​    八进制取三位，十六进制取四位</p>
+<h5 id="9-3-原码-反码-补码"><a href="#9-3-原码-反码-补码" class="headerlink" title="9.3 原码 反码 补码"></a>9.3 原码 反码 补码</h5><p>​        计算机中的数据，都是以二进制补码的形式在运算，而补码则是通过反码和原码推算出来的。</p>
+<p>​    原码：（看数据）</p>
+<p>​    反码：（转数据）原码0变1，1变</p>
+<p>​    补码：（运算数据）反码各位加1<br>​    </p>
+<p>​    byte -128~127</p>
+<p>​    (正数的原反补是一样的，负的的0和正的0没有意义，就把负数的0，成为-128)</p>
+<h5 id="9-4-位运算符"><a href="#9-4-位运算符" class="headerlink" title="9.4 位运算符"></a>9.4 位运算符</h5><p>​    位运算符：二进制位的运算，先将十进制转成二进制后在进行运算</p>
+<p>​            在二进制运算中，1表示true ，0表示false</p>
+<p>​    &amp;位与：遇到false就是false，遇到0就是0；</p>
+<p>​    |位或：遇到true则true,遇到1则1</p>
+<p>​    ^位异或：相同为false,不同的为true ；  一个数被另一个数异或两次，得到的还是该数</p>
+<p>​    ~ 取反：全部取反，0变1，1变0；</p>
+<p>​    </p>
+<p>​    <strong>一个数和本身异或结果是 0</strong></p>
+<p>​    <strong>任何数和0异或的到任何数</strong></p>
+<p>​    </p>
+<p>​    位移运算</p>
+<p>​    &lt;&lt; : 左移几位，乘2的几次方</p>
+<p>​    &gt;&gt;：右移几位，除2的几次方</p>
+<p> <img src="/image/%E4%BD%8D%E8%BF%90%E7%AE%97%E7%AC%A6.png" alt="位运算符"></p>
+<h3 id="10-二维数组"><a href="#10-二维数组" class="headerlink" title="10. 二维数组"></a>10. 二维数组</h3><h5 id="10-1-二维数组概念"><a href="#10-1-二维数组概念" class="headerlink" title="10.1 二维数组概念"></a>10.1 二维数组概念</h5><p>​        概念： 存储多个一维数组的容器</p>
+<p>​                    二维数组里面存在的一堆数组的地址         </p>
+<p>​        格式： 数据类型 <code>[]</code> <code>[]</code> 变量名 = new 数据类型<code>[m]</code> <code>[n]</code></p>
+<p>​        </p>
+<p>​    遍历</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">for(int i&#x3D;0;i&lt;arr.length;i++)&#123;</span><br><span class="line">  for(int j&#x3D;0;j&lt;arr[i].length;j++)&#123;</span><br><span class="line">  System.out.println(arr[i][j]);</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
 ]]></content>
       <tags>
         <tag>后端学习</tag>
@@ -1716,389 +2099,6 @@ System.out.println(divide);
 <p>​    ③为每种判断设置对应的条件</p>
 <p>​    ④为每种判断设置对应的奖励</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">IfTest02</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">		<span class="comment">// 1. 使用Scanner录入考试成绩</span></span><br><span class="line">		Scanner sc = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">		System.out.println(<span class="string">"请输入您的成绩:"</span>);</span><br><span class="line">		<span class="keyword">int</span> score = sc.nextInt();</span><br><span class="line">		<span class="comment">// 2. 判断成绩是否在合法范围内 0~100</span></span><br><span class="line">		<span class="keyword">if</span>(score &gt;=<span class="number">0</span> &amp;&amp; score &lt;= <span class="number">100</span>)&#123;</span><br><span class="line">			<span class="comment">// 合法成绩</span></span><br><span class="line">			<span class="comment">// 3. 在合法的语句块中判断成绩范围符合哪一个奖励</span></span><br><span class="line">			<span class="keyword">if</span>(score &gt;= <span class="number">95</span> &amp;&amp; score &lt;= <span class="number">100</span>)&#123;</span><br><span class="line">				System.out.println(<span class="string">"自行车一辆"</span>);</span><br><span class="line">			&#125;<span class="keyword">else</span> <span class="keyword">if</span>(score &gt;= <span class="number">90</span> &amp;&amp; score &lt;= <span class="number">94</span>)&#123;</span><br><span class="line">				System.out.println(<span class="string">"游乐场一次"</span>);</span><br><span class="line">			&#125;<span class="keyword">else</span> <span class="keyword">if</span>(score &gt;= <span class="number">80</span> &amp;&amp; score &lt;= <span class="number">89</span>)&#123;</span><br><span class="line">				System.out.println(<span class="string">"变形金刚一个"</span>);</span><br><span class="line">			&#125;<span class="keyword">else</span> &#123;</span><br><span class="line">				System.out.println(<span class="string">"挨顿揍, 这座城市又多了一个伤心的人~"</span>);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">			<span class="comment">// 非法的话, 给出错误提示</span></span><br><span class="line">			System.out.println(<span class="string">"您的成绩输入有误!"</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <tags>
-        <tag>后端学习</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>循环和switch</title>
-    <url>/2021/09/01/day03_%E5%BE%AA%E7%8E%AF/</url>
-    <content><![CDATA[<h5 id="4-2-switch语句"><a href="#4-2-switch语句" class="headerlink" title="4.2 switch语句"></a>4.2 switch语句</h5><p>​    格式：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">switch</span>(表达式)&#123;</span><br><span class="line">	<span class="keyword">case</span> 值<span class="number">1</span>：</span><br><span class="line">	语句体 <span class="number">1</span>；</span><br><span class="line">	<span class="keyword">break</span>；</span><br><span class="line">	<span class="keyword">case</span> 值<span class="number">2</span>：</span><br><span class="line">	语句体 <span class="number">2</span>；</span><br><span class="line">	<span class="keyword">break</span>；</span><br><span class="line">	……</span><br><span class="line">	<span class="keyword">case</span> 值n：</span><br><span class="line">	语句体 n；</span><br><span class="line">	<span class="keyword">break</span>；</span><br><span class="line">	<span class="keyword">default</span>:</span><br><span class="line">	语句体；</span><br><span class="line">     <span class="keyword">break</span>；</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
-
-<p>​    表达式的结果只能是：byte,short,int,char 字符串，枚举</p>
-<p>​    先计算表达式的值，从上到下与case开始匹配,遇到相同的值，开始乡下执行对应的语句体，直到遇到break或者switch才结束，如果没有匹配到case，执行default语句，直到遇到break或switch语句结束才结束。</p>
-<p>​    switch 一定能被if取代，能用if的尽量用if，但是有一种情况你可以选择switch，就是做选择的时候，这样的代码看起来比较清爽。</p>
-<p>​    </p>
-<p>​    case穿透：当语句出现break的时候，就会出现穿透现象</p>
-<p>​    当省略break的时候，会继续执行，直到执行到break的时候才会结束；</p>
-<p>​    出现多个重复的语句，可以考虑使用case穿透</p>
-<h3 id="5-循环语句"><a href="#5-循环语句" class="headerlink" title="5.循环语句"></a>5.循环语句</h3><p>​    循环是可以钱傲的，但是不要去数；</p>
-<p>​    嵌套不要超过两次，最多三次；</p>
-<p>​    嵌套就要去找规律，然后拼接；</p>
-<p>​    外层循环执行一次，内层循环执行一圈；</p>
-<h5 id="5-1-for语句"><a href="#5-1-for语句" class="headerlink" title="5.1 for语句"></a>5.1 for语句</h5><p>​    格式： </p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">for(初始化；条件判断语句;条件控制语句)&#123;</span><br><span class="line">  循环体；</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>1.首先执行初始化语句；</p>
-<p>2.执行条件判断语句</p>
-<p>​    true：继续执行</p>
-<p>​    false：结束执行</p>
-<p>可以和if或者for语句继续嵌套使用</p>
-<p>案例：水仙花数：每个位数的立方和等于原数</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">for(int num&#x3D;100;num&lt;&#x3D;999;num+&#x3D;1)&#123;</span><br><span class="line">			int a &#x3D; num % 10; </span><br><span class="line">			int b &#x3D; num &#x2F; 10 % 10; </span><br><span class="line">			int c &#x3D; num &#x2F; 10 &#x2F; 10 % 10;</span><br><span class="line">			if(a*a*a+b*b*b+c*c*c&#x3D;&#x3D;num)&#123;</span><br><span class="line">				System.out.println(num);</span><br><span class="line">		&#125;</span><br><span class="line">		&#125;</span><br></pre></td></tr></table></figure>
-
-<p>键盘输入：Scanner</p>
-<p>求和：sum</p>
-<p>统计数：count</p>
-<p>随机：Random</p>
-<p>案例二：每行打印两个水仙花数</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"> int count &#x3D; 0 ;</span><br><span class="line"> for(int num&#x3D;100;num&lt;&#x3D;999;num+&#x3D;1)&#123;</span><br><span class="line">			int a &#x3D; num % 10; </span><br><span class="line">			int b &#x3D; num &#x2F; 10 % 10; </span><br><span class="line">			int c &#x3D; num &#x2F; 10 &#x2F; 10 % 10;</span><br><span class="line">			if(a*a*a+b*b*b+c*c*c&#x3D;&#x3D;num)&#123;</span><br><span class="line">				System.out.println(num);</span><br><span class="line">				count++;</span><br><span class="line">				if(count%2&#x3D;&#x3D;0)&#123;</span><br><span class="line">System.out.println(num);</span><br><span class="line">&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h5 id="5-2-while-语句"><a href="#5-2-while-语句" class="headerlink" title="5.2 while 语句"></a>5.2 while 语句</h5><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">while(条件判断语句)&#123;</span><br><span class="line">		循环体；</span><br><span class="line">		条件控制语句；</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
-
-<p>和for的操作一致；</p>
-<h5 id="5-3-do-while-语句"><a href="#5-3-do-while-语句" class="headerlink" title="5.3 do-while 语句"></a>5.3 do-while 语句</h5><p>​    格式：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">do</span>&#123;</span><br><span class="line">  循环体；</span><br><span class="line">&#125;<span class="keyword">while</span>(判断语句)&#123;  &#125;</span><br></pre></td></tr></table></figure>
-
-<p>​    特点：无论循环条件是否满足，至少会执行一次循环体</p>
-<h5 id="5-4-三者的区别"><a href="#5-4-三者的区别" class="headerlink" title="5.4 三者的区别"></a>5.4 三者的区别</h5><p>​    for 和 while：</p>
-<p>​    在for语句内的定义的变量，只能在语句内使用，之后就不能够使用了；</p>
-<p>​    在while语句内定义的变量，可以在语句外使用，并且不能重复使用；</p>
-<h5 id="5-5-死循环"><a href="#5-5-死循环" class="headerlink" title="5.5 死循环"></a>5.5 死循环</h5><p>​    格式：</p>
-<p>​    while(true){}</p>
-<p>​    for(;;){}</p>
-<p>​    do{}while(true){}</p>
-<p>应用场景：可以筛选符合对应条件的对象；</p>
-<h5 id="5-6-跳转控制语句"><a href="#5-6-跳转控制语句" class="headerlink" title="5.6 跳转控制语句"></a>5.6 跳转控制语句</h5><p>​    countinue; 跳过这次循环</p>
-<p>​    break;  结束当前循环</p>
-<p>​    只能在循环或switch里面使用</p>
-<h3 id="6-Random-产生随机数"><a href="#6-Random-产生随机数" class="headerlink" title="6.Random 产生随机数"></a>6.Random 产生随机数</h3><h5 id="6-1-Random"><a href="#6-1-Random" class="headerlink" title="6.1 Random"></a>6.1 Random</h5><p>​    格式：</p>
-<p>​    1.导包 <code>import java.unitl.Random;</code></p>
-<p>​    2.创建对象 <code>Random i = new Random();</code></p>
-<p>​    3.接受随机数 <code>int num = i.nextInt(整数);</code></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//1-10</span></span><br><span class="line"><span class="keyword">int</span> num = i.nextInt((<span class="number">10</span>-<span class="number">1</span>))+<span class="number">1</span>;</span><br></pre></td></tr></table></figure>
-
-
-
-]]></content>
-      <tags>
-        <tag>后端学习</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>IDEA和数组</title>
-    <url>/2021/09/03/day04-IDEA%E5%92%8C%E6%95%B0%E7%BB%84/</url>
-    <content><![CDATA[<h2 id="第一部分-IDEA开发工具"><a href="#第一部分-IDEA开发工具" class="headerlink" title="第一部分 : IDEA开发工具"></a>第一部分 : IDEA开发工具</h2><p><strong>参见 ：IEDA的安装请参考文件夹PPT中的 04_IDEA.ppt</strong></p>
-<h2 id="1-数组"><a href="#1-数组" class="headerlink" title="1.数组"></a>1.数组</h2><h3 id="1-1-数组介绍"><a href="#1-1-数组介绍" class="headerlink" title="1.1 数组介绍"></a>1.1 数组介绍</h3><p>​    数组就是存储数据长度固定的容器，存储多个数据的数据类型要一致。 </p>
-<h3 id="1-2-数组的定义格式"><a href="#1-2-数组的定义格式" class="headerlink" title="1.2 数组的定义格式"></a>1.2 数组的定义格式</h3><h4 id="1-2-1-第一种格式"><a href="#1-2-1-第一种格式" class="headerlink" title="1.2.1 第一种格式"></a>1.2.1 第一种格式</h4><p>​    数据类型[] 数组名</p>
-<p>​    示例：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span>[] arr;        </span><br><span class="line"><span class="keyword">double</span>[] arr;      </span><br><span class="line"><span class="keyword">char</span>[] arr;</span><br></pre></td></tr></table></figure>
-
-<h4 id="1-2-2-第二种格式"><a href="#1-2-2-第二种格式" class="headerlink" title="1.2.2 第二种格式"></a>1.2.2 第二种格式</h4><p>​    数据类型 数组名[]</p>
-<p>​    示例：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> arr[];</span><br><span class="line"><span class="keyword">double</span> arr[];</span><br><span class="line"><span class="keyword">char</span> arr[];</span><br></pre></td></tr></table></figure>
-
-<h3 id="1-3-数组的动态初始化"><a href="#1-3-数组的动态初始化" class="headerlink" title="1.3 数组的动态初始化"></a>1.3 数组的动态初始化</h3><h4 id="1-3-1-什么是动态初始化"><a href="#1-3-1-什么是动态初始化" class="headerlink" title="1.3.1 什么是动态初始化"></a>1.3.1 什么是动态初始化</h4><p>​    数组动态初始化就是只给定数组的长度，由系统给出默认初始化值</p>
-<h4 id="1-3-2-动态初始化格式"><a href="#1-3-2-动态初始化格式" class="headerlink" title="1.3.2 动态初始化格式"></a>1.3.2 动态初始化格式</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">数据类型[] 数组名 = <span class="keyword">new</span> 数据类型[数组长度];</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span>[] arr = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">3</span>];</span><br></pre></td></tr></table></figure>
-
-<h4 id="1-3-3-动态初始化格式详解"><a href="#1-3-3-动态初始化格式详解" class="headerlink" title="1.3.3 动态初始化格式详解"></a>1.3.3 动态初始化格式详解</h4><ul>
-<li>等号左边：<ul>
-<li>int:数组的数据类型</li>
-<li>[]:代表这是一个数组</li>
-<li>arr:代表数组的名称</li>
-</ul>
-</li>
-<li>等号右边：<ul>
-<li>new:为数组开辟内存空间</li>
-<li>int:数组的数据类型</li>
-<li>[]:代表这是一个数组</li>
-<li>3:代表数组的长度</li>
-</ul>
-</li>
-</ul>
-<p><strong>代码 :</strong> </p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.itheima.array;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Demo2Array</span> </span>&#123;</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">        数组的动态初始化:</span></span><br><span class="line"><span class="comment">                        在初始化的时候, 需要手动指定数组的长度, 系统会为数组容器分配初始值.</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">        动态初始化格式:</span></span><br><span class="line"><span class="comment">                        数据类型[] 数组名 = new 数据类型[数组的长度];</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">        注意:</span></span><br><span class="line"><span class="comment">                        打印数组变量的时候, 会打印出数组的内存地址</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">        [I@10f87f48 :</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">                        @ : 分隔符</span></span><br><span class="line"><span class="comment">                        [ : 当前的空间是一个数组类型</span></span><br><span class="line"><span class="comment">                        I : 当前数组容器中所存储的数据类型</span></span><br><span class="line"><span class="comment">                        10f87f48 : 十六进制内存地址</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">                                0 1 2 3 4 5 6 7 8 9 a b c d e f</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 数据类型[] 数组名 = new 数据类型[数组的长度];</span></span><br><span class="line">        <span class="comment">// 通过new关键字创建了一个int类型的数组容器, 该容器可以存储5个int类型的整数, 该容器被arr数组变量所记录</span></span><br><span class="line">        <span class="keyword">int</span>[] arr = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">5</span>];</span><br><span class="line">        <span class="comment">// [I@10f87f48</span></span><br><span class="line">        System.out.println(arr);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">byte</span>[] bArr = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">3</span>];</span><br><span class="line">        <span class="comment">// [B@b4c966a</span></span><br><span class="line">        System.out.println(bArr);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="1-4-数组元素访问"><a href="#1-4-数组元素访问" class="headerlink" title="1.4 数组元素访问"></a>1.4 数组元素访问</h3><h4 id="1-4-1-什么是索引"><a href="#1-4-1-什么是索引" class="headerlink" title="1.4.1 什么是索引"></a>1.4.1 什么是索引</h4><p>​    每一个存储到数组的元素，都会自动的拥有一个编号，从0开始,是连续的,不间断的,每次加1。</p>
-<p>​    这个自动编号称为数组索引(index)，可以通过数组的索引访问到数组中的元素。     </p>
-<h4 id="1-4-2访问数组元素格式"><a href="#1-4-2访问数组元素格式" class="headerlink" title="1.4.2访问数组元素格式"></a>1.4.2访问数组元素格式</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">数组名[索引];</span><br></pre></td></tr></table></figure>
-
-<h4 id="1-4-3示例代码"><a href="#1-4-3示例代码" class="headerlink" title="1.4.3示例代码"></a>1.4.3示例代码</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.itheima.array;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Demo3ArrayIndex</span> </span>&#123;</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">        数组动态初始化:</span></span><br><span class="line"><span class="comment">                初始化的时候, 手动指定数组长度, 系统会为数组容器分配初始值.</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">        数组的元素访问格式:</span></span><br><span class="line"><span class="comment">                数组名[索引]</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">                索引: 数组中数据的编号方式, 编号从0开始</span></span><br><span class="line"><span class="comment">                作用: 访问数组容器中的空间位置</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">        注意:</span></span><br><span class="line"><span class="comment">                数组在创建完毕后, 即使没有赋值, 也可以取出, 但取出的元素都是默认初始化值.</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span>[] arr = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">3</span>];         <span class="comment">// 0 1 2</span></span><br><span class="line">        System.out.println(arr);        <span class="comment">// 数组的内存地址  [I@10f87f48</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 数组名[索引]  访问数组容器中的空间位置</span></span><br><span class="line">        System.out.println(arr[<span class="number">0</span>]);     <span class="comment">// 0  系统自动分配的默认初始化值</span></span><br><span class="line">        System.out.println(arr[<span class="number">1</span>]);</span><br><span class="line">        System.out.println(arr[<span class="number">2</span>]);</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">"--------------"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 数组名[索引]</span></span><br><span class="line">        arr[<span class="number">0</span>] = <span class="number">11</span>;</span><br><span class="line">        arr[<span class="number">1</span>] = <span class="number">22</span>;</span><br><span class="line">        arr[<span class="number">2</span>] = <span class="number">33</span>;</span><br><span class="line"></span><br><span class="line">        System.out.println(arr[<span class="number">0</span>]);</span><br><span class="line">        System.out.println(arr[<span class="number">1</span>]);</span><br><span class="line">        System.out.println(arr[<span class="number">2</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="1-5-内存分配"><a href="#1-5-内存分配" class="headerlink" title="1.5 内存分配"></a>1.5 内存分配</h3><h4 id="1-5-1-内存概述"><a href="#1-5-1-内存概述" class="headerlink" title="1.5.1 内存概述"></a>1.5.1 内存概述</h4><p>​    内存是计算机中的重要原件，临时存储区域，作用是运行程序。</p>
-<p>​    我们编写的程序是存放在硬盘中的，在硬盘中的程序是不会运行的。</p>
-<p>​    必须放进内存中才能运行，运行完毕后会清空内存。 </p>
-<p>​    Java虚拟机要运行程序，必须要对内存进行空间的分配和管理。 </p>
-<h4 id="1-5-2-java中的内存分配"><a href="#1-5-2-java中的内存分配" class="headerlink" title="1.5.2 java中的内存分配"></a>1.5.2 java中的内存分配</h4><ul>
-<li>目前我们只需要记住两个内存，分别是：栈内存和堆内存</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>区域名称</th>
-<th>作用</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>寄存器</td>
-<td>给CPU使用，和我们开发无关。</td>
-</tr>
-<tr>
-<td>本地方法栈</td>
-<td>JVM在使用操作系统功能的时候使用，和我们开发无关。</td>
-</tr>
-<tr>
-<td>方法区</td>
-<td>存储可以运行的class文件。</td>
-</tr>
-<tr>
-<td>堆内存</td>
-<td>存储对象或者数组，new来创建的，都存储在堆内存。</td>
-</tr>
-<tr>
-<td>方法栈</td>
-<td>方法运行时使用的内存，比如main方法运行，进入方法栈中执行。</td>
-</tr>
-</tbody></table>
-<h3 id="1-6-Java内存分配-一个数组内存图"><a href="#1-6-Java内存分配-一个数组内存图" class="headerlink" title="1.6 Java内存分配-一个数组内存图"></a>1.6 Java内存分配-一个数组内存图</h3><p><img src=".%5Cimg%5C1591007817165.png" alt="1591007817165"></p>
-<h3 id="1-7-两个数组内存图"><a href="#1-7-两个数组内存图" class="headerlink" title="1.7 两个数组内存图"></a>1.7 两个数组内存图</h3><p><img src=".%5Cimg%5C1591007925899.png" alt="1591007925899"></p>
-<h3 id="1-8-多个数组指向相同内存图"><a href="#1-8-多个数组指向相同内存图" class="headerlink" title="1.8 多个数组指向相同内存图"></a>1.8 多个数组指向相同内存图</h3><p><img src=".%5Cimg%5C1591007957052.png" alt="1591007957052"></p>
-<h3 id="1-9-数组的静态初始化"><a href="#1-9-数组的静态初始化" class="headerlink" title="1.9 数组的静态初始化"></a>1.9 数组的静态初始化</h3><h4 id="1-9-1-什么是静态初始化"><a href="#1-9-1-什么是静态初始化" class="headerlink" title="1.9.1 什么是静态初始化"></a>1.9.1 什么是静态初始化</h4><p>​    在创建数组时，直接将元素确定    </p>
-<h4 id="1-9-2-静态初始化格式"><a href="#1-9-2-静态初始化格式" class="headerlink" title="1.9.2 静态初始化格式"></a>1.9.2 静态初始化格式</h4><ul>
-<li><p>完整版格式</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">数据类型[] 数组名 = <span class="keyword">new</span> 数据类型[]&#123;元素<span class="number">1</span>,元素<span class="number">2</span>,...&#125;;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>简化版格式</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">数据类型[] 数组名 = &#123;元素<span class="number">1</span>,元素<span class="number">2</span>,...&#125;;</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<h4 id="1-9-3示例代码"><a href="#1-9-3示例代码" class="headerlink" title="1.9.3示例代码"></a>1.9.3示例代码</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.itheima.array2;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Demo1Array</span> </span>&#123;</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">        数组静态初始化 : 初始化时指定每个数组元素的初始值，由系统决定数组长度</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">        完整格式:</span></span><br><span class="line"><span class="comment">                    数据类型[] 数组名 = new 数据类型[]&#123;数据1,数据2,数据3...&#125;;</span></span><br><span class="line"><span class="comment">        简化格式:</span></span><br><span class="line"><span class="comment">                    数据类型[] 数组名 = &#123;数据1,数据2,数据3...&#125;;</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 数据类型[] 数组名 = new 数据类型[]&#123;数据1,数据2,数据3...&#125;;</span></span><br><span class="line">        <span class="keyword">int</span>[] arr = <span class="keyword">new</span> <span class="keyword">int</span>[]&#123;<span class="number">11</span>,<span class="number">22</span>,<span class="number">33</span>&#125;;</span><br><span class="line">        System.out.println(arr[<span class="number">0</span>]);</span><br><span class="line">        System.out.println(arr[<span class="number">1</span>]);</span><br><span class="line">        System.out.println(arr[<span class="number">2</span>]);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 数据类型[] 数组名 = &#123;数据1,数据2,数据3...&#125;;</span></span><br><span class="line">        <span class="keyword">int</span>[] arr2 = &#123;<span class="number">44</span>,<span class="number">55</span>,<span class="number">66</span>&#125;;</span><br><span class="line">        System.out.println(arr2);</span><br><span class="line">        System.out.println(arr2[<span class="number">0</span>]);</span><br><span class="line">        System.out.println(arr2[<span class="number">1</span>]);</span><br><span class="line">        System.out.println(arr2[<span class="number">2</span>]);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="1-10-数组操作的两个常见问题"><a href="#1-10-数组操作的两个常见问题" class="headerlink" title="1.10 数组操作的两个常见问题"></a>1.10 数组操作的两个常见问题</h3><h4 id="1-10-1-索引越界异常"><a href="#1-10-1-索引越界异常" class="headerlink" title="1.10.1 索引越界异常"></a>1.10.1 索引越界异常</h4><ul>
-<li><p>出现原因</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ArrayDemo</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span>[] arr = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">3</span>];</span><br><span class="line">        System.out.println(arr[<span class="number">3</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>数组长度为3，索引范围是0~2，但是我们却访问了一个3的索引。</p>
-<p>程序运行后，将会抛出ArrayIndexOutOfBoundsException 数组越界异常。在开发中，数组的越界异常是不能出现的，一旦出现了，就必须要修改我们编写的代码。 </p>
-</li>
-<li><p>解决方案</p>
-<p>将错误的索引修改为正确的索引范围即可！</p>
-</li>
-</ul>
-<h4 id="1-10-2-空指针异常"><a href="#1-10-2-空指针异常" class="headerlink" title="1.10.2 空指针异常"></a>1.10.2 空指针异常</h4><ul>
-<li><p>出现原因</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ArrayDemo</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span>[] arr = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">3</span>];</span><br><span class="line"></span><br><span class="line">        <span class="comment">//把null赋值给数组</span></span><br><span class="line">        arr = <span class="keyword">null</span>;</span><br><span class="line">        System.out.println(arr[<span class="number">0</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>arr = null 这行代码，意味着变量arr将不会在保存数组的内存地址，也就不允许再操作数组了，因此运行的时候会抛出 NullPointerException 空指针异常。在开发中，数组的空指针是不能出现的，一旦出现了，就必须要修改我们编写的代码。</p>
-</li>
-<li><p>解决方案</p>
-<p>给数组一个真正的堆内存空间引用即可！</p>
-</li>
-</ul>
-<h3 id="1-11-数组遍历"><a href="#1-11-数组遍历" class="headerlink" title="1.11 数组遍历"></a>1.11 数组遍历</h3><ul>
-<li><p>数组遍历：就是将数组中的每个元素分别获取出来，就是遍历。遍历也是数组操作中的基石。</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ArrayTest01</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">int</span>[] arr = &#123; <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span> &#125;;</span><br><span class="line">		System.out.println(arr[<span class="number">0</span>]);</span><br><span class="line">		System.out.println(arr[<span class="number">1</span>]);</span><br><span class="line">		System.out.println(arr[<span class="number">2</span>]);</span><br><span class="line">		System.out.println(arr[<span class="number">3</span>]);</span><br><span class="line">		System.out.println(arr[<span class="number">4</span>]);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p> 以上代码是可以将数组中每个元素全部遍历出来，但是如果数组元素非常多，这种写法肯定不行，因此我们需要改造成循环的写法。数组的索引是 0 到 lenght-1 ，可以作为循环的条件出现。 </p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ArrayTest01</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//定义数组</span></span><br><span class="line">        <span class="keyword">int</span>[] arr = &#123;<span class="number">11</span>, <span class="number">22</span>, <span class="number">33</span>, <span class="number">44</span>, <span class="number">55</span>&#125;;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//使用通用的遍历格式</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> x=<span class="number">0</span>; x&lt;arr.length; x++) &#123;</span><br><span class="line">            System.out.println(arr[x]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<h3 id="1-12-数组获取最大值"><a href="#1-12-数组获取最大值" class="headerlink" title="1.12 数组获取最大值"></a>1.12 数组获取最大值</h3><ul>
-<li><p>最大值获取：从数组的所有元素中找出最大值。</p>
-</li>
-<li><p>实现思路：</p>
-<ul>
-<li>定义变量，保存数组0索引上的元素</li>
-<li>遍历数组，获取出数组中的每个元素</li>
-<li>将遍历到的元素和保存数组0索引上值的变量进行比较</li>
-<li>如果数组元素的值大于了变量的值，变量记录住新的值</li>
-<li>数组循环遍历结束，变量保存的就是数组中的最大值 </li>
-</ul>
-</li>
-<li><p>代码实现：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.itheima.test;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test2Array</span> </span>&#123;</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">        需求: 从数组中查找最大值</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">                int[] arr = &#123;12,45,98,73,60&#125;;</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">        实现步骤:</span></span><br><span class="line"><span class="comment">                1. 假设数组中的第一个元素为最大值</span></span><br><span class="line"><span class="comment">                2. 遍历数组, 获取每一个元素, 准备进行比较</span></span><br><span class="line"><span class="comment">                3. 如果比较的过程中, 出现了比max更大的, 让max记录更大的值</span></span><br><span class="line"><span class="comment">                4. 循环结束后, 打印最大值.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span>[] arr = &#123;<span class="number">12</span>,<span class="number">45</span>,<span class="number">98</span>,<span class="number">73</span>,<span class="number">60</span>&#125;;</span><br><span class="line">        <span class="comment">// 1. 假设数组中的第一个元素为最大值</span></span><br><span class="line">        <span class="keyword">int</span> max = arr[<span class="number">0</span>];</span><br><span class="line">        <span class="comment">// 2. 遍历数组, 获取每一个元素, 准备进行比较</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; arr.length; i++)&#123;</span><br><span class="line">            <span class="comment">// 3. 如果比较的过程中, 出现了比max更大的, 让max记录更大的值</span></span><br><span class="line">            <span class="keyword">if</span>(arr[i] &gt; max)&#123;</span><br><span class="line">                max = arr[i];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//  4. 循环结束后, 打印最大值.</span></span><br><span class="line">        System.out.println(<span class="string">"max:"</span> + max);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<h3 id="1-13-数组元素求和"><a href="#1-13-数组元素求和" class="headerlink" title="1.13 数组元素求和"></a>1.13 数组元素求和</h3><ul>
-<li><p>需求：键盘录入5个整数，存储到数组中，并对数组求和</p>
-</li>
-<li><p>思路：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1.创建键盘录入对象，准备键盘录入</span><br><span class="line">2.定义一个求和变量，准备记录累加后的结果</span><br><span class="line">3.动态初始化一个长度为5的int数组，准备存储键盘录入的数值</span><br><span class="line">4.将键盘录入的数值存储到数组中</span><br><span class="line">5.遍历数组，取出每一个元素，并求和</span><br><span class="line">6.输出总和</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>代码实现：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.itheima.test;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test3Array</span> </span>&#123;</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">        需求：键盘录入5个整数，存储到数组中，并对数组求和</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">        思路：</span></span><br><span class="line"><span class="comment">            1.创建键盘录入对象，准备键盘录入</span></span><br><span class="line"><span class="comment">            2.定义一个求和变量，准备记录累加后的结果</span></span><br><span class="line"><span class="comment">            3.动态初始化一个长度为5的int数组，准备存储键盘录入的数值</span></span><br><span class="line"><span class="comment">            4.将键盘录入的数值存储到数组中</span></span><br><span class="line"><span class="comment">            5.遍历数组，取出每一个元素，并求和</span></span><br><span class="line"><span class="comment">            6.输出总和</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 1.创建键盘录入对象，准备键盘录入</span></span><br><span class="line">        Scanner sc = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">        <span class="comment">// 2.定义一个求和变量，准备记录累加后的结果</span></span><br><span class="line">        <span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">        <span class="comment">// 3.动态初始化一个长度为5的int数组，准备存储键盘录入的数值</span></span><br><span class="line">        <span class="keyword">int</span>[] arr = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">5</span>];</span><br><span class="line">        <span class="comment">// 4.将键盘录入的数值存储到数组中</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; arr.length; i++)&#123;</span><br><span class="line">            System.out.println(<span class="string">"请输入第"</span> + (i+<span class="number">1</span>) + <span class="string">"个整数:"</span>);</span><br><span class="line">            <span class="comment">//arr[i] = 10;</span></span><br><span class="line">            arr[i] = sc.nextInt();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 5.遍历数组，取出每一个元素，并求和</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">            sum += arr[i];</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 6.输出总和</span></span><br><span class="line">        System.out.println(<span class="string">"sum:"</span> + sum);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<h3 id="1-14-数组基本查找【应用】"><a href="#1-14-数组基本查找【应用】" class="headerlink" title="1.14 数组基本查找【应用】"></a>1.14 数组基本查找【应用】</h3><ul>
-<li><p>需求：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">已知一个数组 arr &#x3D; &#123;19, 28, 37, 46, 50&#125;; 键盘录入一个数据，查找该数据在数组中的索引，并在控</span><br><span class="line">制台输出找到的索引值。</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>思路：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1.定义一个数组，用静态初始化完成数组元素的初始化</span><br><span class="line">2.键盘录入要查找的数据，用一个变量接收</span><br><span class="line">3.定义一个索引变量，初始值为-1</span><br><span class="line">4.遍历数组，获取到数组中的每一个元素</span><br><span class="line">5.拿键盘录入的数据和数组中的每一个元素进行比较，如果值相同，就把该值对应的索引赋值给索引变量，并结束循环</span><br><span class="line">6.输出索引变量</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>代码实现：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 1.定义一个数组，用静态初始化完成数组元素的初始化</span></span><br><span class="line">        <span class="keyword">int</span>[] arr = &#123;<span class="number">19</span>, <span class="number">28</span>, <span class="number">37</span>, <span class="number">46</span>, <span class="number">50</span>&#125;;</span><br><span class="line">        <span class="comment">// 2.键盘录入要查找的数据，用一个变量接收</span></span><br><span class="line">        Scanner sc = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">        System.out.println(<span class="string">"请输入您要查找的元素:"</span>);</span><br><span class="line">        <span class="keyword">int</span> num = sc.nextInt();</span><br><span class="line">        <span class="comment">// 3.定义一个索引变量，初始值为-1</span></span><br><span class="line">        <span class="comment">// 假设要查找的数据, 在数组中就是不存在的</span></span><br><span class="line">        <span class="keyword">int</span> index = -<span class="number">1</span>;</span><br><span class="line">        <span class="comment">// 4.遍历数组，获取到数组中的每一个元素</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">            <span class="comment">// 5.拿键盘录入的数据和数组中的每一个元素进行比较，如果值相同，就把该值对应的索引赋值给索引变量，并结束循环</span></span><br><span class="line">            <span class="keyword">if</span>(num == arr[i])&#123;</span><br><span class="line">                <span class="comment">// 如果值相同，就把该值对应的索引赋值给索引变量，并结束循环</span></span><br><span class="line">                index = i;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//  6.输出索引变量</span></span><br><span class="line">        System.out.println(index);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<h3 id="1-15-评委打分【应用】"><a href="#1-15-评委打分【应用】" class="headerlink" title="1.15 评委打分【应用】"></a>1.15 评委打分【应用】</h3><ul>
-<li><p>需求：在编程竞赛中，有6个评委为参赛的选手打分，分数为0-100的整数分。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">选手的最后得分为：去掉一个最高分和一个最低分后 的4个评委平均值 (不考虑小数部分)。</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>思路：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1.定义一个数组，用动态初始化完成数组元素的初始化，长度为6</span><br><span class="line">2.键盘录入评委分数</span><br><span class="line">3.由于是6个评委打分，所以，接收评委分数的操作，用循环</span><br><span class="line">4.求出数组最大值</span><br><span class="line">5.求出数组最小值</span><br><span class="line">6.求出数组总和</span><br><span class="line">7.按照计算规则进行计算得到平均分</span><br><span class="line">8.输出平均分</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>代码实现：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 1.定义一个数组，用动态初始化完成数组元素的初始化，长度为6</span></span><br><span class="line">        <span class="keyword">int</span>[] arr = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">6</span>];</span><br><span class="line">        <span class="comment">// 2.键盘录入评委分数</span></span><br><span class="line">        Scanner sc = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">        <span class="comment">//  3.由于是6个评委打分，所以，接收评委分数的操作，用循环</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">            System.out.println(<span class="string">"请输入第"</span> + (i+<span class="number">1</span>) + <span class="string">"个评委的打分:"</span>);</span><br><span class="line">            <span class="keyword">int</span> score = sc.nextInt();</span><br><span class="line">            <span class="keyword">if</span>(score &gt;= <span class="number">0</span> &amp;&amp; score &lt;= <span class="number">100</span>)&#123;</span><br><span class="line">                <span class="comment">// 合法的分值</span></span><br><span class="line">                arr[i] = score;</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="comment">// 非法的分值</span></span><br><span class="line">                System.out.println(<span class="string">"您的打分输入有误, 请检查是否是0-100之间的"</span>);</span><br><span class="line">                i--;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 4.求出数组最大值</span></span><br><span class="line">        <span class="keyword">int</span> max = arr[<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span>(max &lt; arr[i])&#123;</span><br><span class="line">                max = arr[i];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 5.求出数组最小值</span></span><br><span class="line">        <span class="keyword">int</span> min = arr[<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span>(min &gt; arr[i])&#123;</span><br><span class="line">                min = arr[i];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 6.求出数组总和</span></span><br><span class="line">        <span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">            sum += arr[i];</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 7.按照计算规则进行计算得到平均分</span></span><br><span class="line">        <span class="keyword">int</span> avg = (sum - max - min ) / (arr.length-<span class="number">2</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 8.输出平均分</span></span><br><span class="line">        System.out.println(avg);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<h3 id="总结数组"><a href="#总结数组" class="headerlink" title="总结数组"></a>总结数组</h3><p>  第一种：动态初始化格式</p>
-<p>  建议:数据类型 [] 数组名 = new 数据类型 [数组的长度];</p>
-<p>  数据类型  数组名  []  =  new    数据类型 [数组的长度]; </p>
-<p>  第二种：静态初始化格式</p>
-<p>  数据类型 数组名 [] = new 数据类型 [] {元素1，元素2，元素3…..};—-&gt;简化   </p>
-<p>  用的比较多的:数据类型  数组名 [] = {元素1，元素2，元素3…..};</p>
-<p>  数组的好处：</p>
-<p>  1.可以一次开辟多个空间</p>
-<p>  2.可以对这多个空间进行统一管理</p>
-<p>  3.数组定义好之后，每个数组空间都有一个唯一编号（索引，下标，角标），我们在操作数组的时候，都是对统一的数组名和对应的索引来操作数组的每一个空间。赋值:数组名[索引]=值;  拿值:数组名[索引]</p>
-<p>  4.数组的索引是从0开始，到长度-1结束.</p>
-<p>  5.我们可以通过数组名.length这个属性来获取数组的长度。</p>
-<p>  6.获取数组对应索引空间上的数据：数组名[当前的索引]</p>
-]]></content>
-      <tags>
-        <tag>后端学习</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>java的方法的使用</title>
-    <url>/2021/09/04/day05-%E6%96%B9%E6%B3%95%E7%9A%84%E4%BD%BF%E7%94%A8/</url>
-    <content><![CDATA[<h3 id="8-方法"><a href="#8-方法" class="headerlink" title="8.方法"></a>8.方法</h3><p>​    前提须知：</p>
-<p>​    需要先定义，后使用</p>
-<p>​    需要手动调用<br>​    方法不能嵌套定义；</p>
-<p>​    方法的返回值类型为void的时候，表示该方法么有返回值</p>
-<p>​    return语句下面，不能编译代码，和break类似</p>
-<h5 id="8-1-基本概念"><a href="#8-1-基本概念" class="headerlink" title="8.1 基本概念"></a>8.1 基本概念</h5><p>​        概念：具有独立功能的代码块，不调用就不执行</p>
-<p>​        作用：提高代码的复用性</p>
-<h5 id="8-2-定义和使用"><a href="#8-2-定义和使用" class="headerlink" title="8.2 定义和使用"></a>8.2 定义和使用</h5><p>​        方法之间是平级关系，不能嵌套；</p>
-<p>​        格式：</p>
-<p>​    <code>public static void 方法名(){ 方法体 }</code></p>
-<p>​        调用方法：</p>
-<p>​        方法名();</p>
-<h5 id="8-3-带参数的定义和使用"><a href="#8-3-带参数的定义和使用" class="headerlink" title="8.3 带参数的定义和使用"></a>8.3 带参数的定义和使用</h5><p>​        格式：<br>​             <code>public static void 方法名(数据类型 变量名 ){ 方法体 }</code></p>
-<p>​        多个参数之间用逗号分隔</p>
-<p>​        调用方法：</p>
-<p>​        方法名(参数)；</p>
-<h6 id="8-3-1-形参和实参"><a href="#8-3-1-形参和实参" class="headerlink" title="8.3.1 形参和实参"></a>8.3.1 形参和实参</h6><p>​        形式参数：方法定义中的参数</p>
-<p>​        <code>方法名(数据类型 变量名 )</code>   // 这里面的变量名就是形参</p>
-<p>​        实际参数： 方法的调用中的参数</p>
-<p>​        <code>方法名(数据1)；</code> // 这里面调用的数据1就是实参</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">##### 	8.4 带返回值方法的定义和调用</span><br></pre></td></tr></table></figure>
-
-<p>​    格式：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">public static 数据类型 方法名（参数）&#123; </span><br><span class="line">方法体 </span><br><span class="line">return 数据值；</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>​    调用：</p>
-<p>​    <code>方法名（参数）；</code></p>
-<p>​    <code>数据类型 变量名 = 方法名（变量名/常量值）；</code></p>
-<ul>
-<li>public static 修饰符</li>
-</ul>
-<ul>
-<li>方法操作完毕之后，返回的结果数据，所对应的数据类型</li>
-</ul>
-<ul>
-<li>如果方法结束后，没有数据返回，就是用void,而且方法体重一般不写return</li>
-</ul>
-<p>作用：把返回值返回给调用者</p>
-<p>注意：只要执行了return语句，该方法就结束了</p>
-<h5 id="8-5-方法的重载"><a href="#8-5-方法的重载" class="headerlink" title="8.5 方法的重载"></a>8.5 方法的重载</h5><p>​        </p>
-<p>​        方法的重复定义：方法名相同，参数也相同   // 冲突性错误       </p>
-<p>​        概述：同一个类中，方法名相同，参数不同的方法</p>
-<p>​            参数不同；个数不听、类型不同、顺序不同</p>
-<p>​        注意：识别方法之间是否是重载关系，只看方法名和参数，和返回值无关</p>
-<p>​    优点：不用记忆过多的方法民资</p>
-<h5 id="8-6-方法的参数传递"><a href="#8-6-方法的参数传递" class="headerlink" title="8.6 方法的参数传递"></a>8.6 方法的参数传递</h5><p>​        结论：</p>
-<p>​        如果方法参数是基本数据类型，形参的改变，不会影响到实参</p>
-<p>​        如果方法参数是引用数据类型，形参的改变，会影响到实参</p>
-]]></content>
-      <tags>
-        <tag>后端学习</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>java进制的学习</title>
-    <url>/2021/09/06/day06-%E8%BF%9B%E5%88%B6/</url>
-    <content><![CDATA[<h3 id="9-进制"><a href="#9-进制" class="headerlink" title="9. 进制"></a>9. 进制</h3><h5 id="9-1-基本概念"><a href="#9-1-基本概念" class="headerlink" title="9.1 基本概念"></a>9.1 基本概念</h5><p>​        进制： 二进制 、十进制、十六进制</p>
-<p>​    计算机数据在底层运算的时候，都是<u>二进制的形式</u>的</p>
-<p>​    进制：逢几进1，借1当几，就是几进制</p>
-<p>​    二进制 ： 0和1构成   逢2 进 1</p>
-<p>​    十进制：Java中，数值默认都是10进制，不需要加修饰</p>
-<p>​    二进制：数值前面0b开头，b大小写都可以</p>
-<p>​    八进制：数值前面以0开头</p>
-<p>​    十六进制：数值前面以0x开头，x大小写都可以</p>
-<p>​    注意：书写的时候，虽然加入了进制的表示，但是在控制台，都是十进制的形式输出</p>
-<p>​     </p>
-<h5 id="9-2-进制转换"><a href="#9-2-进制转换" class="headerlink" title="9.2 进制转换"></a>9.2 进制转换</h5><p>​    任意进制到十进制的转换</p>
-<p>​    系数*基数的权次幂</p>
-<p>​    系数：每一位上的数</p>
-<p>​    基数：几进制就是几</p>
-<p>​    权次幂：从右往左，从0开始依次加一</p>
-<p>​    </p>
-<p>​    十进制转任意进制的</p>
-<p>​    公式： 除基取余，直到商为0，倒着把余数拼接起来</p>
-<p>​    </p>
-<p>​    二进制转任意进制的</p>
-<p>​    0000 0000</p>
-<p>​    8421 8421</p>
-<p>​    几进制的就对位之和，转换为该进制的书写</p>
-<p>​    八进制取三位，十六进制取四位</p>
-<h5 id="9-3-原码-反码-补码"><a href="#9-3-原码-反码-补码" class="headerlink" title="9.3 原码 反码 补码"></a>9.3 原码 反码 补码</h5><p>​        计算机中的数据，都是以二进制补码的形式在运算，而补码则是通过反码和原码推算出来的。</p>
-<p>​    原码：（看数据）</p>
-<p>​    反码：（转数据）原码0变1，1变</p>
-<p>​    补码：（运算数据）反码各位加1<br>​    </p>
-<p>​    byte -128~127</p>
-<p>​    (正数的原反补是一样的，负的的0和正的0没有意义，就把负数的0，成为-128)</p>
-<h5 id="9-4-位运算符"><a href="#9-4-位运算符" class="headerlink" title="9.4 位运算符"></a>9.4 位运算符</h5><p>​    位运算符：二进制位的运算，先将十进制转成二进制后在进行运算</p>
-<p>​            在二进制运算中，1表示true ，0表示false</p>
-<p>​    &amp;位与：遇到false就是false，遇到0就是0；</p>
-<p>​    |位或：遇到true则true,遇到1则1</p>
-<p>​    ^位异或：相同为false,不同的为true ；  一个数被另一个数异或两次，得到的还是该数</p>
-<p>​    ~ 取反：全部取反，0变1，1变0；</p>
-<p>​    </p>
-<p>​    <strong>一个数和本身异或结果是 0</strong></p>
-<p>​    <strong>任何数和0异或的到任何数</strong></p>
-<p>​    </p>
-<p>​    位移运算</p>
-<p>​    &lt;&lt; : 左移几位，乘2的几次方</p>
-<p>​    &gt;&gt;：右移几位，除2的几次方</p>
-<p> <img src="/image/%E4%BD%8D%E8%BF%90%E7%AE%97%E7%AC%A6.png" alt="位运算符"></p>
-<h3 id="10-二维数组"><a href="#10-二维数组" class="headerlink" title="10. 二维数组"></a>10. 二维数组</h3><h5 id="10-1-二维数组概念"><a href="#10-1-二维数组概念" class="headerlink" title="10.1 二维数组概念"></a>10.1 二维数组概念</h5><p>​        概念： 存储多个一维数组的容器</p>
-<p>​                    二维数组里面存在的一堆数组的地址         </p>
-<p>​        格式： 数据类型 <code>[]</code> <code>[]</code> 变量名 = new 数据类型<code>[m]</code> <code>[n]</code></p>
-<p>​        </p>
-<p>​    遍历</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">for(int i&#x3D;0;i&lt;arr.length;i++)&#123;</span><br><span class="line">  for(int j&#x3D;0;j&lt;arr[i].length;j++)&#123;</span><br><span class="line">  System.out.println(arr[i][j]);</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-
 
 ]]></content>
       <tags>
