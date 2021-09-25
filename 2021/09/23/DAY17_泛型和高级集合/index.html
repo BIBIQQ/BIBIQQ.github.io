@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    高级集合-Set和泛型 |  ONE PEAC
+  </title>
+  <meta name="generator" content="hexo-theme-yilia-plus">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+<script src="/js/pace.min.js"></script>
+
+
+  
+
+  
+
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    <main class="content">
+      <section class="outer">
+  <article id="post-DAY17_泛型和高级集合" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  高级集合-Set和泛型
+</h1>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2021/09/23/DAY17_%E6%B3%9B%E5%9E%8B%E5%92%8C%E9%AB%98%E7%BA%A7%E9%9B%86%E5%90%88/" class="article-date">
+  <time datetime="2021-09-23T08:23:19.000Z" itemprop="datePublished">2021-09-23</time>
+</a>
+      
+      
+      
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">1.9k字</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">8分钟</span>
+        </span>
+    </span>
+</div>
+
+      
+    </div>
+    
+
+    
+    
+    <div class="tocbot"></div>
+
+
+
+
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h3 id="28-泛型"><a href="#28-泛型" class="headerlink" title="28. 泛型"></a>28. 泛型</h3><h4 id="28-1-泛型的概念"><a href="#28-1-泛型的概念" class="headerlink" title="28.1 泛型的概念"></a>28.1 泛型的概念</h4><blockquote>
+<p>泛型：是JDK5中引入的特性，它提供了编译时类型安全检测机制</p>
+<p>泛型的好处：</p>
+<ul>
+<li>把运行使其的问题提前到了编译期间</li>
+<li>避免了强制类型转换</li>
+</ul>
+</blockquote>
+<h4 id="28-2-泛型的使用"><a href="#28-2-泛型的使用" class="headerlink" title="28.2 泛型的使用"></a>28.2 泛型的使用</h4><blockquote>
+<p>泛型可以使用在：</p>
+<ul>
+<li><p>类后面 —-&gt; 泛型类</p>
+</li>
+<li><p>方法声明 —-&gt; 泛型方法</p>
+</li>
+<li><p>接口后面 —-&gt; 泛型接口</p>
+</li>
+</ul>
+<p>总结：</p>
+<p>​    创建泛型类的对象时，必须要给这个泛型确定具体的数据类型</p>
+<p>定义格式：</p>
+<ul>
+<li>修饰符 class 类名 &lt;类型&gt;｛｝</li>
+</ul>
+<p>示例：</p>
+<ul>
+<li><p>public class Demo <T>{ }    </p>
+<p>//  T的位置可以写任意标识，常见的如T、E、K、V</p>
+</li>
+</ul>
+<p>案例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Box&lt;String&gt; box1 = <span class="keyword">new</span> Box&lt;&gt;();</span><br><span class="line">        box1.setElement(<span class="string">"给小丽的土味情话"</span>);</span><br><span class="line">        String element01 = box1.getElement();</span><br><span class="line">        System.out.println(element01);</span><br><span class="line"></span><br><span class="line">        Box&lt;Integer&gt; box2 = <span class="keyword">new</span> Box&lt;&gt;();</span><br><span class="line">        box2.setElement(<span class="number">19</span>);</span><br><span class="line">        <span class="keyword">int</span> element02 = box2.getElement();</span><br><span class="line">        System.out.println(element02);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Box</span>&lt;<span class="title">E</span>&gt; </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> E element;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> E <span class="title">getElement</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> element;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setElement</span><span class="params">(E element)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.element = element;</span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+</blockquote>
+<h5 id="28-2-1-泛型方法的使用"><a href="#28-2-1-泛型方法的使用" class="headerlink" title="28.2.1 泛型方法的使用"></a>28.2.1 泛型方法的使用</h5><blockquote>
+<p>定义格式：</p>
+<ul>
+<li>格式：修饰符&lt;类型&gt; 返回值类型 方法名 (类型 变量名) {  }</li>
+</ul>
+<p>范例：</p>
+<ul>
+<li>public <T> void show(T t) { }</li>
+</ul>
+<p>案例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">   <span class="comment">//字符串</span></span><br><span class="line">   ArrayList&lt;String&gt; list1 = addElement(<span class="keyword">new</span> ArrayList&lt;&gt;(), <span class="string">"a"</span>, <span class="string">"b"</span>, <span class="string">"v"</span>, <span class="string">"d"</span>);</span><br><span class="line">   System.out.println(list1);</span><br><span class="line">   <span class="comment">//整数</span></span><br><span class="line">   ArrayList&lt;Integer&gt; list2 = addElement(<span class="keyword">new</span> ArrayList&lt;&gt;(), <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>);</span><br><span class="line">   System.out.println(list2);</span><br><span class="line">&gt;&#125;</span><br><span class="line"></span><br><span class="line">&gt;<span class="comment">// 集合批量添加的功能</span></span><br><span class="line">&gt;<span class="comment">//让类，方法，接口更加通用</span></span><br><span class="line">&gt;<span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; <span class="function">ArrayList&lt;T&gt; <span class="title">addElement</span><span class="params">(ArrayList&lt;T&gt; list, T ti1, T ti2, T ti3, T ti4)</span> </span>&#123;</span><br><span class="line">   list.add(ti1);</span><br><span class="line">   list.add(ti2);</span><br><span class="line">   list.add(ti3);</span><br><span class="line">   list.add(ti4);</span><br><span class="line">   <span class="keyword">return</span> list;</span><br><span class="line">&gt;&#125;</span><br></pre></td></tr></table></figure>
+
+
+</blockquote>
+<h5 id="28-2-2-泛型接口的使用"><a href="#28-2-2-泛型接口的使用" class="headerlink" title="28.2.2 泛型接口的使用"></a>28.2.2 泛型接口的使用</h5><blockquote>
+<p>使用方式：</p>
+<ul>
+<li>实现类也不给泛型</li>
+<li>实现类确定具体的数据类型</li>
+</ul>
+<p>定义格式：</p>
+<ul>
+<li>修饰符  interface 接口类 &lt; 泛型&gt; { }</li>
+</ul>
+<p>范例：</p>
+<ul>
+<li>范例：public interface Demo<T> { } </li>
+</ul>
+<p>示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">       <span class="comment">//没有定义数据类型的引用</span></span><br><span class="line">       demo04Impl method = <span class="keyword">new</span> demo04Impl();</span><br><span class="line">       method.method(<span class="string">"你说的好"</span>);</span><br><span class="line">       <span class="comment">//定义了数据类型的引用</span></span><br><span class="line">       demo04Impl02 method02 = <span class="keyword">new</span> demo04Impl02();</span><br><span class="line">       method02.method(<span class="number">19</span>);</span><br><span class="line">   &#125;</span><br><span class="line">&gt;&#125;</span><br><span class="line"></span><br><span class="line">&gt;<span class="class"><span class="keyword">interface</span> <span class="title">demo04</span>&lt;<span class="title">E</span>&gt; </span>&#123;</span><br><span class="line">   <span class="function"><span class="keyword">void</span> <span class="title">method</span><span class="params">(E e)</span></span>;</span><br><span class="line">&gt;&#125;</span><br><span class="line"></span><br><span class="line">&gt;<span class="comment">//不定义数据类型</span></span><br><span class="line">&gt;<span class="class"><span class="keyword">class</span> <span class="title">demo04Impl</span>&lt;<span class="title">E</span>&gt; <span class="keyword">implements</span> <span class="title">demo04</span>&lt;<span class="title">E</span>&gt; </span>&#123;</span><br><span class="line"></span><br><span class="line">   <span class="meta">@Override</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">method</span><span class="params">(E e)</span> </span>&#123;</span><br><span class="line">       System.out.println(e);</span><br><span class="line">   &#125;</span><br><span class="line">&gt;&#125;</span><br><span class="line"></span><br><span class="line">&gt;<span class="comment">//定义了数据类型</span></span><br><span class="line">&gt;<span class="class"><span class="keyword">class</span> <span class="title">demo04Impl02</span> <span class="keyword">implements</span> <span class="title">demo04</span>&lt;<span class="title">Integer</span>&gt; </span>&#123;</span><br><span class="line"></span><br><span class="line">   <span class="meta">@Override</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">method</span><span class="params">(Integer integer)</span> </span>&#123;</span><br><span class="line">       System.out.println(integer);</span><br><span class="line">   &#125;</span><br><span class="line">&gt;&#125;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h5 id="28-2-3-泛型的通配符"><a href="#28-2-3-泛型的通配符" class="headerlink" title="28.2.3 泛型的通配符"></a>28.2.3 泛型的通配符</h5><blockquote>
+<p>类型通配符：&lt;?&gt;</p>
+<ul>
+<li>获取出来的是父类类型</li>
+</ul>
+<p>类型通配符上限：&lt;? extends 类型&gt;</p>
+<ul>
+<li>获取出来的是其他类型或者其子类型</li>
+</ul>
+<p>类型通配符下限：&lt;? super 类型&gt;</p>
+<ul>
+<li>获取出来的是其他类型或者其父类型</li>
+</ul>
+<p>示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">       ArrayList&lt;Integer&gt; list1 = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">       ArrayList&lt;String&gt; list2 = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">       ArrayList&lt;Number&gt; list3 = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">       ArrayList&lt;Object&gt; list4 = <span class="keyword">new</span> ArrayList();</span><br><span class="line">       <span class="comment">// 所有父类</span></span><br><span class="line">       printList(list1);</span><br><span class="line">       printList(list2);</span><br><span class="line">       printList(list3);</span><br><span class="line">       printList(list4);</span><br><span class="line">       <span class="comment">// Number及所有子类</span></span><br><span class="line">       method01(list1);</span><br><span class="line">&gt;<span class="comment">//        method01(list2); // 不是Number类型</span></span><br><span class="line">       method01(list3);</span><br><span class="line">&gt;<span class="comment">//        method01(list4);  // 超出Number区域</span></span><br><span class="line">       <span class="comment">// Number及所有父类</span></span><br><span class="line">&gt;<span class="comment">//        method02(list1);    //不是Number的父类</span></span><br><span class="line">&gt;<span class="comment">//        method02(list2);    //不是Number的父类</span></span><br><span class="line">       method02(list3);</span><br><span class="line">       method02(list4);</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="comment">// 设定通配符区域</span></span><br><span class="line">   <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">printList</span><span class="params">(ArrayList&lt;?&gt; list)</span> </span>&#123;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="comment">//表示传递进来的集合的类型，可以是Number类型，也可以是Number的所有父类类型</span></span><br><span class="line">   <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">method02</span><span class="params">(ArrayList&lt;? <span class="keyword">super</span> Number&gt; list)</span> </span>&#123;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="comment">//表示传递进来的集合的类型，可以是Number类型，也可以是Number的所有子类类型</span></span><br><span class="line">   <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">method01</span><span class="params">(ArrayList&lt;? extends Number&gt; list)</span> </span>&#123;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h3 id="29-集合体系结构—Set"><a href="#29-集合体系结构—Set" class="headerlink" title="29.集合体系结构—Set"></a>29.集合体系结构—Set</h3><h5 id="29-1-Set的概念"><a href="#29-1-Set的概念" class="headerlink" title="29.1 Set的概念"></a>29.1 Set的概念</h5><blockquote>
+<p>Set的特点</p>
+<ul>
+<li>可以去除重复</li>
+<li>存储顺序不一致</li>
+<li>没有带索引的方法，不能使用普通for和通过索引来获取、删除Set集合的元素</li>
+</ul>
+<p>可以使用迭代器和增强For进行遍历</p>
+<p>示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">       Set&lt;String&gt; set = <span class="keyword">new</span> TreeSet&lt;&gt;();</span><br><span class="line">       <span class="comment">//默认自然顺序 排序</span></span><br><span class="line">       set.add(<span class="string">"ddd"</span>);</span><br><span class="line">       set.add(<span class="string">"aaa"</span>);</span><br><span class="line">       set.add(<span class="string">"bbb"</span>);</span><br><span class="line">       set.add(<span class="string">"aaa"</span>);</span><br><span class="line">       set.add(<span class="string">"ccc"</span>);</span><br><span class="line"></span><br><span class="line">       <span class="comment">//迭代器遍历</span></span><br><span class="line">       Iterator&lt;String&gt; it = set.iterator();</span><br><span class="line">       <span class="keyword">while</span> (it.hasNext()) &#123;</span><br><span class="line">           System.out.println(it.next());</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">       System.out.println(<span class="string">"----------"</span>);</span><br><span class="line"></span><br><span class="line">       <span class="comment">//增强for遍历，没有索引，因此无法使用普通for</span></span><br><span class="line">       <span class="keyword">for</span> (String s : set) &#123;</span><br><span class="line">           System.out.println(s);</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">       System.out.println(<span class="string">"----------"</span>);</span><br><span class="line">       <span class="comment">//foreach的遍历---Lambda</span></span><br><span class="line">       set.forEach(c -&gt; System.out.println(c));</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h5 id="29-1-1-TreeSet集合"><a href="#29-1-1-TreeSet集合" class="headerlink" title="29.1.1 TreeSet集合"></a>29.1.1 TreeSet集合</h5><blockquote>
+<p>特点：</p>
+<ul>
+<li>不包含重复元素</li>
+<li>没有索引</li>
+<li>可以将元素按照规则排序</li>
+</ul>
+<p>设置TreeSet排序规则：</p>
+<p>自然排序</p>
+<ul>
+<li>Comparable     </li>
+</ul>
+<p>示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">       TreeSet&lt;Test&gt; list = <span class="keyword">new</span> TreeSet&lt;&gt;();</span><br><span class="line">       <span class="comment">//新建测试对象</span></span><br><span class="line">       Test s1 = <span class="keyword">new</span> Test(<span class="string">"xiaoli"</span>,<span class="number">10</span>);</span><br><span class="line">       Test s2 = <span class="keyword">new</span> Test(<span class="string">"liuhuang"</span>,<span class="number">20</span>);</span><br><span class="line">       Test s3 = <span class="keyword">new</span> Test(<span class="string">"aotemang"</span>,<span class="number">30</span>);</span><br><span class="line">       Test s4 = <span class="keyword">new</span> Test(<span class="string">"xiyangyang"</span>,<span class="number">110</span>);</span><br><span class="line">       Test s5 = <span class="keyword">new</span> Test(<span class="string">"gaiya"</span>,<span class="number">30</span>);</span><br><span class="line">       <span class="comment">//TreeSet添加对象</span></span><br><span class="line">       list.add(s1);</span><br><span class="line">       list.add(s2);</span><br><span class="line">       list.add(s3);</span><br><span class="line">       list.add(s4);</span><br><span class="line">       list.add(s5);</span><br><span class="line"></span><br><span class="line">       System.out.println(list);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<p>示例对象：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">&gt;public class Test  implements Comparable&lt;Test&gt;&#123;</span><br><span class="line">   private  String name;</span><br><span class="line">   private  int age;</span><br><span class="line"></span><br><span class="line">   public String getName() &#123;</span><br><span class="line">       return name;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   public void setName(String name) &#123;</span><br><span class="line">       this.name &#x3D; name;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   public int getAge() &#123;</span><br><span class="line">       return age;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   public void setAge(int age) &#123;</span><br><span class="line">       this.age &#x3D; age;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   public Test(String name, int age) &#123;</span><br><span class="line">       this.name &#x3D; name;</span><br><span class="line">       this.age &#x3D; age;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   public Test() &#123;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   @Override</span><br><span class="line">   public String toString() &#123;</span><br><span class="line">       return &quot;Test&#123;&quot; +</span><br><span class="line">               &quot;name&#x3D;&#39;&quot; + name + &#39;\&#39;&#39; +</span><br><span class="line">               &quot;, age&#x3D;&quot; + age +</span><br><span class="line">               &#39;&#125;&#39;;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">&gt;&#x2F;&#x2F;自然排序  Compareable</span><br><span class="line">&gt;&#x2F;&#x2F; return返回三个数   负数在左，正数在右，相同重复或次要判断</span><br><span class="line">   @Override</span><br><span class="line">   public int compareTo(Test o) &#123;</span><br><span class="line">       &#x2F;&#x2F;主要条件</span><br><span class="line">       &#x2F;&#x2F;从小到大</span><br><span class="line">      int result &#x3D; this.age - o.age;</span><br><span class="line">      &#x2F;&#x2F;次要条件</span><br><span class="line">      result &#x3D; this.age &#x3D;&#x3D; o.age ?  this.name.compareTo(o.name) :result ;</span><br><span class="line">      return result;</span><br><span class="line">   &#125;</span><br><span class="line">&gt;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>比较器排序</p>
+<ul>
+<li>Comparator</li>
+</ul>
+<p>示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">   <span class="comment">//比较器 Comparator 的方法重写；两个对象对比</span></span><br><span class="line">   <span class="comment">// o1 表示要存入的，o2 表示 集合中已经存在的</span></span><br><span class="line">   TreeSet&lt;Test02&gt; list = <span class="keyword">new</span> TreeSet&lt;&gt;(<span class="keyword">new</span> Comparator&lt;Test02&gt;() &#123;</span><br><span class="line">       <span class="meta">@Override</span></span><br><span class="line">       <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compare</span><span class="params">(Test02 o1, Test02 o2)</span> </span>&#123;</span><br><span class="line">           <span class="keyword">int</span> result = o1.getAge() - o2.getAge();</span><br><span class="line">           result = result == <span class="number">0</span> ? o1.getName().compareTo(o2.getName()) : result;</span><br><span class="line">           <span class="keyword">return</span> result;</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;);</span><br><span class="line">   <span class="comment">//新建测试对象</span></span><br><span class="line">   Test02 s1 = <span class="keyword">new</span> Test02(<span class="string">"xiaoli"</span>, <span class="number">10</span>);</span><br><span class="line">   Test02 s2 = <span class="keyword">new</span> Test02(<span class="string">"liuhuang"</span>, <span class="number">20</span>);</span><br><span class="line">   Test02 s3 = <span class="keyword">new</span> Test02(<span class="string">"aotemang"</span>, <span class="number">30</span>);</span><br><span class="line">   Test02 s4 = <span class="keyword">new</span> Test02(<span class="string">"xiyangyang"</span>, <span class="number">110</span>);</span><br><span class="line">   Test02 s5 = <span class="keyword">new</span> Test02(<span class="string">"gaiya"</span>, <span class="number">30</span>);</span><br><span class="line">   <span class="comment">//TreeSet添加对象</span></span><br><span class="line">   list.add(s1);</span><br><span class="line">   list.add(s2);</span><br><span class="line">   list.add(s3);</span><br><span class="line">   list.add(s4);</span><br><span class="line">   list.add(s5);</span><br><span class="line"></span><br><span class="line">   System.out.println(list);</span><br><span class="line">&gt;&#125;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h5 id="29-1-2-比较方式小结"><a href="#29-1-2-比较方式小结" class="headerlink" title="29.1.2 比较方式小结"></a>29.1.2 比较方式小结</h5><blockquote>
+<p>小结：</p>
+<ul>
+<li>自然排序：自定义实现Comparable，重写comparaTo方法，根据返回值进行排序</li>
+<li>比较器排序：创建TreeSet对象的时候传递Comparator的实现类对象，重写compara方法，根据返回值进行排序</li>
+<li>在使用的时候，默认使用自然排序，当自然排序不满足现在的需求，使用比较器排序</li>
+</ul>
+<p>关于返回值的规则：</p>
+<ul>
+<li>如果返回值为负数，表示当前存入的元素是最小值，存左边</li>
+<li>如果返回值为0，表示当前存入的元素b跟集合中元素重复了，不存</li>
+<li>如果返回值为正数表示当前存入的元素是较大值，存右边</li>
+</ul>
+</blockquote>
+<h3 id="30-二叉树"><a href="#30-二叉树" class="headerlink" title="30. 二叉树"></a>30. 二叉树</h3><h4 id="30-1-二叉查找树"><a href="#30-1-二叉查找树" class="headerlink" title="30.1 二叉查找树"></a>30.1 二叉查找树</h4><blockquote>
+<p>特点：</p>
+<ul>
+<li>小的存左边</li>
+<li><h6 id="大的存右边"><a href="#大的存右边" class="headerlink" title="大的存右边"></a>大的存右边</h6></li>
+<li>一样的不存</li>
+</ul>
+<h5 id=""><a href="#" class="headerlink" title=""></a><img src="/image/%E4%BA%8C%E5%8F%89%E6%9F%A5%E6%89%BE%E6%A0%91.png" alt=""></h5></blockquote>
+<h4 id="30-2-二叉平衡树"><a href="#30-2-二叉平衡树" class="headerlink" title="30.2 二叉平衡树"></a>30.2 二叉平衡树</h4><blockquote>
+<p>特点：</p>
+<ul>
+<li><p>左子树和右子树的高度差不超过1</p>
+</li>
+<li><p>任意节点的左右两个子树都是一个平衡二叉树</p>
+</li>
+</ul>
+<h6 id="-1"><a href="#-1" class="headerlink" title=""></a><img src="/image/%E5%B9%B3%E8%A1%A1%E4%BA%8C%E5%8F%89%E6%A0%91.png" alt=""></h6></blockquote>
+<h5 id="30-2-1-二叉树平衡机制—左旋、右旋"><a href="#30-2-1-二叉树平衡机制—左旋、右旋" class="headerlink" title="30.2.1 二叉树平衡机制—左旋、右旋"></a>30.2.1 二叉树平衡机制—左旋、右旋</h5><blockquote>
+<p>左旋：就是将根节点的右侧往左转，原先的右节点变成新的父节点，并将多余的左子节点出让，给已经降级的根节点当右子节点</p>
+<h6 id="-2"><a href="#-2" class="headerlink" title=""></a><img src="/image/%E4%BA%8C%E5%8F%89%E6%A0%91%E5%B7%A6%E6%97%8B.png" alt=""></h6><p>右旋：就是将根节点的左侧往右转，原先的左节点变成新的父节点，并将多余的右子节点出让，给已经降级的根节点当左  子节点</p>
+<p><img src="/image/%E5%8F%B3%E6%97%8B02.png" alt=""></p>
+</blockquote>
+
+      
+      <!-- 打赏 -->
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2021/09/23/DAY17_%E6%B3%9B%E5%9E%8B%E5%92%8C%E9%AB%98%E7%BA%A7%E9%9B%86%E5%90%88/" data-id="cktzw6dnw0002isuefl0tc6y5"
+        class="article-share-link">分享</a>
+        
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%90%8E%E7%AB%AF%E5%AD%A6%E4%B9%A0/" rel="tag">后端学习</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+  
+  <nav class="article-nav">
+    
+    
+      <a href="/2021/09/23/DAY16_%E9%AB%98%E7%BA%A7%E9%9B%86%E5%90%88%E5%92%8C%E6%95%B0%E6%8D%AE%E9%9B%86%E5%90%88/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">高级集合-list和数据结构</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+  
+<!-- valine评论 -->
+<div id="vcomments-box">
+    <div id="vcomments">
+    </div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js'></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        notify: false,
+        verify: '',
+        app_id: '',
+        app_key: '',
+        path: window.location.pathname,
+        avatar: 'mp',
+        placeholder: '给我的文章加点评论吧~',
+        recordIP: true
+    });
+    const infoEle = document.querySelector('#vcomments .info');
+    if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+        infoEle.childNodes.forEach(function (item) {
+            item.parentNode.removeChild(item);
+        });
+    }
+</script>
+<style>
+    #vcomments-box {
+        padding: 5px 30px;
+    }
+
+    @media screen and (max-width: 800px) {
+        #vcomments-box {
+            padding: 5px 0px;
+        }
+    }
+
+    #vcomments-box #vcomments {
+        background-color: #fff;
+    }
+
+    .v .vlist .vcard .vh {
+        padding-right: 20px;
+    }
+
+    .v .vlist .vcard {
+        padding-left: 10px;
+    }
+</style>
+
+  
+
+  
+  
+  
+
+</article>
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul class="list-inline">
+      <li>
+        &copy;
+        2020-2021
+        ff
+      </li>
+      <li>
+        
+          Powered by
+        
+        
+        <a href="https://hexo.io" target="_blank">Hexo</a> Theme <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul class="list-inline">
+      <li>
+        
+        
+        <ul class="list-inline">
+  <li>PV:<span id="busuanzi_value_page_pv"></span></li>
+  <li>UV:<span id="busuanzi_value_site_uv"></span></li>
+</ul>
+        
+      </li>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+    <div class="to_top">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+      </div>
+    </main>
+      <aside class="sidebar">
+        <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="ONE PEAC"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/2019/about">关于我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜索">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+      </aside>
+      <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+      
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script>
+  try {
+    var typed = new Typed("#subtitle", {
+    strings: ['面朝大海，春暖花开','愿你一生努力，一生被爱','想要的都拥有，得不到的都释怀'],
+    startDelay: 0,
+    typeSpeed: 200,
+    loop: true,
+    backSpeed: 100,
+    showCursor: true
+    });
+  } catch (err) {
+  }
+  
+</script>
+
+
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer:'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto',
+    onClick: (e) => {
+      $('.toc-link').removeClass('is-active-link');
+      $(`a[href=${e.target.hash}]`).addClass('is-active-link');
+      $(e.target.hash).scrollIntoView();
+      return false;
+    }
+  });
+</script>
+
+
+<script>
+  var ayerConfig = {
+    mathjax: false
+  }
+</script>
+
+
+<script src="/js/ayer.js"></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+
+
+
+<script type="text/javascript" src="https://js.users.51.la/20544303.js"></script>
+  </div>
+</body>
+
+</html>
