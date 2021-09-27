@@ -6,7 +6,7 @@
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>
-    循环和switch |  ONE PEAC
+    可变参数和Steam流 |  ONE PEAC
   </title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   
@@ -31,7 +31,7 @@
   <div id="app">
     <main class="content">
       <section class="outer">
-  <article id="post-day03_循环" class="article article-type-post" itemscope
+  <article id="post-DAY19_可变参数和Steam流" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
   <div class="article-inner">
@@ -39,7 +39,7 @@
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  循环和switch
+  可变参数和Steam流
 </h1>
   
 
@@ -48,8 +48,8 @@
 
     
     <div class="article-meta">
-      <a href="/2021/09/01/day03_%E5%BE%AA%E7%8E%AF/" class="article-date">
-  <time datetime="2021-09-01T06:13:19.000Z" itemprop="datePublished">2021-09-01</time>
+      <a href="/2021/09/27/DAY19_%E5%8F%AF%E5%8F%98%E5%8F%82%E6%95%B0%E5%92%8CSteam%E6%B5%81/" class="article-date">
+  <time datetime="2021-09-27T15:13:19.000Z" itemprop="datePublished">2021-09-27</time>
 </a>
       
       
@@ -59,7 +59,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">794字</span>
+            <span class="post-count">920字</span>
         </span>
     </span>
 
@@ -68,7 +68,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">3分钟</span>
+            <span class="post-count">4分钟</span>
         </span>
     </span>
 </div>
@@ -94,73 +94,148 @@
       
 
       
-      <h5 id="4-2-switch语句"><a href="#4-2-switch语句" class="headerlink" title="4.2 switch语句"></a>4.2 switch语句</h5><p>​    格式：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">switch</span>(表达式)&#123;</span><br><span class="line">	<span class="keyword">case</span> 值<span class="number">1</span>：</span><br><span class="line">	语句体 <span class="number">1</span>；</span><br><span class="line">	<span class="keyword">break</span>；</span><br><span class="line">	<span class="keyword">case</span> 值<span class="number">2</span>：</span><br><span class="line">	语句体 <span class="number">2</span>；</span><br><span class="line">	<span class="keyword">break</span>；</span><br><span class="line">	……</span><br><span class="line">	<span class="keyword">case</span> 值n：</span><br><span class="line">	语句体 n；</span><br><span class="line">	<span class="keyword">break</span>；</span><br><span class="line">	<span class="keyword">default</span>:</span><br><span class="line">	语句体；</span><br><span class="line">     <span class="keyword">break</span>；</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+      <h3 id="33-可变参数"><a href="#33-可变参数" class="headerlink" title="33. 可变参数"></a>33. 可变参数</h3><h4 id="33-1-可变参数概述"><a href="#33-1-可变参数概述" class="headerlink" title="33.1 可变参数概述"></a>33.1 可变参数概述</h4><blockquote>
+<p>可变参数：就是形参的个数是可以变化的</p>
+<ul>
+<li>格式：修饰符 返回值类型 方法名｛数据类型…变量名｝</li>
+<li>范例：public static int sum (int… a)</li>
+<li>示例</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="comment">//求多个数的和</span></span><br><span class="line">&gt;<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">       <span class="keyword">int</span> sum = getSum(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>);</span><br><span class="line">       System.out.<span class="function">printl <span class="title">n</span><span class="params">(sum)</span></span>;</span><br><span class="line">   &#125;</span><br><span class="line">&gt;<span class="comment">// 可变参数</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">getSum</span><span class="params">(<span class="keyword">int</span>... arr)</span> </span>&#123;</span><br><span class="line">       <span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">       <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">           sum += arr[i];</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">return</span> sum;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
 
-<p>​    表达式的结果只能是：byte,short,int,char 字符串，枚举</p>
-<p>​    先计算表达式的值，从上到下与case开始匹配,遇到相同的值，开始乡下执行对应的语句体，直到遇到break或者switch才结束，如果没有匹配到case，执行default语句，直到遇到break或switch语句结束才结束。</p>
-<p>​    switch 一定能被if取代，能用if的尽量用if，但是有一种情况你可以选择switch，就是做选择的时候，这样的代码看起来比较清爽。</p>
-<p>​    </p>
-<p>​    case穿透：当语句出现break的时候，就会出现穿透现象</p>
-<p>​    当省略break的时候，会继续执行，直到执行到break的时候才会结束；</p>
-<p>​    出现多个重复的语句，可以考虑使用case穿透</p>
-<h3 id="5-循环语句"><a href="#5-循环语句" class="headerlink" title="5.循环语句"></a>5.循环语句</h3><p>​    循环是可以钱傲的，但是不要去数；</p>
-<p>​    嵌套不要超过两次，最多三次；</p>
-<p>​    嵌套就要去找规律，然后拼接；</p>
-<p>​    外层循环执行一次，内层循环执行一圈；</p>
-<h5 id="5-1-for语句"><a href="#5-1-for语句" class="headerlink" title="5.1 for语句"></a>5.1 for语句</h5><p>​    格式： </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">for(初始化；条件判断语句;条件控制语句)&#123;</span><br><span class="line">  循环体；</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>1.首先执行初始化语句；</p>
-<p>2.执行条件判断语句</p>
-<p>​    true：继续执行</p>
-<p>​    false：结束执行</p>
-<p>可以和if或者for语句继续嵌套使用</p>
-<p>案例：水仙花数：每个位数的立方和等于原数</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">for(int num&#x3D;100;num&lt;&#x3D;999;num+&#x3D;1)&#123;</span><br><span class="line">			int a &#x3D; num % 10; </span><br><span class="line">			int b &#x3D; num &#x2F; 10 % 10; </span><br><span class="line">			int c &#x3D; num &#x2F; 10 &#x2F; 10 % 10;</span><br><span class="line">			if(a*a*a+b*b*b+c*c*c&#x3D;&#x3D;num)&#123;</span><br><span class="line">				System.out.println(num);</span><br><span class="line">		&#125;</span><br><span class="line">		&#125;</span><br></pre></td></tr></table></figure>
-
-<p>键盘输入：Scanner</p>
-<p>求和：sum</p>
-<p>统计数：count</p>
-<p>随机：Random</p>
-<p>案例二：每行打印两个水仙花数</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"> int count &#x3D; 0 ;</span><br><span class="line"> for(int num&#x3D;100;num&lt;&#x3D;999;num+&#x3D;1)&#123;</span><br><span class="line">			int a &#x3D; num % 10; </span><br><span class="line">			int b &#x3D; num &#x2F; 10 % 10; </span><br><span class="line">			int c &#x3D; num &#x2F; 10 &#x2F; 10 % 10;</span><br><span class="line">			if(a*a*a+b*b*b+c*c*c&#x3D;&#x3D;num)&#123;</span><br><span class="line">				System.out.println(num);</span><br><span class="line">				count++;</span><br><span class="line">				if(count%2&#x3D;&#x3D;0)&#123;</span><br><span class="line">System.out.println(num);</span><br><span class="line">&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		&#125;</span><br></pre></td></tr></table></figure>
+<p>注意：</p>
+<ul>
+<li>这里变量其实就是一个数组</li>
+<li>如果一个方法有多个参数，包含可变参数，<font color= "red">可变参数要放在最后</font></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">       <span class="keyword">int</span> sum = getSum(<span class="number">2</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>);</span><br><span class="line">       System.out.println(sum);</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="comment">// 可变参数</span></span><br><span class="line">&gt;<span class="comment">//    添加新参数，必须放在可变参数前面</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">getSum</span><span class="params">(<span class="keyword">int</span> num, <span class="keyword">int</span>... arr)</span> </span>&#123;</span><br><span class="line">       <span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">       <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">           sum += arr[i];</span><br><span class="line">       &#125;</span><br><span class="line">       sum += num;</span><br><span class="line">       <span class="keyword">return</span> sum;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
 
 
-
-<h5 id="5-2-while-语句"><a href="#5-2-while-语句" class="headerlink" title="5.2 while 语句"></a>5.2 while 语句</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">while(条件判断语句)&#123;</span><br><span class="line">		循环体；</span><br><span class="line">		条件控制语句；</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
-
-<p>和for的操作一致；</p>
-<h5 id="5-3-do-while-语句"><a href="#5-3-do-while-语句" class="headerlink" title="5.3 do-while 语句"></a>5.3 do-while 语句</h5><p>​    格式：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">do</span>&#123;</span><br><span class="line">  循环体；</span><br><span class="line">&#125;<span class="keyword">while</span>(判断语句)&#123;  &#125;</span><br></pre></td></tr></table></figure>
-
-<p>​    特点：无论循环条件是否满足，至少会执行一次循环体</p>
-<h5 id="5-4-三者的区别"><a href="#5-4-三者的区别" class="headerlink" title="5.4 三者的区别"></a>5.4 三者的区别</h5><p>​    for 和 while：</p>
-<p>​    在for语句内的定义的变量，只能在语句内使用，之后就不能够使用了；</p>
-<p>​    在while语句内定义的变量，可以在语句外使用，并且不能重复使用；</p>
-<h5 id="5-5-死循环"><a href="#5-5-死循环" class="headerlink" title="5.5 死循环"></a>5.5 死循环</h5><p>​    格式：</p>
-<p>​    while(true){}</p>
-<p>​    for(;;){}</p>
-<p>​    do{}while(true){}</p>
-<p>应用场景：可以筛选符合对应条件的对象；</p>
-<h5 id="5-6-跳转控制语句"><a href="#5-6-跳转控制语句" class="headerlink" title="5.6 跳转控制语句"></a>5.6 跳转控制语句</h5><p>​    countinue; 跳过这次循环</p>
-<p>​    break;  结束当前循环</p>
-<p>​    只能在循环或switch里面使用</p>
-<h3 id="6-Random-产生随机数"><a href="#6-Random-产生随机数" class="headerlink" title="6.Random 产生随机数"></a>6.Random 产生随机数</h3><h5 id="6-1-Random"><a href="#6-1-Random" class="headerlink" title="6.1 Random"></a>6.1 Random</h5><p>​    格式：</p>
-<p>​    1.导包 <code>import java.unitl.Random;</code></p>
-<p>​    2.创建对象 <code>Random i = new Random();</code></p>
-<p>​    3.接受随机数 <code>int num = i.nextInt(整数);</code></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//1-10</span></span><br><span class="line"><span class="keyword">int</span> num = i.nextInt((<span class="number">10</span>-<span class="number">1</span>))+<span class="number">1</span>;</span><br></pre></td></tr></table></figure>
-
-
-
+</blockquote>
+<h4 id="33-2-不可变集合-JDK-1-8-不支持"><a href="#33-2-不可变集合-JDK-1-8-不支持" class="headerlink" title="33.2 不可变集合(JDK.1.8 不支持)"></a>33.2 不可变集合(JDK.1.8 不支持)</h4><blockquote>
+<p>成员方法：</p>
+<table>
+<thead>
+<tr>
+<th>方法名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>static <E> List of(E….elements)</td>
+<td>创建一个具有指定元素的List集合对象</td>
+</tr>
+<tr>
+<td>static <E> Set<E> of(E….elements)</td>
+<td>创建一个具有指定元素的Set集合对象（不能出现重复的元素）</td>
+</tr>
+<tr>
+<td>static &lt;K,V&gt;  Map&lt;K,V&gt; of(E….elements)</td>
+<td>创建一个具有指定元素的Map集合对象</td>
+</tr>
+</tbody></table>
+<p>注意：</p>
+<ul>
+<li>集合不可变，不可以添加和删除 、修改</li>
+<li>可以结合集合的带参构造，实现集合的批量添加</li>
+</ul>
+<ul>
+<li>在Map接口中，还有一个ofEntries方法可以提高代码的阅读性</li>
+<li>首先会把键值对封装成一个Entry对象，再把这个Entry对象添加到集合当中</li>
+</ul>
+</blockquote>
+<h3 id="34-Stream流"><a href="#34-Stream流" class="headerlink" title="34. Stream流"></a>34. Stream流</h3><h4 id="34-1-Stream流"><a href="#34-1-Stream流" class="headerlink" title="34.1 Stream流"></a>34.1 Stream流</h4><blockquote>
+<h3 id="Stream流不能直接修改数据源中的数据"><a href="#Stream流不能直接修改数据源中的数据" class="headerlink" title="Stream流不能直接修改数据源中的数据"></a><strong>Stream流不能直接修改数据源中的数据</strong></h3><p>可以使用：</p>
+<ul>
+<li><p>单列集合</p>
+<ul>
+<li><p>使用stream() 生成流</p>
+</li>
+<li><p>default Stream<E> stream()</p>
+</li>
+<li><pre><code>//        单列集合
+       ArrayList&lt;String&gt; list = new ArrayList&lt;&gt;();
+       list.add(&quot;aaa&quot;);
+       list.add(&quot;bbb&quot;);
+       list.add(&quot;ccc&quot;);
+      list.stream().forEach(c -&gt; System.out.println(c));
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&gt;- 双列集合</span><br><span class="line">- 间接的生成流</span><br><span class="line"></span><br><span class="line">- 先通过keySet或者entrySet获取一个单列Set集合，再获取stream流</span><br><span class="line"></span><br><span class="line"> - </span><br></pre></td></tr></table></figure>
+//        双列集合
+       HashMap&lt;String, String&gt; maps = new HashMap&lt;&gt;();
+       maps.put(&quot;aaa&quot;, &quot;001&quot;);
+       maps.put(&quot;bbb&quot;, &quot;002&quot;);
+       maps.put(&quot;ccc&quot;, &quot;003&quot;);
+       //输出键
+       maps.keySet().stream().forEach(c -&gt; System.out.println(c));
+       //输出键值对
+       maps.entrySet().stream().forEach(c -&gt; System.out.println(c));
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure></code></pre></li>
+</ul>
+</li>
+<li><p>数组</p>
+<ul>
+<li><p>Arrays中的静态方法stream生成流</p>
+</li>
+<li><pre><code>//        数组
+       int[] arr = {1, 2, 3, 4};
+       Arrays.stream(arr).forEach(c -&gt; System.out.println(c));
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&gt;- 同数据类型的多个数据</span><br><span class="line">- 使用Stream.of(T…values)生成流</span><br><span class="line"></span><br><span class="line">- </span><br></pre></td></tr></table></figure>
+//         多个同数据类型
+       String a = &quot;aaa&quot;;
+       String b = &quot;bbb&quot;;
+       String c = &quot;ccc&quot;;
+       String d = &quot;ddd&quot;;
+       Stream.of(a, b, c, d).forEach(i -&gt; System.out.println(i));</code></pre></li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h5 id="34-1-1-Stream常见中间操作方法"><a href="#34-1-1-Stream常见中间操作方法" class="headerlink" title="34.1.1 Stream常见中间操作方法"></a>34.1.1 Stream常见中间操作方法</h5><blockquote>
+<p>条件筛选：</p>
+<ul>
+<li><p>Stream <T> filter(Predicate predicate)：用户对流中的数据进行过滤</p>
+<ul>
+<li>Predicate接口汇总的方法</li>
+<li>boolean test(T  t) :对给定的参数进行判断，返回一个布尔值</li>
+</ul>
+</li>
+<li><p>Stream<T> limit(long maxSize) ：截取指定参数个数的数据</p>
+</li>
+<li><p>Stream<T> skip(long n)：跳过指定参数个数的数据</p>
+</li>
+<li><p>static<T> Stream<T> concat(Stream a,Stream b)：合并a和b两个流为一个流</p>
+</li>
+<li><p>Stream<T> distinct：去除流中重复的元素，依赖（hashCode和equals方法）</p>
+</li>
+</ul>
+<p>结束后返回值：</p>
+<ul>
+<li>void forEach(Consumer action)：对此流的每个元素执行操作<ul>
+<li>Consumer 接口中的方法</li>
+<li>void accept(T  t) ：对给定的参数执行此操作</li>
+</ul>
+</li>
+<li>long count()  ：返回此流中的元素数</li>
+</ul>
+</blockquote>
+<h5 id="34-1-2-Stream流的收集操作"><a href="#34-1-2-Stream流的收集操作" class="headerlink" title="34.1.2 Stream流的收集操作"></a>34.1.2 Stream流的收集操作</h5><blockquote>
+<p>收集方法：</p>
+<ul>
+<li>R collect(Collector collector)<ul>
+<li>toList()  ：元素收集到List集合中</li>
+<li>toSet()   ：元素收集到Set集合中</li>
+<li>toMap(Function keyMapper,Function valueMapper)  ：元素收集到Map集合中</li>
+</ul>
+</li>
+</ul>
+</blockquote>
 
       
       <!-- 打赏 -->
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2021/09/01/day03_%E5%BE%AA%E7%8E%AF/" data-id="cku2sjkmr000jw0ue3gz43zno"
+      <a data-url="http://yoursite.com/2021/09/27/DAY19_%E5%8F%AF%E5%8F%98%E5%8F%82%E6%95%B0%E5%92%8CSteam%E6%B5%81/" data-id="cku2sjkme0003w0uefryw05ut"
         class="article-share-link">分享</a>
         
       
@@ -174,19 +249,10 @@
   
   <nav class="article-nav">
     
-      <a href="/2021/09/03/day04-IDEA%E5%92%8C%E6%95%B0%E7%BB%84/" class="article-nav-link">
-        <strong class="article-nav-caption">上一篇</strong>
-        <div class="article-nav-title">
-          
-            IDEA和数组
-          
-        </div>
-      </a>
     
-    
-      <a href="/2021/08/31/day02-Java%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/" class="article-nav-link">
+      <a href="/2021/09/23/DAY16_%E9%AB%98%E7%BA%A7%E9%9B%86%E5%90%88%E5%92%8C%E6%95%B0%E6%8D%AE%E9%9B%86%E5%90%88/" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">运算符和分支语句</div>
+        <div class="article-nav-title">高级集合-list和数据结构</div>
       </a>
     
   </nav>
