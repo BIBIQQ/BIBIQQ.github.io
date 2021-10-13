@@ -76,6 +76,476 @@
     
     
     
+    <article id="post-Day22_网络编程" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2021/10/13/Day22_%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/"
+    >网络编程</a
+  >
+</h2>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2021/10/13/Day22_%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" class="article-date">
+  <time datetime="2021-10-13T14:43:19.000Z" itemprop="datePublished">2021-10-13</time>
+</a>
+      
+      
+      
+      
+    </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h3 id="42-网络编程-物联网"><a href="#42-网络编程-物联网" class="headerlink" title="42.网络编程(物联网)"></a>42.网络编程(物联网)</h3><h4 id="42-1-网络编程概述"><a href="#42-1-网络编程概述" class="headerlink" title="42.1 网络编程概述"></a>42.1 网络编程概述</h4><h5 id="42-1-1-基本概念"><a href="#42-1-1-基本概念" class="headerlink" title="42.1.1 基本概念"></a>42.1.1 基本概念</h5><blockquote>
+<p>网络编程三要素：</p>
+<ul>
+<li><p>IP地址</p>
+</li>
+<li><p>端口</p>
+<ul>
+<li><p>端口号的取值范围：0~65535，普通的应用程序需要使用1024以上的端口号</p>
+</li>
+<li><p>==一个端口只能被一个应用程序使用==</p>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>协议</li>
+</ul>
+</blockquote>
+<h4 id="42-2-IntAddress的使用"><a href="#42-2-IntAddress的使用" class="headerlink" title="42.2 IntAddress的使用"></a>42.2 IntAddress的使用</h4><blockquote>
+<p>示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">test</span> </span>&#123;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> UnknownHostException </span>&#123;</span><br><span class="line">       <span class="comment">//设置地址</span></span><br><span class="line">       InetAddress byName = InetAddress.getByName(<span class="string">"192.168.31.58"</span>);</span><br><span class="line">       <span class="comment">//获取地址的名字</span></span><br><span class="line">       String hostName = byName.getHostName();</span><br><span class="line">       System.out.println(hostName);</span><br><span class="line">       <span class="comment">//获得地址的ip地址</span></span><br><span class="line">       String hostAddress = byName.getHostAddress();</span><br><span class="line">       System.out.println(hostAddress);</span><br><span class="line">   &#125;</span><br><span class="line">&gt;&#125;</span><br></pre></td></tr></table></figure>
+
+
+</blockquote>
+<h4 id="42-3-UDP通信程序"><a href="#42-3-UDP通信程序" class="headerlink" title="42.3 UDP通信程序"></a>42.3 UDP通信程序</h4><blockquote>
+<p>发送端：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="comment">//DUP发送</span></span><br><span class="line">&gt;<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">test</span> </span>&#123;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">       Scanner sc = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">       <span class="comment">//确认发送端口</span></span><br><span class="line">       DatagramSocket ds = <span class="keyword">new</span> DatagramSocket();</span><br><span class="line">       <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">           <span class="comment">//打包礼物</span></span><br><span class="line">           String s = <span class="string">"🤘🎈"</span>;</span><br><span class="line">           String num = sc.next();</span><br><span class="line"></span><br><span class="line">           <span class="keyword">byte</span>[] bytes = num.getBytes();</span><br><span class="line">           <span class="comment">//确认发送ip</span></span><br><span class="line">           InetAddress address = InetAddress.getByName(<span class="string">"192.168.31.108"</span>);</span><br><span class="line">           <span class="keyword">int</span> port = <span class="number">10000</span>;</span><br><span class="line">           <span class="comment">//封装成数据包</span></span><br><span class="line">           DatagramPacket dp = <span class="keyword">new</span> DatagramPacket(bytes, bytes.length, address, port);</span><br><span class="line">           <span class="comment">//发送信息</span></span><br><span class="line">           ds.send(dp);</span><br><span class="line">           System.err.println(<span class="string">"已发送"</span>);</span><br><span class="line">           <span class="keyword">if</span>(num.equals(<span class="string">"886"</span>))&#123;</span><br><span class="line">               <span class="keyword">break</span>;</span><br><span class="line">           &#125;</span><br><span class="line"></span><br><span class="line">       &#125;</span><br><span class="line">       System.out.println(<span class="string">"结束聊天"</span>);</span><br><span class="line">       <span class="comment">//释放资源</span></span><br><span class="line">&gt;<span class="comment">//        ds.close();</span></span><br><span class="line"></span><br><span class="line">   &#125;</span><br><span class="line">&gt;&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<p>接收端：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="comment">//DUP接收</span></span><br><span class="line">&gt;<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Accept</span> </span>&#123;</span><br><span class="line">       <span class="comment">//注意点</span></span><br><span class="line">   <span class="comment">//1.需要先运行发送端再运行发送端</span></span><br><span class="line">   <span class="comment">//2.如果接收端启动之后，没有收到信息，就会死等(阻塞)</span></span><br><span class="line">   <span class="comment">//3.接收的时候需要调用getLength</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">       <span class="comment">//确认发送端口</span></span><br><span class="line">       DatagramSocket ds = <span class="keyword">new</span> DatagramSocket(<span class="number">10000</span>);</span><br><span class="line"></span><br><span class="line">       <span class="keyword">while</span> (<span class="keyword">true</span>)&#123;</span><br><span class="line">           <span class="comment">//构建数据包，接收数据</span></span><br><span class="line">           <span class="keyword">byte</span>[] bytes = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">8042</span>];</span><br><span class="line">           DatagramPacket dp = <span class="keyword">new</span> DatagramPacket(bytes,bytes.length);</span><br><span class="line">           <span class="comment">//接收信息</span></span><br><span class="line">           ds.receive(dp);</span><br><span class="line">           <span class="comment">//解析数据包</span></span><br><span class="line">           <span class="keyword">byte</span>[] data = dp.getData();</span><br><span class="line">           <span class="keyword">int</span> length = dp.getLength();</span><br><span class="line">           InetAddress address = dp.getAddress();</span><br><span class="line">           System.out.println(<span class="string">"用户名："</span>+address.getHostName());</span><br><span class="line">           System.out.println(<span class="keyword">new</span> String(data,<span class="number">0</span>,length));</span><br><span class="line">&gt;<span class="comment">//            System.out.println(address.getHostAddress() );</span></span><br><span class="line">       &#125;</span><br><span class="line">       </span><br><span class="line">       <span class="comment">//关闭</span></span><br><span class="line">&gt;<span class="comment">//        ds.close();</span></span><br><span class="line">       </span><br><span class="line">   &#125;</span><br><span class="line">&gt;&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>UDP的三种通讯方式</p>
+<ul>
+<li>单播<ul>
+<li>1-1</li>
+<li>创建DatagramSocket</li>
+<li>打包DatagramPacket</li>
+<li>发送send</li>
+</ul>
+</li>
+<li>组播<ul>
+<li>1- 组(多)</li>
+</ul>
+</li>
+<li>广播<ul>
+<li>1-多</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h4 id="42-4-TCP通信程序"><a href="#42-4-TCP通信程序" class="headerlink" title="42.4 TCP通信程序"></a>42.4 TCP通信程序</h4><blockquote>
+<p>发送：</p>
+<p>Socket</p>
+<p>示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">send</span> </span>&#123;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">       <span class="comment">//创建一个Socket对象</span></span><br><span class="line">       Socket socket = <span class="keyword">new</span> Socket(<span class="string">"192.168.31.87"</span>, <span class="number">10010</span>);</span><br><span class="line"></span><br><span class="line">       <span class="comment">//获取IO流</span></span><br><span class="line">       OutputStream os = socket.getOutputStream(); <span class="comment">//网络流</span></span><br><span class="line">       os.write(<span class="string">"hello"</span>.getBytes());</span><br><span class="line">       <span class="comment">//关闭流</span></span><br><span class="line">       os.close();</span><br><span class="line">       socket.close();</span><br><span class="line">   &#125;</span><br><span class="line">&gt;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>接收：</p>
+<p>SeverSocket</p>
+<p>示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">receive</span> </span>&#123;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">       <span class="comment">//接收</span></span><br><span class="line">       ServerSocket accept = <span class="keyword">new</span> ServerSocket(<span class="number">10000</span>);</span><br><span class="line">       InputStream is = <span class="keyword">null</span>;</span><br><span class="line">       <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">           <span class="comment">//调用等待</span></span><br><span class="line">           Socket ss =accept.accept();</span><br><span class="line"></span><br><span class="line">           <span class="comment">//获取输入流</span></span><br><span class="line">           is = ss.getInputStream();</span><br><span class="line">           <span class="keyword">int</span> b;</span><br><span class="line">           <span class="keyword">while</span> ((b = is.read()) != -<span class="number">1</span>) &#123;</span><br><span class="line">               System.out.print((<span class="keyword">char</span>)b);</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">&gt;<span class="comment">//        //关闭</span></span><br><span class="line">&gt;<span class="comment">//        is.close();</span></span><br><span class="line">&gt;<span class="comment">//        accept.close();</span></span><br><span class="line">   &#125;</span><br><span class="line">&gt;&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<ol>
+<li>accpet方法是阻塞，作用就是等待客户端连接</li>
+<li>客户端创建对象并连接服务器，通过 三次握手协议保证连接</li>
+<li>对于客服端，往外写，所以是输出；对于服务器是，往里输，所以是输入</li>
+<li>read也是阻塞</li>
+<li>通过四次挥手协议，确认连接终止</li>
+</ol>
+</blockquote>
+
+      
+      <!-- 打赏 -->
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2021/10/13/Day22_%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" data-id="ckupml8oo000fjkueaqbgfehr"
+        class="article-share-link">分享</a>
+        
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%90%8E%E7%AB%AF%E5%AD%A6%E4%B9%A0/" rel="tag">后端学习</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+
+</article>
+    
+    <article id="post-DAY23_类加载器和反射" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2021/10/07/DAY23_%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8%E5%92%8C%E5%8F%8D%E5%B0%84/"
+    >类加载器和反射</a
+  >
+</h2>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2021/10/07/DAY23_%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8%E5%92%8C%E5%8F%8D%E5%B0%84/" class="article-date">
+  <time datetime="2021-10-07T14:13:19.000Z" itemprop="datePublished">2021-10-07</time>
+</a>
+      
+      
+      
+      
+    </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h3 id="43-类加载器"><a href="#43-类加载器" class="headerlink" title="43. 类加载器"></a>43. 类加载器</h3><h4 id="43-1-类加载器的基础"><a href="#43-1-类加载器的基础" class="headerlink" title="43.1 类加载器的基础"></a>43.1 类加载器的基础</h4><h5 id="43-1-1-类加载器的概念"><a href="#43-1-1-类加载器的概念" class="headerlink" title="43.1.1 类加载器的概念"></a>43.1.1 类加载器的概念</h5><blockquote>
+<p>类加载器：负责将.class文件(存储的物理文件)加载到内存中</p>
+</blockquote>
+<h4 id="43-2-类加载器的过程"><a href="#43-2-类加载器的过程" class="headerlink" title="43.2 类加载器的过程"></a>43.2 类加载器的过程</h4><blockquote>
+<p>类加载时机</p>
+<ul>
+<li>创建类的实例（对象）</li>
+<li>调用类的类方法</li>
+<li>访问类或者接口的类变量，或者为该类变量赋值</li>
+<li>使用反射方式来强制创建某个类或接口对应的java.lang.Class对象</li>
+<li>初始化某个类的子类</li>
+<li>直接使用java.exe命令来运行某个主类、</li>
+</ul>
+<h6 id="使用的时候加载，不运行不加载"><a href="#使用的时候加载，不运行不加载" class="headerlink" title="==使用的时候加载，不运行不加载=="></a>==使用的时候加载，不运行不加载==</h6><p>过程：</p>
+<p>加载—验证—准备—解析—初始化</p>
+<p>链接：验证-准备-解析 </p>
+<p>加载：（把Class文件加载到内存中）</p>
+<p>​    全限定类名 ： 包名+类名  （相当于类的绝对路径）</p>
+<ul>
+<li>通过包名+类名，来获取这个类，准备用进行传输</li>
+<li>在这个类加载到内存中</li>
+<li>加载完毕创建一个Class对象</li>
+</ul>
+<p>验证：</p>
+<ul>
+<li>文件中的信息是否符合规范</li>
+</ul>
+<p>准备：</p>
+<ul>
+<li>初始化静态变量</li>
+</ul>
+<p>解析：</p>
+<ul>
+<li>如果使用到其他的类，就找到该类</li>
+</ul>
+<p>初始化：</p>
+<ul>
+<li>静态变量赋值以及初始化其他资源</li>
+</ul>
+</blockquote>
+<h4 id="43-3-类加载器的分类"><a href="#43-3-类加载器的分类" class="headerlink" title="43.3 类加载器的分类"></a>43.3 类加载器的分类</h4><blockquote>
+<p>三种加载器</p>
+<ul>
+<li>启动类加载器：虚拟机内置的类加载<ul>
+<li>加载JRE        </li>
+</ul>
+</li>
+<li>平台类加载器：负责加载JDK一些特殊的模块  <ul>
+<li>加载JDK   </li>
+</ul>
+</li>
+<li>系统类加载器：负责加载用户类路径上所指定的类库  <ul>
+<li>加载自己的类或者别人的工具类   </li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h4 id="43-4-双亲委派模型"><a href="#43-4-双亲委派模型" class="headerlink" title="43.4 双亲委派模型"></a>43.4 双亲委派模型</h4><blockquote>
+<p>方法：</p>
+<table>
+<thead>
+<tr>
+<th>方法名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>public static ClassLoader getSystemClassLoader()</td>
+<td>获取系统类加载器</td>
+</tr>
+<tr>
+<td>public InputStream getResourceAsStream(String name)</td>
+<td>加载某一个资源文件</td>
+</tr>
+</tbody></table>
+<p>示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ClassLoaderDemo2</span> </span>&#123;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">       <span class="comment">//static ClassLoader getSystemClassLoader() 获取系统类加载器</span></span><br><span class="line">       <span class="comment">//InputStream getResourceAsStream(String name)  加载某一个资源文件</span></span><br><span class="line"></span><br><span class="line">       <span class="comment">//获取系统类加载器</span></span><br><span class="line">       ClassLoader systemClassLoader = ClassLoader.getSystemClassLoader();</span><br><span class="line"></span><br><span class="line">       <span class="comment">//利用加载器去加载一个指定的文件</span></span><br><span class="line">       <span class="comment">//参数：文件的路径（放在src的根目录下，默认去那里加载）</span></span><br><span class="line">       <span class="comment">//返回值：字节流。</span></span><br><span class="line">     InputStream is = systemClassLoader.getResourceAsStream(<span class="string">"prop.properties"</span>);</span><br><span class="line"></span><br><span class="line">       Properties prop = <span class="keyword">new</span> Properties();</span><br><span class="line">     prop.load(is);</span><br><span class="line"></span><br><span class="line">     System.out.println(prop);</span><br><span class="line"></span><br><span class="line">       is.close();</span><br><span class="line">   &#125;</span><br><span class="line">&gt;&#125;</span><br></pre></td></tr></table></figure>
+
+
+</blockquote>
+<h3 id="44-反射"><a href="#44-反射" class="headerlink" title="44. 反射"></a>44. 反射</h3><h4 id="44-1-反射的概念"><a href="#44-1-反射的概念" class="headerlink" title="44.1 反射的概念"></a>44.1 反射的概念</h4><blockquote>
+<p>Java反射机制：</p>
+<ul>
+<li>在运行状态下，对于任何一个类，都能够知道这个类的所有属性和方法</li>
+<li>对于任何一个对象，都能调用它的任意属性和方法</li>
+</ul>
+<p>==利用反射调用它类中的属性和方法时，无视修饰符==</p>
+<p>先获取配置文件中的信息，动态获取信息并创建对象和调动方法</p>
+</blockquote>
+<h4 id="44-2-使用反射的前提条件"><a href="#44-2-使用反射的前提条件" class="headerlink" title="44.2 使用反射的前提条件"></a>44.2 使用反射的前提条件</h4><h5 id="44-2-1-获取Class类的对象"><a href="#44-2-1-获取Class类的对象" class="headerlink" title="44.2.1 获取Class类的对象"></a>44.2.1 获取Class类的对象</h5><blockquote>
+<p>三种方法：</p>
+<ul>
+<li>Class类中的静态方法forName（“包名+类名”）</li>
+<li>通过class属性来获得</li>
+<li>利用对象的getClass方法来获得class对象；getClass方法是定义在Object类中</li>
+</ul>
+<p>示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">text</span> </span>&#123;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> ClassNotFoundException </span>&#123;</span><br><span class="line">&gt;<span class="comment">//        1.Class类中的静态方法forName（“全类名”）</span></span><br><span class="line">       <span class="comment">//全类名：包名+类名</span></span><br><span class="line">       Class clazz = Class.forName(<span class="string">"DAY24.Demo.Demo01.Staff"</span>);</span><br><span class="line">       System.out.println(clazz);</span><br><span class="line"></span><br><span class="line">&gt;<span class="comment">//        2.通过class属性来获得</span></span><br><span class="line">       Class clazz2 = Staff<span class="class">.<span class="keyword">class</span></span>;</span><br><span class="line">       System.out.println(clazz2);</span><br><span class="line"></span><br><span class="line">&gt;<span class="comment">//        3.利用对象的getClass方法来获得class对象</span></span><br><span class="line">&gt;<span class="comment">//            getClass方法是定义在Object类中</span></span><br><span class="line">       Staff staff= <span class="keyword">new</span> Staff();</span><br><span class="line">       Class clazz3 = staff.getClass();</span><br><span class="line">       System.out.println(clazz3);</span><br><span class="line"></span><br><span class="line">   &#125;</span><br><span class="line">&gt;&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+</blockquote>
+<h4 id="44-3-Class的使用"><a href="#44-3-Class的使用" class="headerlink" title="44.3 Class的使用"></a>44.3 Class的使用</h4><h5 id="44-3-1-Class的方法"><a href="#44-3-1-Class的方法" class="headerlink" title="44.3.1 Class的方法"></a>44.3.1 Class的方法</h5><blockquote>
+<p>获取构造方法：</p>
+<table>
+<thead>
+<tr>
+<th>方法名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Constructor&lt;?&gt;[] getDeclaredConstructors()</td>
+<td>返回所有构造方法对象的数组</td>
+</tr>
+<tr>
+<td>Constructor&lt;?&gt;[] getConstructors()</td>
+<td>返回所有公共构造方法对象的数组</td>
+</tr>
+<tr>
+<td>Constructor<T> getConstructor(Class&lt;?&gt;… parameterTypes)</td>
+<td>返回单个公共构造方法对象</td>
+</tr>
+<tr>
+<td>Constructor<T> getDeclaredConstructor(Class&lt;?&gt;… parameterTypes)</td>
+<td>返回单个构造方法对象</td>
+</tr>
+</tbody></table>
+<p>示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ClassDemo02</span> </span>&#123;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> NoSuchMethodException </span>&#123;</span><br><span class="line">       <span class="comment">//返回单个公共构造方法</span></span><br><span class="line">&gt;<span class="comment">//        method01();</span></span><br><span class="line">       <span class="comment">//获取单个构造方法</span></span><br><span class="line">&gt;<span class="comment">//        method02();</span></span><br><span class="line">       <span class="comment">//返回所有构造方法对象数组</span></span><br><span class="line">&gt;<span class="comment">//        method03();</span></span><br><span class="line">       <span class="comment">//返回所有公共方法对象</span></span><br><span class="line">&gt;<span class="comment">//        method04();</span></span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">method04</span><span class="params">()</span> </span>&#123;</span><br><span class="line">       <span class="comment">//获取class对象</span></span><br><span class="line">       Class clazz = Staff<span class="class">.<span class="keyword">class</span></span>;</span><br><span class="line">       <span class="comment">//返回所有公共方法对象</span></span><br><span class="line">       Constructor[] cs = clazz.getConstructors();</span><br><span class="line">       System.out.println(Arrays.toString(cs));</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">method03</span><span class="params">()</span> </span>&#123;</span><br><span class="line">       <span class="comment">//获取class对象</span></span><br><span class="line">       Class clazz = Staff<span class="class">.<span class="keyword">class</span></span>;</span><br><span class="line">       <span class="comment">//返回所有构造方法对象数组</span></span><br><span class="line">       Constructor[] dc = clazz.getDeclaredConstructors();</span><br><span class="line">       System.out.println(Arrays.toString(dc));</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">method02</span><span class="params">()</span> <span class="keyword">throws</span> NoSuchMethodException </span>&#123;</span><br><span class="line">       <span class="comment">//获取class对象</span></span><br><span class="line">       Class clazz = Staff<span class="class">.<span class="keyword">class</span></span>;</span><br><span class="line">       <span class="comment">//获取单个构造方法</span></span><br><span class="line">       Constructor dc = clazz.getDeclaredConstructor();</span><br><span class="line">       System.out.println(dc);</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">method01</span><span class="params">()</span> <span class="keyword">throws</span> NoSuchMethodException </span>&#123;</span><br><span class="line">       <span class="comment">//获取class对象</span></span><br><span class="line">       Class clazz = Staff<span class="class">.<span class="keyword">class</span></span>;</span><br><span class="line">       <span class="comment">//获取无参构造</span></span><br><span class="line">       Constructor cs = clazz.getConstructor();</span><br><span class="line">       System.out.println(cs);</span><br><span class="line">       <span class="comment">//获取有参构造，顺序需要和构造方法的顺序一致</span></span><br><span class="line">       Constructor cs2 = clazz.getConstructor(String<span class="class">.<span class="keyword">class</span>, <span class="title">String</span>.<span class="title">class</span>)</span>;</span><br><span class="line">       System.out.println(cs2);</span><br><span class="line">   &#125;</span><br><span class="line">&gt;&#125;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h5 id="44-3-2-Class的成员方法使用"><a href="#44-3-2-Class的成员方法使用" class="headerlink" title="44.3.2 Class的成员方法使用"></a>44.3.2 Class的成员方法使用</h5><blockquote>
+<p>成员方法：</p>
+<table>
+<thead>
+<tr>
+<th>方法名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>T newInstance(Object…initargs)</td>
+<td>根据指定的构造方法创建对象</td>
+</tr>
+<tr>
+<td>setAccessible(boolean flag)</td>
+<td>设置为true,表示取消访问检查</td>
+</tr>
+</tbody></table>
+<p>示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ClassDemo03</span> </span>&#123;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException </span>&#123;</span><br><span class="line">&gt;<span class="comment">//        method01();</span></span><br><span class="line">&gt;<span class="comment">//        method02();</span></span><br><span class="line">&gt;<span class="comment">//        method03();</span></span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">method03</span><span class="params">()</span> <span class="keyword">throws</span> NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException </span>&#123;</span><br><span class="line">       <span class="comment">//获取Class对象</span></span><br><span class="line">       Class clazz = Staff<span class="class">.<span class="keyword">class</span></span>;</span><br><span class="line">       <span class="comment">//获取无参构造</span></span><br><span class="line">       Constructor dc = clazz.getDeclaredConstructor(String<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">       <span class="comment">//被private修饰的成员，不能直接使用</span></span><br><span class="line">       <span class="comment">//如果用反射强行获取并且使用，需要临时取消访问检查</span></span><br><span class="line">       dc.setAccessible(<span class="keyword">true</span>);</span><br><span class="line">       Staff staff = (Staff) dc.newInstance(<span class="string">"李四"</span>);</span><br><span class="line">       System.out.println(staff);</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">method02</span><span class="params">()</span> <span class="keyword">throws</span> NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException </span>&#123;</span><br><span class="line">       <span class="comment">//获取Class对象</span></span><br><span class="line">       Class clazz = Staff<span class="class">.<span class="keyword">class</span></span>;</span><br><span class="line">       <span class="comment">//获取公共的无参构造</span></span><br><span class="line">       Constructor cs = clazz.getConstructor();</span><br><span class="line">       <span class="comment">//使用对象</span></span><br><span class="line">       Staff staff = (Staff) cs.newInstance();</span><br><span class="line">       System.out.println(staff);</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">method01</span><span class="params">()</span> <span class="keyword">throws</span> NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException </span>&#123;</span><br><span class="line">       <span class="comment">//获取Class对象</span></span><br><span class="line">       Class clazz = Staff<span class="class">.<span class="keyword">class</span></span>;</span><br><span class="line">       <span class="comment">//获取构造方法 有参</span></span><br><span class="line">       Constructor cs = clazz.getConstructor(String<span class="class">.<span class="keyword">class</span>, <span class="title">String</span>.<span class="title">class</span>)</span>;</span><br><span class="line">       Staff sta1 = (Staff) cs.newInstance(<span class="string">"六四"</span>, <span class="string">"14"</span>);</span><br><span class="line">       <span class="comment">//        System.out.println(sta1);</span></span><br><span class="line">   &#125;</span><br><span class="line">&gt;&#125;</span><br></pre></td></tr></table></figure>
+
+
+</blockquote>
+<h5 id="44-3-3-Clas的成员变量-Field对象"><a href="#44-3-3-Clas的成员变量-Field对象" class="headerlink" title="44.3.3 Clas的成员变量 - Field对象"></a>44.3.3 Clas的成员变量 - Field对象</h5><blockquote>
+<p>方法分类：</p>
+<table>
+<thead>
+<tr>
+<th>方法名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Field[] getFields()</td>
+<td>返回所有公共成员变量对象的数组</td>
+</tr>
+<tr>
+<td>Field[] getDeclaredFields()</td>
+<td>返回所有成员变量对象的数组</td>
+</tr>
+<tr>
+<td>Field getField(String name)</td>
+<td>返回单个公共成员变量对象</td>
+</tr>
+<tr>
+<td>Field getDeclaredField(String name)</td>
+<td>返回单个成员变量对象</td>
+</tr>
+</tbody></table>
+<p>示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ClassFieldDemo</span> </span>&#123;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> NoSuchFieldException, IllegalAccessException </span>&#123;</span><br><span class="line">&gt;<span class="comment">//        method01();</span></span><br><span class="line">&gt;<span class="comment">//        method02();</span></span><br><span class="line">&gt;<span class="comment">//        method03();</span></span><br><span class="line">&gt;<span class="comment">//        mothod04();</span></span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">mothod04</span><span class="params">()</span> </span>&#123;</span><br><span class="line">       <span class="comment">//获取Class对象</span></span><br><span class="line">       Class&lt;Staff&gt; clazz = Staff<span class="class">.<span class="keyword">class</span></span>;</span><br><span class="line">       <span class="comment">//获取所有成员变量数组对象</span></span><br><span class="line">       Field[] declaredFields = clazz.getDeclaredFields();</span><br><span class="line">       System.out.println(Arrays.toString(declaredFields));</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">method03</span><span class="params">()</span> </span>&#123;</span><br><span class="line">       <span class="comment">//获取Class对象</span></span><br><span class="line">       Class&lt;Staff&gt; clazz = Staff<span class="class">.<span class="keyword">class</span></span>;</span><br><span class="line">       <span class="comment">//获取所有公共成员变量对象的数组</span></span><br><span class="line">       Field[] fields = clazz.getFields();</span><br><span class="line">       System.out.println(Arrays.toString(fields));</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">method02</span><span class="params">()</span> <span class="keyword">throws</span> NoSuchFieldException </span>&#123;</span><br><span class="line">       <span class="comment">//获取Class对象</span></span><br><span class="line">       Class&lt;Staff&gt; clazz = Staff<span class="class">.<span class="keyword">class</span></span>;</span><br><span class="line">       <span class="comment">//获取私有成员变量</span></span><br><span class="line">       Field field = clazz.getDeclaredField(<span class="string">"name"</span>);</span><br><span class="line">       System.out.println(field);</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">method01</span><span class="params">()</span> <span class="keyword">throws</span> NoSuchFieldException </span>&#123;</span><br><span class="line">       <span class="comment">//获取Class对象</span></span><br><span class="line">       Class&lt;Staff&gt; clazz = Staff<span class="class">.<span class="keyword">class</span></span>;</span><br><span class="line">       <span class="comment">//获取的成员变量必须是真实存在的</span></span><br><span class="line">       <span class="comment">//且必须是public修饰的</span></span><br><span class="line">       <span class="comment">//获取name的成员变量</span></span><br><span class="line">       Field field = clazz.getField(<span class="string">"sex"</span>);</span><br><span class="line">       System.out.println(field);</span><br><span class="line">   &#125;</span><br><span class="line">&gt;&#125;</span><br></pre></td></tr></table></figure>
+
+
+</blockquote>
+<h5 id="44-3-4-Class的Field对象进行赋值并使用"><a href="#44-3-4-Class的Field对象进行赋值并使用" class="headerlink" title="44.3.4 Class的Field对象进行赋值并使用"></a>44.3.4 Class的Field对象进行赋值并使用</h5><blockquote>
+<p>方法介绍</p>
+<table>
+<thead>
+<tr>
+<th>方法名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>void set(Object obj, Object value)</td>
+<td>赋值</td>
+</tr>
+<tr>
+<td>Object get(Object obj)</td>
+<td>获取值</td>
+</tr>
+</tbody></table>
+<p>示例:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&gt;public class ClassFieldSetDemo &#123;</span><br><span class="line">   public static void main(String[] args) throws NoSuchFieldException, IllegalAccessException, InstantiationException &#123;</span><br><span class="line">       </span><br><span class="line">       &#x2F;&#x2F;获取Class对象</span><br><span class="line">       Class clazz &#x3D; Staff.class;</span><br><span class="line">       &#x2F;&#x2F;获取成员变量</span><br><span class="line">       Field field &#x3D; clazz.getDeclaredField(&quot;sex&quot;);</span><br><span class="line">       &#x2F;&#x2F;避免访问</span><br><span class="line">       field.setAccessible(true);</span><br><span class="line">       &#x2F;&#x2F;获取成员对象</span><br><span class="line">       Staff staff &#x3D; (Staff)clazz.newInstance();</span><br><span class="line">&gt;&#x2F;&#x2F;        Staff o &#x3D; (Staff)df.get(staff);</span><br><span class="line">       &#x2F;&#x2F;设置成员变量</span><br><span class="line">       field.set(staff,&quot;女&quot;);</span><br><span class="line">       &#x2F;&#x2F;获取成员变量</span><br><span class="line">       String  sex &#x3D;(String) field.get(staff);</span><br><span class="line">       System.out.println(sex);</span><br><span class="line">   &#125;</span><br><span class="line">&gt;&#125;</span><br></pre></td></tr></table></figure>
+
+
+</blockquote>
+<h5 id="44-3-4-Class的调用成员方法"><a href="#44-3-4-Class的调用成员方法" class="headerlink" title="44.3.4 Class的调用成员方法"></a>44.3.4 Class的调用成员方法</h5><blockquote>
+<p>方法分类</p>
+<table>
+<thead>
+<tr>
+<th>方法名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Method[] getMethods()</td>
+<td>返回所有公共成员方法对象的数组，包括继承的</td>
+</tr>
+<tr>
+<td>Method[] getDeclaredMethods()</td>
+<td>返回所有成员方法对象的数组，不包括继承的</td>
+</tr>
+<tr>
+<td>Method getMethod(String name, Class&lt;?&gt;… parameterTypes)</td>
+<td>返回单个公共成员方法对象</td>
+</tr>
+<tr>
+<td>Method getDeclaredMethod(String name, Class&lt;?&gt;… parameterTypes)</td>
+<td>返回单个成员方法对象</td>
+</tr>
+</tbody></table>
+<p>示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ClassGetMethodDemo</span> </span>&#123;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> NoSuchMethodException </span>&#123;</span><br><span class="line">&gt;<span class="comment">//        method01();</span></span><br><span class="line">&gt;<span class="comment">//        method02();</span></span><br><span class="line">   &#125;</span><br><span class="line">   <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">method02</span><span class="params">()</span> <span class="keyword">throws</span> NoSuchMethodException </span>&#123;</span><br><span class="line"></span><br><span class="line">       <span class="comment">//创建Class对象</span></span><br><span class="line">       Class&lt;Staff&gt; clazz = Staff<span class="class">.<span class="keyword">class</span></span>;</span><br><span class="line">       <span class="comment">//获取方法method02</span></span><br><span class="line">       Method method02 = clazz.getDeclaredMethod(<span class="string">"method02"</span>);</span><br><span class="line">       System.out.println(method02);</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">method01</span><span class="params">()</span> <span class="keyword">throws</span> NoSuchMethodException </span>&#123;</span><br><span class="line">       <span class="comment">//创建Class对象</span></span><br><span class="line">       Class&lt;Staff&gt; clazz = Staff<span class="class">.<span class="keyword">class</span></span>;</span><br><span class="line">       <span class="comment">//获取成员方法method01</span></span><br><span class="line">       Method method01 = clazz.getMethod(<span class="string">"method01"</span>);</span><br><span class="line">       System.out.println(method01);</span><br><span class="line">   &#125;</span><br><span class="line">&gt;&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>成员方法使用：</strong></p>
+<p>方法介绍</p>
+<table>
+<thead>
+<tr>
+<th>方法名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Object invoke(Object obj, Object… args)</td>
+<td>运行方法</td>
+</tr>
+</tbody></table>
+<p>参数一: 用obj对象调用该方法</p>
+<p>参数二: 调用方法的传递的参数(如果没有就不写)</p>
+<p>返回值: 方法的返回值(如果没有就不写)</p>
+<p>示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ClassMethodUser</span> </span>&#123;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> NoSuchMethodException, IllegalAccessException, InstantiationException, InvocationTargetException </span>&#123;</span><br><span class="line">       <span class="comment">//创建Class对象</span></span><br><span class="line">       Class clazz = Staff<span class="class">.<span class="keyword">class</span></span>;</span><br><span class="line">       <span class="comment">//构造成员方法</span></span><br><span class="line">       Constructor dc = clazz.getDeclaredConstructor();</span><br><span class="line">       <span class="comment">//避免访问</span></span><br><span class="line">       dc.setAccessible(<span class="keyword">true</span>);</span><br><span class="line">       <span class="comment">//调用方法</span></span><br><span class="line">       Method method02 = clazz.getDeclaredMethod(<span class="string">"method02"</span>);</span><br><span class="line">       <span class="comment">//避免访问</span></span><br><span class="line">       method02.setAccessible(<span class="keyword">true</span>);</span><br><span class="line">       <span class="comment">//创建Staff对象</span></span><br><span class="line">       Staff staff = (Staff) dc.newInstance();</span><br><span class="line">       method02.invoke(staff);</span><br><span class="line">   &#125;</span><br><span class="line">&gt;&#125;</span><br></pre></td></tr></table></figure>
+
+
+</blockquote>
+<h4 id="44-4-注意事项"><a href="#44-4-注意事项" class="headerlink" title="44.4 注意事项"></a>44.4 注意事项</h4><blockquote>
+<ul>
+<li>调用私有成员或者私有方法，需要添加 <code>T setAccessible(true);</code>语句，暴力破解</li>
+<li>创建Class后，需要创建成员构造方法</li>
+<li>不能直接使用Class对象直接创建成员对象,需要创建构造方法后，构造方法对象进行构造</li>
+</ul>
+</blockquote>
+
+      
+      <!-- 打赏 -->
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2021/10/07/DAY23_%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8%E5%92%8C%E5%8F%8D%E5%B0%84/" data-id="ckupml8oj0009jkue2j3z4f61"
+        class="article-share-link">分享</a>
+        
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%90%8E%E7%AB%AF%E5%AD%A6%E4%B9%A0/" rel="tag">后端学习</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+
+</article>
+    
     <article id="post-Day21_多线程" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
@@ -557,7 +1027,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2021/10/07/Day21_%E5%A4%9A%E7%BA%BF%E7%A8%8B/" data-id="ckuo8rkpn000c98ue93uf6o3l"
+      <a data-url="http://yoursite.com/2021/10/07/Day21_%E5%A4%9A%E7%BA%BF%E7%A8%8B/" data-id="ckupml8oq000hjkueg1r19sxo"
         class="article-share-link">分享</a>
         
       
@@ -945,7 +1415,7 @@ fos.close();
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2021/10/06/DAY20_file%E5%92%8CIO%E6%B5%81/" data-id="ckuo8rkqa000k98ue2g3p7g34"
+      <a data-url="http://yoursite.com/2021/10/06/DAY20_file%E5%92%8CIO%E6%B5%81/" data-id="ckupml8os000ljkuegp3033n8"
         class="article-share-link">分享</a>
         
       
@@ -1144,7 +1614,7 @@ fos.close();
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2021/09/27/DAY19_%E5%8F%AF%E5%8F%98%E5%8F%82%E6%95%B0%E5%92%8CSteam%E6%B5%81/" data-id="ckuo8rkpm000b98ue80nb22vt"
+      <a data-url="http://yoursite.com/2021/09/27/DAY19_%E5%8F%AF%E5%8F%98%E5%8F%82%E6%95%B0%E5%92%8CSteam%E6%B5%81/" data-id="ckupml8on000djkueed27h7b6"
         class="article-share-link">分享</a>
         
       
@@ -1364,7 +1834,7 @@ fos.close();
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2021/09/23/DAY17_%E6%B3%9B%E5%9E%8B%E5%92%8C%E9%AB%98%E7%BA%A7%E9%9B%86%E5%90%88/" data-id="ckuo8rkjh000298uebcqr504h"
+      <a data-url="http://yoursite.com/2021/09/23/DAY17_%E6%B3%9B%E5%9E%8B%E5%92%8C%E9%AB%98%E7%BA%A7%E9%9B%86%E5%90%88/" data-id="ckupml8o30003jkue5mwv40pb"
         class="article-share-link">分享</a>
         
       
@@ -1684,7 +2154,7 @@ fos.close();
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2021/09/23/DAY16_%E9%AB%98%E7%BA%A7%E9%9B%86%E5%90%88%E5%92%8C%E6%95%B0%E6%8D%AE%E9%9B%86%E5%90%88/" data-id="ckuo8rkjs000598uefzpt108u"
+      <a data-url="http://yoursite.com/2021/09/23/DAY16_%E9%AB%98%E7%BA%A7%E9%9B%86%E5%90%88%E5%92%8C%E6%95%B0%E6%8D%AE%E9%9B%86%E5%90%88/" data-id="ckupml8ol000bjkue9g4x0gmo"
         class="article-share-link">分享</a>
         
       
@@ -2210,7 +2680,7 @@ fos.close();
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2021/09/22/DAY15_JDK8%E6%97%B6%E9%97%B4%E6%97%A5%E6%9C%9F%E7%B1%BB/" data-id="ckuo8rkjo000398ue0a05f1tq"
+      <a data-url="http://yoursite.com/2021/09/22/DAY15_JDK8%E6%97%B6%E9%97%B4%E6%97%A5%E6%9C%9F%E7%B1%BB/" data-id="ckupml8o00001jkue5e249kiz"
         class="article-share-link">分享</a>
         
       
@@ -2544,7 +3014,7 @@ System.out.println(divide);
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2021/09/20/DAY14_API%E5%92%8C%E6%95%B0%E7%BB%84%E9%AB%98%E7%BA%A7%E6%93%8D%E4%BD%9C/" data-id="ckuo8rkqe000q98uedjp2avgx"
+      <a data-url="http://yoursite.com/2021/09/20/DAY14_API%E5%92%8C%E6%95%B0%E7%BB%84%E9%AB%98%E7%BA%A7%E6%93%8D%E4%BD%9C/" data-id="ckupml8ns0000jkue79rfg8m5"
         class="article-share-link">分享</a>
         
       
@@ -2728,445 +3198,7 @@ System.out.println(divide);
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2021/09/18/Day13_%E5%86%85%E9%83%A8%E5%92%8CLambda/" data-id="ckuo8rkqb000m98uefq0rejpm"
-        class="article-share-link">分享</a>
-        
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%90%8E%E7%AB%AF%E5%AD%A6%E4%B9%A0/" rel="tag">后端学习</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-  
-  
-
-  
-
-</article>
-    
-    <article id="post-Day12_接口和多态" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2021/09/17/Day12_%E6%8E%A5%E5%8F%A3%E5%92%8C%E5%A4%9A%E6%80%81/"
-    >接口和多态</a
-  >
-</h2>
-  
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2021/09/17/Day12_%E6%8E%A5%E5%8F%A3%E5%92%8C%E5%A4%9A%E6%80%81/" class="article-date">
-  <time datetime="2021-09-17T14:13:19.000Z" itemprop="datePublished">2021-09-17</time>
-</a>
-      
-      
-      
-      
-    </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-      <h3 id="20-接口"><a href="#20-接口" class="headerlink" title="20. 接口"></a>20. 接口</h3><h5 id="20-1-接口概念"><a href="#20-1-接口概念" class="headerlink" title="20.1 接口概念"></a>20.1 接口概念</h5><p>​    概念：</p>
-<p>​        当一个类中的所有方法都是抽象方法的时候，可以定义为==接口==</p>
-<p>​        接口是一种的抽象类，比抽象类更抽象</p>
-<p>​    存在的意义：</p>
-<ul>
-<li>定义规则</li>
-<li>程序的拓展性</li>
-</ul>
-<p>​    格式：</p>
-<ul>
-<li>接口用关键字==interface==来定义</li>
-</ul>
-<p>​            public interface 接口名｛｝</p>
-<ul>
-<li>接口不能实例化</li>
-</ul>
-<ul>
-<li><p>类实现接口格式</p>
-<p>​    public class 类名 inplements 接口名｛｝</p>
-</li>
-<li><p>接口的子类（实现类）</p>
-<p>​    要么重写接口的所有抽象方法</p>
-<p>​    要么是抽象类</p>
-</li>
-<li><p>多接口的实现</p>
-</li>
-</ul>
-<p>public class 类名 inplements 接口名1，接口名2｛｝</p>
-<h5 id="20-2-接头的成员特点"><a href="#20-2-接头的成员特点" class="headerlink" title="20.2 接头的成员特点"></a>20.2 接头的成员特点</h5><ul>
-<li><p>成员变量</p>
-<ul>
-<li>默认是公共静态变量</li>
-<li>只能是常量，系统会默认加入“public”、”static”、”final”</li>
-<li>不可被修改</li>
-</ul>
-</li>
-<li><p>成员方法</p>
-<ul>
-<li>默认是公共抽象变量</li>
-<li>只能是抽象方法(JDK7之前)</li>
-<li>会被系统默认加入“public”、”abstract”</li>
-</ul>
-</li>
-<li><p>构造方法</p>
-<ul>
-<li>没有构造方法</li>
-</ul>
-</li>
-</ul>
-<h5 id="20-2-1-新特性（JDK8之后的）默认和静态方法"><a href="#20-2-1-新特性（JDK8之后的）默认和静态方法" class="headerlink" title="==20.2.1 新特性（JDK8之后的）默认和静态方法=="></a>==20.2.1 新特性（JDK8之后的）默认和静态方法==</h5><p>​    1. <strong>允许在接口中定义非抽象方法，但是需要使用关键字default关键字，这些方法就是默认方法</strong></p>
-<p>​        作用：解决接口升级的问题    </p>
-<p>默认方法的定义格式:</p>
-<ul>
-<li>pubic default 返回值类型 方法名（参数列表）｛｝</li>
-<li>案例：public default void show(){ }</li>
-</ul>
-<p>注意事项：</p>
-<ul>
-<li><p>默认方法不是抽象方法，所以不强制被重写。当时可以别重写，重写的时候去掉default关键字</p>
-</li>
-<li><p>public可以省略，default不能省略</p>
-</li>
-<li><p>如果实现了多个接口，多个接口存在相同的方法声明，子类就必须对该方法进行重写</p>
-</li>
-<li><p>实现类中可以通过==接口名.super==调用对应的父接口中的方法</p>
-</li>
-</ul>
-<ol start="2">
-<li><p><strong>接口中允许定义static静态方法</strong></p>
-<p>​    作用：拓展接口，方便通过接口名直接调用</p>
-</li>
-</ol>
-<p>格式：</p>
-<p>​    public static 返回值类型 方法名（参数列表）｛｝</p>
-<p>注意事项：</p>
-<ul>
-<li>public可以省略,static不会被省略</li>
-<li>只能通过接口名直接调用，不能使用实现类名或者实现类对象调用</li>
-<li>多实现时，多个接口中有相同的静态方法；实现类不会报错<ul>
-<li>实现类无法调用父接口的静态方法</li>
-<li>实现类中定义的同名静态方法与静态无关</li>
-</ul>
-</li>
-</ul>
-<h5 id="20-2-2-新特性（JDK9之后的）私有方法"><a href="#20-2-2-新特性（JDK9之后的）私有方法" class="headerlink" title="==20.2.2 新特性（JDK9之后的）私有方法=="></a>==20.2.2 新特性（JDK9之后的）私有方法==</h5><p>可以在方法中定义私有方法</p>
-<h5 id="20-3-接口的整体使用思路"><a href="#20-3-接口的整体使用思路" class="headerlink" title="20.3 接口的整体使用思路"></a>20.3 接口的整体使用思路</h5><ol>
-<li><p>基本使用：</p>
-<ol>
-<li>如果发现一个类中的所有方法都是抽象方法，就可以定义为一个接口</li>
-</ol>
-</li>
-<li><p>拓展使用：</p>
-<ol>
-<li>改进为一个接口涉及到了接口大面积更新方法，而不想去修改每一个实现类，就可以将更新方法，定义为歹友方法体的默认方法</li>
-<li>希望默认方法调用的更简洁，可以考虑设计为static静态方法（需要去除default）；</li>
-<li>默认/静态方法中出现重复的代码，可以考虑抽取出一个私有/静态方法（需要去除default）;</li>
-</ol>
-</li>
-</ol>
-<h5 id="20-4-类和接口的关系"><a href="#20-4-类和接口的关系" class="headerlink" title="20.4 类和接口的关系"></a>20.4 类和接口的关系</h5><ul>
-<li>类和接口的关系<ul>
-<li>实现关系，可以单实现，也可以多实现，还可以继承一个类的同时实现多个接口</li>
-<li>如果父类和父接口中初心相同的方法声明，优先是使用父类的方法</li>
-</ul>
-</li>
-<li>类和类的关系<ul>
-<li>继承关系，只能单继承，但是可以多层继承</li>
-</ul>
-</li>
-<li>接口和接口的关系<ul>
-<li>继承关系，可以单继承，也可以多继承</li>
-<li>多个父接口中出现相同的默认方法，子接口需要重写该默认方法</li>
-</ul>
-</li>
-</ul>
-<h5 id="20-5-抽象类和接口的关系"><a href="#20-5-抽象类和接口的关系" class="headerlink" title="20.5 抽象类和接口的关系"></a>20.5 抽象类和接口的关系</h5><ul>
-<li>对事物本质的抽象用抽象类</li>
-<li>对拓展功能的抽象用接口</li>
-</ul>
-<h3 id="21-多态"><a href="#21-多态" class="headerlink" title="21. 多态"></a>21. 多态</h3><h5 id="21-1-多态概述"><a href="#21-1-多态概述" class="headerlink" title="21.1 多态概述"></a>21.1 多态概述</h5><p>​        概述: 同一个对象，在不同时刻表现出来的不同形态；一个对象可以让不同类型的引用指向他</p>
-<p>​        <strong>多态的前提和体现</strong></p>
-<ul>
-<li>有继承/实现关系</li>
-<li>有方法重写</li>
-<li>有父类引用指向子类对象</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test02</span> </span>&#123;</span><br><span class="line">        <span class="comment">//  父类成员引用子类对象</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Cat cat = <span class="keyword">new</span> Cat();</span><br><span class="line">        <span class="comment">//  父类成员引用子类对象</span></span><br><span class="line">        Animal a = <span class="keyword">new</span> Cat();</span><br><span class="line">        a.eat();</span><br><span class="line"></span><br><span class="line">        Dog dog = <span class="keyword">new</span> Dog();</span><br><span class="line">        Animal b = <span class="keyword">new</span> Animal();</span><br><span class="line">        b.eat();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//子类</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Cat</span> <span class="keyword">extends</span> <span class="title">Animal</span></span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">eat</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"吃鱼"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 父类</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Animal</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span>  <span class="keyword">void</span>  <span class="title">eat</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"动物吃饭"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<h5 id="21-2-多态特点"><a href="#21-2-多态特点" class="headerlink" title="21.2 多态特点"></a>21.2 多态特点</h5><p>成员变量</p>
-<ul>
-<li>编译看左边（父类），运行看左边（父类）</li>
-</ul>
-<p>成员方法</p>
-<ul>
-<li>编译看左边（父类），运行看右边（子类）</li>
-</ul>
-<p>构造方法</p>
-<ul>
-<li>同继承一样，子类会通过super访问父类构造方法</li>
-</ul>
-<p>成员变量和成员方法的不同</p>
-<ul>
-<li>成员方法有重写，成员变量没有重写</li>
-</ul>
-<h5 id="21-3-好处和弊端"><a href="#21-3-好处和弊端" class="headerlink" title="21.3 好处和弊端"></a>21.3 好处和弊端</h5><p>好处：提高了程序的拓展性</p>
-<p>​            定义方法的时候，使用父类型作为参数，该方法就可以接受这父类的任意子类对象</p>
-<p>弊端：父类/父接口不能使用子类的特有功能</p>
-<h5 id="21-4-多态中的类型转换"><a href="#21-4-多态中的类型转换" class="headerlink" title="21.4 多态中的类型转换"></a>21.4 多态中的类型转换</h5><p>​    类型转换：</p>
-<ul>
-<li><p>向上转型：父类引用指向子类对象   父类对象 =  子类对象</p>
-<p>​        解决：</p>
-<ul>
-<li>重新创建子类对象</li>
-<li>向下转型</li>
-</ul>
-</li>
-<li><p>向下转型：从父类类型，转换回子类类型</p>
-<ul>
-<li>被转换的引用，本身是目标类型</li>
-</ul>
-</li>
-</ul>
-<p><strong>存在的风险</strong></p>
-<ul>
-<li>概述：如果被转的引用类型变量，对应的实际类型和目标类型不是同一个类型，那么在转换的时候就会出现ClassCastException(目标引用异常)</li>
-</ul>
-<p>解决：</p>
-<ul>
-<li><p>关键字:instanceof</p>
-<p>使用格式：</p>
-<p>变量名  instanceof 类型</p>
-<p>通俗的理解：判断关键字左边的变量，是否是右边的类型，返回boolean类型结果</p>
-</li>
-</ul>
-
-      
-      <!-- 打赏 -->
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2021/09/17/Day12_%E6%8E%A5%E5%8F%A3%E5%92%8C%E5%A4%9A%E6%80%81/" data-id="ckuo8rkpn000e98ue5ukc5ijx"
-        class="article-share-link">分享</a>
-        
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%90%8E%E7%AB%AF%E5%AD%A6%E4%B9%A0/" rel="tag">后端学习</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-  
-  
-
-  
-
-</article>
-    
-    <article id="post-day11_继承" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2021/09/15/day11_%E7%BB%A7%E6%89%BF/"
-    >继承</a
-  >
-</h2>
-  
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2021/09/15/day11_%E7%BB%A7%E6%89%BF/" class="article-date">
-  <time datetime="2021-09-15T11:53:19.000Z" itemprop="datePublished">2021-09-15</time>
-</a>
-      
-      
-      
-      
-    </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-      <h3 id="15-继承"><a href="#15-继承" class="headerlink" title="15. 继承"></a>15. 继承</h3><h5 id="15-1-继承概述"><a href="#15-1-继承概述" class="headerlink" title="15.1  继承概述"></a>15.1  继承概述</h5><h6 id="15-1-1-继承："><a href="#15-1-1-继承：" class="headerlink" title="15.1.1 继承："></a>15.1.1 继承：</h6><p>​            让<font color= "red">类与类之间产生关系</font>（子父类关系），子类可以直接使用父类中非私有的成员</p>
-<p>​            格式：通过’ extends ‘实现</p>
-<ul>
-<li>​    public class 子类名 extends 父类名｛｝</li>
-<li>​    public class Zi extends Fu {}<ul>
-<li>父类又称 基类或超类</li>
-<li>子类又称 派生类</li>
-</ul>
-</li>
-</ul>
-<p>Object类是所有类的超类，无论是否显式的写出</p>
-<h6 id="15-1-2-优势："><a href="#15-1-2-优势：" class="headerlink" title="15.1.2 优势："></a>15.1.2 优势：</h6><ul>
-<li><p>提高代码的复用性</p>
-</li>
-<li><p>提高代码的维护性</p>
-</li>
-<li><p>让类和类之间产生的关系，是多态的前提 </p>
-</li>
-</ul>
-<pre><code>###### 15.1.3 弊端：</code></pre><ul>
-<li><p>提高了代码的耦合性</p>
-</li>
-<li><p>降低了代码的灵活性</p>
-</li>
-</ul>
-<ul>
-<li>当类和类，存在相同（共性）的内容，并且产生了is a（前者是后者的一种）的关系，就可以考虑使用继承，来优化代码</li>
-</ul>
-<h6 id="15-1-4-特点："><a href="#15-1-4-特点：" class="headerlink" title="15.1.4 特点："></a>15.1.4 特点：</h6><ul>
-<li>Java只支持单继承，不支持多继承，但是只是多层继承</li>
-</ul>
-<h3 id="16-子类和父类"><a href="#16-子类和父类" class="headerlink" title="16. 子类和父类"></a>16. 子类和父类</h3><p>成员变量： 就近原则</p>
-<ul>
-<li>子类的局部范围</li>
-<li>子类的成员范围</li>
-<li>父类的成员范围</li>
-</ul>
-<p>如果子父类中，出现重名的成员变量，通过就近原则，会优先使用子类的</p>
-<p>​    如果一定要会用父类的，可以使用super关键字，进行区分</p>
-<p>this:代表本类对象的引用</p>
-<p>super：代表父类存储空间的标识</p>
-<p><img src="image/this%E3%80%81super%E7%9A%84%E5%8C%BA%E5%88%AB.png" alt=""></p>
-<h3 id="17-方法重写"><a href="#17-方法重写" class="headerlink" title="17. 方法重写"></a>17. 方法重写</h3><h5 id="17-1-方法重写概念"><a href="#17-1-方法重写概念" class="headerlink" title="17.1 方法重写概念"></a>17.1 方法重写概念</h5><p>​    在继承体系中，子类中出现了父类中一模一样的方法声明（方法名、参数列表、返回值类型）</p>
-<hr>
-<p>​    方法重载：在同个类中，存在方法名，参数列表不同的多个方法，和返回值无关，之间的关系叫重载</p>
-<hr>
-<h5 id="17-2-重写应用场景"><a href="#17-2-重写应用场景" class="headerlink" title="17.2 重写应用场景"></a>17.2 重写应用场景</h5><p>​    当子类需要父类的功能，而功能主体子类有自己的特色内容</p>
-<p>可以重写父类中的方法，这样，即沿袭了父类的功能，有定义子类特有内容</p>
-<h5 id="17-3-注意事项"><a href="#17-3-注意事项" class="headerlink" title="17.3 注意事项"></a>17.3 注意事项</h5><ul>
-<li><p>子父类的方法声明必须一致</p>
-</li>
-<li><p>父类中私有方法不能被重写</p>
-</li>
-<li><p>父类的静态方法，父类必须通过静态方法进行重写，父类非静态，子类也要非静态</p>
-<ul>
-<li><p><font color = "red">注意：静态方法不能被重写，只是覆盖！如果子类中，也存在一个方法声明一模一样方法</font></p>
-</li>
-<li><p>@Override // 注解检查当前的成员方法是否一个正确的重写方法</p>
-</li>
-</ul>
-</li>
-<li><p>子类重写父类方法时，访问权限必须大于等于父类</p>
-</li>
-<li><p>权限修饰符</p>
-</li>
-</ul>
-<p><img src="image/%E8%AE%BF%E9%97%AE%E6%9D%83%E9%99%90%E4%BF%AE%E9%A5%B0%E7%AC%A6.png" alt=""></p>
-<h5 id="17-4-继承中构造方法的访问特点"><a href="#17-4-继承中构造方法的访问特点" class="headerlink" title="17.4 继承中构造方法的访问特点"></a>17.4 继承中构造方法的访问特点</h5><ul>
-<li>子类初始化之前，一定要先完成父类数据的初始化.</li>
-<li>构造方法的第一条语句默认都是：super();<ul>
-<li>必须出现在方法的第一行</li>
-</ul>
-</li>
-<li>子类初始化之前，一定先访问道父类的构造方法</li>
-<li>this() 和super()不能出现在同一个构造方法中,但凡出现一个，系统将不再提供默认的super();<ul>
-<li>this() 和super()关键字可以出现在同一个构造方法中</li>
-</ul>
-</li>
-</ul>
-<h5 id="17-5-特殊情况"><a href="#17-5-特殊情况" class="headerlink" title="17.5 特殊情况"></a>17.5 特殊情况</h5><p>当父类中没有空参构造时，在子类的构造方法首行手动调动父类中的有参构造，或在子类中通过this调用本类的其他构造方法，被调用的构造方法</p>
-<h5 id="17-6-抽象类"><a href="#17-6-抽象类" class="headerlink" title="17.6 抽象类"></a>17.6 抽象类</h5><p>​     抽象方法：将共性的行为（方法）抽取到父类之后，发现该方法的实现逻辑，无法在父类中给出具体明确，该方法就可以定义为抽象方法，被<font color= 'pink'>abstract</font>修饰</p>
-<p>​    抽象类：如果一个类中存在抽象方法，那么该类就必须声明为抽象类</p>
-<p>​    特点：</p>
-<ul>
-<li>抽象类不能实例化（实例化就是创建对象）</li>
-<li>抽象类中可以没有抽象方法，有抽象方法的类一定是抽象类</li>
-<li>抽象类可以有构造方法<ul>
-<li>但是无法创建对象</li>
-<li>构造方法主要用于初始化父类成员变量，以供子类使用</li>
-</ul>
-</li>
-<li>抽象类的子类<ul>
-<li>要么重写父类所有的抽象方法（推荐）</li>
-<li>要么自己也是一个抽象类（工作中可能会使用到）</li>
-</ul>
-</li>
-</ul>
-<h3 id="18-模板设计模式"><a href="#18-模板设计模式" class="headerlink" title="18. 模板设计模式"></a>18. 模板设计模式</h3><h5 id="18-1-设计模式"><a href="#18-1-设计模式" class="headerlink" title="18.1 设计模式"></a>18.1 设计模式</h5><p>​        设计模式就是成熟的解决方案/思路</p>
-<h5 id="18-2-final-关键字"><a href="#18-2-final-关键字" class="headerlink" title="18.2 final 关键字"></a>18.2 final 关键字</h5><p>​        final 关键字是最终的意思，可以修饰（方法、变量、类）；</p>
-<p>​        </p>
-<p>​        final 修饰的特点</p>
-<ul>
-<li>修饰方法：表示该方法是最终方法，不能被重写</li>
-<li>修饰变量：表示该变量是常量，不能再次被赋值<ul>
-<li>在创建的时候，直接给值</li>
-<li>在构造方法结束之前，完成赋值                          </li>
-</ul>
-</li>
-<li>修饰类：表明该类是最终类，不能被继承</li>
-</ul>
-<h3 id="19-代码块"><a href="#19-代码块" class="headerlink" title="19. 代码块"></a>19. 代码块</h3><h5 id="19-1-概念"><a href="#19-1-概念" class="headerlink" title="19.1 概念"></a>19.1 概念</h5><p>​        在java中被｛｝起来的的代码被称为代码块</p>
-<p>​        分类：</p>
-<ul>
-<li>局部代码块<ul>
-<li>方法中定义</li>
-<li>限定变量的生命周期、作用范，及早释放，提高内存的释放率</li>
-</ul>
-</li>
-<li>构造代码块<ul>
-<li>类中方法外</li>
-<li>每次执行构造方法时，先执行代码块</li>
-<li>多个构造方法相同的方法，抽取到代码块中，提高代码的复用性</li>
-</ul>
-</li>
-<li>静态代码<ul>
-<li>类中方法外</li>
-<li>需要通过static修饰，随着类的加载而加载，并且只执行一次</li>
-<li>类加载的时候，做一些数据初始化的操作</li>
-</ul>
-</li>
-</ul>
-<p>​    19.2</p>
-
-      
-      <!-- 打赏 -->
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2021/09/15/day11_%E7%BB%A7%E6%89%BF/" data-id="ckuo8rkqs001a98ue3oqbhz7g"
+      <a data-url="http://yoursite.com/2021/09/18/Day13_%E5%86%85%E9%83%A8%E5%92%8CLambda/" data-id="ckupml8p0000xjkueb2eogha8"
         class="article-share-link">分享</a>
         
       

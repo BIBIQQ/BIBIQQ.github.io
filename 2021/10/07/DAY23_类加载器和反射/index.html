@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    类加载器和反射 |  ONE PEAC
+  </title>
+  <meta name="generator" content="hexo-theme-yilia-plus">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+<script src="/js/pace.min.js"></script>
+
+
+  
+
+  
+
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    <main class="content">
+      <section class="outer">
+  <article id="post-DAY23_类加载器和反射" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  类加载器和反射
+</h1>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2021/10/07/DAY23_%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8%E5%92%8C%E5%8F%8D%E5%B0%84/" class="article-date">
+  <time datetime="2021-10-07T14:13:19.000Z" itemprop="datePublished">2021-10-07</time>
+</a>
+      
+      
+      
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">2.3k字</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">10分钟</span>
+        </span>
+    </span>
+</div>
+
+      
+    </div>
+    
+
+    
+    
+    <div class="tocbot"></div>
+
+
+
+
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h3 id="43-类加载器"><a href="#43-类加载器" class="headerlink" title="43. 类加载器"></a>43. 类加载器</h3><h4 id="43-1-类加载器的基础"><a href="#43-1-类加载器的基础" class="headerlink" title="43.1 类加载器的基础"></a>43.1 类加载器的基础</h4><h5 id="43-1-1-类加载器的概念"><a href="#43-1-1-类加载器的概念" class="headerlink" title="43.1.1 类加载器的概念"></a>43.1.1 类加载器的概念</h5><blockquote>
+<p>类加载器：负责将.class文件(存储的物理文件)加载到内存中</p>
+</blockquote>
+<h4 id="43-2-类加载器的过程"><a href="#43-2-类加载器的过程" class="headerlink" title="43.2 类加载器的过程"></a>43.2 类加载器的过程</h4><blockquote>
+<p>类加载时机</p>
+<ul>
+<li>创建类的实例（对象）</li>
+<li>调用类的类方法</li>
+<li>访问类或者接口的类变量，或者为该类变量赋值</li>
+<li>使用反射方式来强制创建某个类或接口对应的java.lang.Class对象</li>
+<li>初始化某个类的子类</li>
+<li>直接使用java.exe命令来运行某个主类、</li>
+</ul>
+<h6 id="使用的时候加载，不运行不加载"><a href="#使用的时候加载，不运行不加载" class="headerlink" title="==使用的时候加载，不运行不加载=="></a>==使用的时候加载，不运行不加载==</h6><p>过程：</p>
+<p>加载—验证—准备—解析—初始化</p>
+<p>链接：验证-准备-解析 </p>
+<p>加载：（把Class文件加载到内存中）</p>
+<p>​    全限定类名 ： 包名+类名  （相当于类的绝对路径）</p>
+<ul>
+<li>通过包名+类名，来获取这个类，准备用进行传输</li>
+<li>在这个类加载到内存中</li>
+<li>加载完毕创建一个Class对象</li>
+</ul>
+<p>验证：</p>
+<ul>
+<li>文件中的信息是否符合规范</li>
+</ul>
+<p>准备：</p>
+<ul>
+<li>初始化静态变量</li>
+</ul>
+<p>解析：</p>
+<ul>
+<li>如果使用到其他的类，就找到该类</li>
+</ul>
+<p>初始化：</p>
+<ul>
+<li>静态变量赋值以及初始化其他资源</li>
+</ul>
+</blockquote>
+<h4 id="43-3-类加载器的分类"><a href="#43-3-类加载器的分类" class="headerlink" title="43.3 类加载器的分类"></a>43.3 类加载器的分类</h4><blockquote>
+<p>三种加载器</p>
+<ul>
+<li>启动类加载器：虚拟机内置的类加载<ul>
+<li>加载JRE        </li>
+</ul>
+</li>
+<li>平台类加载器：负责加载JDK一些特殊的模块  <ul>
+<li>加载JDK   </li>
+</ul>
+</li>
+<li>系统类加载器：负责加载用户类路径上所指定的类库  <ul>
+<li>加载自己的类或者别人的工具类   </li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h4 id="43-4-双亲委派模型"><a href="#43-4-双亲委派模型" class="headerlink" title="43.4 双亲委派模型"></a>43.4 双亲委派模型</h4><blockquote>
+<p>方法：</p>
+<table>
+<thead>
+<tr>
+<th>方法名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>public static ClassLoader getSystemClassLoader()</td>
+<td>获取系统类加载器</td>
+</tr>
+<tr>
+<td>public InputStream getResourceAsStream(String name)</td>
+<td>加载某一个资源文件</td>
+</tr>
+</tbody></table>
+<p>示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ClassLoaderDemo2</span> </span>&#123;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">       <span class="comment">//static ClassLoader getSystemClassLoader() 获取系统类加载器</span></span><br><span class="line">       <span class="comment">//InputStream getResourceAsStream(String name)  加载某一个资源文件</span></span><br><span class="line"></span><br><span class="line">       <span class="comment">//获取系统类加载器</span></span><br><span class="line">       ClassLoader systemClassLoader = ClassLoader.getSystemClassLoader();</span><br><span class="line"></span><br><span class="line">       <span class="comment">//利用加载器去加载一个指定的文件</span></span><br><span class="line">       <span class="comment">//参数：文件的路径（放在src的根目录下，默认去那里加载）</span></span><br><span class="line">       <span class="comment">//返回值：字节流。</span></span><br><span class="line">     InputStream is = systemClassLoader.getResourceAsStream(<span class="string">"prop.properties"</span>);</span><br><span class="line"></span><br><span class="line">       Properties prop = <span class="keyword">new</span> Properties();</span><br><span class="line">     prop.load(is);</span><br><span class="line"></span><br><span class="line">     System.out.println(prop);</span><br><span class="line"></span><br><span class="line">       is.close();</span><br><span class="line">   &#125;</span><br><span class="line">&gt;&#125;</span><br></pre></td></tr></table></figure>
+
+
+</blockquote>
+<h3 id="44-反射"><a href="#44-反射" class="headerlink" title="44. 反射"></a>44. 反射</h3><h4 id="44-1-反射的概念"><a href="#44-1-反射的概念" class="headerlink" title="44.1 反射的概念"></a>44.1 反射的概念</h4><blockquote>
+<p>Java反射机制：</p>
+<ul>
+<li>在运行状态下，对于任何一个类，都能够知道这个类的所有属性和方法</li>
+<li>对于任何一个对象，都能调用它的任意属性和方法</li>
+</ul>
+<p>==利用反射调用它类中的属性和方法时，无视修饰符==</p>
+<p>先获取配置文件中的信息，动态获取信息并创建对象和调动方法</p>
+</blockquote>
+<h4 id="44-2-使用反射的前提条件"><a href="#44-2-使用反射的前提条件" class="headerlink" title="44.2 使用反射的前提条件"></a>44.2 使用反射的前提条件</h4><h5 id="44-2-1-获取Class类的对象"><a href="#44-2-1-获取Class类的对象" class="headerlink" title="44.2.1 获取Class类的对象"></a>44.2.1 获取Class类的对象</h5><blockquote>
+<p>三种方法：</p>
+<ul>
+<li>Class类中的静态方法forName（“包名+类名”）</li>
+<li>通过class属性来获得</li>
+<li>利用对象的getClass方法来获得class对象；getClass方法是定义在Object类中</li>
+</ul>
+<p>示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">text</span> </span>&#123;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> ClassNotFoundException </span>&#123;</span><br><span class="line">&gt;<span class="comment">//        1.Class类中的静态方法forName（“全类名”）</span></span><br><span class="line">       <span class="comment">//全类名：包名+类名</span></span><br><span class="line">       Class clazz = Class.forName(<span class="string">"DAY24.Demo.Demo01.Staff"</span>);</span><br><span class="line">       System.out.println(clazz);</span><br><span class="line"></span><br><span class="line">&gt;<span class="comment">//        2.通过class属性来获得</span></span><br><span class="line">       Class clazz2 = Staff<span class="class">.<span class="keyword">class</span></span>;</span><br><span class="line">       System.out.println(clazz2);</span><br><span class="line"></span><br><span class="line">&gt;<span class="comment">//        3.利用对象的getClass方法来获得class对象</span></span><br><span class="line">&gt;<span class="comment">//            getClass方法是定义在Object类中</span></span><br><span class="line">       Staff staff= <span class="keyword">new</span> Staff();</span><br><span class="line">       Class clazz3 = staff.getClass();</span><br><span class="line">       System.out.println(clazz3);</span><br><span class="line"></span><br><span class="line">   &#125;</span><br><span class="line">&gt;&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+</blockquote>
+<h4 id="44-3-Class的使用"><a href="#44-3-Class的使用" class="headerlink" title="44.3 Class的使用"></a>44.3 Class的使用</h4><h5 id="44-3-1-Class的方法"><a href="#44-3-1-Class的方法" class="headerlink" title="44.3.1 Class的方法"></a>44.3.1 Class的方法</h5><blockquote>
+<p>获取构造方法：</p>
+<table>
+<thead>
+<tr>
+<th>方法名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Constructor&lt;?&gt;[] getDeclaredConstructors()</td>
+<td>返回所有构造方法对象的数组</td>
+</tr>
+<tr>
+<td>Constructor&lt;?&gt;[] getConstructors()</td>
+<td>返回所有公共构造方法对象的数组</td>
+</tr>
+<tr>
+<td>Constructor<T> getConstructor(Class&lt;?&gt;… parameterTypes)</td>
+<td>返回单个公共构造方法对象</td>
+</tr>
+<tr>
+<td>Constructor<T> getDeclaredConstructor(Class&lt;?&gt;… parameterTypes)</td>
+<td>返回单个构造方法对象</td>
+</tr>
+</tbody></table>
+<p>示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ClassDemo02</span> </span>&#123;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> NoSuchMethodException </span>&#123;</span><br><span class="line">       <span class="comment">//返回单个公共构造方法</span></span><br><span class="line">&gt;<span class="comment">//        method01();</span></span><br><span class="line">       <span class="comment">//获取单个构造方法</span></span><br><span class="line">&gt;<span class="comment">//        method02();</span></span><br><span class="line">       <span class="comment">//返回所有构造方法对象数组</span></span><br><span class="line">&gt;<span class="comment">//        method03();</span></span><br><span class="line">       <span class="comment">//返回所有公共方法对象</span></span><br><span class="line">&gt;<span class="comment">//        method04();</span></span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">method04</span><span class="params">()</span> </span>&#123;</span><br><span class="line">       <span class="comment">//获取class对象</span></span><br><span class="line">       Class clazz = Staff<span class="class">.<span class="keyword">class</span></span>;</span><br><span class="line">       <span class="comment">//返回所有公共方法对象</span></span><br><span class="line">       Constructor[] cs = clazz.getConstructors();</span><br><span class="line">       System.out.println(Arrays.toString(cs));</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">method03</span><span class="params">()</span> </span>&#123;</span><br><span class="line">       <span class="comment">//获取class对象</span></span><br><span class="line">       Class clazz = Staff<span class="class">.<span class="keyword">class</span></span>;</span><br><span class="line">       <span class="comment">//返回所有构造方法对象数组</span></span><br><span class="line">       Constructor[] dc = clazz.getDeclaredConstructors();</span><br><span class="line">       System.out.println(Arrays.toString(dc));</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">method02</span><span class="params">()</span> <span class="keyword">throws</span> NoSuchMethodException </span>&#123;</span><br><span class="line">       <span class="comment">//获取class对象</span></span><br><span class="line">       Class clazz = Staff<span class="class">.<span class="keyword">class</span></span>;</span><br><span class="line">       <span class="comment">//获取单个构造方法</span></span><br><span class="line">       Constructor dc = clazz.getDeclaredConstructor();</span><br><span class="line">       System.out.println(dc);</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">method01</span><span class="params">()</span> <span class="keyword">throws</span> NoSuchMethodException </span>&#123;</span><br><span class="line">       <span class="comment">//获取class对象</span></span><br><span class="line">       Class clazz = Staff<span class="class">.<span class="keyword">class</span></span>;</span><br><span class="line">       <span class="comment">//获取无参构造</span></span><br><span class="line">       Constructor cs = clazz.getConstructor();</span><br><span class="line">       System.out.println(cs);</span><br><span class="line">       <span class="comment">//获取有参构造，顺序需要和构造方法的顺序一致</span></span><br><span class="line">       Constructor cs2 = clazz.getConstructor(String<span class="class">.<span class="keyword">class</span>, <span class="title">String</span>.<span class="title">class</span>)</span>;</span><br><span class="line">       System.out.println(cs2);</span><br><span class="line">   &#125;</span><br><span class="line">&gt;&#125;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h5 id="44-3-2-Class的成员方法使用"><a href="#44-3-2-Class的成员方法使用" class="headerlink" title="44.3.2 Class的成员方法使用"></a>44.3.2 Class的成员方法使用</h5><blockquote>
+<p>成员方法：</p>
+<table>
+<thead>
+<tr>
+<th>方法名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>T newInstance(Object…initargs)</td>
+<td>根据指定的构造方法创建对象</td>
+</tr>
+<tr>
+<td>setAccessible(boolean flag)</td>
+<td>设置为true,表示取消访问检查</td>
+</tr>
+</tbody></table>
+<p>示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ClassDemo03</span> </span>&#123;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException </span>&#123;</span><br><span class="line">&gt;<span class="comment">//        method01();</span></span><br><span class="line">&gt;<span class="comment">//        method02();</span></span><br><span class="line">&gt;<span class="comment">//        method03();</span></span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">method03</span><span class="params">()</span> <span class="keyword">throws</span> NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException </span>&#123;</span><br><span class="line">       <span class="comment">//获取Class对象</span></span><br><span class="line">       Class clazz = Staff<span class="class">.<span class="keyword">class</span></span>;</span><br><span class="line">       <span class="comment">//获取无参构造</span></span><br><span class="line">       Constructor dc = clazz.getDeclaredConstructor(String<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">       <span class="comment">//被private修饰的成员，不能直接使用</span></span><br><span class="line">       <span class="comment">//如果用反射强行获取并且使用，需要临时取消访问检查</span></span><br><span class="line">       dc.setAccessible(<span class="keyword">true</span>);</span><br><span class="line">       Staff staff = (Staff) dc.newInstance(<span class="string">"李四"</span>);</span><br><span class="line">       System.out.println(staff);</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">method02</span><span class="params">()</span> <span class="keyword">throws</span> NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException </span>&#123;</span><br><span class="line">       <span class="comment">//获取Class对象</span></span><br><span class="line">       Class clazz = Staff<span class="class">.<span class="keyword">class</span></span>;</span><br><span class="line">       <span class="comment">//获取公共的无参构造</span></span><br><span class="line">       Constructor cs = clazz.getConstructor();</span><br><span class="line">       <span class="comment">//使用对象</span></span><br><span class="line">       Staff staff = (Staff) cs.newInstance();</span><br><span class="line">       System.out.println(staff);</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">method01</span><span class="params">()</span> <span class="keyword">throws</span> NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException </span>&#123;</span><br><span class="line">       <span class="comment">//获取Class对象</span></span><br><span class="line">       Class clazz = Staff<span class="class">.<span class="keyword">class</span></span>;</span><br><span class="line">       <span class="comment">//获取构造方法 有参</span></span><br><span class="line">       Constructor cs = clazz.getConstructor(String<span class="class">.<span class="keyword">class</span>, <span class="title">String</span>.<span class="title">class</span>)</span>;</span><br><span class="line">       Staff sta1 = (Staff) cs.newInstance(<span class="string">"六四"</span>, <span class="string">"14"</span>);</span><br><span class="line">       <span class="comment">//        System.out.println(sta1);</span></span><br><span class="line">   &#125;</span><br><span class="line">&gt;&#125;</span><br></pre></td></tr></table></figure>
+
+
+</blockquote>
+<h5 id="44-3-3-Clas的成员变量-Field对象"><a href="#44-3-3-Clas的成员变量-Field对象" class="headerlink" title="44.3.3 Clas的成员变量 - Field对象"></a>44.3.3 Clas的成员变量 - Field对象</h5><blockquote>
+<p>方法分类：</p>
+<table>
+<thead>
+<tr>
+<th>方法名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Field[] getFields()</td>
+<td>返回所有公共成员变量对象的数组</td>
+</tr>
+<tr>
+<td>Field[] getDeclaredFields()</td>
+<td>返回所有成员变量对象的数组</td>
+</tr>
+<tr>
+<td>Field getField(String name)</td>
+<td>返回单个公共成员变量对象</td>
+</tr>
+<tr>
+<td>Field getDeclaredField(String name)</td>
+<td>返回单个成员变量对象</td>
+</tr>
+</tbody></table>
+<p>示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ClassFieldDemo</span> </span>&#123;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> NoSuchFieldException, IllegalAccessException </span>&#123;</span><br><span class="line">&gt;<span class="comment">//        method01();</span></span><br><span class="line">&gt;<span class="comment">//        method02();</span></span><br><span class="line">&gt;<span class="comment">//        method03();</span></span><br><span class="line">&gt;<span class="comment">//        mothod04();</span></span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">mothod04</span><span class="params">()</span> </span>&#123;</span><br><span class="line">       <span class="comment">//获取Class对象</span></span><br><span class="line">       Class&lt;Staff&gt; clazz = Staff<span class="class">.<span class="keyword">class</span></span>;</span><br><span class="line">       <span class="comment">//获取所有成员变量数组对象</span></span><br><span class="line">       Field[] declaredFields = clazz.getDeclaredFields();</span><br><span class="line">       System.out.println(Arrays.toString(declaredFields));</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">method03</span><span class="params">()</span> </span>&#123;</span><br><span class="line">       <span class="comment">//获取Class对象</span></span><br><span class="line">       Class&lt;Staff&gt; clazz = Staff<span class="class">.<span class="keyword">class</span></span>;</span><br><span class="line">       <span class="comment">//获取所有公共成员变量对象的数组</span></span><br><span class="line">       Field[] fields = clazz.getFields();</span><br><span class="line">       System.out.println(Arrays.toString(fields));</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">method02</span><span class="params">()</span> <span class="keyword">throws</span> NoSuchFieldException </span>&#123;</span><br><span class="line">       <span class="comment">//获取Class对象</span></span><br><span class="line">       Class&lt;Staff&gt; clazz = Staff<span class="class">.<span class="keyword">class</span></span>;</span><br><span class="line">       <span class="comment">//获取私有成员变量</span></span><br><span class="line">       Field field = clazz.getDeclaredField(<span class="string">"name"</span>);</span><br><span class="line">       System.out.println(field);</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">method01</span><span class="params">()</span> <span class="keyword">throws</span> NoSuchFieldException </span>&#123;</span><br><span class="line">       <span class="comment">//获取Class对象</span></span><br><span class="line">       Class&lt;Staff&gt; clazz = Staff<span class="class">.<span class="keyword">class</span></span>;</span><br><span class="line">       <span class="comment">//获取的成员变量必须是真实存在的</span></span><br><span class="line">       <span class="comment">//且必须是public修饰的</span></span><br><span class="line">       <span class="comment">//获取name的成员变量</span></span><br><span class="line">       Field field = clazz.getField(<span class="string">"sex"</span>);</span><br><span class="line">       System.out.println(field);</span><br><span class="line">   &#125;</span><br><span class="line">&gt;&#125;</span><br></pre></td></tr></table></figure>
+
+
+</blockquote>
+<h5 id="44-3-4-Class的Field对象进行赋值并使用"><a href="#44-3-4-Class的Field对象进行赋值并使用" class="headerlink" title="44.3.4 Class的Field对象进行赋值并使用"></a>44.3.4 Class的Field对象进行赋值并使用</h5><blockquote>
+<p>方法介绍</p>
+<table>
+<thead>
+<tr>
+<th>方法名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>void set(Object obj, Object value)</td>
+<td>赋值</td>
+</tr>
+<tr>
+<td>Object get(Object obj)</td>
+<td>获取值</td>
+</tr>
+</tbody></table>
+<p>示例:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&gt;public class ClassFieldSetDemo &#123;</span><br><span class="line">   public static void main(String[] args) throws NoSuchFieldException, IllegalAccessException, InstantiationException &#123;</span><br><span class="line">       </span><br><span class="line">       &#x2F;&#x2F;获取Class对象</span><br><span class="line">       Class clazz &#x3D; Staff.class;</span><br><span class="line">       &#x2F;&#x2F;获取成员变量</span><br><span class="line">       Field field &#x3D; clazz.getDeclaredField(&quot;sex&quot;);</span><br><span class="line">       &#x2F;&#x2F;避免访问</span><br><span class="line">       field.setAccessible(true);</span><br><span class="line">       &#x2F;&#x2F;获取成员对象</span><br><span class="line">       Staff staff &#x3D; (Staff)clazz.newInstance();</span><br><span class="line">&gt;&#x2F;&#x2F;        Staff o &#x3D; (Staff)df.get(staff);</span><br><span class="line">       &#x2F;&#x2F;设置成员变量</span><br><span class="line">       field.set(staff,&quot;女&quot;);</span><br><span class="line">       &#x2F;&#x2F;获取成员变量</span><br><span class="line">       String  sex &#x3D;(String) field.get(staff);</span><br><span class="line">       System.out.println(sex);</span><br><span class="line">   &#125;</span><br><span class="line">&gt;&#125;</span><br></pre></td></tr></table></figure>
+
+
+</blockquote>
+<h5 id="44-3-4-Class的调用成员方法"><a href="#44-3-4-Class的调用成员方法" class="headerlink" title="44.3.4 Class的调用成员方法"></a>44.3.4 Class的调用成员方法</h5><blockquote>
+<p>方法分类</p>
+<table>
+<thead>
+<tr>
+<th>方法名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Method[] getMethods()</td>
+<td>返回所有公共成员方法对象的数组，包括继承的</td>
+</tr>
+<tr>
+<td>Method[] getDeclaredMethods()</td>
+<td>返回所有成员方法对象的数组，不包括继承的</td>
+</tr>
+<tr>
+<td>Method getMethod(String name, Class&lt;?&gt;… parameterTypes)</td>
+<td>返回单个公共成员方法对象</td>
+</tr>
+<tr>
+<td>Method getDeclaredMethod(String name, Class&lt;?&gt;… parameterTypes)</td>
+<td>返回单个成员方法对象</td>
+</tr>
+</tbody></table>
+<p>示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ClassGetMethodDemo</span> </span>&#123;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> NoSuchMethodException </span>&#123;</span><br><span class="line">&gt;<span class="comment">//        method01();</span></span><br><span class="line">&gt;<span class="comment">//        method02();</span></span><br><span class="line">   &#125;</span><br><span class="line">   <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">method02</span><span class="params">()</span> <span class="keyword">throws</span> NoSuchMethodException </span>&#123;</span><br><span class="line"></span><br><span class="line">       <span class="comment">//创建Class对象</span></span><br><span class="line">       Class&lt;Staff&gt; clazz = Staff<span class="class">.<span class="keyword">class</span></span>;</span><br><span class="line">       <span class="comment">//获取方法method02</span></span><br><span class="line">       Method method02 = clazz.getDeclaredMethod(<span class="string">"method02"</span>);</span><br><span class="line">       System.out.println(method02);</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">method01</span><span class="params">()</span> <span class="keyword">throws</span> NoSuchMethodException </span>&#123;</span><br><span class="line">       <span class="comment">//创建Class对象</span></span><br><span class="line">       Class&lt;Staff&gt; clazz = Staff<span class="class">.<span class="keyword">class</span></span>;</span><br><span class="line">       <span class="comment">//获取成员方法method01</span></span><br><span class="line">       Method method01 = clazz.getMethod(<span class="string">"method01"</span>);</span><br><span class="line">       System.out.println(method01);</span><br><span class="line">   &#125;</span><br><span class="line">&gt;&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>成员方法使用：</strong></p>
+<p>方法介绍</p>
+<table>
+<thead>
+<tr>
+<th>方法名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Object invoke(Object obj, Object… args)</td>
+<td>运行方法</td>
+</tr>
+</tbody></table>
+<p>参数一: 用obj对象调用该方法</p>
+<p>参数二: 调用方法的传递的参数(如果没有就不写)</p>
+<p>返回值: 方法的返回值(如果没有就不写)</p>
+<p>示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ClassMethodUser</span> </span>&#123;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> NoSuchMethodException, IllegalAccessException, InstantiationException, InvocationTargetException </span>&#123;</span><br><span class="line">       <span class="comment">//创建Class对象</span></span><br><span class="line">       Class clazz = Staff<span class="class">.<span class="keyword">class</span></span>;</span><br><span class="line">       <span class="comment">//构造成员方法</span></span><br><span class="line">       Constructor dc = clazz.getDeclaredConstructor();</span><br><span class="line">       <span class="comment">//避免访问</span></span><br><span class="line">       dc.setAccessible(<span class="keyword">true</span>);</span><br><span class="line">       <span class="comment">//调用方法</span></span><br><span class="line">       Method method02 = clazz.getDeclaredMethod(<span class="string">"method02"</span>);</span><br><span class="line">       <span class="comment">//避免访问</span></span><br><span class="line">       method02.setAccessible(<span class="keyword">true</span>);</span><br><span class="line">       <span class="comment">//创建Staff对象</span></span><br><span class="line">       Staff staff = (Staff) dc.newInstance();</span><br><span class="line">       method02.invoke(staff);</span><br><span class="line">   &#125;</span><br><span class="line">&gt;&#125;</span><br></pre></td></tr></table></figure>
+
+
+</blockquote>
+<h4 id="44-4-注意事项"><a href="#44-4-注意事项" class="headerlink" title="44.4 注意事项"></a>44.4 注意事项</h4><blockquote>
+<ul>
+<li>调用私有成员或者私有方法，需要添加 <code>T setAccessible(true);</code>语句，暴力破解</li>
+<li>创建Class后，需要创建成员构造方法</li>
+<li>不能直接使用Class对象直接创建成员对象,需要创建构造方法后，构造方法对象进行构造</li>
+</ul>
+</blockquote>
+
+      
+      <!-- 打赏 -->
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2021/10/07/DAY23_%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8%E5%92%8C%E5%8F%8D%E5%B0%84/" data-id="ckupml8oj0009jkue2j3z4f61"
+        class="article-share-link">分享</a>
+        
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%90%8E%E7%AB%AF%E5%AD%A6%E4%B9%A0/" rel="tag">后端学习</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+  
+  <nav class="article-nav">
+    
+      <a href="/2021/10/13/Day22_%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            网络编程
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2021/10/07/Day21_%E5%A4%9A%E7%BA%BF%E7%A8%8B/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">多线程</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+  
+<!-- valine评论 -->
+<div id="vcomments-box">
+    <div id="vcomments">
+    </div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js'></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        notify: false,
+        verify: '',
+        app_id: '',
+        app_key: '',
+        path: window.location.pathname,
+        avatar: 'mp',
+        placeholder: '给我的文章加点评论吧~',
+        recordIP: true
+    });
+    const infoEle = document.querySelector('#vcomments .info');
+    if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+        infoEle.childNodes.forEach(function (item) {
+            item.parentNode.removeChild(item);
+        });
+    }
+</script>
+<style>
+    #vcomments-box {
+        padding: 5px 30px;
+    }
+
+    @media screen and (max-width: 800px) {
+        #vcomments-box {
+            padding: 5px 0px;
+        }
+    }
+
+    #vcomments-box #vcomments {
+        background-color: #fff;
+    }
+
+    .v .vlist .vcard .vh {
+        padding-right: 20px;
+    }
+
+    .v .vlist .vcard {
+        padding-left: 10px;
+    }
+</style>
+
+  
+
+  
+  
+  
+
+</article>
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul class="list-inline">
+      <li>
+        &copy;
+        2020-2021
+        ff
+      </li>
+      <li>
+        
+          Powered by
+        
+        
+        <a href="https://hexo.io" target="_blank">Hexo</a> Theme <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul class="list-inline">
+      <li>
+        
+        
+        <ul class="list-inline">
+  <li>PV:<span id="busuanzi_value_page_pv"></span></li>
+  <li>UV:<span id="busuanzi_value_site_uv"></span></li>
+</ul>
+        
+      </li>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+    <div class="to_top">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+      </div>
+    </main>
+      <aside class="sidebar">
+        <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="ONE PEAC"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/2019/about">关于我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜索">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+      </aside>
+      <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+      
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script>
+  try {
+    var typed = new Typed("#subtitle", {
+    strings: ['面朝大海，春暖花开','愿你一生努力，一生被爱','想要的都拥有，得不到的都释怀'],
+    startDelay: 0,
+    typeSpeed: 200,
+    loop: true,
+    backSpeed: 100,
+    showCursor: true
+    });
+  } catch (err) {
+  }
+  
+</script>
+
+
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer:'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto',
+    onClick: (e) => {
+      $('.toc-link').removeClass('is-active-link');
+      $(`a[href=${e.target.hash}]`).addClass('is-active-link');
+      $(e.target.hash).scrollIntoView();
+      return false;
+    }
+  });
+</script>
+
+
+<script>
+  var ayerConfig = {
+    mathjax: false
+  }
+</script>
+
+
+<script src="/js/ayer.js"></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+
+
+
+<script type="text/javascript" src="https://js.users.51.la/20544303.js"></script>
+  </div>
+</body>
+
+</html>
