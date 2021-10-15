@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    单元测试和日志 |  ONE PEAC
+  </title>
+  <meta name="generator" content="hexo-theme-yilia-plus">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+<script src="/js/pace.min.js"></script>
+
+
+  
+
+  
+
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    <main class="content">
+      <section class="outer">
+  <article id="post-DAY25_单元测试" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  单元测试和日志
+</h1>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2021/10/15/DAY25_%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/" class="article-date">
+  <time datetime="2021-10-15T05:44:19.000Z" itemprop="datePublished">2021-10-15</time>
+</a>
+      
+      
+      
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">1.6k字</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">6分钟</span>
+        </span>
+    </span>
+</div>
+
+      
+    </div>
+    
+
+    
+    
+    <div class="tocbot"></div>
+
+
+
+
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h3 id="48-单元测试"><a href="#48-单元测试" class="headerlink" title="48. 单元测试"></a>48. 单元测试</h3><h4 id="48-1-单元测试的概念"><a href="#48-1-单元测试的概念" class="headerlink" title="48.1 单元测试的概念"></a>48.1 单元测试的概念</h4><blockquote>
+<p>单元测试:对软件最小单元的测试</p>
+<p>步骤：</p>
+<p>1.将junit4J添加项目中</p>
+<p>2.编写测试类</p>
+<p>3.编写测试方法</p>
+<p>@Test  :表示一个方法为测试方法</p>
+<p>@Before: 表示一个测试方法执行前要执行的方法</p>
+<p>@After: 表示一个测试方法执行之后要执行的方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UseAnno</span> </span>&#123;</span><br><span class="line"><span class="comment">//测试执行之前执行</span></span><br><span class="line">  <span class="meta">@Before</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">method</span><span class="params">()</span></span>&#123;</span><br><span class="line">       System.out.println(<span class="string">"method"</span>);</span><br><span class="line">   &#125;</span><br><span class="line">    <span class="comment">//Before 和After一定会执行</span></span><br><span class="line"><span class="comment">//可以单独运行  </span></span><br><span class="line">   <span class="meta">@Test</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">fountion</span><span class="params">()</span></span>&#123;</span><br><span class="line">       System.out.println(<span class="string">"fountion"</span>);</span><br><span class="line">   &#125;</span><br><span class="line"><span class="comment">//可以单独运行</span></span><br><span class="line">   <span class="meta">@Test</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">fountion1</span><span class="params">()</span></span>&#123;</span><br><span class="line">       System.out.println(<span class="string">"HELLO"</span>);</span><br><span class="line">   &#125;</span><br><span class="line"><span class="comment">//测试执行之后执行</span></span><br><span class="line">  <span class="meta">@After</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">aethod01</span><span class="params">()</span></span>&#123;</span><br><span class="line">       System.out.println(<span class="number">2</span> / <span class="number">1</span>);</span><br><span class="line">   &#125;</span><br><span class="line">&gt;&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+</blockquote>
+<h3 id="49-日志"><a href="#49-日志" class="headerlink" title="49. 日志"></a>49. 日志</h3><blockquote>
+<p>日志：对方法执行过程的记录</p>
+<p>步骤：</p>
+<p>1.将log4j-1.2.17.jar、slf4j-log4j12-1.7.26.jar、slf4j-api-1.7.30.jar添加项目中</p>
+<p>2.导入log4j.properties配置文件到src目录下</p>
+<p>3.配置测试文件</p>
+<p>4.在代码中获取日志的对象</p>
+<p>5.按照级别设置记录日志信息</p>
+<p>日志类别分类</p>
+<ul>
+<li>debug</li>
+<li>info</li>
+<li>warn</li>
+<li>error</li>
+</ul>
+<p>示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Log4jDemo</span> </span>&#123;</span><br><span class="line">   <span class="comment">//必须先导入Logger对象 </span></span><br><span class="line">   <span class="comment">//参数写本类字节码文件</span></span><br><span class="line">   <span class="keyword">private</span> <span class="keyword">static</span>  <span class="keyword">final</span> Logger log = LoggerFactory.getLogger(Log4jDemo<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">   </span><br><span class="line">   <span class="meta">@Test</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">()</span></span>&#123;</span><br><span class="line">       log.debug(<span class="string">"debug日志"</span>);</span><br><span class="line">       log.info(<span class="string">"info日志"</span>);</span><br><span class="line">       log.warn(<span class="string">"warn日志"</span>);</span><br><span class="line">       log.error(<span class="string">"error日志"</span>);</span><br><span class="line"></span><br><span class="line">   &#125;</span><br><span class="line">&gt;&#125;</span><br></pre></td></tr></table></figure>
+
+
+<p>配置文件：</p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">&gt;#debug日志需要修改debug,my,fileAppender</span></span><br><span class="line"><span class="attr">&gt;#通常使用info,my,fileAppender</span></span><br><span class="line"><span class="meta">&gt;log4j.rootLogger</span>=<span class="string">debug,my,fileAppender</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;###</span> <span class="string">direct log messages to my ###</span></span><br><span class="line"><span class="attr">&gt;#输出到控制台</span></span><br><span class="line"><span class="meta">&gt;log4j.appender.my</span>=<span class="string">org.apache.log4j.ConsoleAppender</span></span><br><span class="line"><span class="attr">&gt;##表示所有的消息都会被立刻输出</span></span><br><span class="line"><span class="meta">&gt;log4j.appender.my.ImmediateFlush</span> = <span class="string">true</span></span><br><span class="line"><span class="attr">&gt;#使用System.out方式输出</span></span><br><span class="line"><span class="meta">&gt;log4j.appender.my.Target</span>=<span class="string">System.out</span></span><br><span class="line"><span class="attr">&gt;#使用pattenlayout布局输出日志</span></span><br><span class="line"><span class="meta">&gt;log4j.appender.my.layout</span>=<span class="string">org.apache.log4j.PatternLayout</span></span><br><span class="line"><span class="meta">&gt;log4j.appender.my.layout.ConversionPattern</span>=<span class="string">%d %t %5p %c&#123;1&#125;:%L - %m%n</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;#</span> <span class="string">fileAppender演示</span></span><br><span class="line"><span class="attr">&gt;#输出到地方文件夹</span></span><br><span class="line"><span class="meta">&gt;log4j.appender.fileAppender</span>=<span class="string">org.apache.log4j.FileAppender</span></span><br><span class="line"><span class="attr">&gt;#表示所有的消息都会被立刻输出</span></span><br><span class="line"><span class="meta">&gt;log4j.appender.fileAppender.ImmediateFlush</span> = <span class="string">true</span></span><br><span class="line"><span class="attr">&gt;#表示输出的内容，会从结尾输出，不会重置</span></span><br><span class="line"><span class="meta">&gt;log4j.appender.fileAppender.Append</span>=<span class="string">true</span></span><br><span class="line"><span class="attr">&gt;#输出文件，存储地址</span></span><br><span class="line"><span class="meta">&gt;log4j.appender.fileAppender.File</span>=<span class="string">./log4j-log.log</span></span><br><span class="line"><span class="attr">&gt;#输出文件指定格式</span></span><br><span class="line"><span class="meta">&gt;#</span> <span class="string">灵活使用指定布局</span></span><br><span class="line"><span class="meta">&gt;log4j.appender.fileAppender.layout</span>=<span class="string">org.apache.log4j.PatternLayout</span></span><br><span class="line"><span class="meta">&gt;log4j.appender.fileAppender.layout.ConversionPattern</span>=<span class="string">%d %5p %c&#123;1&#125;:%L - %m%n</span></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+</blockquote>
+<h4 id="49-1-日志技术-三个核心"><a href="#49-1-日志技术-三个核心" class="headerlink" title="49.1 日志技术-三个核心"></a>49.1 日志技术-三个核心</h4><blockquote>
+<p>三个核心</p>
+<ul>
+<li><p>Loggers(记录器)       日志的级别</p>
+<p>Loggers组件在此系统中常见的五个级别：DEBUG、INFO、WARN、ERROR 和 FATAL。</p>
+<p>==DEBUG &lt; INFO &lt; WARN &lt; ERROR &lt; FATAL。==</p>
+<p>==Log4j有一个规则：只输出级别不低于设定级别的日志信息。==</p>
+</li>
+<li><p>Appenders(输出源)   日志要输出的地方</p>
+<p>把日志输出到不同的地方，如控制台==（Console）、文件（Files）==等。</p>
+<ul>
+<li>org.apache.log4j.ConsoleAppender（控制台）</li>
+<li>org.apache.log4j.FileAppender（文件）</li>
+</ul>
+</li>
+<li><p>Layouts(布局)             日志输出的格式</p>
+<p>可以根据自己的喜好规定日志输出的格式</p>
+<p>常用的布局管理器：</p>
+<p>==org.apache.log4j.PatternLayout（可以灵活地指定布局模式）==</p>
+<p>org.apache.log4j.SimpleLayout（包含日志信息的级别和信息字符串）</p>
+<p>org.apache.log4j.TTCCLayout（包含日志产生的时间、线程、类别等信息）  </p>
+</li>
+</ul>
+</blockquote>
+<h4 id="49-2-配置文件的详细配置"><a href="#49-2-配置文件的详细配置" class="headerlink" title="49.2 配置文件的详细配置"></a>49.2 配置文件的详细配置</h4><blockquote>
+<p>1.配置根Logger</p>
+<ul>
+<li><p>格式</p>
+<p>==log4j.rootLogger=日志级别，appenderName1，appenderName2，…==</p>
+<p>日志级别</p>
+<p>OFF、FATAL、ERROR、WARN、INFO、DEBUG、ALL或者自定义的级别。</p>
+</li>
+<li><p>appenderName1</p>
+<p>就是指定日志信息要输出到哪里。可以同时指定多个输出目的地，用逗号隔开。</p>
+<p>例如：log4j.rootLogger＝INFO，ca，fa</p>
+</li>
+</ul>
+<p>2.ConsoleAppender常用的选项</p>
+<ul>
+<li><p>ImmediateFlush=true</p>
+<p>表示所有消息都会被立即输出，设为false则不输出，默认值是true。</p>
+</li>
+<li><p>Target=System.err</p>
+<p>默认值是System.out。</p>
+</li>
+</ul>
+<p>3.FileAppender常用的选项</p>
+<ul>
+<li><p>ImmediateFlush=true</p>
+<p>表示所有消息都会被立即输出。设为false则不输出，默认值是true</p>
+</li>
+<li><p>Append=false</p>
+<p>true表示将消息添加到指定文件中，原来的消息不覆盖。</p>
+<p>false则将消息覆盖指定的文件内容，默认值是true。</p>
+</li>
+<li><p>File=D:/logs/logging.log4j</p>
+<p>指定消息输出到logging.log4j文件中</p>
+</li>
+</ul>
+<p>4.PatternLayout常用的选项</p>
+<p>​    ConversionPattern=%m%n</p>
+<p>​    设定以怎样的格式显示消息</p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;#########</span> <span class="string">常见参数 #########</span></span><br><span class="line"><span class="attr">&gt;//</span></span><br><span class="line"><span class="meta">&gt;%c&#123;参数&#125;</span> <span class="string">或 %logger&#123;参数&#125;  ##输出日志名称</span></span><br><span class="line"><span class="meta">&gt;%C&#123;参数&#125;</span> <span class="string">或 %class&#123;参数    ##输出类型</span></span><br><span class="line"><span class="meta">&gt;%d&#123;参数&#125;&#123;时区te&#123;参数&#125;&#123;时区&#125;</span> <span class="string">##输出时间</span></span><br><span class="line"><span class="meta">&gt;%F|%file</span>                  <span class="string">##输出文件名</span></span><br><span class="line"><span class="meta">&gt;highlight&#123;pattern&#125;&#123;style&#125;</span> <span class="string">##高亮显示</span></span><br><span class="line"><span class="meta">&gt;%l</span>  <span class="string">##输出错误的完整位置</span></span><br><span class="line"><span class="meta">&gt;%L</span>  <span class="string">##输出错误行号</span></span><br><span class="line"><span class="meta">&gt;%m</span> <span class="string">或 %msg 或 %message ##输出错误信息</span></span><br><span class="line"><span class="meta">&gt;%M</span> <span class="string">或 %method ##输出方法名</span></span><br><span class="line"><span class="meta">&gt;%n</span>            <span class="string">##输出换行符</span></span><br><span class="line"><span class="meta">&gt;%level&#123;参数1&#125;&#123;参数2&#125;&#123;参数3&#125;</span> <span class="string">##输出日志的级别</span></span><br><span class="line"><span class="meta">&gt;%t</span> <span class="string">或 %thread              ##创建logging事件的线程名</span></span><br><span class="line"><span class="attr">&gt;*/</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;#########</span> <span class="string">特殊符号 ############</span></span><br><span class="line"><span class="attr">&gt;#有些特殊符号不能直接打印，需要使用实体名称或者编号</span></span><br><span class="line"><span class="attr">&gt;//</span></span><br><span class="line"><span class="meta">&gt;&amp;</span> <span class="string">—— &amp;amp; 或者 &amp;#38;</span></span><br><span class="line"><span class="meta">&gt;&lt;</span> <span class="string">—— &amp;lt;  或者 &amp;#60;</span></span><br><span class="line"><span class="meta">&gt;&gt;</span> <span class="string">—— &amp;gt;  或者 &amp;#62;</span></span><br><span class="line"><span class="meta">&gt;“</span> <span class="string">—— &amp;quot; 或者 &amp;#34;</span></span><br><span class="line"><span class="meta">&gt;‘</span> <span class="string">—— &amp;apos; 或者 &amp;#39;</span></span><br><span class="line"><span class="attr">&gt;*/</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;########</span> <span class="string">pattern对齐修饰 ##########</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;//</span> <span class="string">对齐修饰，可以指定信息的输出格式，如是否左对齐，是否留空格等。</span></span><br><span class="line"><span class="meta">&gt;##</span> <span class="string">编写格式为在任何pattern和%之间加入一个小数，可以是正数，也可以是负数。</span></span><br><span class="line"><span class="meta">&gt;##</span> <span class="string">整数表示右对齐，负数表示左对齐；</span></span><br><span class="line"><span class="meta">&gt;##</span> <span class="string">整数位表示输出信息的最小n个字符，如果输出信息不够n个字符，将用空格补齐；</span></span><br><span class="line"><span class="meta">&gt;##</span> <span class="string">小数位表示输出信息的最大字符数，如果超过n个字符，则只保留最后n个字符的信息</span></span><br><span class="line"><span class="meta">&gt;##</span> <span class="string">（注意：保留的是后20个字符，而不是前20个字符）</span></span><br><span class="line"><span class="attr">&gt;*/</span></span><br><span class="line"></span><br><span class="line"><span class="attr">&gt;#示例如下</span></span><br><span class="line"><span class="attr">&gt;//</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;%20</span> <span class="string">—— 右对齐，不足20个字符则在信息前面用空格补足，超过20个字符则保留原信息</span></span><br><span class="line"><span class="meta">&gt;%-20</span> <span class="string">—— 左对齐，不足20个字符则在信息后面用空格补足，超过20个字符则保留原信息</span></span><br><span class="line"><span class="meta">&gt;%.30</span> <span class="string">—— 如果信息超过30个字符，则只保留最后30个字符</span></span><br><span class="line"><span class="meta">&gt;%20.30</span> <span class="string">—— 右对齐，不足20个字符则在信息前面用空格补足，超过30个字符则只保留最后30个字符</span></span><br><span class="line"><span class="meta">&gt;%-20.30</span> <span class="string">—— 左对齐，不足20个字符则在信息后面用空格补足，超过30个字符则只保留最后30个字符</span></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+</blockquote>
+
+      
+      <!-- 打赏 -->
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2021/10/15/DAY25_%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/" data-id="ckury6bb00005sguee69648kh"
+        class="article-share-link">分享</a>
+        
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%90%8E%E7%AB%AF%E5%AD%A6%E4%B9%A0/" rel="tag">后端学习</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+  
+  <nav class="article-nav">
+    
+      <a href="/2021/10/15/DAY24_%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%92%8C%E6%9E%9A%E4%B8%BE/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            配置文件和枚举、注解
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2021/10/13/Day22_%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">网络编程</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+  
+<!-- valine评论 -->
+<div id="vcomments-box">
+    <div id="vcomments">
+    </div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js'></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        notify: false,
+        verify: '',
+        app_id: '',
+        app_key: '',
+        path: window.location.pathname,
+        avatar: 'mp',
+        placeholder: '给我的文章加点评论吧~',
+        recordIP: true
+    });
+    const infoEle = document.querySelector('#vcomments .info');
+    if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+        infoEle.childNodes.forEach(function (item) {
+            item.parentNode.removeChild(item);
+        });
+    }
+</script>
+<style>
+    #vcomments-box {
+        padding: 5px 30px;
+    }
+
+    @media screen and (max-width: 800px) {
+        #vcomments-box {
+            padding: 5px 0px;
+        }
+    }
+
+    #vcomments-box #vcomments {
+        background-color: #fff;
+    }
+
+    .v .vlist .vcard .vh {
+        padding-right: 20px;
+    }
+
+    .v .vlist .vcard {
+        padding-left: 10px;
+    }
+</style>
+
+  
+
+  
+  
+  
+
+</article>
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul class="list-inline">
+      <li>
+        &copy;
+        2020-2021
+        ff
+      </li>
+      <li>
+        
+          Powered by
+        
+        
+        <a href="https://hexo.io" target="_blank">Hexo</a> Theme <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul class="list-inline">
+      <li>
+        
+        
+        <ul class="list-inline">
+  <li>PV:<span id="busuanzi_value_page_pv"></span></li>
+  <li>UV:<span id="busuanzi_value_site_uv"></span></li>
+</ul>
+        
+      </li>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+    <div class="to_top">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+      </div>
+    </main>
+      <aside class="sidebar">
+        <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="ONE PEAC"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/2019/about">关于我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜索">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+      </aside>
+      <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+      
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script>
+  try {
+    var typed = new Typed("#subtitle", {
+    strings: ['面朝大海，春暖花开','愿你一生努力，一生被爱','想要的都拥有，得不到的都释怀'],
+    startDelay: 0,
+    typeSpeed: 200,
+    loop: true,
+    backSpeed: 100,
+    showCursor: true
+    });
+  } catch (err) {
+  }
+  
+</script>
+
+
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer:'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto',
+    onClick: (e) => {
+      $('.toc-link').removeClass('is-active-link');
+      $(`a[href=${e.target.hash}]`).addClass('is-active-link');
+      $(e.target.hash).scrollIntoView();
+      return false;
+    }
+  });
+</script>
+
+
+<script>
+  var ayerConfig = {
+    mathjax: false
+  }
+</script>
+
+
+<script src="/js/ayer.js"></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+
+
+
+<script type="text/javascript" src="https://js.users.51.la/20544303.js"></script>
+  </div>
+</body>
+
+</html>
