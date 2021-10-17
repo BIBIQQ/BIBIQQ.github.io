@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    MySQL基础 |  ONE PEAC
+  </title>
+  <meta name="generator" content="hexo-theme-yilia-plus">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+<script src="/js/pace.min.js"></script>
+
+
+  
+
+  
+
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    <main class="content">
+      <section class="outer">
+  <article id="post-Day01_MySQL和Navicat" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  MySQL基础
+</h1>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2021/10/16/Day01_MySQL%E5%92%8CNavicat/" class="article-date">
+  <time datetime="2021-10-16T13:19:19.000Z" itemprop="datePublished">2021-10-16</time>
+</a>
+      
+      
+      
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">1.6k字</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">7分钟</span>
+        </span>
+    </span>
+</div>
+
+      
+    </div>
+    
+
+    
+    
+    <div class="tocbot"></div>
+
+
+
+
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h3 id="1-数据库"><a href="#1-数据库" class="headerlink" title="1. 数据库"></a>1. 数据库</h3><h4 id="1-1-数据库相关概念"><a href="#1-1-数据库相关概念" class="headerlink" title="1.1 数据库相关概念"></a>1.1 数据库相关概念</h4><blockquote>
+<p>数据库：</p>
+<ul>
+<li>存储数据的仓库，数据是有组织的进行存储</li>
+<li>英文：DataBase ，简称DB</li>
+</ul>
+<p>数据库管理系统：</p>
+<ul>
+<li>管理数据库的大型软件</li>
+<li>英文：DataBase Management System，简称 DBMS</li>
+</ul>
+<p>SQL：</p>
+<ul>
+<li>英文：Structured Query Language，简称 SQL，结构化查询语言</li>
+<li>操作关系型数据库的编程语言</li>
+<li>定义操作所有关系型数据库的统一标准</li>
+</ul>
+</blockquote>
+<h4 id="1-2-SQ分类"><a href="#1-2-SQ分类" class="headerlink" title="1.2 SQ分类"></a>1.2 SQ分类</h4><blockquote>
+<p>DDL:操作数据库、表</p>
+<p>DML:操作表中数据的增删改</p>
+<p>DQL:操作表中数据进行查询</p>
+<p>DCL:对数据库中进行权限控制</p>
+<p>基本语句：</p>
+<p><strong>进入数据库</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;#mysql -u 用户名 -p 密码</span><br><span class="line">&gt;mysql -u root -p root</span><br></pre></td></tr></table></figure>
+
+<p><strong>展示所有数据库</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt;show databases;</span><br></pre></td></tr></table></figure>
+
+<p><strong>进入使用数据库</strong>：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt;use 数据库名；</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h4 id="1-3-DDL的语句"><a href="#1-3-DDL的语句" class="headerlink" title="1.3 DDL的语句:"></a>1.3 DDL的语句:</h4><blockquote>
+<p><strong>查看表结构</strong>：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt;desc 表名;</span><br></pre></td></tr></table></figure>
+
+<p><strong>更换表名</strong>：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt;ALTER TABLE 表名 RENAME TO 新的表名</span><br></pre></td></tr></table></figure>
+
+<p><strong>添加一列</strong>：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt;ALTER TABLE 表名 ADD 列名  数据类型；</span><br></pre></td></tr></table></figure>
+
+<p><strong>修改数据类型</strong>：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ALTER TABLE 表名 MODIFY 列名 新数据类型；</span><br></pre></td></tr></table></figure>
+
+<p><strong>修改列名和数据类型</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ALTER TABLE 表名 CHANGE 列名 新列名 新数据类型；</span><br></pre></td></tr></table></figure>
+
+<p><strong>删除列</strong>：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ALTER TABLE 表名 DROP 列名</span><br></pre></td></tr></table></figure>
+
+
+</blockquote>
+<h4 id="1-4-DML的语句"><a href="#1-4-DML的语句" class="headerlink" title="1.4 DML的语句"></a>1.4 DML的语句</h4><blockquote>
+<p><strong>查看所有数据</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;-- 查看所有数据</span><br><span class="line">&gt;SELECT * from stu;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>添加指定列数据</strong>：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;-- 添加指定列数据 表名（列名1，列名2） VALUES (值1，值2。。)</span><br><span class="line">&gt;INSERT INTO stu(id,&#96;name&#96;,age,sex) VALUES (11,&#39;张三&#39;,10,&#39;男&#39;);</span><br></pre></td></tr></table></figure>
+
+<p><strong>给全部列添加数据</strong>：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;-- 给全部列添加数据</span><br><span class="line">&gt;-- 给所有列添加数据，列名的列表可以省略的</span><br><span class="line">&gt;INSERT INTO tb_user (id,&#96;name&#96;,sex,birthday,sroce,emile,tell,state) VALUES (2,&#39;李四&#39;,&#39;男&#39;,&#39;1999-11-11&#39;,88.88,&#39;lisi@itcast.cn&#39;,&#39;13888888888&#39;,1);</span><br><span class="line"></span><br><span class="line">&gt;INSERT INTO tb_user VALUES (2,&#39;李四&#39;,&#39;男&#39;,&#39;1999-11-11&#39;,88.88,&#39;lisi@itcast.cn&#39;,&#39;13888888888&#39;,1);</span><br></pre></td></tr></table></figure>
+
+<p><strong>批量添加数据</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;-- 批量添加数据</span><br><span class="line">&gt;INSERT INTO tb_user VALUES </span><br><span class="line">(4,&#39;李四&#39;,&#39;男&#39;,&#39;1999-11-11&#39;,88.88,&#39;lisi@itcast.cn&#39;,&#39;13888888888&#39;,1),</span><br><span class="line">(5,&#39;李四&#39;,&#39;男&#39;,&#39;1999-11-11&#39;,88.88,&#39;lisi@itcast.cn&#39;,&#39;13888888888&#39;,1),</span><br><span class="line">(6,&#39;李四&#39;,&#39;男&#39;,&#39;1999-11-11&#39;,88.88,&#39;lisi@itcast.cn&#39;,&#39;13888888888&#39;,1);</span><br></pre></td></tr></table></figure>
+
+<p><strong>删除数据</strong>:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;-- 	删除表内数据</span><br><span class="line">&gt;DELETE FROM tb_user WHERE (条件)id &#x3D; 1;</span><br></pre></td></tr></table></figure>
+
+<p><strong>删除表中所有的数据</strong>:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt;delete from 表名;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h4 id="1-5-DQL的语句"><a href="#1-5-DQL的语句" class="headerlink" title="1.5 DQL的语句"></a>1.5 DQL的语句</h4><blockquote>
+<p>基础语法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&gt;SELECT </span><br><span class="line">   字段列表</span><br><span class="line">&gt;FROM </span><br><span class="line">   表名列表 </span><br><span class="line">&gt;WHERE </span><br><span class="line">   条件列表</span><br><span class="line">&gt;GROUP BY</span><br><span class="line">   分组字段</span><br><span class="line">&gt;HAVING</span><br><span class="line">   分组后条件</span><br><span class="line">&gt;ORDER BY</span><br><span class="line">   排序字段</span><br><span class="line">&gt;LIMIT</span><br><span class="line">   分页限定</span><br></pre></td></tr></table></figure>
+
+
+</blockquote>
+<h5 id="1-5-1-分组查询"><a href="#1-5-1-分组查询" class="headerlink" title="1.5.1 分组查询"></a>1.5.1 分组查询</h5><blockquote>
+<p><strong>查询多个字段：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;-- 查询多个字段</span><br><span class="line">&gt;SELECT * FROM tb_user;</span><br></pre></td></tr></table></figure>
+
+<p> <strong>去除重复记录：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;-- 去除重复记录</span><br><span class="line">&gt;SELECT DISTINCT &#96;name&#96; FROM tb_user;</span><br></pre></td></tr></table></figure>
+
+<p><strong>起别名  as可以省略：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;-- 起别名  as可以省略</span><br><span class="line">&gt;SELECT id as 学号,&#96;name&#96; as 姓名,sex AS 性别,birthday 出生月份 FROM tb_user;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h5 id="1-5-2-条件查询"><a href="#1-5-2-条件查询" class="headerlink" title="1.5.2 条件查询"></a>1.5.2 条件查询</h5><blockquote>
+<p>基本格式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt;SELECT 字段列表 FROM 表名 WHERE 条件列表;</span><br></pre></td></tr></table></figure>
+
+<p><strong>条件</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>符号</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>&gt;</td>
+<td>大于</td>
+</tr>
+<tr>
+<td>&lt;</td>
+<td>小于</td>
+</tr>
+<tr>
+<td>&gt;=</td>
+<td>大于等于</td>
+</tr>
+<tr>
+<td>&lt;=</td>
+<td>大于等于</td>
+</tr>
+<tr>
+<td>=</td>
+<td>等于</td>
+</tr>
+<tr>
+<td>&lt;&gt; 或!=</td>
+<td>不等于</td>
+</tr>
+<tr>
+<td>BETWEEN..AND..</td>
+<td>在某个范围之内</td>
+</tr>
+<tr>
+<td>IN(..)</td>
+<td>多选一</td>
+</tr>
+<tr>
+<td>LIKE 占位符</td>
+<td>模糊查询 %是多个任意字符</td>
+</tr>
+<tr>
+<td>IS NULL</td>
+<td>是null</td>
+</tr>
+<tr>
+<td>IS NOT NULL</td>
+<td>不是null</td>
+</tr>
+<tr>
+<td>AND 或 &amp;&amp;</td>
+<td>并且</td>
+</tr>
+<tr>
+<td>OR 或 ||</td>
+<td>或者</td>
+</tr>
+<tr>
+<td>NOT或！</td>
+<td>非，不是</td>
+</tr>
+</tbody></table>
+<p>示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">&gt;-- 条件查询</span><br><span class="line"></span><br><span class="line">&gt;-- 1. 查询年龄大于20岁的学院信息</span><br><span class="line">&gt;select id,name,age,sex,address,math,english,hire_date from stu where age &gt; 20;</span><br><span class="line"></span><br><span class="line">&gt;-- 2. 查询年龄大于等于20岁的学院信息</span><br><span class="line">&gt;select id,name,age,sex,address,math,english,hire_date from stu where age &gt;&#x3D; 20;</span><br><span class="line"></span><br><span class="line">&gt;-- 3. 查询年龄大于等于30 并且 年龄小于等于30的学员信息</span><br><span class="line">&gt;select id,name,age,sex,address,math,english,hire_date from stu where age &gt;&#x3D; 20 and age &lt;&#x3D; 30;</span><br><span class="line"></span><br><span class="line">&gt;-- 4. 查询入学日期</span><br><span class="line">&gt;select id,name,age,sex,address,math,english,hire_date from stu where hire_date between &#39;1998-09-01&#39; and &#39;1999-09-01&#39;;</span><br><span class="line"></span><br><span class="line">&gt;-- 5. 查询年龄等于20岁的学员信息</span><br><span class="line">&gt;select * from stu where age &#x3D; 20;</span><br><span class="line"></span><br><span class="line">&gt;-- 6. 查询年龄不等于20岁的学员信息</span><br><span class="line">&gt;select * from stu where age !&#x3D; 20;</span><br><span class="line">&gt;select * from stu where age &lt;&gt; 20;</span><br><span class="line"></span><br><span class="line">&gt;-- 7. 查询20岁，45岁，55岁的学员信息</span><br><span class="line">&gt;select * from stu where age &#x3D; 20 or age &#x3D; 45 or age &#x3D; 55;</span><br><span class="line">&gt;select * from stu where age in (20,45,55);</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h5 id="1-5-3-糊查询"><a href="#1-5-3-糊查询" class="headerlink" title="1.5.3 糊查询"></a>1.5.3 糊查询</h5><blockquote>
+<p>使用LIKE关键字，使用通配符进行占位</p>
+<ul>
+<li>_：表示单个字符</li>
+<li>%：表示任意字符</li>
+</ul>
+<ul>
+<li>查询姓’马’的学员信息</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;-- 查询姓&#39;马&#39;的学员信息</span><br><span class="line">&gt;select * from stu where name like &#39;马%&#39;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>查询姓第二个字是’化’的学员信息</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;-- 查询姓第二个字是&#39;化&#39;的学员信息</span><br><span class="line">&gt;select * from stu where name like &#39;_化%&#39;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>查询名字中包含’徳’的学员信息</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;-- 查询名字中包含&#39;徳&#39;的学员信息</span><br><span class="line">&gt;select * from stu where name like &#39;%德%&#39;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h5 id="1-5-4-排序查询"><a href="#1-5-4-排序查询" class="headerlink" title="1.5.4 排序查询"></a>1.5.4 排序查询</h5><blockquote>
+<p>排序方式：</p>
+<ul>
+<li>ASC 升序排列</li>
+<li>DESC 降序排列</li>
+</ul>
+<p><strong>按照升序排列:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;-- 1. 年龄按照升序排列</span><br><span class="line">&gt;select * from stu order by age ASC;</span><br></pre></td></tr></table></figure>
+
+<p><strong>数学成绩按照降序排列：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;-- 2. 数学成绩按照降序排列</span><br><span class="line">&gt;select * from stu order by math DEsc;</span><br></pre></td></tr></table></figure>
+
+<p><strong>数学成绩按照降排列,如果数学成绩一样 英语成绩按照降序排列</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;-- 4. 数学成绩按照降排列,如果数学成绩一样 英语成绩按照降序排列</span><br><span class="line">&gt;SELECT * FROM stu ORDER BY math DESC , english DESC;</span><br></pre></td></tr></table></figure>
+
+<p>注意：如果第一个条件一样，执行第二个条件</p>
+</blockquote>
+<h5 id="1-5-5-聚合查询"><a href="#1-5-5-聚合查询" class="headerlink" title="1.5.5 聚合查询"></a>1.5.5 聚合查询</h5><blockquote>
+<p>函数分类：</p>
+<table>
+<thead>
+<tr>
+<th>函数名</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>count(列名)</td>
+<td>统计数量（一般选用不为null的列）</td>
+</tr>
+<tr>
+<td>max(列名)</td>
+<td>最大值</td>
+</tr>
+<tr>
+<td>min(列名)</td>
+<td>最小值</td>
+</tr>
+<tr>
+<td>sum(列名)</td>
+<td>求和</td>
+</tr>
+<tr>
+<td>avg(列名)</td>
+<td>平均值</td>
+</tr>
+</tbody></table>
+<p>格式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt;SELECT 聚合函数名（列名） FROM 表名；</span><br></pre></td></tr></table></figure>
+
+<p>​    ==null值不参与所有聚合函数运算==</p>
+<p>示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">&gt;&#x2F;*</span><br><span class="line">&gt;取值：</span><br><span class="line">主键</span><br><span class="line">*</span><br><span class="line">&gt;*&#x2F;</span><br><span class="line"></span><br><span class="line">&gt;-- 1. 统计班级一共有多少学生</span><br><span class="line">&gt;select count(*) from stu;</span><br><span class="line"></span><br><span class="line">&gt;-- 2. 查询数学成绩的最高分</span><br><span class="line">&gt;select max(math) from stu;</span><br><span class="line"></span><br><span class="line">&gt;-- 3. 查询数学成绩的最低分</span><br><span class="line">&gt;select min(math) from stu;</span><br><span class="line"></span><br><span class="line">&gt;-- 4. 查询数学成绩的总分</span><br><span class="line">&gt;select sum(math) from stu;</span><br><span class="line"></span><br><span class="line">&gt;-- 5. 查询数学成绩的平均分</span><br><span class="line">&gt;select avg(math) from stu;</span><br><span class="line"></span><br><span class="line">&gt;-- 6. 查询英语成绩的最低分</span><br><span class="line">&gt;select min(english) from stu;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+</blockquote>
+
+      
+      <!-- 打赏 -->
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2021/10/16/Day01_MySQL%E5%92%8CNavicat/" data-id="ckuvcxgdr000aykue0wch4t2c"
+        class="article-share-link">分享</a>
+        
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+  
+  <nav class="article-nav">
+    
+      <a href="/2021/10/17/Day02_MySQL%E9%AB%98%E7%BA%A7/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            MySQL高级
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2021/10/15/DAY24_%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%92%8C%E6%9E%9A%E4%B8%BE/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">配置文件和枚举、注解</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+  
+<!-- valine评论 -->
+<div id="vcomments-box">
+    <div id="vcomments">
+    </div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js'></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        notify: false,
+        verify: '',
+        app_id: '',
+        app_key: '',
+        path: window.location.pathname,
+        avatar: 'mp',
+        placeholder: '给我的文章加点评论吧~',
+        recordIP: true
+    });
+    const infoEle = document.querySelector('#vcomments .info');
+    if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+        infoEle.childNodes.forEach(function (item) {
+            item.parentNode.removeChild(item);
+        });
+    }
+</script>
+<style>
+    #vcomments-box {
+        padding: 5px 30px;
+    }
+
+    @media screen and (max-width: 800px) {
+        #vcomments-box {
+            padding: 5px 0px;
+        }
+    }
+
+    #vcomments-box #vcomments {
+        background-color: #fff;
+    }
+
+    .v .vlist .vcard .vh {
+        padding-right: 20px;
+    }
+
+    .v .vlist .vcard {
+        padding-left: 10px;
+    }
+</style>
+
+  
+
+  
+  
+  
+
+</article>
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul class="list-inline">
+      <li>
+        &copy;
+        2020-2021
+        ff
+      </li>
+      <li>
+        
+          Powered by
+        
+        
+        <a href="https://hexo.io" target="_blank">Hexo</a> Theme <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul class="list-inline">
+      <li>
+        
+        
+        <ul class="list-inline">
+  <li>PV:<span id="busuanzi_value_page_pv"></span></li>
+  <li>UV:<span id="busuanzi_value_site_uv"></span></li>
+</ul>
+        
+      </li>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+    <div class="to_top">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+      </div>
+    </main>
+      <aside class="sidebar">
+        <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="ONE PEAC"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/2019/about">关于我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜索">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+      </aside>
+      <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+      
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script>
+  try {
+    var typed = new Typed("#subtitle", {
+    strings: ['面朝大海，春暖花开','愿你一生努力，一生被爱','想要的都拥有，得不到的都释怀'],
+    startDelay: 0,
+    typeSpeed: 200,
+    loop: true,
+    backSpeed: 100,
+    showCursor: true
+    });
+  } catch (err) {
+  }
+  
+</script>
+
+
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer:'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto',
+    onClick: (e) => {
+      $('.toc-link').removeClass('is-active-link');
+      $(`a[href=${e.target.hash}]`).addClass('is-active-link');
+      $(e.target.hash).scrollIntoView();
+      return false;
+    }
+  });
+</script>
+
+
+<script>
+  var ayerConfig = {
+    mathjax: false
+  }
+</script>
+
+
+<script src="/js/ayer.js"></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+
+
+
+<script type="text/javascript" src="https://js.users.51.la/20544303.js"></script>
+  </div>
+</body>
+
+</html>

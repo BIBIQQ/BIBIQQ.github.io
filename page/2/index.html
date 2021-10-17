@@ -76,6 +76,852 @@
     
     
     
+    <article id="post-DAY16_高级集合和数据集合" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2021/09/23/DAY16_%E9%AB%98%E7%BA%A7%E9%9B%86%E5%90%88%E5%92%8C%E6%95%B0%E6%8D%AE%E9%9B%86%E5%90%88/"
+    >高级集合-list和数据结构</a
+  >
+</h2>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2021/09/23/DAY16_%E9%AB%98%E7%BA%A7%E9%9B%86%E5%90%88%E5%92%8C%E6%95%B0%E6%8D%AE%E9%9B%86%E5%90%88/" class="article-date">
+  <time datetime="2021-09-23T08:23:19.000Z" itemprop="datePublished">2021-09-23</time>
+</a>
+      
+      
+      
+      
+    </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h3 id="26-集合的高级"><a href="#26-集合的高级" class="headerlink" title="26. 集合的高级"></a>26. 集合的高级</h3><h4 id="26-1-集合的概述和继承体系"><a href="#26-1-集合的概述和继承体系" class="headerlink" title="26.1 集合的概述和继承体系"></a>26.1 集合的概述和继承体系</h4><blockquote>
+<ol>
+<li>集合和数组的对比：</li>
+</ol>
+<ul>
+<li>集合长度可变，数组长度不可变</li>
+<li>集合只能存储引用数据类型或者<font color = "red">存储基本数据类型的包装类</font>，集合可以存储引用数据类型和基本数据类型</li>
+</ul>
+<ol start="2">
+<li>集合类体系结构</li>
+</ol>
+<ul>
+<li>Collection (单列)(接口)<ul>
+<li>list（可重复)(接口)<ul>
+<li>ArrayList（实现类）</li>
+<li>LinkedList（实现类）</li>
+</ul>
+</li>
+<li>Set（不重复)(接口)<ul>
+<li>HashSet（实现类）</li>
+<li>TreeSet（实现类）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Map（双列)(接口)<ul>
+<li>HashMap（实现类）</li>
+<li>TreeMap（实现类）</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h4 id="26-2-Collection"><a href="#26-2-Collection" class="headerlink" title="26.2 Collection"></a>26.2 Collection</h4><h5 id="26-2-1-成员方法"><a href="#26-2-1-成员方法" class="headerlink" title="26.2.1 成员方法"></a>26.2.1 成员方法</h5><blockquote>
+<table>
+<thead>
+<tr>
+<th align="left">方法名</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">boolean add(E e)</td>
+<td align="left">添加元素</td>
+</tr>
+<tr>
+<td align="left">boolean remove(Object o)</td>
+<td align="left">从集合中移除指定的元素</td>
+</tr>
+<tr>
+<td align="left">boolean removeIf(Object o)</td>
+<td align="left">根据条件进行移除</td>
+</tr>
+<tr>
+<td align="left">void   clear()</td>
+<td align="left">清空集合中的元素</td>
+</tr>
+<tr>
+<td align="left">boolean contains(Object o)</td>
+<td align="left">判断集合中是否存在指定的元素</td>
+</tr>
+<tr>
+<td align="left">boolean isEmpty()</td>
+<td align="left">判断集合是否为空</td>
+</tr>
+<tr>
+<td align="left">int   size()</td>
+<td align="left">集合的长度，也就是集合中元素的个数</td>
+</tr>
+</tbody></table>
+<p>示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    Collection&lt;String&gt; collection = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    collection.add(<span class="string">"aaa"</span>);</span><br><span class="line">    collection.add(<span class="string">"bbb"</span>);</span><br><span class="line">    collection.add(<span class="string">"ccc"</span>);</span><br><span class="line">    collection.add(<span class="string">"dddd"</span>);</span><br><span class="line">    collection.add(<span class="string">"eeeee"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 判断是否存在某元素</span></span><br><span class="line">    <span class="keyword">boolean</span> result = collection.contains(<span class="string">"aaa"</span>);</span><br><span class="line">    System.out.println(result);</span><br><span class="line">    <span class="comment">// 删除符合条件的元素</span></span><br><span class="line">    collection.removeIf(s -&gt; s.length() == <span class="number">3</span>);</span><br><span class="line">    System.out.println(collection);</span><br><span class="line">    <span class="comment">//集合是否为空</span></span><br><span class="line">    <span class="keyword">boolean</span> result1 = collection.isEmpty();</span><br><span class="line">    System.out.println(result1);</span><br><span class="line">    <span class="comment">//清空集合</span></span><br><span class="line">    collection.clear();</span><br><span class="line">    System.out.println(collection);</span><br><span class="line">    <span class="comment">//获取集合的长度</span></span><br><span class="line">    <span class="keyword">int</span> size = collection.size();</span><br><span class="line">    System.out.println(size);</span><br><span class="line">    <span class="comment">// removerIf的拓展</span></span><br><span class="line">    collection.removeIf(<span class="keyword">new</span> Predicate&lt;String&gt;() &#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">test</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">if</span>(s.length() == <span class="number">4</span>)&#123;</span><br><span class="line">                <span class="keyword">return</span>  <span class="keyword">true</span>;</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">    System.out.println(collection);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h5 id="26-2-2-Collertion集合的遍历"><a href="#26-2-2-Collertion集合的遍历" class="headerlink" title="26.2.2 Collertion集合的遍历"></a>26.2.2 Collertion集合的遍历</h5><blockquote>
+<ul>
+<li><p>Iterator:迭代器，集合的专用遍历方式</p>
+<ul>
+<li>Iterator<E> itertor(): 返回集合中的迭代器对象，该迭代器对象默认指向当前集合的0索引位置</li>
+</ul>
+</li>
+<li><p>Iterator中的常用方法</p>
+<ul>
+<li>boolean hasNext：判断单签位置是否有元素可以取出</li>
+<li>E next()：获取当前位置的元素；将迭代器对象移动向下一个索引位置</li>
+</ul>
+</li>
+</ul>
+<p>示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"> Collection&lt;String&gt; collection = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line"> collection.add(<span class="string">"aaa"</span>);</span><br><span class="line"> collection.add(<span class="string">"bbb"</span>);</span><br><span class="line"> collection.add(<span class="string">"ccc"</span>);</span><br><span class="line"> collection.add(<span class="string">"dddd"</span>);</span><br><span class="line"> collection.add(<span class="string">"eeeee"</span>);</span><br><span class="line"> <span class="comment">//创建Iterator 对象</span></span><br><span class="line"> Iterator&lt;String&gt; it = collection.iterator();</span><br><span class="line"> <span class="comment">//创建循环遍历</span></span><br><span class="line"> <span class="keyword">while</span> (it.hasNext())&#123;  <span class="comment">// 判断索引位置是否有元素</span></span><br><span class="line">     System.out.println(it.next());  <span class="comment">// 取出索引位置的元素；并且往后推一下元素</span></span><br><span class="line"> &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<p>集合遍历删除相同元素示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">&gt;ArrayList&lt;String&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">      list.add(<span class="string">"a"</span>);</span><br><span class="line">      list.add(<span class="string">"a"</span>);</span><br><span class="line">      list.add(<span class="string">"c"</span>);</span><br><span class="line">      list.add(<span class="string">"b"</span>);</span><br><span class="line">      list.add(<span class="string">"e"</span>);</span><br><span class="line"></span><br><span class="line">&gt;<span class="comment">//数组for循环遍历删除   ----1</span></span><br><span class="line">       <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; list.size(); i++) &#123;</span><br><span class="line">           String s = list.get(i);</span><br><span class="line">           <span class="keyword">if</span>(<span class="string">"a"</span>.equals(s))&#123;</span><br><span class="line">               list.remove(s);</span><br><span class="line">               i--;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">&gt;<span class="comment">// 集合迭代器遍历，删除相同元素   -----2</span></span><br><span class="line">      Iterator&lt;String&gt; it = list.iterator();</span><br><span class="line">      <span class="keyword">while</span> (it.hasNext()) &#123;  <span class="comment">// 迭代器指向0索引</span></span><br><span class="line">          <span class="comment">// 将指向元素，赋值String，取出比较，并移向下一元素</span></span><br><span class="line">          String s = it.next();  </span><br><span class="line">          <span class="keyword">if</span> (<span class="string">"a"</span>.equals(s)) &#123;</span><br><span class="line">              it.remove();</span><br><span class="line">          &#125;</span><br><span class="line"></span><br><span class="line">      &#125;</span><br><span class="line">      System.out.println(list);</span><br></pre></td></tr></table></figure>
+<p>ArrayList集合遍历删除弊端：降低性能（删除中间的数值，需要将后面的元素往前移动一位）</p>
+<p><strong>增强for循环</strong></p>
+<p>概念：简化数组和Collertion集合的遍历</p>
+<ul>
+<li>JDK5后面出现的，其内部原理是一个Iterator迭代器</li>
+<li>实现Iterable接口的类才可以使用迭代器和增强for</li>
+</ul>
+<p>格式：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="keyword">for</span>(元素数据类型  变量名：数组或者Collertion集合)&#123;</span><br><span class="line">	<span class="comment">//在此处使用变量，该变量就是元素</span></span><br><span class="line">&gt;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>案例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt;ArrayList&lt;String&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">&gt;<span class="comment">//  增加元素</span></span><br><span class="line">&gt;<span class="comment">//s只是一个变量，表示集合或者数组中循环的中的每个元素</span></span><br><span class="line">&gt;<span class="comment">// list是需要遍历的集合或者数组</span></span><br><span class="line">&gt;<span class="keyword">for</span>(String s : list)&#123;  </span><br><span class="line">          System.out.println(s);</span><br><span class="line">      &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>Lambda方式遍历</p>
+<p>案例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt;list.forEach(c -&gt; System.out.println(c));</span><br></pre></td></tr></table></figure>
+
+<p>三种循环的使用场景</p>
+<ul>
+<li><p>如果需要操作索引，使用普通for循环</p>
+</li>
+<li><p>如果在遍历过程中需要删除元素，使用迭代器</p>
+</li>
+<li><p>如果只需要遍历，使用增强for，不建议使用删除</p>
+<p>（Iterator迭代器和集合长度可变删除移位冲突）</p>
+<p>// ConcurrentModificationException  并发修改异常</p>
+</li>
+<li><p>普通for循环不通用</p>
+</li>
+</ul>
+</blockquote>
+<h4 id="26-3-List集合"><a href="#26-3-List集合" class="headerlink" title="26.3 List集合"></a>26.3 List集合</h4><h5 id="26-3-1-List的概述和特点"><a href="#26-3-1-List的概述和特点" class="headerlink" title="26.3.1 List的概述和特点"></a>26.3.1 List的概述和特点</h5><blockquote>
+<ol>
+<li><strong>List集合概述</strong></li>
+</ol>
+<ul>
+<li>有序集合，这里的有序指的是存取顺序</li>
+<li>用户可以精确控制列表中每个元素的插入位置，用户可以通过整数索引访问元素，并搜索列表中的元素</li>
+<li>与Set集合不同，列表中通常允许重复的元素</li>
+</ul>
+<ol start="2">
+<li>List集合的<strong>特点</strong></li>
+</ol>
+<ul>
+<li>有序：有序和取出的元素顺序一致</li>
+<li>有索引：可以通过索引操作元素</li>
+<li>可重复：存储的元素可以重复</li>
+</ul>
+</blockquote>
+<h5 id="26-3-2-List集合的方法"><a href="#26-3-2-List集合的方法" class="headerlink" title="26.3.2 List集合的方法"></a>26.3.2 List集合的方法</h5><blockquote>
+<p>成员方法：</p>
+<table>
+<thead>
+<tr>
+<th>方法名</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>void add(int index,E   element)</td>
+<td>在此集合中的指定位置插入指定的元素</td>
+</tr>
+<tr>
+<td>E remove(int   index)</td>
+<td>删除指定索引处的元素，返回被删除的元素</td>
+</tr>
+<tr>
+<td>E set(int index,E   element)</td>
+<td>修改指定索引处的元素，返回被修改的元素</td>
+</tr>
+<tr>
+<td>E get(int   index)</td>
+<td>返回指定索引处的元素</td>
+</tr>
+</tbody></table>
+<p>案例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">       List&lt;String&gt; list  = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">       list.add(<span class="string">"aaa"</span>);</span><br><span class="line">       list.add(<span class="string">"bbb"</span>);</span><br><span class="line">       list.add(<span class="string">"ccc"</span>);</span><br><span class="line"></span><br><span class="line">&gt;<span class="comment">//        Listadd(list);   // 增加</span></span><br><span class="line">&gt;<span class="comment">//       Listremove(list);  //删除</span></span><br><span class="line">&gt;<span class="comment">//        Listset(list);    //修改</span></span><br><span class="line">&gt;<span class="comment">//        Listget(list);    //获取</span></span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Listget</span><span class="params">(List&lt;String&gt; list)</span> </span>&#123;</span><br><span class="line">       <span class="comment">// 获取指定位置的元素</span></span><br><span class="line">       String s = list.get(<span class="number">0</span>);</span><br><span class="line">       System.out.println(s);</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Listset</span><span class="params">(List&lt;String&gt; list)</span> </span>&#123;</span><br><span class="line">       <span class="comment">// 修改指定元素，会返回被修改的元素</span></span><br><span class="line">       <span class="comment">//被替代的元素，在集合中就不存在了</span></span><br><span class="line">       String  result = list.set(<span class="number">0</span>,<span class="string">"qqq"</span>);</span><br><span class="line">       System.out.println(result);</span><br><span class="line">       System.out.println(list);</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Listremove</span><span class="params">(List&lt;String&gt; list)</span> </span>&#123;</span><br><span class="line">       <span class="comment">// 删除指定元素，会返回被删除的元素</span></span><br><span class="line">       String s = list.remove(<span class="number">0</span>);</span><br><span class="line">       <span class="comment">// 删除指定元素，集合中的第一个，返回删除的布尔值</span></span><br><span class="line">       <span class="keyword">boolean</span> result = list.remove(<span class="string">"aaa"</span>);</span><br><span class="line">       System.out.println(result);</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Listadd</span><span class="params">(List&lt;String&gt; list)</span> </span>&#123;</span><br><span class="line">       <span class="comment">// add 在指定位置插入指定元素，原来上的元素往后挪一个索引</span></span><br><span class="line">       list.add(<span class="number">0</span>,<span class="string">"ddd"</span>);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+</blockquote>
+<h5 id="26-3-3-List的常用方法"><a href="#26-3-3-List的常用方法" class="headerlink" title="26.3.3 List的常用方法"></a>26.3.3 List的常用方法</h5><blockquote>
+<ul>
+<li><p>ArrayList集合</p>
+<ul>
+<li>底层是数组结构实现，查询快、增删慢</li>
+</ul>
+</li>
+<li><p>LinkedList集合</p>
+<ul>
+<li>底层是链表结构实现，查询慢、增删快</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h5 id="26-3-4-LinkedList的私有方法"><a href="#26-3-4-LinkedList的私有方法" class="headerlink" title="26.3.4 LinkedList的私有方法"></a>26.3.4 LinkedList的私有方法</h5><blockquote>
+<p>成员方法：</p>
+<table>
+<thead>
+<tr>
+<th>方法名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>public void addFirst(E e)</td>
+<td>在该列表开头插入指定的元素</td>
+</tr>
+<tr>
+<td>public void addLast(E e)</td>
+<td>将指定的元素追加到此列表的末尾</td>
+</tr>
+<tr>
+<td>public E getFirst()</td>
+<td>返回此列表中的第一个元素</td>
+</tr>
+<tr>
+<td>public   E getLast()</td>
+<td>返回此列表中的最后一个元素</td>
+</tr>
+<tr>
+<td>public E removeFirst()</td>
+<td>从此列表中删除并返回第一个元素</td>
+</tr>
+<tr>
+<td>public   E removeLast()</td>
+<td>从此列表中删除并返回最后一个元素</td>
+</tr>
+</tbody></table>
+<p>案例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">LinkedList&lt;String&gt; list = <span class="keyword">new</span> LinkedList&lt;&gt;();</span><br><span class="line">list.add(<span class="string">"aaa"</span>);</span><br><span class="line">list.add(<span class="string">"bbb"</span>);</span><br><span class="line">list.add(<span class="string">"ccc"</span>);</span><br><span class="line">list.add(<span class="string">"ddd"</span>);</span><br><span class="line">&gt;<span class="comment">//添加到最后一位</span></span><br><span class="line">list.addLast(<span class="string">"eee"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//添加到开头</span></span><br><span class="line">list.addFirst(<span class="string">"000"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 返回列表中第一个元素</span></span><br><span class="line">String a =list.getFirst();</span><br><span class="line">System.out.println(a);</span><br><span class="line">System.out.println(<span class="string">"----------------"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 返回列表中最后一个元素</span></span><br><span class="line">String b =list.getLast();</span><br><span class="line">System.out.println(b);</span><br><span class="line">System.out.println(<span class="string">"----------------"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 删除第一个元素</span></span><br><span class="line">list.removeFirst();</span><br><span class="line"></span><br><span class="line"><span class="comment">//删除最后一位</span></span><br><span class="line">list.removeLast();</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h3 id="27-数据结构"><a href="#27-数据结构" class="headerlink" title="27. 数据结构"></a>27. 数据结构</h3><h4 id="27-1-常见的数据结构之一队列"><a href="#27-1-常见的数据结构之一队列" class="headerlink" title="27.1 常见的数据结构之一队列"></a>27.1 常见的数据结构之一队列</h4><blockquote>
+<ul>
+<li><p>栈结构</p>
+<p>​    先进后出</p>
+</li>
+<li><p>队列结构</p>
+<p>​    先进先出</p>
+</li>
+</ul>
+</blockquote>
+<h4 id="27-2-常见的数据结构之一数组"><a href="#27-2-常见的数据结构之一数组" class="headerlink" title="27.2 常见的数据结构之一数组"></a>27.2 常见的数据结构之一数组</h4><blockquote>
+<ul>
+<li>数组<ul>
+<li>查询数据通过地址值和索引定位</li>
+<li>查询快，增删慢</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h4 id="27-3-常见的数据结构之一链表"><a href="#27-3-常见的数据结构之一链表" class="headerlink" title="27.3 常见的数据结构之一链表"></a>27.3 常见的数据结构之一链表</h4><blockquote>
+<ul>
+<li>增删快，查询慢</li>
+</ul>
+<p><img src="image/%E9%93%BE%E8%A1%A8-%E5%8D%95%E9%A1%B9%E9%93%BE%E8%A1%A8.png" alt=""></p>
+<p><img src="image/%E9%93%BE%E8%A1%A8-%E5%8F%8C%E5%90%91%E9%93%BE%E8%A1%A8.png" alt=""></p>
+</blockquote>
+<ul>
+<li>数组在执行查询时效率很高</li>
+<li>数据在增删时候效率很低</li>
+<li>链表在执行查询时候效率低</li>
+<li>链表在执行增删的时候效率很高</li>
+</ul>
+
+      
+      <!-- 打赏 -->
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2021/09/23/DAY16_%E9%AB%98%E7%BA%A7%E9%9B%86%E5%90%88%E5%92%8C%E6%95%B0%E6%8D%AE%E9%9B%86%E5%90%88/" data-id="ckuvcxgdq0008ykueh8zpg2pf"
+        class="article-share-link">分享</a>
+        
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%90%8E%E7%AB%AF%E5%AD%A6%E4%B9%A0/" rel="tag">后端学习</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+
+</article>
+    
+    <article id="post-DAY15_JDK8时间日期类" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2021/09/22/DAY15_JDK8%E6%97%B6%E9%97%B4%E6%97%A5%E6%9C%9F%E7%B1%BB/"
+    >常用的Api-02</a
+  >
+</h2>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2021/09/22/DAY15_JDK8%E6%97%B6%E9%97%B4%E6%97%A5%E6%9C%9F%E7%B1%BB/" class="article-date">
+  <time datetime="2021-09-22T09:28:19.000Z" itemprop="datePublished">2021-09-22</time>
+</a>
+      
+      
+      
+      
+    </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h3 id="25-常见的API-02"><a href="#25-常见的API-02" class="headerlink" title="25. 常见的API-02"></a>25. 常见的API-02</h3><h4 id="25-1-日期类"><a href="#25-1-日期类" class="headerlink" title="25.1 日期类"></a>25.1 日期类</h4><p>​            计算机的时间原点：1970年1月1日  00：00：00</p>
+<h5 id="25-1-1-Date类概述和构造方法"><a href="#25-1-1-Date类概述和构造方法" class="headerlink" title="25.1.1 Date类概述和构造方法"></a>25.1.1 Date类概述和构造方法</h5><p>​        <strong>1. JDK8之前用于表示日期时间的类</strong></p>
+<p>​        其对象可以表示特定的时刻，精确到毫秒（yyyy-MM-dd HH:mm:ss 000）</p>
+<p>​        <strong>2. 构造方法</strong>    </p>
+<table>
+<thead>
+<tr>
+<th>方法名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>public Date()</td>
+<td>创建一个Date对象，表示默认时间</td>
+</tr>
+<tr>
+<td>public Date(long date)</td>
+<td>创建一个Date对象，表示指定时间</td>
+</tr>
+</tbody></table>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//输出默认时间</span></span><br><span class="line">      Date date1 = <span class="keyword">new</span> Date();</span><br><span class="line">      System.out.println(date1);</span><br><span class="line"></span><br><span class="line">      <span class="comment">//输出指定时间 </span></span><br><span class="line">      Date date2 = <span class="keyword">new</span> Date(<span class="number">0L</span>);</span><br><span class="line">      System.out.println(date2);</span><br></pre></td></tr></table></figure>
+
+<p>​        <strong>3.常用方法</strong></p>
+<p>​            setTime–设置从远点时间过了多少毫秒值</p>
+<p>​            getTime–获取时间的毫秒值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 获取date对象的毫秒值--当前时间的毫秒值</span><br><span class="line">long time &#x3D; date1.getTime();</span><br><span class="line">      System.out.println(time);</span><br><span class="line">&#x2F;&#x2F; 设置date对象从原点时间过了多少毫秒值</span><br><span class="line">     date1.setTime(2000000000000L);</span><br><span class="line">      System.out.println(date1);</span><br></pre></td></tr></table></figure>
+
+<h5 id="25-1-2-SimpleDateFormat-类概述"><a href="#25-1-2-SimpleDateFormat-类概述" class="headerlink" title="25.1.2 SimpleDateFormat 类概述"></a>25.1.2 SimpleDateFormat 类概述</h5><p>​         SimpleDateFormat可以对Date对象，进行<font color = "red">格式化解析</font></p>
+<p>字符串和Date对象转化过程的中相关概念</p>
+<ul>
+<li><p>String -&gt; Date 解析 parse</p>
+</li>
+<li><pre><code class="java"> <span class="comment">// String -&gt; Date  解析</span>
+ String str = <span class="string">"2021-9-22"</span>;
+ SimpleDateFormat sdf02 = <span class="keyword">new</span> SimpleDateFormat(<span class="string">"yyyy-MM-dd"</span>);
+ Date result2 = sdf02.parse(str);
+ System.out.println(result2);
+&lt;!--￼<span class="number">2</span>--&gt;
+</code></pre>
+</li>
+</ul>
+<p>​        <strong>2. 构造方法</strong>    </p>
+<table>
+<thead>
+<tr>
+<th>方法名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>public SimpleDateFormat()</td>
+<td>创建一个SimpleDateFormat，使用默认格式</td>
+</tr>
+<tr>
+<td>public SimpleDateFormat(String pattern)</td>
+<td>创建一个SimpleDateFormat，表示指定格式</td>
+</tr>
+</tbody></table>
+<p>​    <strong>3.小结</strong></p>
+<table>
+<thead>
+<tr>
+<th>转向流向</th>
+<th>设计方法</th>
+<th>方法所属类</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>long ==&gt; Date</td>
+<td>new Date(long ms)/setTime(long ms)创建Date对象/为Date对象设置时间</td>
+<td>Date</td>
+</tr>
+<tr>
+<td>Date ==&gt; long</td>
+<td>getTime()获取指定时间对象的毫秒值</td>
+<td>Date</td>
+</tr>
+<tr>
+<td>String ==&gt; Date</td>
+<td>解析，sdfObj.parse(dateStr)</td>
+<td>SimpleDateFormat</td>
+</tr>
+<tr>
+<td>Date ==&gt; String</td>
+<td>格式化，sdfObj.format(dateObj)</td>
+<td>SimpleDateFormat</td>
+</tr>
+</tbody></table>
+<h5 id="25-1-3-JDK8新增日期类-LocaDateTime"><a href="#25-1-3-JDK8新增日期类-LocaDateTime" class="headerlink" title="25.1.3 JDK8新增日期类-LocaDateTime"></a>25.1.3 JDK8新增日期类-LocaDateTime</h5><ul>
+<li>LocaDateTime</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>fa方法名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>public static LocalDateTime now()</td>
+<td>获取当前系统时间</td>
+</tr>
+<tr>
+<td>public static LocalDateTime of(年，月，日，时，分，秒)</td>
+<td>使用指定年月日和时分秒初始化一个LocalDateTime对象</td>
+</tr>
+</tbody></table>
+<h6 id="25-1-3-1-localDateTime的常用方法"><a href="#25-1-3-1-localDateTime的常用方法" class="headerlink" title="25.1.3.1 localDateTime的常用方法"></a>25.1.3.1 localDateTime的常用方法</h6><p>示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//设置时间</span></span><br><span class="line">LocalDateTime localDateTime = LocalDateTime.of(<span class="number">2020</span>,<span class="number">12</span>,<span class="number">22</span>,<span class="number">5</span>,<span class="number">2</span>,<span class="number">2</span>);</span><br><span class="line"><span class="comment">//获得年</span></span><br><span class="line"><span class="keyword">int</span> year = localDateTime.getYear();</span><br><span class="line">System.out.println(year);</span><br><span class="line"><span class="comment">//获取月份</span></span><br><span class="line"><span class="keyword">int</span> monthValue = localDateTime.getMonthValue();</span><br><span class="line">System.out.println(monthValue);</span><br><span class="line"><span class="comment">//获取月份中的第几天</span></span><br><span class="line"><span class="keyword">int</span> dayOfMonth = localDateTime.getDayOfMonth();</span><br><span class="line">System.out.println(dayOfMonth);</span><br><span class="line"><span class="comment">//获取一年中的第几天</span></span><br><span class="line"><span class="keyword">int</span> dayOfYear = localDateTime.getDayOfYear();</span><br><span class="line">System.out.println(dayOfYear);</span><br><span class="line"><span class="comment">//获取星期</span></span><br><span class="line">DayOfWeek dayOfWeek =localDateTime.getDayOfWeek();</span><br><span class="line">System.out.println(dayOfWeek);</span><br><span class="line"><span class="comment">//获取分钟</span></span><br><span class="line"><span class="keyword">int</span> minute = localDateTime.getMinute();</span><br><span class="line">System.out.println(minute);</span><br><span class="line"><span class="comment">//获取小时</span></span><br><span class="line"><span class="keyword">int</span> hour = localDateTime.getHour();</span><br><span class="line">System.out.println(hour);</span><br></pre></td></tr></table></figure>
+
+
+
+<h6 id="25-1-3-2-LocalDateTime转换方法"><a href="#25-1-3-2-LocalDateTime转换方法" class="headerlink" title="25.1.3.2 LocalDateTime转换方法"></a>25.1.3.2 LocalDateTime转换方法</h6><p>方法说明：</p>
+<table>
+<thead>
+<tr>
+<th>方法名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>public LocalDate  toLocalDate ()</td>
+<td>转换成为一个LocalDate对象</td>
+</tr>
+<tr>
+<td>public LocalTime toLocalTime ()</td>
+<td>转换成为一个LocalTime对象</td>
+</tr>
+</tbody></table>
+<p>​    示例代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JDK8DateDemo4</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        LocalDateTime localDateTime = LocalDateTime.of(<span class="number">2020</span>, <span class="number">12</span>, <span class="number">12</span>, <span class="number">8</span>, <span class="number">10</span>, <span class="number">12</span>);</span><br><span class="line">        <span class="comment">//public LocalDate toLocalDate ()    转换成为一个LocalDate对象</span></span><br><span class="line">        LocalDate localDate = localDateTime.toLocalDate();</span><br><span class="line">        System.out.println(localDate);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//public LocalTime toLocalTime ()    转换成为一个LocalTime对象</span></span><br><span class="line">        LocalTime localTime = localDateTime.toLocalTime();</span><br><span class="line">        System.out.println(localTime);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h6 id="25-1-3-3-LocalDatTime的解析和格式化"><a href="#25-1-3-3-LocalDatTime的解析和格式化" class="headerlink" title="25.1.3.3 LocalDatTime的解析和格式化"></a>25.1.3.3 LocalDatTime的解析和格式化</h6><p>方法说明：</p>
+<table>
+<thead>
+<tr>
+<th>方法名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>public String format (指定格式)</td>
+<td>把一个LocalDateTime格式化成为一个字符串</td>
+</tr>
+<tr>
+<td>public LocalDateTime parse (准备解析的字符串, 解析格式)</td>
+<td>把一个日期字符串解析成为一个LocalDateTime对象</td>
+</tr>
+<tr>
+<td>public static DateTimeFormatter ofPattern(String pattern)</td>
+<td>使用指定的日期模板获取一个日期格式化器DateTimeFormatter对象</td>
+</tr>
+</tbody></table>
+<p>解析示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span>  <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">method2</span><span class="params">()</span></span>&#123;</span><br><span class="line">    String s = <span class="string">"2020年11月12日 11:01:10"</span>;</span><br><span class="line">    DateTimeFormatter patten = DateTimeFormatter.ofPattern(<span class="string">"yyyy年MM月dd日 HH:mm:ss"</span>);</span><br><span class="line">    LocalDateTime parse = LocalDateTime.parse(s,patten);</span><br><span class="line">    System.out.println(parse);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>​    格式化示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span>  <span class="keyword">static</span>  <span class="keyword">void</span> <span class="title">method1</span><span class="params">()</span></span>&#123;</span><br><span class="line">        LocalDateTime localDateTime = LocalDateTime.now();</span><br><span class="line">    System.out.println(localDateTime);</span><br><span class="line">    DateTimeFormatter patten = DateTimeFormatter.ofPattern(<span class="string">"yyyy年MM月dd日 HH:mm:ss"</span>);</span><br><span class="line">    String s = localDateTime.format(patten);</span><br><span class="line">    System.out.println(s);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h6 id="25-1-3-4-LocaDateTime增加或者减少时间方法"><a href="#25-1-3-4-LocaDateTime增加或者减少时间方法" class="headerlink" title="25.1.3.4 LocaDateTime增加或者减少时间方法"></a>25.1.3.4 <strong>LocaDateTime增加或者减少时间方法</strong></h6><ol>
+<li>方法返回一个新的ocalDateTime对象，返回值就是修改之后的结果</li>
+<li>参数为正，就是往后加</li>
+<li>参数为负，就是往后减</li>
+</ol>
+<p><strong>plus基本方法说明：</strong></p>
+<table>
+<thead>
+<tr>
+<th>方法名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>public LocalDateTime plusYears (long years)</td>
+<td>添加或者减去年</td>
+</tr>
+<tr>
+<td>public LocalDateTime plusMonths(long months)</td>
+<td>添加或者减去月</td>
+</tr>
+<tr>
+<td>public LocalDateTime plusDays(long days)</td>
+<td>添加或者减去日</td>
+</tr>
+<tr>
+<td>public LocalDateTime plusHours(long hours)</td>
+<td>添加或者减去时</td>
+</tr>
+<tr>
+<td>public LocalDateTime plusMinutes(long minutes)</td>
+<td>添加或者减去分</td>
+</tr>
+<tr>
+<td>public LocalDateTime plusSeconds(long seconds)</td>
+<td>添加或者减去秒</td>
+</tr>
+<tr>
+<td>public LocalDateTime plusWeeks(long weeks)</td>
+<td>添加或者减去周</td>
+</tr>
+</tbody></table>
+<p><strong>minus基本方法说明：</strong></p>
+<table>
+<thead>
+<tr>
+<th>方法名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>public LocalDateTime  minusYears (long years)</td>
+<td>减去或者添加年</td>
+</tr>
+<tr>
+<td>public LocalDateTime  minusMonths(long months)</td>
+<td>减去或者添加月</td>
+</tr>
+<tr>
+<td>public LocalDateTime minusDays(long days)</td>
+<td>减去或者添加日</td>
+</tr>
+<tr>
+<td>public LocalDateTime minusHours(long hours)</td>
+<td>减去或者添加时</td>
+</tr>
+<tr>
+<td>public LocalDateTime minusMinutes(long minutes)</td>
+<td>减去或者添加分</td>
+</tr>
+<tr>
+<td>public LocalDateTime minusSeconds(long seconds)</td>
+<td>减去或者添加秒</td>
+</tr>
+<tr>
+<td>public LocalDateTime minusWeeks(long weeks)</td>
+<td>减去或者添加周</td>
+</tr>
+</tbody></table>
+<h6 id="25-1-3-5-LocalDateTime修改方法"><a href="#25-1-3-5-LocalDateTime修改方法" class="headerlink" title="25.1.3.5 LocalDateTime修改方法"></a>25.1.3.5 <strong>LocalDateTime修改方法</strong></h6><p>方法说明</p>
+<table>
+<thead>
+<tr>
+<th>方法名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>public LocalDateTime withYear(int year)</td>
+<td>直接修改年</td>
+</tr>
+<tr>
+<td>public LocalDateTime withMonth(int month)</td>
+<td>直接修改月</td>
+</tr>
+<tr>
+<td>public LocalDateTime withDayOfMonth(int dayofmonth)</td>
+<td>直接修改日期(一个月中的第几天)</td>
+</tr>
+<tr>
+<td>public LocalDateTime withDayOfYear(int dayOfYear)</td>
+<td>直接修改日期(一年中的第几天)</td>
+</tr>
+<tr>
+<td>public LocalDateTime withHour(int hour)</td>
+<td>直接修改小时</td>
+</tr>
+<tr>
+<td>public LocalDateTime withMinute(int minute)</td>
+<td>直接修改分钟</td>
+</tr>
+<tr>
+<td>public LocalDateTime withSecond(int second)</td>
+<td>直接修改秒</td>
+</tr>
+</tbody></table>
+<p>注意：直接修改，不会和of一样会会根据情况报错</p>
+<h5 id="23-1-4-时间间隔的计算"><a href="#23-1-4-时间间隔的计算" class="headerlink" title="23.1.4 时间间隔的计算"></a>23.1.4 时间间隔的计算</h5><ul>
+<li>Period方法说明：</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>方法名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>public static Period between(开始时间,结束时间)</td>
+<td>计算两个“时间”的间隔</td>
+</tr>
+<tr>
+<td>public int getYears()</td>
+<td>获得这段时间的年数</td>
+</tr>
+<tr>
+<td>public int getMonths()</td>
+<td>获得此期间的月数</td>
+</tr>
+<tr>
+<td>public int getDays()</td>
+<td>获得此期间的天数</td>
+</tr>
+<tr>
+<td>public long toTotalMonths()</td>
+<td>获取此期间的总月数</td>
+</tr>
+</tbody></table>
+<p>示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">LocalDate localDate1 &#x3D; LocalDate.of(2020, 1, 1);</span><br><span class="line">       LocalDate localDate2 &#x3D; LocalDate.of(2048, 12, 12);</span><br><span class="line">       Period period &#x3D; Period.between(localDate1, localDate2);</span><br><span class="line">       System.out.println(period);&#x2F;&#x2F;P28Y11M11D</span><br><span class="line"></span><br><span class="line">       &#x2F;&#x2F;public int getYears()         获得这段时间的年数</span><br><span class="line">       System.out.println(period.getYears());&#x2F;&#x2F;28</span><br><span class="line">       &#x2F;&#x2F;public int getMonths()        获得此期间的月数</span><br><span class="line">       System.out.println(period.getMonths());&#x2F;&#x2F;11</span><br><span class="line">       &#x2F;&#x2F;public int getDays()          获得此期间的天数</span><br><span class="line">       System.out.println(period.getDays());&#x2F;&#x2F;11</span><br><span class="line"></span><br><span class="line">       &#x2F;&#x2F;public long toTotalMonths()   获取此期间的总月数</span><br><span class="line">       System.out.println(period.toTotalMonths());&#x2F;&#x2F;347</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>Duration方法说明</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>方法名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>public static Durationbetween(开始时间,结束时间)</td>
+<td>计算两个“时间”的间隔</td>
+</tr>
+<tr>
+<td>public long toSeconds()</td>
+<td>获得此时间间隔的秒</td>
+</tr>
+<tr>
+<td>public int toMillis()</td>
+<td>获得此时间间隔的毫秒</td>
+</tr>
+<tr>
+<td>public int toNanos()</td>
+<td>获得此时间间隔的纳秒</td>
+</tr>
+</tbody></table>
+<p>示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">LocalDateTime localDateTime1 = LocalDateTime.of(<span class="number">2020</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">13</span>, <span class="number">14</span>, <span class="number">15</span>);</span><br><span class="line">        LocalDateTime localDateTime2 = LocalDateTime.of(<span class="number">2020</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">11</span>, <span class="number">12</span>, <span class="number">13</span>);</span><br><span class="line">        Duration duration = Duration.between(localDateTime1, localDateTime2);</span><br><span class="line">        System.out.println(duration);<span class="comment">//PT21H57M58S</span></span><br><span class="line">        <span class="comment">//public long toSeconds()	       获得此时间间隔的秒</span></span><br><span class="line">        System.out.println(duration.toSeconds());<span class="comment">//79078</span></span><br><span class="line">        <span class="comment">//public int toMillis()	           获得此时间间隔的毫秒</span></span><br><span class="line">        System.out.println(duration.toMillis());<span class="comment">//79078000</span></span><br><span class="line">        <span class="comment">//public int toNanos()             获得此时间间隔的纳秒</span></span><br><span class="line">        System.out.println(duration.toNanos());<span class="comment">//79078000000000</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>注意：<font color= "red">Period方法只能精确到年月日，Duration方法可以精确到纳秒位</font></p>
+<h5 id="25-1-5-小结"><a href="#25-1-5-小结" class="headerlink" title="25.1.5 小结"></a>25.1.5 小结</h5><ul>
+<li>创建时间对象（now、of）</li>
+<li>获取时间对象中的年，月，日，时，分，秒</li>
+<li>格式化（format）</li>
+<li>解析（parse）</li>
+<li>增加或减少时间的方法（plus开头，minus开头）</li>
+<li>修改时间（with开头+对象）</li>
+<li>计算时间间隔的两个类：<ul>
+<li>Period</li>
+<li>Duration</li>
+</ul>
+</li>
+</ul>
+<h4 id="25-2-异常概述"><a href="#25-2-异常概述" class="headerlink" title="25.2 异常概述"></a>25.2 异常概述</h4><h5 id="25-2-1-基本概述"><a href="#25-2-1-基本概述" class="headerlink" title="25.2.1 基本概述"></a>25.2.1 基本概述</h5><p>​        概述：就是程序中出现了不正常的情况。程序在执行过程中，出现的非正常的情况，就会导致JVM的非正常停止</p>
+<p>​        <font color= "red">注意：</font>语法错误不算在异常体系中</p>
+<p>异常体系：</p>
+<p>Thorwable：</p>
+<ul>
+<li><p>Error：严重错误，通过代码无法处理  — 内存溢出</p>
+</li>
+<li><p>Exception：称为异常类，表示程序本身可以处理的问题    </p>
+<ul>
+<li>RuntimeExcetion及其子类：运行时异常。（空指针异常、数组索引越界异常）</li>
+<li>除RuntimeExcetion之外所有的异常：编译时异常。在编译期必须处理，否则不能通过编译</li>
+</ul>
+</li>
+</ul>
+<h5 id="25-2-2-JVM默认处理异常的方式"><a href="#25-2-2-JVM默认处理异常的方式" class="headerlink" title="25.2.2 JVM默认处理异常的方式"></a>25.2.2 JVM默认处理异常的方式</h5><ul>
+<li>如果程序出现了问题，我们没有做任何处理时，最终JVM会做默认的处理：<ul>
+<li>把异常的名称，错误原因及异常出现的位置等信息输出在控制台</li>
+<li>程序停止执行，出现异常之后的所有代码不会执行</li>
+</ul>
+</li>
+</ul>
+<h5 id="25-2-3-异常处理方式"><a href="#25-2-3-异常处理方式" class="headerlink" title="25.2.3 异常处理方式"></a>25.2.3 异常处理方式</h5><h6 id="25-2-3-1-Thorws处理方式"><a href="#25-2-3-1-Thorws处理方式" class="headerlink" title="25.2.3.1.  Thorws处理方式"></a>25.2.3.1.  <strong>Thorws处理方式</strong></h6><p>​        格式：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> 方法名()  thorws 异常类名&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 用在方法声明后面，跟的是异常类名</span></span><br><span class="line"><span class="comment">// 表示什么异常，调用该方法有可能会出现这样的异常</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>​        注意事项：表示声明一个异常</p>
+<ul>
+<li>编译异常因为在编译时就会检查，所以必须要写在方法后面进行显示声明</li>
+<li>运行时异常因为在运行时才会发生，所以方法后面可以不写</li>
+</ul>
+<h6 id="25-2-3-2-Thorw处理方式"><a href="#25-2-3-2-Thorw处理方式" class="headerlink" title="25.2.3.2. Thorw处理方式"></a>25.2.3.2. <strong>Thorw处理方式</strong></h6><p>​            格式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">thorw new 异常对象;</span><br><span class="line">&#x2F;&#x2F;用在方法体内，跟的是异常对象名</span><br><span class="line">&#x2F;&#x2F;表示手动抛出异常对象，由方法体内的语句处理</span><br></pre></td></tr></table></figure>
+
+
+
+<p>​        意义：</p>
+<pre><code>1. 在方法中，参数传递有误，没有继续执行的意义了
+ 2. 我们根据业务需要，定义一些业务相关的一类，可以在核实的时机手动创建这些类的对象并抛出</code></pre><h6 id="25-2-3-3-try…-catch…处理方式"><a href="#25-2-3-3-try…-catch…处理方式" class="headerlink" title="25.2.3.3 try… catch…处理方式"></a>25.2.3.3 try… catch…处理方式</h6><p>​            格式：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span>&#123;</span><br><span class="line">可能出现的异常的代码；</span><br><span class="line"><span class="comment">//异常</span></span><br><span class="line"><span class="comment">//try中异常之后的代码不会执行了</span></span><br><span class="line">&#125;<span class="keyword">catch</span>(异常类名  变量名 )&#123;</span><br><span class="line"><span class="comment">//使用变量名，获得本次异常的各种信息</span></span><br><span class="line">异常的处理代码；</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//下面的代码会继续执行</span></span><br></pre></td></tr></table></figure>
+
+<p>​        </p>
+<p>​            示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span>[] arr = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">try</span>&#123;</span><br><span class="line">            printArr(arr);<span class="comment">// 可能会尝试异常的代码</span></span><br><span class="line">        &#125;<span class="keyword">catch</span> (NullPointerException e)&#123;</span><br><span class="line">            System.out.println(<span class="string">"不能为Null"</span>);<span class="comment">// 处理异常的代码</span></span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">"大牛皮"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">printArr</span><span class="params">(<span class="keyword">int</span>[] arr)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(arr == <span class="keyword">null</span>)&#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> NullPointerException();<span class="comment">//当参数为null的时候，手动创建一个异常对象，抛给调用者，产生了一个异常</span></span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">                System.out.println(arr[i]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h6 id="25-2-3-4-try…cath…常见问题"><a href="#25-2-3-4-try…cath…常见问题" class="headerlink" title="25.2.3.4 try…cath…常见问题"></a>25.2.3.4 try…cath…常见问题</h6><ul>
+<li><p>如果try中没有遇到问题，怎么执行</p>
+<ul>
+<li>会把try中的所有代码全部执行完毕，catch中的不执行</li>
+</ul>
+</li>
+<li><p>如果try中遇到问题，try下面的代码还会执行么</p>
+<ul>
+<li>直接跳转到catch语句中，try中的下面的代码就不会再执行了</li>
+<li>catch执行完毕，表示try…catch体系全部执行完毕，继续执行下面的代码</li>
+</ul>
+</li>
+<li><p>如果出现的问题没有被捕获，那么程序如何运行</p>
+<ul>
+<li>那么相当于异常没有处理到，try…catch就没有处理到异常</li>
+<li>默认交给JVM处理</li>
+</ul>
+</li>
+<li><p>同时出现多个异常怎么处理</p>
+<ul>
+<li><p>添加多个catch语句</p>
+</li>
+<li><pre><code class="java"><span class="keyword">try</span>{
+可能出现的异常的代码；
+}<span class="keyword">catch</span>(异常类名<span class="number">1</span>  变量名){
+该异常的处理代码；
+}<span class="keyword">catch</span>(异常类名<span class="number">2</span>  变量名){
+    <span class="comment">//针对不同的异常，有不同的处理方法</span>
+该异常的处理代码；
+}……
+&lt;!--￼<span class="number">13</span>--&gt;
+<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>{
+<span class="keyword">try</span> {
+    <span class="keyword">int</span>[] arr = {<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>};
+    System.out.println(arr[<span class="number">10</span>]);
+} <span class="keyword">catch</span> (Exception e) {
+    <span class="comment">//返回此throwable的详细信息字符串</span>
+    e.getMessage();
+    <span class="comment">//返回此可抛出的简短描述</span>
+    e.toString();
+    <span class="comment">// 把异常的信息输出到控制台（字体为红色）</span>
+    e.printStackTrace();
+}
+&lt;!--￼<span class="number">14</span>--&gt;
+</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+<p>对象类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TryStudent</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> age;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">TryStudent</span><span class="params">(String name, <span class="keyword">int</span> age)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">        <span class="keyword">this</span>.age = age;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">TryStudent</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getAge</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> age;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAge</span><span class="params">(<span class="keyword">int</span> age)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (age &gt;=<span class="number">18</span> &amp;&amp; age&lt;=<span class="number">25</span>) &#123;</span><br><span class="line">            <span class="keyword">this</span>.age = age;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">throw</span>  <span class="keyword">new</span> AgeOutOfBoundsException();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"TryStudent&#123;"</span> +</span><br><span class="line">                <span class="string">"name='"</span> + name + <span class="string">'\''</span> +</span><br><span class="line">                <span class="string">", age='"</span> + age + <span class="string">'\''</span> +</span><br><span class="line">                <span class="string">'&#125;'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>自定义异常类：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AgeOutOfBoundsException</span> <span class="keyword">extends</span>  <span class="title">RuntimeException</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">AgeOutOfBoundsException</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">AgeOutOfBoundsException</span><span class="params">(String message)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(message);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+      <!-- 打赏 -->
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2021/09/22/DAY15_JDK8%E6%97%B6%E9%97%B4%E6%97%A5%E6%9C%9F%E7%B1%BB/" data-id="ckuvcxgdi0001ykue4o9y0giu"
+        class="article-share-link">分享</a>
+        
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%90%8E%E7%AB%AF%E5%AD%A6%E4%B9%A0/" rel="tag">后端学习</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+
+</article>
+    
     <article id="post-DAY14_API和数组高级操作" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
@@ -390,7 +1236,7 @@ System.out.println(divide);
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2021/09/20/DAY14_API%E5%92%8C%E6%95%B0%E7%BB%84%E9%AB%98%E7%BA%A7%E6%93%8D%E4%BD%9C/" data-id="ckury6bal0000sguedc7uc9l9"
+      <a data-url="http://yoursite.com/2021/09/20/DAY14_API%E5%92%8C%E6%95%B0%E7%BB%84%E9%AB%98%E7%BA%A7%E6%93%8D%E4%BD%9C/" data-id="ckuvcxgd90000ykue055632rz"
         class="article-share-link">分享</a>
         
       
@@ -574,7 +1420,7 @@ System.out.println(divide);
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2021/09/18/Day13_%E5%86%85%E9%83%A8%E5%92%8CLambda/" data-id="ckury6bbc000ksgue7ftc1cm0"
+      <a data-url="http://yoursite.com/2021/09/18/Day13_%E5%86%85%E9%83%A8%E5%92%8CLambda/" data-id="ckuvcxge3000rykueftci3146"
         class="article-share-link">分享</a>
         
       
@@ -816,7 +1662,7 @@ System.out.println(divide);
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2021/09/17/Day12_%E6%8E%A5%E5%8F%A3%E5%92%8C%E5%A4%9A%E6%80%81/" data-id="ckury6bb4000asguef5xchcxy"
+      <a data-url="http://yoursite.com/2021/09/17/Day12_%E6%8E%A5%E5%8F%A3%E5%92%8C%E5%A4%9A%E6%80%81/" data-id="ckuvcxge1000pykue8y167q5b"
         class="article-share-link">分享</a>
         
       
@@ -1012,7 +1858,7 @@ System.out.println(divide);
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2021/09/15/day11_%E7%BB%A7%E6%89%BF/" data-id="ckury6bcg001gsgue1icuff79"
+      <a data-url="http://yoursite.com/2021/09/15/day11_%E7%BB%A7%E6%89%BF/" data-id="ckuvcxgen001hykuea4hb8l4k"
         class="article-share-link">分享</a>
         
       
@@ -1335,7 +2181,7 @@ System.out.println(divide);
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2021/09/13/day10-%E5%88%86%E7%B1%BB%E5%92%8Cstatic/" data-id="ckury6bc8001asgue849tgtz0"
+      <a data-url="http://yoursite.com/2021/09/13/day10-%E5%88%86%E7%B1%BB%E5%92%8Cstatic/" data-id="ckuvcxgem001fykue4ay9aes9"
         class="article-share-link">分享</a>
         
       
@@ -1562,7 +2408,73 @@ System.out.println(divide);
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2021/09/10/day09%20ArrayList%E9%9B%86%E5%90%88&%E5%AD%A6%E7%94%9F%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/" data-id="ckury6bc40017sguec1fl1c4e"
+      <a data-url="http://yoursite.com/2021/09/10/day09%20ArrayList%E9%9B%86%E5%90%88&%E5%AD%A6%E7%94%9F%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/" data-id="ckuvcxged0019ykue5gcm1hmq"
+        class="article-share-link">分享</a>
+        
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%90%8E%E7%AB%AF%E5%AD%A6%E4%B9%A0/" rel="tag">后端学习</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+
+</article>
+    
+    <article id="post-递归排序" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2021/09/09/%E9%80%92%E5%BD%92%E6%8E%92%E5%BA%8F/"
+    >递归排序</a
+  >
+</h2>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2021/09/09/%E9%80%92%E5%BD%92%E6%8E%92%E5%BA%8F/" class="article-date">
+  <time datetime="2021-09-09T13:13:19.000Z" itemprop="datePublished">2021-09-09</time>
+</a>
+      
+      
+      
+      
+    </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h3 id="递归排序"><a href="#递归排序" class="headerlink" title="递归排序"></a>递归排序</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Demo5</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> [] arr = &#123;<span class="number">12</span>,<span class="number">4</span>,<span class="number">67</span>,<span class="number">89</span>,<span class="number">34</span>,<span class="number">25</span>&#125;;</span><br><span class="line">        <span class="comment">//哪些索引需要往后比</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; arr.length-<span class="number">1</span>; i++) &#123;</span><br><span class="line">            <span class="comment">//每一次从哪开始比的位置</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = i+<span class="number">1</span>; j &lt; arr.length; j++) &#123;</span><br><span class="line">                <span class="keyword">if</span>(arr[i]&lt;arr[j])&#123;</span><br><span class="line">                    <span class="keyword">int</span> temp = arr[j];</span><br><span class="line">                    arr[j]=arr[i];</span><br><span class="line">                    arr[i]=temp;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">            System.out.print(arr[i]+<span class="string">" "</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+      <!-- 打赏 -->
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2021/09/09/%E9%80%92%E5%BD%92%E6%8E%92%E5%BA%8F/" data-id="ckuvcxgep001lykuegg6v7zjm"
         class="article-share-link">分享</a>
         
       
@@ -1851,260 +2763,7 @@ System.out.println(divide);
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2021/09/09/day08-String%E7%9A%84%E4%BD%BF%E7%94%A8/" data-id="ckury6bcb001csgue2bqifrmh"
-        class="article-share-link">分享</a>
-        
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%90%8E%E7%AB%AF%E5%AD%A6%E4%B9%A0/" rel="tag">后端学习</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-  
-  
-
-  
-
-</article>
-    
-    <article id="post-递归排序" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2021/09/09/%E9%80%92%E5%BD%92%E6%8E%92%E5%BA%8F/"
-    >递归排序</a
-  >
-</h2>
-  
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2021/09/09/%E9%80%92%E5%BD%92%E6%8E%92%E5%BA%8F/" class="article-date">
-  <time datetime="2021-09-09T13:13:19.000Z" itemprop="datePublished">2021-09-09</time>
-</a>
-      
-      
-      
-      
-    </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-      <h3 id="递归排序"><a href="#递归排序" class="headerlink" title="递归排序"></a>递归排序</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Demo5</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> [] arr = &#123;<span class="number">12</span>,<span class="number">4</span>,<span class="number">67</span>,<span class="number">89</span>,<span class="number">34</span>,<span class="number">25</span>&#125;;</span><br><span class="line">        <span class="comment">//哪些索引需要往后比</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; arr.length-<span class="number">1</span>; i++) &#123;</span><br><span class="line">            <span class="comment">//每一次从哪开始比的位置</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = i+<span class="number">1</span>; j &lt; arr.length; j++) &#123;</span><br><span class="line">                <span class="keyword">if</span>(arr[i]&lt;arr[j])&#123;</span><br><span class="line">                    <span class="keyword">int</span> temp = arr[j];</span><br><span class="line">                    arr[j]=arr[i];</span><br><span class="line">                    arr[i]=temp;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">            System.out.print(arr[i]+<span class="string">" "</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-      <!-- 打赏 -->
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2021/09/09/%E9%80%92%E5%BD%92%E6%8E%92%E5%BA%8F/" data-id="ckury6bch001isguehodg7ak7"
-        class="article-share-link">分享</a>
-        
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%90%8E%E7%AB%AF%E5%AD%A6%E4%B9%A0/" rel="tag">后端学习</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-  
-  
-
-  
-
-</article>
-    
-    <article id="post-冒泡排序" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2021/09/09/%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/"
-    >冒泡排序</a
-  >
-</h2>
-  
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2021/09/09/%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/" class="article-date">
-  <time datetime="2021-09-09T12:13:19.000Z" itemprop="datePublished">2021-09-09</time>
-</a>
-      
-      
-      
-      
-    </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-      <p>冒泡排序</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Demo4</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> [] arr = &#123;<span class="number">12</span>,<span class="number">4</span>,<span class="number">67</span>,<span class="number">89</span>,<span class="number">34</span>,<span class="number">25</span>&#125;;</span><br><span class="line">        <span class="comment">//排序  冒泡排序  选</span></span><br><span class="line">        <span class="comment">//冒泡了几次</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; arr.length-<span class="number">1</span>; i++) &#123;</span><br><span class="line">                <span class="comment">//每一次冒泡了几次</span></span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; arr.length-<span class="number">1</span>-i; j++) &#123;</span><br><span class="line">                    <span class="keyword">if</span>(arr[j]&gt;arr[j+<span class="number">1</span>])&#123;</span><br><span class="line">                        <span class="keyword">int</span> temp = arr[j];</span><br><span class="line">                        arr[j]=arr[j+<span class="number">1</span>];</span><br><span class="line">                        arr[j+<span class="number">1</span>]=temp;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">            System.out.print(arr[i]+<span class="string">" "</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-      <!-- 打赏 -->
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2021/09/09/%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/" data-id="ckury6bce001esgued7rdc5cp"
-        class="article-share-link">分享</a>
-        
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%90%8E%E7%AB%AF%E5%AD%A6%E4%B9%A0/" rel="tag">后端学习</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-  
-  
-
-  
-
-</article>
-    
-    <article id="post-day07-面对对象" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2021/09/07/day07-%E9%9D%A2%E5%AF%B9%E5%AF%B9%E8%B1%A1/"
-    >面向对象</a
-  >
-</h2>
-  
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2021/09/07/day07-%E9%9D%A2%E5%AF%B9%E5%AF%B9%E8%B1%A1/" class="article-date">
-  <time datetime="2021-09-07T10:36:52.158Z" itemprop="datePublished">2021-09-07</time>
-</a>
-      
-      
-      
-      
-    </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-      <h3 id="11-类和对象"><a href="#11-类和对象" class="headerlink" title="11. 类和对象"></a>11. 类和对象</h3><p>三大特征：封装、继承、多态</p>
-<p>面对过程思想：自己一步步实现需求<br>面向对象思想：指挥别人干活</p>
-<h5 id="11-1-类"><a href="#11-1-类" class="headerlink" title="11.1 类"></a>11.1 类</h5><p>​    11.1.1 类的组成</p>
-<p>​        类：现实生活中具有共同属性和行为事物的抽象<br>​    用java语言去对一类事物的共性（属性和行为）进行总结和描述，类似于一类事物的模板；</p>
-<p>​        对象：真实存在的个体</p>
-<p>​    在java中，用new关键字创建出来的实体，在堆内存中产生<br>​    </p>
-<p>​    <strong>定义：</strong></p>
-<p>​    类的属性：成员变量（类中方法外的变量）</p>
-<p>​    行为：成员方法（去掉static的方法）</p>
-<p>​    使用属性：对象名、属性名 既可以存值也可以取值</p>
-<p>​    属性行为：对象名、方法名（）</p>
-<p>​    自定义类  模板类  没有住方法  不需要运行</p>
-<p>​    垃圾回收</p>
-<p>​    注意：当堆内存中，对象或数组产生的地址，通过任何方式都不能被找到后，就会被判定为内存找那个的’垃圾’ ，垃圾会被java垃圾回收器，空闲的时候自动进行清理</p>
-<h5 id="11-2-局部变量和成员变量"><a href="#11-2-局部变量和成员变量" class="headerlink" title="11.2 局部变量和成员变量"></a>11.2 局部变量和成员变量</h5><p>​    1.局部变量：方法中的变量<br>​    2.成员变量：类中方法外的变量</p>
-<p><img src="/image/%E5%B1%80%E9%83%A8%E5%8F%98%E9%87%8F%E5%92%8C%E6%88%90%E5%91%98%E5%8F%98%E9%87%8F.png" alt="局部变量和成员变量"></p>
-<h5 id="11-3-封装"><a href="#11-3-封装" class="headerlink" title="11.3 封装"></a>11.3 封装</h5><p>​    隐藏实现细节，仅对外暴露公共的访问方式<br>​    体现：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1. 私有成员变量，提供setXxx和getXxx</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">2. 将代码抽取到方法中，这是对代码的一种分装</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">3. 将属性抽取到类当中，这是对数据表的一种分装</span><br></pre></td></tr></table></figure>
-
-<p>​      </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">优点： 安全 提高复用性</span><br></pre></td></tr></table></figure>
-
-<p>​    </p>
-<h6 id="11-3-1-private私有化"><a href="#11-3-1-private私有化" class="headerlink" title="11.3.1 private私有化"></a><strong>11.3.1 private私有化</strong></h6><p>​    关键字：private</p>
-<p>​    是一个权限修饰符<br>​    私有化，只能在本类中使用变量</p>
-<h6 id="11-3-2-this关键字"><a href="#11-3-2-this关键字" class="headerlink" title="11.3.2 this关键字"></a>11.3.2 this关键字</h6><p>​    方法名中的变量名和私有化的变量名相同的时候，使用this关键字</p>
-<p>​    this.变量名</p>
-<p><code>return age</code>     //  <code>this this.age</code></p>
-<p>​    概念:代表所在类的对象的引用</p>
-<p>​        方法被哪个对象调动，this就代表那个对象</p>
-<h5 id="11-4-构造方法"><a href="#11-4-构造方法" class="headerlink" title="11.4 构造方法"></a>11.4 构造方法</h5><p>​        分别提供一个有参的，和无参的 方法</p>
-<h6 id="11-4-1-基本概念"><a href="#11-4-1-基本概念" class="headerlink" title="11.4.1 基本概念"></a>11.4.1 基本概念</h6><p>​            基本概念：构建、构造对象的时候，所调用的方法；</p>
-<p>​            格式：</p>
-<p>​            1.方法名和类名相同，大小也要一致</p>
-<p>​            2.没有返回值的类型，连void都没有</p>
-<p>​            3.没有具体的返回值（不能有return带回具体的结果）</p>
-<p>​    </p>
-<p>​    执行时机：没有构造的时候，系统默认提供一个无参构造：</p>
-<p>​        1.创建对象的时候调用，每创建一次对象的时候，就会执行一次构造方法；</p>
-<p>​        2.不能手动调用构造方法；</p>
-<p>​    </p>
-<p>​        格式：</p>
-<p>​    public  变量名(){    }</p>
-<p>​        </p>
-<p>​        作用： 用于给对象的数据(属性)进行初始化</p>
-<p>​    <strong>JavaBean类：封装数据</strong></p>
-<p>​    标准类的书写</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">pubic <span class="class"><span class="keyword">class</span> 类名</span>&#123;</span><br><span class="line">  <span class="comment">// 私有化属性</span></span><br><span class="line"> <span class="comment">// 无参构造</span></span><br><span class="line"> <span class="comment">// 满参构造</span></span><br><span class="line"> <span class="comment">// get/set方法</span></span><br><span class="line"> <span class="comment">// 行为</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>​        </p>
-
-      
-      <!-- 打赏 -->
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2021/09/07/day07-%E9%9D%A2%E5%AF%B9%E5%AF%B9%E8%B1%A1/" data-id="ckury6bbm0012sguehq7ycrqw"
+      <a data-url="http://yoursite.com/2021/09/09/day08-String%E7%9A%84%E4%BD%BF%E7%94%A8/" data-id="ckuvcxgeq001nykueaojxhrb5"
         class="article-share-link">分享</a>
         
       

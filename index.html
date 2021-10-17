@@ -76,6 +76,535 @@
     
     
     
+    <article id="post-Day02_MySQL高级" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2021/10/17/Day02_MySQL%E9%AB%98%E7%BA%A7/"
+    >MySQL高级</a
+  >
+</h2>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2021/10/17/Day02_MySQL%E9%AB%98%E7%BA%A7/" class="article-date">
+  <time datetime="2021-10-17T14:19:19.000Z" itemprop="datePublished">2021-10-17</time>
+</a>
+      
+      
+      
+      
+    </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h3 id="1-MySQL高级"><a href="#1-MySQL高级" class="headerlink" title="1. MySQL高级"></a>1. MySQL高级</h3><h4 id="1-1约束"><a href="#1-1约束" class="headerlink" title="1.1约束"></a>1.1约束</h4><h5 id="1-1-1-基础概念"><a href="#1-1-1-基础概念" class="headerlink" title="1.1.1 基础概念"></a>1.1.1 基础概念</h5><blockquote>
+<p>约束：</p>
+<ul>
+<li>约束是作用于表中列上的规则，用于限定加入表的数据</li>
+<li>约束的存在保存数据库中数据的正确性、有效性和完整性</li>
+</ul>
+<p>约束的分类：</p>
+<table>
+<thead>
+<tr>
+<th>约束名称</th>
+<th>描述</th>
+<th>关键字</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>非空约束</td>
+<td>保证列中所有数据不能有null值</td>
+<td>NOT NULL</td>
+</tr>
+<tr>
+<td>唯一约束</td>
+<td>保证列中所有数据各不相同</td>
+<td>UNIQUE</td>
+</tr>
+<tr>
+<td>主键约束</td>
+<td>主键是一行数据的唯一表示，要求非空白且唯一</td>
+<td>PRIMARY KEY</td>
+</tr>
+<tr>
+<td>检查约束</td>
+<td>保障列中的值满足某一条件</td>
+<td>CHECK</td>
+</tr>
+<tr>
+<td>默认约束</td>
+<td>保存数据时，未指定值则采用默认值</td>
+<td>DEFAULT</td>
+</tr>
+<tr>
+<td>外键约束</td>
+<td>外键用来让两个表的数据之间建立连接，保证数据的一致性和完整性</td>
+<td>FOREIGN KEY</td>
+</tr>
+</tbody></table>
+<p>Tips：MySQL不支持检查约束</p>
+</blockquote>
+<h5 id="1-2-外键约束"><a href="#1-2-外键约束" class="headerlink" title="1.2 外键约束"></a>1.2 外键约束</h5><blockquote>
+<p>概念：</p>
+<ul>
+<li>外键用来让两个表的数据之间建立链接，保证数据的一致性和完整性</li>
+</ul>
+<p>语法：</p>
+<p>（1）添加外键约束</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;CREATE TABLE 表名（</span><br><span class="line">列名 数据类型；</span><br><span class="line">..</span><br><span class="line">##小括号不要忘记</span><br><span class="line">[CONSTRAINT] [外键名称] FOREIGN KEY (外键列名) REFERENCES 主表（主表列名）</span><br><span class="line">&gt;）</span><br></pre></td></tr></table></figure>
+
+<p>（2）建表后添加外键</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt;ALTER TABLE 表名 ADD CONSTRAINT 外键名 FOREIGN KEY (外键字段名称) REFERENCES 主表名称(主列表名称);</span><br></pre></td></tr></table></figure>
+
+<p>（3）删除约束</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt;alter table 表名 drop FOREIGN key 外键名;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&gt;-- 删除表</span><br><span class="line">&gt;DROP TABLE IF EXISTS emp;</span><br><span class="line">&gt;DROP TABLE IF EXISTS dept;</span><br><span class="line"></span><br><span class="line">&gt;-- 部门表</span><br><span class="line">&gt;CREATE TABLE dept(</span><br><span class="line">id int primary key auto_increment,</span><br><span class="line">dep_name varchar(20),</span><br><span class="line">addr varchar(20)</span><br><span class="line">&gt;);</span><br><span class="line">&gt;-- 员工表 </span><br><span class="line">&gt;CREATE TABLE emp(</span><br><span class="line">id int primary key auto_increment,</span><br><span class="line">name varchar(20),</span><br><span class="line">age int,</span><br><span class="line">dep_id int,</span><br><span class="line"></span><br><span class="line">-- 添加外键 dep_id,关联 dept 表的id主键</span><br><span class="line">	CONSTRAINT fk_emp_dept FOREIGN KEY (dep_id) REFERENCES dept(id)</span><br><span class="line">&gt;);</span><br><span class="line"></span><br><span class="line">&gt;-- 添加 2 个部门</span><br><span class="line">&gt;insert into dept(dep_name,addr) values</span><br><span class="line">&gt;(&#39;研发部&#39;,&#39;广州&#39;),(&#39;销售部&#39;, &#39;深圳&#39;);</span><br><span class="line"></span><br><span class="line">&gt;-- 添加员工,dep_id 表示员工所在的部门</span><br><span class="line">&gt;INSERT INTO emp (NAME, age, dep_id) VALUES </span><br><span class="line">&gt;(&#39;张三&#39;, 20, 1),</span><br><span class="line">&gt;(&#39;李四&#39;, 20, 1),</span><br><span class="line">&gt;(&#39;王五&#39;, 20, 1),</span><br><span class="line">&gt;(&#39;赵六&#39;, 20, 2),</span><br><span class="line">&gt;(&#39;孙七&#39;, 22, 2),</span><br><span class="line">&gt;(&#39;周八&#39;, 18, 2);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&gt;-- 删除外键</span><br><span class="line">&gt;alter table emp drop FOREIGN key fk_emp_dept;</span><br><span class="line"></span><br><span class="line">&gt;-- 添加外键</span><br><span class="line">&gt;ALTER TABLE emp ADD CONSTRAINT fk_emp_dept FOREIGN KEY (dep_id) REFERENCES dept(id);</span><br></pre></td></tr></table></figure>
+
+
+</blockquote>
+<h5 id="1-2-数据库设计"><a href="#1-2-数据库设计" class="headerlink" title="1.2 数据库设计"></a>1.2 数据库设计</h5><blockquote>
+<p>概念：</p>
+<ul>
+<li>数据库设计就是根据业务系统的具体需求，结合我们所选的DBMS，为这个业务系统构造出最优的数据存储模型</li>
+<li>建立数据库中的表结构以及表于表之间的关联关系的过程</li>
+</ul>
+<p>设计步骤：</p>
+<ul>
+<li><p>需求分析 ：数据是什么？数据具有哪些属性，属性和数据的特点是什么</p>
+</li>
+<li><p>逻辑分析：通过ER图对数据库进行裸机建模，不需要考虑所有选用的数据管理系统</p>
+</li>
+<li><p>物理设计：根据数据库自身的特点把裸机设计转换成物理设计</p>
+</li>
+<li><p>维护设计：对新的需求进行建模，表优化</p>
+</li>
+</ul>
+<h5 id="表关系"><a href="#表关系" class="headerlink" title="表关系"></a><strong>表关系</strong></h5><ul>
+<li>一对一<ul>
+<li>用户和用户</li>
+<li>一对一关系多用于表拆分</li>
+<li>实现方式：在任意一方建立外键，关联对方主键，并设置外键唯一</li>
+</ul>
+</li>
+<li>一对多（多对一）<ul>
+<li>部门 和 员工</li>
+<li>一个部门对应多个员工，一个员工对应一个部门</li>
+<li>实现方式：在多的一方建立外键关联一的一方主键</li>
+</ul>
+</li>
+<li>多对多<ul>
+<li>商品 和 订单</li>
+<li>一个商品对应多个订单，一个订单包含多个商品</li>
+<li>实现方式：建立第三张中间表，中间表至少包含2个外键，分别关联双方主键</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h5 id="1-3-多表查询"><a href="#1-3-多表查询" class="headerlink" title="1.3 多表查询"></a>1.3 多表查询</h5><blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;SELECT * FROM emp,dept;</span><br><span class="line">&gt;-- 笛卡尔积：有A、B两个集合，取A、B所有的组合情况</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>连接查询：</strong></p>
+<ul>
+<li>内连接：相当于查询AB交集数据</li>
+<li>外连接<ul>
+<li>左外连接：相当于查询A表所有数据和交际部分数据</li>
+<li>右外连接：相当于查询B表所有数据和交际部分数据</li>
+</ul>
+</li>
+</ul>
+<p><strong>子查询：</strong></p>
+</blockquote>
+<h6 id="1-3-1-连接查询"><a href="#1-3-1-连接查询" class="headerlink" title="1.3.1 连接查询"></a>1.3.1 连接查询</h6><blockquote>
+<p>内连接：</p>
+<ul>
+<li><p>格式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-- 隐式内连接</span><br><span class="line">SELECT 字段列表 FROM 表1,表2… WHERE 条件;</span><br><span class="line"></span><br><span class="line">-- 显示内连接</span><br><span class="line">SELECT 字段列表 FROM 表1 [INNER] JOIN 表2 ON 条件;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>外连接：</p>
+<ul>
+<li><p>格式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-- 左外连接</span><br><span class="line">SELECT 字段列表 FROM 表1 LEFT [OUTER] JOIN 表2 ON 条件;</span><br><span class="line"></span><br><span class="line">-- 右外连接</span><br><span class="line">SELECT 字段列表 FROM 表1 RIGHT [OUTER] JOIN 表2 ON 条件;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&gt;&#x2F;*</span><br><span class="line"></span><br><span class="line">&gt;-- 连接查询</span><br><span class="line">内连接</span><br><span class="line">外连接</span><br><span class="line">&gt;-- 	子查询</span><br><span class="line"></span><br><span class="line">&gt;*&#x2F;</span><br><span class="line"></span><br><span class="line">&gt;-- 内连接 隐式</span><br><span class="line"></span><br><span class="line">&gt;SELECT * FROM dept,emp WHERE emp.dep_id &#x3D; dept.id;</span><br><span class="line"></span><br><span class="line">&gt;-- 内连接 显式</span><br><span class="line"></span><br><span class="line">&gt;SELECT * FROM emp INNER JOIN dept on emp.dep_id &#x3D; dept.id;</span><br><span class="line"></span><br><span class="line">&gt;-- 外连接  左  查询左边的所有 以及交集</span><br><span class="line">&gt;SELECT *FROM emp LEFT JOIN dept ON emp.dep_id &#x3D; dept.id;</span><br><span class="line"></span><br><span class="line">&gt;-- 外连接  右		查询右边边的所有 以及交集</span><br><span class="line">&gt;SELECT *FROM emp RIGHT JOIN dept ON emp.dep_id &#x3D; dept.id;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h6 id="1-3-2-子查询"><a href="#1-3-2-子查询" class="headerlink" title="1.3.2 子查询"></a>1.3.2 子查询</h6><blockquote>
+<p>概念： 查询中嵌套查询</p>
+<p>根据查询结果不同，作用不同：</p>
+<ul>
+<li>单行单列 ：作为条件值，使用= != &gt; &lt; 等进行条件判断</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt;SELECT 字段列表 FROM 表 WHERE 字段名 &#x3D; (子查询)；</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>多行单列 ：作为条件值，使用in等关键字进行条件判断</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt;SELECT 字段列表 FROM 表 WHERE 字段名 in (子查询)；</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>多行多列 ：作为虚拟表</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt;SELECT 字段列表 FROM (子查询) WHERE 条件；</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>1.4 事务</p>
+
+      
+      <!-- 打赏 -->
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2021/10/17/Day02_MySQL%E9%AB%98%E7%BA%A7/" data-id="ckuvcxgdt000dykuecbva74b3"
+        class="article-share-link">分享</a>
+        
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+
+</article>
+    
+    <article id="post-Day01_MySQL和Navicat" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2021/10/16/Day01_MySQL%E5%92%8CNavicat/"
+    >MySQL基础</a
+  >
+</h2>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2021/10/16/Day01_MySQL%E5%92%8CNavicat/" class="article-date">
+  <time datetime="2021-10-16T13:19:19.000Z" itemprop="datePublished">2021-10-16</time>
+</a>
+      
+      
+      
+      
+    </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h3 id="1-数据库"><a href="#1-数据库" class="headerlink" title="1. 数据库"></a>1. 数据库</h3><h4 id="1-1-数据库相关概念"><a href="#1-1-数据库相关概念" class="headerlink" title="1.1 数据库相关概念"></a>1.1 数据库相关概念</h4><blockquote>
+<p>数据库：</p>
+<ul>
+<li>存储数据的仓库，数据是有组织的进行存储</li>
+<li>英文：DataBase ，简称DB</li>
+</ul>
+<p>数据库管理系统：</p>
+<ul>
+<li>管理数据库的大型软件</li>
+<li>英文：DataBase Management System，简称 DBMS</li>
+</ul>
+<p>SQL：</p>
+<ul>
+<li>英文：Structured Query Language，简称 SQL，结构化查询语言</li>
+<li>操作关系型数据库的编程语言</li>
+<li>定义操作所有关系型数据库的统一标准</li>
+</ul>
+</blockquote>
+<h4 id="1-2-SQ分类"><a href="#1-2-SQ分类" class="headerlink" title="1.2 SQ分类"></a>1.2 SQ分类</h4><blockquote>
+<p>DDL:操作数据库、表</p>
+<p>DML:操作表中数据的增删改</p>
+<p>DQL:操作表中数据进行查询</p>
+<p>DCL:对数据库中进行权限控制</p>
+<p>基本语句：</p>
+<p><strong>进入数据库</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;#mysql -u 用户名 -p 密码</span><br><span class="line">&gt;mysql -u root -p root</span><br></pre></td></tr></table></figure>
+
+<p><strong>展示所有数据库</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt;show databases;</span><br></pre></td></tr></table></figure>
+
+<p><strong>进入使用数据库</strong>：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt;use 数据库名；</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h4 id="1-3-DDL的语句"><a href="#1-3-DDL的语句" class="headerlink" title="1.3 DDL的语句:"></a>1.3 DDL的语句:</h4><blockquote>
+<p><strong>查看表结构</strong>：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt;desc 表名;</span><br></pre></td></tr></table></figure>
+
+<p><strong>更换表名</strong>：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt;ALTER TABLE 表名 RENAME TO 新的表名</span><br></pre></td></tr></table></figure>
+
+<p><strong>添加一列</strong>：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt;ALTER TABLE 表名 ADD 列名  数据类型；</span><br></pre></td></tr></table></figure>
+
+<p><strong>修改数据类型</strong>：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ALTER TABLE 表名 MODIFY 列名 新数据类型；</span><br></pre></td></tr></table></figure>
+
+<p><strong>修改列名和数据类型</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ALTER TABLE 表名 CHANGE 列名 新列名 新数据类型；</span><br></pre></td></tr></table></figure>
+
+<p><strong>删除列</strong>：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ALTER TABLE 表名 DROP 列名</span><br></pre></td></tr></table></figure>
+
+
+</blockquote>
+<h4 id="1-4-DML的语句"><a href="#1-4-DML的语句" class="headerlink" title="1.4 DML的语句"></a>1.4 DML的语句</h4><blockquote>
+<p><strong>查看所有数据</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;-- 查看所有数据</span><br><span class="line">&gt;SELECT * from stu;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>添加指定列数据</strong>：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;-- 添加指定列数据 表名（列名1，列名2） VALUES (值1，值2。。)</span><br><span class="line">&gt;INSERT INTO stu(id,&#96;name&#96;,age,sex) VALUES (11,&#39;张三&#39;,10,&#39;男&#39;);</span><br></pre></td></tr></table></figure>
+
+<p><strong>给全部列添加数据</strong>：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;-- 给全部列添加数据</span><br><span class="line">&gt;-- 给所有列添加数据，列名的列表可以省略的</span><br><span class="line">&gt;INSERT INTO tb_user (id,&#96;name&#96;,sex,birthday,sroce,emile,tell,state) VALUES (2,&#39;李四&#39;,&#39;男&#39;,&#39;1999-11-11&#39;,88.88,&#39;lisi@itcast.cn&#39;,&#39;13888888888&#39;,1);</span><br><span class="line"></span><br><span class="line">&gt;INSERT INTO tb_user VALUES (2,&#39;李四&#39;,&#39;男&#39;,&#39;1999-11-11&#39;,88.88,&#39;lisi@itcast.cn&#39;,&#39;13888888888&#39;,1);</span><br></pre></td></tr></table></figure>
+
+<p><strong>批量添加数据</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;-- 批量添加数据</span><br><span class="line">&gt;INSERT INTO tb_user VALUES </span><br><span class="line">(4,&#39;李四&#39;,&#39;男&#39;,&#39;1999-11-11&#39;,88.88,&#39;lisi@itcast.cn&#39;,&#39;13888888888&#39;,1),</span><br><span class="line">(5,&#39;李四&#39;,&#39;男&#39;,&#39;1999-11-11&#39;,88.88,&#39;lisi@itcast.cn&#39;,&#39;13888888888&#39;,1),</span><br><span class="line">(6,&#39;李四&#39;,&#39;男&#39;,&#39;1999-11-11&#39;,88.88,&#39;lisi@itcast.cn&#39;,&#39;13888888888&#39;,1);</span><br></pre></td></tr></table></figure>
+
+<p><strong>删除数据</strong>:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;-- 	删除表内数据</span><br><span class="line">&gt;DELETE FROM tb_user WHERE (条件)id &#x3D; 1;</span><br></pre></td></tr></table></figure>
+
+<p><strong>删除表中所有的数据</strong>:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt;delete from 表名;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h4 id="1-5-DQL的语句"><a href="#1-5-DQL的语句" class="headerlink" title="1.5 DQL的语句"></a>1.5 DQL的语句</h4><blockquote>
+<p>基础语法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&gt;SELECT </span><br><span class="line">   字段列表</span><br><span class="line">&gt;FROM </span><br><span class="line">   表名列表 </span><br><span class="line">&gt;WHERE </span><br><span class="line">   条件列表</span><br><span class="line">&gt;GROUP BY</span><br><span class="line">   分组字段</span><br><span class="line">&gt;HAVING</span><br><span class="line">   分组后条件</span><br><span class="line">&gt;ORDER BY</span><br><span class="line">   排序字段</span><br><span class="line">&gt;LIMIT</span><br><span class="line">   分页限定</span><br></pre></td></tr></table></figure>
+
+
+</blockquote>
+<h5 id="1-5-1-分组查询"><a href="#1-5-1-分组查询" class="headerlink" title="1.5.1 分组查询"></a>1.5.1 分组查询</h5><blockquote>
+<p><strong>查询多个字段：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;-- 查询多个字段</span><br><span class="line">&gt;SELECT * FROM tb_user;</span><br></pre></td></tr></table></figure>
+
+<p> <strong>去除重复记录：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;-- 去除重复记录</span><br><span class="line">&gt;SELECT DISTINCT &#96;name&#96; FROM tb_user;</span><br></pre></td></tr></table></figure>
+
+<p><strong>起别名  as可以省略：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;-- 起别名  as可以省略</span><br><span class="line">&gt;SELECT id as 学号,&#96;name&#96; as 姓名,sex AS 性别,birthday 出生月份 FROM tb_user;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h5 id="1-5-2-条件查询"><a href="#1-5-2-条件查询" class="headerlink" title="1.5.2 条件查询"></a>1.5.2 条件查询</h5><blockquote>
+<p>基本格式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt;SELECT 字段列表 FROM 表名 WHERE 条件列表;</span><br></pre></td></tr></table></figure>
+
+<p><strong>条件</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>符号</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>&gt;</td>
+<td>大于</td>
+</tr>
+<tr>
+<td>&lt;</td>
+<td>小于</td>
+</tr>
+<tr>
+<td>&gt;=</td>
+<td>大于等于</td>
+</tr>
+<tr>
+<td>&lt;=</td>
+<td>大于等于</td>
+</tr>
+<tr>
+<td>=</td>
+<td>等于</td>
+</tr>
+<tr>
+<td>&lt;&gt; 或!=</td>
+<td>不等于</td>
+</tr>
+<tr>
+<td>BETWEEN..AND..</td>
+<td>在某个范围之内</td>
+</tr>
+<tr>
+<td>IN(..)</td>
+<td>多选一</td>
+</tr>
+<tr>
+<td>LIKE 占位符</td>
+<td>模糊查询 %是多个任意字符</td>
+</tr>
+<tr>
+<td>IS NULL</td>
+<td>是null</td>
+</tr>
+<tr>
+<td>IS NOT NULL</td>
+<td>不是null</td>
+</tr>
+<tr>
+<td>AND 或 &amp;&amp;</td>
+<td>并且</td>
+</tr>
+<tr>
+<td>OR 或 ||</td>
+<td>或者</td>
+</tr>
+<tr>
+<td>NOT或！</td>
+<td>非，不是</td>
+</tr>
+</tbody></table>
+<p>示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">&gt;-- 条件查询</span><br><span class="line"></span><br><span class="line">&gt;-- 1. 查询年龄大于20岁的学院信息</span><br><span class="line">&gt;select id,name,age,sex,address,math,english,hire_date from stu where age &gt; 20;</span><br><span class="line"></span><br><span class="line">&gt;-- 2. 查询年龄大于等于20岁的学院信息</span><br><span class="line">&gt;select id,name,age,sex,address,math,english,hire_date from stu where age &gt;&#x3D; 20;</span><br><span class="line"></span><br><span class="line">&gt;-- 3. 查询年龄大于等于30 并且 年龄小于等于30的学员信息</span><br><span class="line">&gt;select id,name,age,sex,address,math,english,hire_date from stu where age &gt;&#x3D; 20 and age &lt;&#x3D; 30;</span><br><span class="line"></span><br><span class="line">&gt;-- 4. 查询入学日期</span><br><span class="line">&gt;select id,name,age,sex,address,math,english,hire_date from stu where hire_date between &#39;1998-09-01&#39; and &#39;1999-09-01&#39;;</span><br><span class="line"></span><br><span class="line">&gt;-- 5. 查询年龄等于20岁的学员信息</span><br><span class="line">&gt;select * from stu where age &#x3D; 20;</span><br><span class="line"></span><br><span class="line">&gt;-- 6. 查询年龄不等于20岁的学员信息</span><br><span class="line">&gt;select * from stu where age !&#x3D; 20;</span><br><span class="line">&gt;select * from stu where age &lt;&gt; 20;</span><br><span class="line"></span><br><span class="line">&gt;-- 7. 查询20岁，45岁，55岁的学员信息</span><br><span class="line">&gt;select * from stu where age &#x3D; 20 or age &#x3D; 45 or age &#x3D; 55;</span><br><span class="line">&gt;select * from stu where age in (20,45,55);</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h5 id="1-5-3-糊查询"><a href="#1-5-3-糊查询" class="headerlink" title="1.5.3 糊查询"></a>1.5.3 糊查询</h5><blockquote>
+<p>使用LIKE关键字，使用通配符进行占位</p>
+<ul>
+<li>_：表示单个字符</li>
+<li>%：表示任意字符</li>
+</ul>
+<ul>
+<li>查询姓’马’的学员信息</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;-- 查询姓&#39;马&#39;的学员信息</span><br><span class="line">&gt;select * from stu where name like &#39;马%&#39;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>查询姓第二个字是’化’的学员信息</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;-- 查询姓第二个字是&#39;化&#39;的学员信息</span><br><span class="line">&gt;select * from stu where name like &#39;_化%&#39;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>查询名字中包含’徳’的学员信息</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;-- 查询名字中包含&#39;徳&#39;的学员信息</span><br><span class="line">&gt;select * from stu where name like &#39;%德%&#39;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h5 id="1-5-4-排序查询"><a href="#1-5-4-排序查询" class="headerlink" title="1.5.4 排序查询"></a>1.5.4 排序查询</h5><blockquote>
+<p>排序方式：</p>
+<ul>
+<li>ASC 升序排列</li>
+<li>DESC 降序排列</li>
+</ul>
+<p><strong>按照升序排列:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;-- 1. 年龄按照升序排列</span><br><span class="line">&gt;select * from stu order by age ASC;</span><br></pre></td></tr></table></figure>
+
+<p><strong>数学成绩按照降序排列：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;-- 2. 数学成绩按照降序排列</span><br><span class="line">&gt;select * from stu order by math DEsc;</span><br></pre></td></tr></table></figure>
+
+<p><strong>数学成绩按照降排列,如果数学成绩一样 英语成绩按照降序排列</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;-- 4. 数学成绩按照降排列,如果数学成绩一样 英语成绩按照降序排列</span><br><span class="line">&gt;SELECT * FROM stu ORDER BY math DESC , english DESC;</span><br></pre></td></tr></table></figure>
+
+<p>注意：如果第一个条件一样，执行第二个条件</p>
+</blockquote>
+<h5 id="1-5-5-聚合查询"><a href="#1-5-5-聚合查询" class="headerlink" title="1.5.5 聚合查询"></a>1.5.5 聚合查询</h5><blockquote>
+<p>函数分类：</p>
+<table>
+<thead>
+<tr>
+<th>函数名</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>count(列名)</td>
+<td>统计数量（一般选用不为null的列）</td>
+</tr>
+<tr>
+<td>max(列名)</td>
+<td>最大值</td>
+</tr>
+<tr>
+<td>min(列名)</td>
+<td>最小值</td>
+</tr>
+<tr>
+<td>sum(列名)</td>
+<td>求和</td>
+</tr>
+<tr>
+<td>avg(列名)</td>
+<td>平均值</td>
+</tr>
+</tbody></table>
+<p>格式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt;SELECT 聚合函数名（列名） FROM 表名；</span><br></pre></td></tr></table></figure>
+
+<p>​    ==null值不参与所有聚合函数运算==</p>
+<p>示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">&gt;&#x2F;*</span><br><span class="line">&gt;取值：</span><br><span class="line">主键</span><br><span class="line">*</span><br><span class="line">&gt;*&#x2F;</span><br><span class="line"></span><br><span class="line">&gt;-- 1. 统计班级一共有多少学生</span><br><span class="line">&gt;select count(*) from stu;</span><br><span class="line"></span><br><span class="line">&gt;-- 2. 查询数学成绩的最高分</span><br><span class="line">&gt;select max(math) from stu;</span><br><span class="line"></span><br><span class="line">&gt;-- 3. 查询数学成绩的最低分</span><br><span class="line">&gt;select min(math) from stu;</span><br><span class="line"></span><br><span class="line">&gt;-- 4. 查询数学成绩的总分</span><br><span class="line">&gt;select sum(math) from stu;</span><br><span class="line"></span><br><span class="line">&gt;-- 5. 查询数学成绩的平均分</span><br><span class="line">&gt;select avg(math) from stu;</span><br><span class="line"></span><br><span class="line">&gt;-- 6. 查询英语成绩的最低分</span><br><span class="line">&gt;select min(english) from stu;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+</blockquote>
+
+      
+      <!-- 打赏 -->
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2021/10/16/Day01_MySQL%E5%92%8CNavicat/" data-id="ckuvcxgdr000aykue0wch4t2c"
+        class="article-share-link">分享</a>
+        
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+
+</article>
+    
     <article id="post-DAY24_配置文件和枚举" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
@@ -407,7 +936,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2021/10/15/DAY24_%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%92%8C%E6%9E%9A%E4%B8%BE/" data-id="ckury6baz0004sguee2s0app0"
+      <a data-url="http://yoursite.com/2021/10/15/DAY24_%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%92%8C%E6%9E%9A%E4%B8%BE/" data-id="ckuvcxgdu000fykueenzr0sxa"
         class="article-share-link">分享</a>
         
       
@@ -574,7 +1103,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2021/10/15/DAY25_%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/" data-id="ckury6bb00005sguee69648kh"
+      <a data-url="http://yoursite.com/2021/10/15/DAY25_%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/" data-id="ckuvcxgdw000kykue82m59lkg"
         class="article-share-link">分享</a>
         
       
@@ -713,7 +1242,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2021/10/13/Day22_%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" data-id="ckury6bbf000osgue91g695qm"
+      <a data-url="http://yoursite.com/2021/10/13/Day22_%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" data-id="ckuvcxgec0017ykuees33dkjb"
         class="article-share-link">分享</a>
         
       
@@ -1044,7 +1573,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2021/10/07/DAY23_%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8%E5%92%8C%E5%8F%8D%E5%B0%84/" data-id="ckury6baw0003sgue3tsa20fl"
+      <a data-url="http://yoursite.com/2021/10/07/DAY23_%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8%E5%92%8C%E5%8F%8D%E5%B0%84/" data-id="ckuvcxgdv000iykue06hwcnnb"
         class="article-share-link">分享</a>
         
       
@@ -1545,7 +2074,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2021/10/07/Day21_%E5%A4%9A%E7%BA%BF%E7%A8%8B/" data-id="ckury6bbb000jsgue2c8941rg"
+      <a data-url="http://yoursite.com/2021/10/07/Day21_%E5%A4%9A%E7%BA%BF%E7%A8%8B/" data-id="ckuvcxgdy000nykue9zozbhg0"
         class="article-share-link">分享</a>
         
       
@@ -1933,7 +2462,7 @@ fos.close();
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2021/10/06/DAY20_file%E5%92%8CIO%E6%B5%81/" data-id="ckury6bbh000qsgue7bdtb8p0"
+      <a data-url="http://yoursite.com/2021/10/06/DAY20_file%E5%92%8CIO%E6%B5%81/" data-id="ckuvcxgdn0004ykuehqdcbty6"
         class="article-share-link">分享</a>
         
       
@@ -2132,7 +2661,7 @@ fos.close();
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2021/09/27/DAY19_%E5%8F%AF%E5%8F%98%E5%8F%82%E6%95%B0%E5%92%8CSteam%E6%B5%81/" data-id="ckury6bb30008sgue1shoedl8"
+      <a data-url="http://yoursite.com/2021/09/27/DAY19_%E5%8F%AF%E5%8F%98%E5%8F%82%E6%95%B0%E5%92%8CSteam%E6%B5%81/" data-id="ckuvcxgdo0005ykue2l2z38dp"
         class="article-share-link">分享</a>
         
       
@@ -2352,853 +2881,7 @@ fos.close();
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2021/09/23/DAY17_%E6%B3%9B%E5%9E%8B%E5%92%8C%E9%AB%98%E7%BA%A7%E9%9B%86%E5%90%88/" data-id="ckury6bat0001sgueg2vsdj01"
-        class="article-share-link">分享</a>
-        
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%90%8E%E7%AB%AF%E5%AD%A6%E4%B9%A0/" rel="tag">后端学习</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-  
-  
-
-  
-
-</article>
-    
-    <article id="post-DAY16_高级集合和数据集合" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2021/09/23/DAY16_%E9%AB%98%E7%BA%A7%E9%9B%86%E5%90%88%E5%92%8C%E6%95%B0%E6%8D%AE%E9%9B%86%E5%90%88/"
-    >高级集合-list和数据结构</a
-  >
-</h2>
-  
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2021/09/23/DAY16_%E9%AB%98%E7%BA%A7%E9%9B%86%E5%90%88%E5%92%8C%E6%95%B0%E6%8D%AE%E9%9B%86%E5%90%88/" class="article-date">
-  <time datetime="2021-09-23T08:23:19.000Z" itemprop="datePublished">2021-09-23</time>
-</a>
-      
-      
-      
-      
-    </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-      <h3 id="26-集合的高级"><a href="#26-集合的高级" class="headerlink" title="26. 集合的高级"></a>26. 集合的高级</h3><h4 id="26-1-集合的概述和继承体系"><a href="#26-1-集合的概述和继承体系" class="headerlink" title="26.1 集合的概述和继承体系"></a>26.1 集合的概述和继承体系</h4><blockquote>
-<ol>
-<li>集合和数组的对比：</li>
-</ol>
-<ul>
-<li>集合长度可变，数组长度不可变</li>
-<li>集合只能存储引用数据类型或者<font color = "red">存储基本数据类型的包装类</font>，集合可以存储引用数据类型和基本数据类型</li>
-</ul>
-<ol start="2">
-<li>集合类体系结构</li>
-</ol>
-<ul>
-<li>Collection (单列)(接口)<ul>
-<li>list（可重复)(接口)<ul>
-<li>ArrayList（实现类）</li>
-<li>LinkedList（实现类）</li>
-</ul>
-</li>
-<li>Set（不重复)(接口)<ul>
-<li>HashSet（实现类）</li>
-<li>TreeSet（实现类）</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>Map（双列)(接口)<ul>
-<li>HashMap（实现类）</li>
-<li>TreeMap（实现类）</li>
-</ul>
-</li>
-</ul>
-</blockquote>
-<h4 id="26-2-Collection"><a href="#26-2-Collection" class="headerlink" title="26.2 Collection"></a>26.2 Collection</h4><h5 id="26-2-1-成员方法"><a href="#26-2-1-成员方法" class="headerlink" title="26.2.1 成员方法"></a>26.2.1 成员方法</h5><blockquote>
-<table>
-<thead>
-<tr>
-<th align="left">方法名</th>
-<th align="left">说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">boolean add(E e)</td>
-<td align="left">添加元素</td>
-</tr>
-<tr>
-<td align="left">boolean remove(Object o)</td>
-<td align="left">从集合中移除指定的元素</td>
-</tr>
-<tr>
-<td align="left">boolean removeIf(Object o)</td>
-<td align="left">根据条件进行移除</td>
-</tr>
-<tr>
-<td align="left">void   clear()</td>
-<td align="left">清空集合中的元素</td>
-</tr>
-<tr>
-<td align="left">boolean contains(Object o)</td>
-<td align="left">判断集合中是否存在指定的元素</td>
-</tr>
-<tr>
-<td align="left">boolean isEmpty()</td>
-<td align="left">判断集合是否为空</td>
-</tr>
-<tr>
-<td align="left">int   size()</td>
-<td align="left">集合的长度，也就是集合中元素的个数</td>
-</tr>
-</tbody></table>
-<p>示例：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    Collection&lt;String&gt; collection = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    collection.add(<span class="string">"aaa"</span>);</span><br><span class="line">    collection.add(<span class="string">"bbb"</span>);</span><br><span class="line">    collection.add(<span class="string">"ccc"</span>);</span><br><span class="line">    collection.add(<span class="string">"dddd"</span>);</span><br><span class="line">    collection.add(<span class="string">"eeeee"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 判断是否存在某元素</span></span><br><span class="line">    <span class="keyword">boolean</span> result = collection.contains(<span class="string">"aaa"</span>);</span><br><span class="line">    System.out.println(result);</span><br><span class="line">    <span class="comment">// 删除符合条件的元素</span></span><br><span class="line">    collection.removeIf(s -&gt; s.length() == <span class="number">3</span>);</span><br><span class="line">    System.out.println(collection);</span><br><span class="line">    <span class="comment">//集合是否为空</span></span><br><span class="line">    <span class="keyword">boolean</span> result1 = collection.isEmpty();</span><br><span class="line">    System.out.println(result1);</span><br><span class="line">    <span class="comment">//清空集合</span></span><br><span class="line">    collection.clear();</span><br><span class="line">    System.out.println(collection);</span><br><span class="line">    <span class="comment">//获取集合的长度</span></span><br><span class="line">    <span class="keyword">int</span> size = collection.size();</span><br><span class="line">    System.out.println(size);</span><br><span class="line">    <span class="comment">// removerIf的拓展</span></span><br><span class="line">    collection.removeIf(<span class="keyword">new</span> Predicate&lt;String&gt;() &#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">test</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">if</span>(s.length() == <span class="number">4</span>)&#123;</span><br><span class="line">                <span class="keyword">return</span>  <span class="keyword">true</span>;</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">    System.out.println(collection);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</blockquote>
-<h5 id="26-2-2-Collertion集合的遍历"><a href="#26-2-2-Collertion集合的遍历" class="headerlink" title="26.2.2 Collertion集合的遍历"></a>26.2.2 Collertion集合的遍历</h5><blockquote>
-<ul>
-<li><p>Iterator:迭代器，集合的专用遍历方式</p>
-<ul>
-<li>Iterator<E> itertor(): 返回集合中的迭代器对象，该迭代器对象默认指向当前集合的0索引位置</li>
-</ul>
-</li>
-<li><p>Iterator中的常用方法</p>
-<ul>
-<li>boolean hasNext：判断单签位置是否有元素可以取出</li>
-<li>E next()：获取当前位置的元素；将迭代器对象移动向下一个索引位置</li>
-</ul>
-</li>
-</ul>
-<p>示例：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"> Collection&lt;String&gt; collection = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line"> collection.add(<span class="string">"aaa"</span>);</span><br><span class="line"> collection.add(<span class="string">"bbb"</span>);</span><br><span class="line"> collection.add(<span class="string">"ccc"</span>);</span><br><span class="line"> collection.add(<span class="string">"dddd"</span>);</span><br><span class="line"> collection.add(<span class="string">"eeeee"</span>);</span><br><span class="line"> <span class="comment">//创建Iterator 对象</span></span><br><span class="line"> Iterator&lt;String&gt; it = collection.iterator();</span><br><span class="line"> <span class="comment">//创建循环遍历</span></span><br><span class="line"> <span class="keyword">while</span> (it.hasNext())&#123;  <span class="comment">// 判断索引位置是否有元素</span></span><br><span class="line">     System.out.println(it.next());  <span class="comment">// 取出索引位置的元素；并且往后推一下元素</span></span><br><span class="line"> &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
-<p>集合遍历删除相同元素示例：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">&gt;ArrayList&lt;String&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">      list.add(<span class="string">"a"</span>);</span><br><span class="line">      list.add(<span class="string">"a"</span>);</span><br><span class="line">      list.add(<span class="string">"c"</span>);</span><br><span class="line">      list.add(<span class="string">"b"</span>);</span><br><span class="line">      list.add(<span class="string">"e"</span>);</span><br><span class="line"></span><br><span class="line">&gt;<span class="comment">//数组for循环遍历删除   ----1</span></span><br><span class="line">       <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; list.size(); i++) &#123;</span><br><span class="line">           String s = list.get(i);</span><br><span class="line">           <span class="keyword">if</span>(<span class="string">"a"</span>.equals(s))&#123;</span><br><span class="line">               list.remove(s);</span><br><span class="line">               i--;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">&gt;<span class="comment">// 集合迭代器遍历，删除相同元素   -----2</span></span><br><span class="line">      Iterator&lt;String&gt; it = list.iterator();</span><br><span class="line">      <span class="keyword">while</span> (it.hasNext()) &#123;  <span class="comment">// 迭代器指向0索引</span></span><br><span class="line">          <span class="comment">// 将指向元素，赋值String，取出比较，并移向下一元素</span></span><br><span class="line">          String s = it.next();  </span><br><span class="line">          <span class="keyword">if</span> (<span class="string">"a"</span>.equals(s)) &#123;</span><br><span class="line">              it.remove();</span><br><span class="line">          &#125;</span><br><span class="line"></span><br><span class="line">      &#125;</span><br><span class="line">      System.out.println(list);</span><br></pre></td></tr></table></figure>
-<p>ArrayList集合遍历删除弊端：降低性能（删除中间的数值，需要将后面的元素往前移动一位）</p>
-<p><strong>增强for循环</strong></p>
-<p>概念：简化数组和Collertion集合的遍历</p>
-<ul>
-<li>JDK5后面出现的，其内部原理是一个Iterator迭代器</li>
-<li>实现Iterable接口的类才可以使用迭代器和增强for</li>
-</ul>
-<p>格式：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="keyword">for</span>(元素数据类型  变量名：数组或者Collertion集合)&#123;</span><br><span class="line">	<span class="comment">//在此处使用变量，该变量就是元素</span></span><br><span class="line">&gt;&#125;</span><br></pre></td></tr></table></figure>
-
-<p>案例：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt;ArrayList&lt;String&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">&gt;<span class="comment">//  增加元素</span></span><br><span class="line">&gt;<span class="comment">//s只是一个变量，表示集合或者数组中循环的中的每个元素</span></span><br><span class="line">&gt;<span class="comment">// list是需要遍历的集合或者数组</span></span><br><span class="line">&gt;<span class="keyword">for</span>(String s : list)&#123;  </span><br><span class="line">          System.out.println(s);</span><br><span class="line">      &#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>Lambda方式遍历</p>
-<p>案例：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt;list.forEach(c -&gt; System.out.println(c));</span><br></pre></td></tr></table></figure>
-
-<p>三种循环的使用场景</p>
-<ul>
-<li><p>如果需要操作索引，使用普通for循环</p>
-</li>
-<li><p>如果在遍历过程中需要删除元素，使用迭代器</p>
-</li>
-<li><p>如果只需要遍历，使用增强for，不建议使用删除</p>
-<p>（Iterator迭代器和集合长度可变删除移位冲突）</p>
-<p>// ConcurrentModificationException  并发修改异常</p>
-</li>
-<li><p>普通for循环不通用</p>
-</li>
-</ul>
-</blockquote>
-<h4 id="26-3-List集合"><a href="#26-3-List集合" class="headerlink" title="26.3 List集合"></a>26.3 List集合</h4><h5 id="26-3-1-List的概述和特点"><a href="#26-3-1-List的概述和特点" class="headerlink" title="26.3.1 List的概述和特点"></a>26.3.1 List的概述和特点</h5><blockquote>
-<ol>
-<li><strong>List集合概述</strong></li>
-</ol>
-<ul>
-<li>有序集合，这里的有序指的是存取顺序</li>
-<li>用户可以精确控制列表中每个元素的插入位置，用户可以通过整数索引访问元素，并搜索列表中的元素</li>
-<li>与Set集合不同，列表中通常允许重复的元素</li>
-</ul>
-<ol start="2">
-<li>List集合的<strong>特点</strong></li>
-</ol>
-<ul>
-<li>有序：有序和取出的元素顺序一致</li>
-<li>有索引：可以通过索引操作元素</li>
-<li>可重复：存储的元素可以重复</li>
-</ul>
-</blockquote>
-<h5 id="26-3-2-List集合的方法"><a href="#26-3-2-List集合的方法" class="headerlink" title="26.3.2 List集合的方法"></a>26.3.2 List集合的方法</h5><blockquote>
-<p>成员方法：</p>
-<table>
-<thead>
-<tr>
-<th>方法名</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>void add(int index,E   element)</td>
-<td>在此集合中的指定位置插入指定的元素</td>
-</tr>
-<tr>
-<td>E remove(int   index)</td>
-<td>删除指定索引处的元素，返回被删除的元素</td>
-</tr>
-<tr>
-<td>E set(int index,E   element)</td>
-<td>修改指定索引处的元素，返回被修改的元素</td>
-</tr>
-<tr>
-<td>E get(int   index)</td>
-<td>返回指定索引处的元素</td>
-</tr>
-</tbody></table>
-<p>案例：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">       List&lt;String&gt; list  = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">       list.add(<span class="string">"aaa"</span>);</span><br><span class="line">       list.add(<span class="string">"bbb"</span>);</span><br><span class="line">       list.add(<span class="string">"ccc"</span>);</span><br><span class="line"></span><br><span class="line">&gt;<span class="comment">//        Listadd(list);   // 增加</span></span><br><span class="line">&gt;<span class="comment">//       Listremove(list);  //删除</span></span><br><span class="line">&gt;<span class="comment">//        Listset(list);    //修改</span></span><br><span class="line">&gt;<span class="comment">//        Listget(list);    //获取</span></span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Listget</span><span class="params">(List&lt;String&gt; list)</span> </span>&#123;</span><br><span class="line">       <span class="comment">// 获取指定位置的元素</span></span><br><span class="line">       String s = list.get(<span class="number">0</span>);</span><br><span class="line">       System.out.println(s);</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Listset</span><span class="params">(List&lt;String&gt; list)</span> </span>&#123;</span><br><span class="line">       <span class="comment">// 修改指定元素，会返回被修改的元素</span></span><br><span class="line">       <span class="comment">//被替代的元素，在集合中就不存在了</span></span><br><span class="line">       String  result = list.set(<span class="number">0</span>,<span class="string">"qqq"</span>);</span><br><span class="line">       System.out.println(result);</span><br><span class="line">       System.out.println(list);</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Listremove</span><span class="params">(List&lt;String&gt; list)</span> </span>&#123;</span><br><span class="line">       <span class="comment">// 删除指定元素，会返回被删除的元素</span></span><br><span class="line">       String s = list.remove(<span class="number">0</span>);</span><br><span class="line">       <span class="comment">// 删除指定元素，集合中的第一个，返回删除的布尔值</span></span><br><span class="line">       <span class="keyword">boolean</span> result = list.remove(<span class="string">"aaa"</span>);</span><br><span class="line">       System.out.println(result);</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Listadd</span><span class="params">(List&lt;String&gt; list)</span> </span>&#123;</span><br><span class="line">       <span class="comment">// add 在指定位置插入指定元素，原来上的元素往后挪一个索引</span></span><br><span class="line">       list.add(<span class="number">0</span>,<span class="string">"ddd"</span>);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
-
-
-
-</blockquote>
-<h5 id="26-3-3-List的常用方法"><a href="#26-3-3-List的常用方法" class="headerlink" title="26.3.3 List的常用方法"></a>26.3.3 List的常用方法</h5><blockquote>
-<ul>
-<li><p>ArrayList集合</p>
-<ul>
-<li>底层是数组结构实现，查询快、增删慢</li>
-</ul>
-</li>
-<li><p>LinkedList集合</p>
-<ul>
-<li>底层是链表结构实现，查询慢、增删快</li>
-</ul>
-</li>
-</ul>
-</blockquote>
-<h5 id="26-3-4-LinkedList的私有方法"><a href="#26-3-4-LinkedList的私有方法" class="headerlink" title="26.3.4 LinkedList的私有方法"></a>26.3.4 LinkedList的私有方法</h5><blockquote>
-<p>成员方法：</p>
-<table>
-<thead>
-<tr>
-<th>方法名</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>public void addFirst(E e)</td>
-<td>在该列表开头插入指定的元素</td>
-</tr>
-<tr>
-<td>public void addLast(E e)</td>
-<td>将指定的元素追加到此列表的末尾</td>
-</tr>
-<tr>
-<td>public E getFirst()</td>
-<td>返回此列表中的第一个元素</td>
-</tr>
-<tr>
-<td>public   E getLast()</td>
-<td>返回此列表中的最后一个元素</td>
-</tr>
-<tr>
-<td>public E removeFirst()</td>
-<td>从此列表中删除并返回第一个元素</td>
-</tr>
-<tr>
-<td>public   E removeLast()</td>
-<td>从此列表中删除并返回最后一个元素</td>
-</tr>
-</tbody></table>
-<p>案例：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">LinkedList&lt;String&gt; list = <span class="keyword">new</span> LinkedList&lt;&gt;();</span><br><span class="line">list.add(<span class="string">"aaa"</span>);</span><br><span class="line">list.add(<span class="string">"bbb"</span>);</span><br><span class="line">list.add(<span class="string">"ccc"</span>);</span><br><span class="line">list.add(<span class="string">"ddd"</span>);</span><br><span class="line">&gt;<span class="comment">//添加到最后一位</span></span><br><span class="line">list.addLast(<span class="string">"eee"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//添加到开头</span></span><br><span class="line">list.addFirst(<span class="string">"000"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 返回列表中第一个元素</span></span><br><span class="line">String a =list.getFirst();</span><br><span class="line">System.out.println(a);</span><br><span class="line">System.out.println(<span class="string">"----------------"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 返回列表中最后一个元素</span></span><br><span class="line">String b =list.getLast();</span><br><span class="line">System.out.println(b);</span><br><span class="line">System.out.println(<span class="string">"----------------"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 删除第一个元素</span></span><br><span class="line">list.removeFirst();</span><br><span class="line"></span><br><span class="line"><span class="comment">//删除最后一位</span></span><br><span class="line">list.removeLast();</span><br></pre></td></tr></table></figure>
-</blockquote>
-<h3 id="27-数据结构"><a href="#27-数据结构" class="headerlink" title="27. 数据结构"></a>27. 数据结构</h3><h4 id="27-1-常见的数据结构之一队列"><a href="#27-1-常见的数据结构之一队列" class="headerlink" title="27.1 常见的数据结构之一队列"></a>27.1 常见的数据结构之一队列</h4><blockquote>
-<ul>
-<li><p>栈结构</p>
-<p>​    先进后出</p>
-</li>
-<li><p>队列结构</p>
-<p>​    先进先出</p>
-</li>
-</ul>
-</blockquote>
-<h4 id="27-2-常见的数据结构之一数组"><a href="#27-2-常见的数据结构之一数组" class="headerlink" title="27.2 常见的数据结构之一数组"></a>27.2 常见的数据结构之一数组</h4><blockquote>
-<ul>
-<li>数组<ul>
-<li>查询数据通过地址值和索引定位</li>
-<li>查询快，增删慢</li>
-</ul>
-</li>
-</ul>
-</blockquote>
-<h4 id="27-3-常见的数据结构之一链表"><a href="#27-3-常见的数据结构之一链表" class="headerlink" title="27.3 常见的数据结构之一链表"></a>27.3 常见的数据结构之一链表</h4><blockquote>
-<ul>
-<li>增删快，查询慢</li>
-</ul>
-<p><img src="image/%E9%93%BE%E8%A1%A8-%E5%8D%95%E9%A1%B9%E9%93%BE%E8%A1%A8.png" alt=""></p>
-<p><img src="image/%E9%93%BE%E8%A1%A8-%E5%8F%8C%E5%90%91%E9%93%BE%E8%A1%A8.png" alt=""></p>
-</blockquote>
-<ul>
-<li>数组在执行查询时效率很高</li>
-<li>数据在增删时候效率很低</li>
-<li>链表在执行查询时候效率低</li>
-<li>链表在执行增删的时候效率很高</li>
-</ul>
-
-      
-      <!-- 打赏 -->
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2021/09/23/DAY16_%E9%AB%98%E7%BA%A7%E9%9B%86%E5%90%88%E5%92%8C%E6%95%B0%E6%8D%AE%E9%9B%86%E5%90%88/" data-id="ckury6bb6000dsgue9dxn3d6q"
-        class="article-share-link">分享</a>
-        
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%90%8E%E7%AB%AF%E5%AD%A6%E4%B9%A0/" rel="tag">后端学习</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-  
-  
-
-  
-
-</article>
-    
-    <article id="post-DAY15_JDK8时间日期类" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2021/09/22/DAY15_JDK8%E6%97%B6%E9%97%B4%E6%97%A5%E6%9C%9F%E7%B1%BB/"
-    >常用的Api-02</a
-  >
-</h2>
-  
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2021/09/22/DAY15_JDK8%E6%97%B6%E9%97%B4%E6%97%A5%E6%9C%9F%E7%B1%BB/" class="article-date">
-  <time datetime="2021-09-22T09:28:19.000Z" itemprop="datePublished">2021-09-22</time>
-</a>
-      
-      
-      
-      
-    </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-      <h3 id="25-常见的API-02"><a href="#25-常见的API-02" class="headerlink" title="25. 常见的API-02"></a>25. 常见的API-02</h3><h4 id="25-1-日期类"><a href="#25-1-日期类" class="headerlink" title="25.1 日期类"></a>25.1 日期类</h4><p>​            计算机的时间原点：1970年1月1日  00：00：00</p>
-<h5 id="25-1-1-Date类概述和构造方法"><a href="#25-1-1-Date类概述和构造方法" class="headerlink" title="25.1.1 Date类概述和构造方法"></a>25.1.1 Date类概述和构造方法</h5><p>​        <strong>1. JDK8之前用于表示日期时间的类</strong></p>
-<p>​        其对象可以表示特定的时刻，精确到毫秒（yyyy-MM-dd HH:mm:ss 000）</p>
-<p>​        <strong>2. 构造方法</strong>    </p>
-<table>
-<thead>
-<tr>
-<th>方法名</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>public Date()</td>
-<td>创建一个Date对象，表示默认时间</td>
-</tr>
-<tr>
-<td>public Date(long date)</td>
-<td>创建一个Date对象，表示指定时间</td>
-</tr>
-</tbody></table>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//输出默认时间</span></span><br><span class="line">      Date date1 = <span class="keyword">new</span> Date();</span><br><span class="line">      System.out.println(date1);</span><br><span class="line"></span><br><span class="line">      <span class="comment">//输出指定时间 </span></span><br><span class="line">      Date date2 = <span class="keyword">new</span> Date(<span class="number">0L</span>);</span><br><span class="line">      System.out.println(date2);</span><br></pre></td></tr></table></figure>
-
-<p>​        <strong>3.常用方法</strong></p>
-<p>​            setTime–设置从远点时间过了多少毫秒值</p>
-<p>​            getTime–获取时间的毫秒值</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 获取date对象的毫秒值--当前时间的毫秒值</span><br><span class="line">long time &#x3D; date1.getTime();</span><br><span class="line">      System.out.println(time);</span><br><span class="line">&#x2F;&#x2F; 设置date对象从原点时间过了多少毫秒值</span><br><span class="line">     date1.setTime(2000000000000L);</span><br><span class="line">      System.out.println(date1);</span><br></pre></td></tr></table></figure>
-
-<h5 id="25-1-2-SimpleDateFormat-类概述"><a href="#25-1-2-SimpleDateFormat-类概述" class="headerlink" title="25.1.2 SimpleDateFormat 类概述"></a>25.1.2 SimpleDateFormat 类概述</h5><p>​         SimpleDateFormat可以对Date对象，进行<font color = "red">格式化解析</font></p>
-<p>字符串和Date对象转化过程的中相关概念</p>
-<ul>
-<li><p>String -&gt; Date 解析 parse</p>
-</li>
-<li><pre><code class="java"> <span class="comment">// String -&gt; Date  解析</span>
- String str = <span class="string">"2021-9-22"</span>;
- SimpleDateFormat sdf02 = <span class="keyword">new</span> SimpleDateFormat(<span class="string">"yyyy-MM-dd"</span>);
- Date result2 = sdf02.parse(str);
- System.out.println(result2);
-&lt;!--￼<span class="number">2</span>--&gt;
-</code></pre>
-</li>
-</ul>
-<p>​        <strong>2. 构造方法</strong>    </p>
-<table>
-<thead>
-<tr>
-<th>方法名</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>public SimpleDateFormat()</td>
-<td>创建一个SimpleDateFormat，使用默认格式</td>
-</tr>
-<tr>
-<td>public SimpleDateFormat(String pattern)</td>
-<td>创建一个SimpleDateFormat，表示指定格式</td>
-</tr>
-</tbody></table>
-<p>​    <strong>3.小结</strong></p>
-<table>
-<thead>
-<tr>
-<th>转向流向</th>
-<th>设计方法</th>
-<th>方法所属类</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>long ==&gt; Date</td>
-<td>new Date(long ms)/setTime(long ms)创建Date对象/为Date对象设置时间</td>
-<td>Date</td>
-</tr>
-<tr>
-<td>Date ==&gt; long</td>
-<td>getTime()获取指定时间对象的毫秒值</td>
-<td>Date</td>
-</tr>
-<tr>
-<td>String ==&gt; Date</td>
-<td>解析，sdfObj.parse(dateStr)</td>
-<td>SimpleDateFormat</td>
-</tr>
-<tr>
-<td>Date ==&gt; String</td>
-<td>格式化，sdfObj.format(dateObj)</td>
-<td>SimpleDateFormat</td>
-</tr>
-</tbody></table>
-<h5 id="25-1-3-JDK8新增日期类-LocaDateTime"><a href="#25-1-3-JDK8新增日期类-LocaDateTime" class="headerlink" title="25.1.3 JDK8新增日期类-LocaDateTime"></a>25.1.3 JDK8新增日期类-LocaDateTime</h5><ul>
-<li>LocaDateTime</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>fa方法名</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>public static LocalDateTime now()</td>
-<td>获取当前系统时间</td>
-</tr>
-<tr>
-<td>public static LocalDateTime of(年，月，日，时，分，秒)</td>
-<td>使用指定年月日和时分秒初始化一个LocalDateTime对象</td>
-</tr>
-</tbody></table>
-<h6 id="25-1-3-1-localDateTime的常用方法"><a href="#25-1-3-1-localDateTime的常用方法" class="headerlink" title="25.1.3.1 localDateTime的常用方法"></a>25.1.3.1 localDateTime的常用方法</h6><p>示例：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//设置时间</span></span><br><span class="line">LocalDateTime localDateTime = LocalDateTime.of(<span class="number">2020</span>,<span class="number">12</span>,<span class="number">22</span>,<span class="number">5</span>,<span class="number">2</span>,<span class="number">2</span>);</span><br><span class="line"><span class="comment">//获得年</span></span><br><span class="line"><span class="keyword">int</span> year = localDateTime.getYear();</span><br><span class="line">System.out.println(year);</span><br><span class="line"><span class="comment">//获取月份</span></span><br><span class="line"><span class="keyword">int</span> monthValue = localDateTime.getMonthValue();</span><br><span class="line">System.out.println(monthValue);</span><br><span class="line"><span class="comment">//获取月份中的第几天</span></span><br><span class="line"><span class="keyword">int</span> dayOfMonth = localDateTime.getDayOfMonth();</span><br><span class="line">System.out.println(dayOfMonth);</span><br><span class="line"><span class="comment">//获取一年中的第几天</span></span><br><span class="line"><span class="keyword">int</span> dayOfYear = localDateTime.getDayOfYear();</span><br><span class="line">System.out.println(dayOfYear);</span><br><span class="line"><span class="comment">//获取星期</span></span><br><span class="line">DayOfWeek dayOfWeek =localDateTime.getDayOfWeek();</span><br><span class="line">System.out.println(dayOfWeek);</span><br><span class="line"><span class="comment">//获取分钟</span></span><br><span class="line"><span class="keyword">int</span> minute = localDateTime.getMinute();</span><br><span class="line">System.out.println(minute);</span><br><span class="line"><span class="comment">//获取小时</span></span><br><span class="line"><span class="keyword">int</span> hour = localDateTime.getHour();</span><br><span class="line">System.out.println(hour);</span><br></pre></td></tr></table></figure>
-
-
-
-<h6 id="25-1-3-2-LocalDateTime转换方法"><a href="#25-1-3-2-LocalDateTime转换方法" class="headerlink" title="25.1.3.2 LocalDateTime转换方法"></a>25.1.3.2 LocalDateTime转换方法</h6><p>方法说明：</p>
-<table>
-<thead>
-<tr>
-<th>方法名</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>public LocalDate  toLocalDate ()</td>
-<td>转换成为一个LocalDate对象</td>
-</tr>
-<tr>
-<td>public LocalTime toLocalTime ()</td>
-<td>转换成为一个LocalTime对象</td>
-</tr>
-</tbody></table>
-<p>​    示例代码：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JDK8DateDemo4</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        LocalDateTime localDateTime = LocalDateTime.of(<span class="number">2020</span>, <span class="number">12</span>, <span class="number">12</span>, <span class="number">8</span>, <span class="number">10</span>, <span class="number">12</span>);</span><br><span class="line">        <span class="comment">//public LocalDate toLocalDate ()    转换成为一个LocalDate对象</span></span><br><span class="line">        LocalDate localDate = localDateTime.toLocalDate();</span><br><span class="line">        System.out.println(localDate);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//public LocalTime toLocalTime ()    转换成为一个LocalTime对象</span></span><br><span class="line">        LocalTime localTime = localDateTime.toLocalTime();</span><br><span class="line">        System.out.println(localTime);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h6 id="25-1-3-3-LocalDatTime的解析和格式化"><a href="#25-1-3-3-LocalDatTime的解析和格式化" class="headerlink" title="25.1.3.3 LocalDatTime的解析和格式化"></a>25.1.3.3 LocalDatTime的解析和格式化</h6><p>方法说明：</p>
-<table>
-<thead>
-<tr>
-<th>方法名</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>public String format (指定格式)</td>
-<td>把一个LocalDateTime格式化成为一个字符串</td>
-</tr>
-<tr>
-<td>public LocalDateTime parse (准备解析的字符串, 解析格式)</td>
-<td>把一个日期字符串解析成为一个LocalDateTime对象</td>
-</tr>
-<tr>
-<td>public static DateTimeFormatter ofPattern(String pattern)</td>
-<td>使用指定的日期模板获取一个日期格式化器DateTimeFormatter对象</td>
-</tr>
-</tbody></table>
-<p>解析示例：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span>  <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">method2</span><span class="params">()</span></span>&#123;</span><br><span class="line">    String s = <span class="string">"2020年11月12日 11:01:10"</span>;</span><br><span class="line">    DateTimeFormatter patten = DateTimeFormatter.ofPattern(<span class="string">"yyyy年MM月dd日 HH:mm:ss"</span>);</span><br><span class="line">    LocalDateTime parse = LocalDateTime.parse(s,patten);</span><br><span class="line">    System.out.println(parse);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>​    格式化示例：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span>  <span class="keyword">static</span>  <span class="keyword">void</span> <span class="title">method1</span><span class="params">()</span></span>&#123;</span><br><span class="line">        LocalDateTime localDateTime = LocalDateTime.now();</span><br><span class="line">    System.out.println(localDateTime);</span><br><span class="line">    DateTimeFormatter patten = DateTimeFormatter.ofPattern(<span class="string">"yyyy年MM月dd日 HH:mm:ss"</span>);</span><br><span class="line">    String s = localDateTime.format(patten);</span><br><span class="line">    System.out.println(s);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h6 id="25-1-3-4-LocaDateTime增加或者减少时间方法"><a href="#25-1-3-4-LocaDateTime增加或者减少时间方法" class="headerlink" title="25.1.3.4 LocaDateTime增加或者减少时间方法"></a>25.1.3.4 <strong>LocaDateTime增加或者减少时间方法</strong></h6><ol>
-<li>方法返回一个新的ocalDateTime对象，返回值就是修改之后的结果</li>
-<li>参数为正，就是往后加</li>
-<li>参数为负，就是往后减</li>
-</ol>
-<p><strong>plus基本方法说明：</strong></p>
-<table>
-<thead>
-<tr>
-<th>方法名</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>public LocalDateTime plusYears (long years)</td>
-<td>添加或者减去年</td>
-</tr>
-<tr>
-<td>public LocalDateTime plusMonths(long months)</td>
-<td>添加或者减去月</td>
-</tr>
-<tr>
-<td>public LocalDateTime plusDays(long days)</td>
-<td>添加或者减去日</td>
-</tr>
-<tr>
-<td>public LocalDateTime plusHours(long hours)</td>
-<td>添加或者减去时</td>
-</tr>
-<tr>
-<td>public LocalDateTime plusMinutes(long minutes)</td>
-<td>添加或者减去分</td>
-</tr>
-<tr>
-<td>public LocalDateTime plusSeconds(long seconds)</td>
-<td>添加或者减去秒</td>
-</tr>
-<tr>
-<td>public LocalDateTime plusWeeks(long weeks)</td>
-<td>添加或者减去周</td>
-</tr>
-</tbody></table>
-<p><strong>minus基本方法说明：</strong></p>
-<table>
-<thead>
-<tr>
-<th>方法名</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>public LocalDateTime  minusYears (long years)</td>
-<td>减去或者添加年</td>
-</tr>
-<tr>
-<td>public LocalDateTime  minusMonths(long months)</td>
-<td>减去或者添加月</td>
-</tr>
-<tr>
-<td>public LocalDateTime minusDays(long days)</td>
-<td>减去或者添加日</td>
-</tr>
-<tr>
-<td>public LocalDateTime minusHours(long hours)</td>
-<td>减去或者添加时</td>
-</tr>
-<tr>
-<td>public LocalDateTime minusMinutes(long minutes)</td>
-<td>减去或者添加分</td>
-</tr>
-<tr>
-<td>public LocalDateTime minusSeconds(long seconds)</td>
-<td>减去或者添加秒</td>
-</tr>
-<tr>
-<td>public LocalDateTime minusWeeks(long weeks)</td>
-<td>减去或者添加周</td>
-</tr>
-</tbody></table>
-<h6 id="25-1-3-5-LocalDateTime修改方法"><a href="#25-1-3-5-LocalDateTime修改方法" class="headerlink" title="25.1.3.5 LocalDateTime修改方法"></a>25.1.3.5 <strong>LocalDateTime修改方法</strong></h6><p>方法说明</p>
-<table>
-<thead>
-<tr>
-<th>方法名</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>public LocalDateTime withYear(int year)</td>
-<td>直接修改年</td>
-</tr>
-<tr>
-<td>public LocalDateTime withMonth(int month)</td>
-<td>直接修改月</td>
-</tr>
-<tr>
-<td>public LocalDateTime withDayOfMonth(int dayofmonth)</td>
-<td>直接修改日期(一个月中的第几天)</td>
-</tr>
-<tr>
-<td>public LocalDateTime withDayOfYear(int dayOfYear)</td>
-<td>直接修改日期(一年中的第几天)</td>
-</tr>
-<tr>
-<td>public LocalDateTime withHour(int hour)</td>
-<td>直接修改小时</td>
-</tr>
-<tr>
-<td>public LocalDateTime withMinute(int minute)</td>
-<td>直接修改分钟</td>
-</tr>
-<tr>
-<td>public LocalDateTime withSecond(int second)</td>
-<td>直接修改秒</td>
-</tr>
-</tbody></table>
-<p>注意：直接修改，不会和of一样会会根据情况报错</p>
-<h5 id="23-1-4-时间间隔的计算"><a href="#23-1-4-时间间隔的计算" class="headerlink" title="23.1.4 时间间隔的计算"></a>23.1.4 时间间隔的计算</h5><ul>
-<li>Period方法说明：</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>方法名</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>public static Period between(开始时间,结束时间)</td>
-<td>计算两个“时间”的间隔</td>
-</tr>
-<tr>
-<td>public int getYears()</td>
-<td>获得这段时间的年数</td>
-</tr>
-<tr>
-<td>public int getMonths()</td>
-<td>获得此期间的月数</td>
-</tr>
-<tr>
-<td>public int getDays()</td>
-<td>获得此期间的天数</td>
-</tr>
-<tr>
-<td>public long toTotalMonths()</td>
-<td>获取此期间的总月数</td>
-</tr>
-</tbody></table>
-<p>示例：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">LocalDate localDate1 &#x3D; LocalDate.of(2020, 1, 1);</span><br><span class="line">       LocalDate localDate2 &#x3D; LocalDate.of(2048, 12, 12);</span><br><span class="line">       Period period &#x3D; Period.between(localDate1, localDate2);</span><br><span class="line">       System.out.println(period);&#x2F;&#x2F;P28Y11M11D</span><br><span class="line"></span><br><span class="line">       &#x2F;&#x2F;public int getYears()         获得这段时间的年数</span><br><span class="line">       System.out.println(period.getYears());&#x2F;&#x2F;28</span><br><span class="line">       &#x2F;&#x2F;public int getMonths()        获得此期间的月数</span><br><span class="line">       System.out.println(period.getMonths());&#x2F;&#x2F;11</span><br><span class="line">       &#x2F;&#x2F;public int getDays()          获得此期间的天数</span><br><span class="line">       System.out.println(period.getDays());&#x2F;&#x2F;11</span><br><span class="line"></span><br><span class="line">       &#x2F;&#x2F;public long toTotalMonths()   获取此期间的总月数</span><br><span class="line">       System.out.println(period.toTotalMonths());&#x2F;&#x2F;347</span><br></pre></td></tr></table></figure>
-
-
-
-<ul>
-<li>Duration方法说明</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>方法名</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>public static Durationbetween(开始时间,结束时间)</td>
-<td>计算两个“时间”的间隔</td>
-</tr>
-<tr>
-<td>public long toSeconds()</td>
-<td>获得此时间间隔的秒</td>
-</tr>
-<tr>
-<td>public int toMillis()</td>
-<td>获得此时间间隔的毫秒</td>
-</tr>
-<tr>
-<td>public int toNanos()</td>
-<td>获得此时间间隔的纳秒</td>
-</tr>
-</tbody></table>
-<p>示例：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">LocalDateTime localDateTime1 = LocalDateTime.of(<span class="number">2020</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">13</span>, <span class="number">14</span>, <span class="number">15</span>);</span><br><span class="line">        LocalDateTime localDateTime2 = LocalDateTime.of(<span class="number">2020</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">11</span>, <span class="number">12</span>, <span class="number">13</span>);</span><br><span class="line">        Duration duration = Duration.between(localDateTime1, localDateTime2);</span><br><span class="line">        System.out.println(duration);<span class="comment">//PT21H57M58S</span></span><br><span class="line">        <span class="comment">//public long toSeconds()	       获得此时间间隔的秒</span></span><br><span class="line">        System.out.println(duration.toSeconds());<span class="comment">//79078</span></span><br><span class="line">        <span class="comment">//public int toMillis()	           获得此时间间隔的毫秒</span></span><br><span class="line">        System.out.println(duration.toMillis());<span class="comment">//79078000</span></span><br><span class="line">        <span class="comment">//public int toNanos()             获得此时间间隔的纳秒</span></span><br><span class="line">        System.out.println(duration.toNanos());<span class="comment">//79078000000000</span></span><br></pre></td></tr></table></figure>
-
-
-
-<p>注意：<font color= "red">Period方法只能精确到年月日，Duration方法可以精确到纳秒位</font></p>
-<h5 id="25-1-5-小结"><a href="#25-1-5-小结" class="headerlink" title="25.1.5 小结"></a>25.1.5 小结</h5><ul>
-<li>创建时间对象（now、of）</li>
-<li>获取时间对象中的年，月，日，时，分，秒</li>
-<li>格式化（format）</li>
-<li>解析（parse）</li>
-<li>增加或减少时间的方法（plus开头，minus开头）</li>
-<li>修改时间（with开头+对象）</li>
-<li>计算时间间隔的两个类：<ul>
-<li>Period</li>
-<li>Duration</li>
-</ul>
-</li>
-</ul>
-<h4 id="25-2-异常概述"><a href="#25-2-异常概述" class="headerlink" title="25.2 异常概述"></a>25.2 异常概述</h4><h5 id="25-2-1-基本概述"><a href="#25-2-1-基本概述" class="headerlink" title="25.2.1 基本概述"></a>25.2.1 基本概述</h5><p>​        概述：就是程序中出现了不正常的情况。程序在执行过程中，出现的非正常的情况，就会导致JVM的非正常停止</p>
-<p>​        <font color= "red">注意：</font>语法错误不算在异常体系中</p>
-<p>异常体系：</p>
-<p>Thorwable：</p>
-<ul>
-<li><p>Error：严重错误，通过代码无法处理  — 内存溢出</p>
-</li>
-<li><p>Exception：称为异常类，表示程序本身可以处理的问题    </p>
-<ul>
-<li>RuntimeExcetion及其子类：运行时异常。（空指针异常、数组索引越界异常）</li>
-<li>除RuntimeExcetion之外所有的异常：编译时异常。在编译期必须处理，否则不能通过编译</li>
-</ul>
-</li>
-</ul>
-<h5 id="25-2-2-JVM默认处理异常的方式"><a href="#25-2-2-JVM默认处理异常的方式" class="headerlink" title="25.2.2 JVM默认处理异常的方式"></a>25.2.2 JVM默认处理异常的方式</h5><ul>
-<li>如果程序出现了问题，我们没有做任何处理时，最终JVM会做默认的处理：<ul>
-<li>把异常的名称，错误原因及异常出现的位置等信息输出在控制台</li>
-<li>程序停止执行，出现异常之后的所有代码不会执行</li>
-</ul>
-</li>
-</ul>
-<h5 id="25-2-3-异常处理方式"><a href="#25-2-3-异常处理方式" class="headerlink" title="25.2.3 异常处理方式"></a>25.2.3 异常处理方式</h5><h6 id="25-2-3-1-Thorws处理方式"><a href="#25-2-3-1-Thorws处理方式" class="headerlink" title="25.2.3.1.  Thorws处理方式"></a>25.2.3.1.  <strong>Thorws处理方式</strong></h6><p>​        格式：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> 方法名()  thorws 异常类名&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 用在方法声明后面，跟的是异常类名</span></span><br><span class="line"><span class="comment">// 表示什么异常，调用该方法有可能会出现这样的异常</span></span><br></pre></td></tr></table></figure>
-
-
-
-<p>​        注意事项：表示声明一个异常</p>
-<ul>
-<li>编译异常因为在编译时就会检查，所以必须要写在方法后面进行显示声明</li>
-<li>运行时异常因为在运行时才会发生，所以方法后面可以不写</li>
-</ul>
-<h6 id="25-2-3-2-Thorw处理方式"><a href="#25-2-3-2-Thorw处理方式" class="headerlink" title="25.2.3.2. Thorw处理方式"></a>25.2.3.2. <strong>Thorw处理方式</strong></h6><p>​            格式：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">thorw new 异常对象;</span><br><span class="line">&#x2F;&#x2F;用在方法体内，跟的是异常对象名</span><br><span class="line">&#x2F;&#x2F;表示手动抛出异常对象，由方法体内的语句处理</span><br></pre></td></tr></table></figure>
-
-
-
-<p>​        意义：</p>
-<pre><code>1. 在方法中，参数传递有误，没有继续执行的意义了
- 2. 我们根据业务需要，定义一些业务相关的一类，可以在核实的时机手动创建这些类的对象并抛出</code></pre><h6 id="25-2-3-3-try…-catch…处理方式"><a href="#25-2-3-3-try…-catch…处理方式" class="headerlink" title="25.2.3.3 try… catch…处理方式"></a>25.2.3.3 try… catch…处理方式</h6><p>​            格式：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span>&#123;</span><br><span class="line">可能出现的异常的代码；</span><br><span class="line"><span class="comment">//异常</span></span><br><span class="line"><span class="comment">//try中异常之后的代码不会执行了</span></span><br><span class="line">&#125;<span class="keyword">catch</span>(异常类名  变量名 )&#123;</span><br><span class="line"><span class="comment">//使用变量名，获得本次异常的各种信息</span></span><br><span class="line">异常的处理代码；</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//下面的代码会继续执行</span></span><br></pre></td></tr></table></figure>
-
-<p>​        </p>
-<p>​            示例：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span>[] arr = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">try</span>&#123;</span><br><span class="line">            printArr(arr);<span class="comment">// 可能会尝试异常的代码</span></span><br><span class="line">        &#125;<span class="keyword">catch</span> (NullPointerException e)&#123;</span><br><span class="line">            System.out.println(<span class="string">"不能为Null"</span>);<span class="comment">// 处理异常的代码</span></span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">"大牛皮"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">printArr</span><span class="params">(<span class="keyword">int</span>[] arr)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(arr == <span class="keyword">null</span>)&#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> NullPointerException();<span class="comment">//当参数为null的时候，手动创建一个异常对象，抛给调用者，产生了一个异常</span></span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">                System.out.println(arr[i]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h6 id="25-2-3-4-try…cath…常见问题"><a href="#25-2-3-4-try…cath…常见问题" class="headerlink" title="25.2.3.4 try…cath…常见问题"></a>25.2.3.4 try…cath…常见问题</h6><ul>
-<li><p>如果try中没有遇到问题，怎么执行</p>
-<ul>
-<li>会把try中的所有代码全部执行完毕，catch中的不执行</li>
-</ul>
-</li>
-<li><p>如果try中遇到问题，try下面的代码还会执行么</p>
-<ul>
-<li>直接跳转到catch语句中，try中的下面的代码就不会再执行了</li>
-<li>catch执行完毕，表示try…catch体系全部执行完毕，继续执行下面的代码</li>
-</ul>
-</li>
-<li><p>如果出现的问题没有被捕获，那么程序如何运行</p>
-<ul>
-<li>那么相当于异常没有处理到，try…catch就没有处理到异常</li>
-<li>默认交给JVM处理</li>
-</ul>
-</li>
-<li><p>同时出现多个异常怎么处理</p>
-<ul>
-<li><p>添加多个catch语句</p>
-</li>
-<li><pre><code class="java"><span class="keyword">try</span>{
-可能出现的异常的代码；
-}<span class="keyword">catch</span>(异常类名<span class="number">1</span>  变量名){
-该异常的处理代码；
-}<span class="keyword">catch</span>(异常类名<span class="number">2</span>  变量名){
-    <span class="comment">//针对不同的异常，有不同的处理方法</span>
-该异常的处理代码；
-}……
-&lt;!--￼<span class="number">13</span>--&gt;
-<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>{
-<span class="keyword">try</span> {
-    <span class="keyword">int</span>[] arr = {<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>};
-    System.out.println(arr[<span class="number">10</span>]);
-} <span class="keyword">catch</span> (Exception e) {
-    <span class="comment">//返回此throwable的详细信息字符串</span>
-    e.getMessage();
-    <span class="comment">//返回此可抛出的简短描述</span>
-    e.toString();
-    <span class="comment">// 把异常的信息输出到控制台（字体为红色）</span>
-    e.printStackTrace();
-}
-&lt;!--￼<span class="number">14</span>--&gt;
-</code></pre>
-</li>
-</ul>
-</li>
-</ul>
-<p>对象类</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TryStudent</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> age;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">TryStudent</span><span class="params">(String name, <span class="keyword">int</span> age)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">        <span class="keyword">this</span>.age = age;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">TryStudent</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getAge</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> age;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAge</span><span class="params">(<span class="keyword">int</span> age)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (age &gt;=<span class="number">18</span> &amp;&amp; age&lt;=<span class="number">25</span>) &#123;</span><br><span class="line">            <span class="keyword">this</span>.age = age;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">throw</span>  <span class="keyword">new</span> AgeOutOfBoundsException();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"TryStudent&#123;"</span> +</span><br><span class="line">                <span class="string">"name='"</span> + name + <span class="string">'\''</span> +</span><br><span class="line">                <span class="string">", age='"</span> + age + <span class="string">'\''</span> +</span><br><span class="line">                <span class="string">'&#125;'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>自定义异常类：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AgeOutOfBoundsException</span> <span class="keyword">extends</span>  <span class="title">RuntimeException</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">AgeOutOfBoundsException</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">AgeOutOfBoundsException</span><span class="params">(String message)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(message);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-      <!-- 打赏 -->
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2021/09/22/DAY15_JDK8%E6%97%B6%E9%97%B4%E6%97%A5%E6%9C%9F%E7%B1%BB/" data-id="ckury6bbd000msgue4re6cfnx"
+      <a data-url="http://yoursite.com/2021/09/23/DAY17_%E6%B3%9B%E5%9E%8B%E5%92%8C%E9%AB%98%E7%BA%A7%E9%9B%86%E5%90%88/" data-id="ckuvcxgdl0003ykuehhtyc8th"
         class="article-share-link">分享</a>
         
       
