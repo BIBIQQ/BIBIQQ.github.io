@@ -76,6 +76,357 @@
     
     
     
+    <article id="post-Day04_Maven和MyBatis" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2021/10/20/Day04_Maven%E5%92%8CMyBatis/"
+    >Maven和MyBatis</a
+  >
+</h2>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2021/10/20/Day04_Maven%E5%92%8CMyBatis/" class="article-date">
+  <time datetime="2021-10-20T10:16:49.000Z" itemprop="datePublished">2021-10-20</time>
+</a>
+      
+      
+      
+      
+    </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h3 id="1-Maven"><a href="#1-Maven" class="headerlink" title="1. Maven"></a>1. Maven</h3><h4 id="1-1-Maven概述"><a href="#1-1-Maven概述" class="headerlink" title="1.1 Maven概述"></a>1.1 Maven概述</h4><blockquote>
+<p>Maven是专门用于管理好构建Java的项目的工具</p>
+<p>管理依赖</p>
+<p>主要功能：</p>
+<ul>
+<li>提供了一套标准haul的项目机构</li>
+<li>提供了一套标准化的构建流程（编译、测试、打包、发布。。）</li>
+<li>提供了一套依赖管理机制</li>
+</ul>
+<p>界面详情：</p>
+<p><img src="E:%5CHEIMA%5CNOTE/MySQL/image/Maven-%E7%95%8C%E9%9D%A2.png" alt=""></p>
+<p>仓库分类：</p>
+<ul>
+<li>本地仓库：自己计算机上的目录</li>
+<li>中央仓库：Maven团队维护的全球唯一仓库  <a href="https://repo1.maven.org/maven2/" target="_blank" rel="noopener">https://repo1.maven.org/maven2/</a></li>
+<li>远程仓库（私服）：公司团队搭建的私有仓库</li>
+</ul>
+<p>本地项目导入驱动jar包</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="comment">&lt;!--pom.xml--&gt;</span></span><br><span class="line">&gt;<span class="comment">&lt;!--mysql服务--&gt;</span></span><br><span class="line">&gt;<span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>mysql<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mysql-connector-java<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">version</span>&gt;</span>5.1.46<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</blockquote>
+<h4 id="1-2-Maven的使用"><a href="#1-2-Maven的使用" class="headerlink" title="1.2 Maven的使用"></a>1.2 Maven的使用</h4><blockquote>
+<p>maven生命周期</p>
+<ul>
+<li>Maven构建项目生命周期描述的是一次构建过程经历多少事件</li>
+<li>Maven对项目构建的生命周期划分为3套</li>
+<li>clean：清理工作</li>
+<li>default：核心工作，例如编译、测试、打包、安装等</li>
+<li>site：产生报告，发布站点</li>
+</ul>
+<p>==同一生命周期内，执行后边的命令，前面的所有命令会自动执行==</p>
+<p>Maven坐标详解</p>
+<p>坐标：</p>
+<ul>
+<li>Maven中的坐标是资源的唯一标识</li>
+<li>使用坐标来定义项目或引用项目中需要的依赖</li>
+</ul>
+<p>坐标组成：</p>
+<ul>
+<li>grould：当前Maven项目隶属组织名称</li>
+<li>artifactId：当前项目名称</li>
+<li>version：定义当前项目版本号</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">             <span class="comment">&lt;!-- 驱动名称 --&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>mysql<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">             <span class="comment">&lt;!-- 驱动目录地址 --&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mysql-connector-java<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">             <span class="comment">&lt;!--驱动版本号  --&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">version</span>&gt;</span>5.1.46<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+</blockquote>
+<h3 id="2-Mybatis"><a href="#2-Mybatis" class="headerlink" title="2. Mybatis"></a>2. Mybatis</h3><h5 id="2-1-基本概述"><a href="#2-1-基本概述" class="headerlink" title="2.1 基本概述"></a>2.1 基本概述</h5><blockquote>
+<ul>
+<li>MyBatis是一款优秀的持久层框架，用于简化JDBC开发</li>
+</ul>
+<p><strong>持久层</strong></p>
+<ul>
+<li>负责将数据保存到数据库的那一层代码</li>
+<li>JavaEE三层架构：表现层、业务层、持久层</li>
+</ul>
+<h5 id="JavaEE三层"><a href="#JavaEE三层" class="headerlink" title="JavaEE三层"></a>JavaEE三层</h5><ul>
+<li>表现层</li>
+<li>业务层</li>
+<li>持久层</li>
+</ul>
+<h5 id="框架："><a href="#框架：" class="headerlink" title="框架："></a>框架：</h5><ul>
+<li>框架是一个半成品软件，是一套可重用，通用的、软件基础代码模型</li>
+<li>在框架的基础之上构建软件编写更加高效、规范、通用、可拓展</li>
+</ul>
+<h5 id="MyBatis简化"><a href="#MyBatis简化" class="headerlink" title="MyBatis简化"></a>MyBatis简化</h5><ul>
+<li><p>硬编码</p>
+<ul>
+<li>注册驱动，获取连接</li>
+<li>SQL语句</li>
+</ul>
+</li>
+<li><p>操作繁琐</p>
+<ul>
+<li>手动设置参数</li>
+<li>手动封装对象</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h5 id="2-1-MyBatis的使用"><a href="#2-1-MyBatis的使用" class="headerlink" title="2.1 MyBatis的使用"></a>2.1 MyBatis的使用</h5><blockquote>
+<h4 id="1-创建数据表，导入驱动jar包，定义POJO类"><a href="#1-创建数据表，导入驱动jar包，定义POJO类" class="headerlink" title="1. 创建数据表，导入驱动jar包，定义POJO类"></a>1. 创建数据表，导入驱动jar包，定义POJO类</h4><h4 id="2-配置MyBatis的配置文件"><a href="#2-配置MyBatis的配置文件" class="headerlink" title="2. 配置MyBatis的配置文件"></a>2. 配置MyBatis的配置文件</h4><ul>
+<li><strong>第一步</strong> ： 创建 mybatis-config.xml 核心配置文件</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="comment">&lt;!--mybatis-config.xml --&gt;</span></span><br><span class="line">&gt;<span class="meta">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;</span></span><br><span class="line">&gt;<span class="meta">&lt;!DOCTYPE <span class="meta-keyword">configuration</span></span></span><br><span class="line"><span class="meta">       <span class="meta-keyword">PUBLIC</span> <span class="meta-string">"-//mybatis.org//DTD Config 3.0//EN"</span></span></span><br><span class="line"><span class="meta">       <span class="meta-string">"http://mybatis.org/dtd/mybatis-3-config.dtd"</span>&gt;</span></span><br><span class="line">&gt;<span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">environments</span> <span class="attr">default</span>=<span class="string">"development"</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">environment</span> <span class="attr">id</span>=<span class="string">"development"</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">transactionManager</span> <span class="attr">type</span>=<span class="string">"JDBC"</span>/&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">dataSource</span> <span class="attr">type</span>=<span class="string">"POOLED"</span>&gt;</span></span><br><span class="line">               <span class="comment">&lt;!--连接信息--&gt;</span></span><br><span class="line">               <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"driver"</span> <span class="attr">value</span>=<span class="string">"com.mysql.jdbc.Driver"</span>/&gt;</span></span><br><span class="line">               <span class="comment">&lt;!--数据库地址--&gt;</span></span><br><span class="line">               <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"url"</span> <span class="attr">value</span>=<span class="string">"jdbc:mysql:///day04_mybatis?useSSL = false"</span>/&gt;</span></span><br><span class="line">               <span class="comment">&lt;!--用户名密码--&gt;</span></span><br><span class="line">               <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"username"</span> <span class="attr">value</span>=<span class="string">"root"</span>/&gt;</span></span><br><span class="line">               <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"password"</span> <span class="attr">value</span>=<span class="string">"root"</span>/&gt;</span></span><br><span class="line">           <span class="tag">&lt;/<span class="name">dataSource</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;/<span class="name">environment</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">environments</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">mappers</span>&gt;</span></span><br><span class="line">       <span class="comment">&lt;!--加载sql的映射文件--&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">mapper</span> <span class="attr">resource</span>=<span class="string">"UserMapper.xml"</span>/&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">mappers</span>&gt;</span></span><br><span class="line">&gt;<span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>第二步</strong>   创建 UserMapper.xml 映射文件  命名：表名+Mapper</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="comment">&lt;!--UserMapper.xml  映射文件 --&gt;</span> </span><br><span class="line">&gt;<span class="meta">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;</span></span><br><span class="line">&gt;<span class="meta">&lt;!DOCTYPE <span class="meta-keyword">mapper</span></span></span><br><span class="line"><span class="meta">       <span class="meta-keyword">PUBLIC</span> <span class="meta-string">"-//mybatis.org//DTD Mapper 3.0//EN"</span></span></span><br><span class="line"><span class="meta">       <span class="meta-string">"http://mybatis.org/dtd/mybatis-3-mapper.dtd"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">&gt;<span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">&gt;namepace:名称空间</span></span><br><span class="line"><span class="comment">&gt;--&gt;</span></span><br><span class="line">&gt;<span class="tag">&lt;<span class="name">mapper</span> <span class="attr">namespace</span>=<span class="string">"test"</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"selectAll"</span> <span class="attr">resultType</span>=<span class="string">"pojo.User"</span>&gt;</span></span><br><span class="line">   select * from tb_user ;</span><br><span class="line"> <span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line">&gt;<span class="tag">&lt;/<span class="name">mapper</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>第三部   创建 logback.xml   日志配置文件</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line">&gt;<span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">   <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">       CONSOLE ：表示当前的日志信息是可以输出到控制台的。</span></span><br><span class="line"><span class="comment">   --&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">appender</span> <span class="attr">name</span>=<span class="string">"Console"</span> <span class="attr">class</span>=<span class="string">"ch.qos.logback.core.ConsoleAppender"</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">encoder</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">pattern</span>&gt;</span>[%level] %blue(%d&#123;HH:mm:ss.SSS&#125;) %cyan([%thread]) %boldGreen(%logger&#123;15&#125;) - %msg %n<span class="tag">&lt;/<span class="name">pattern</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;/<span class="name">encoder</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">appender</span>&gt;</span></span><br><span class="line"></span><br><span class="line">   <span class="tag">&lt;<span class="name">logger</span> <span class="attr">name</span>=<span class="string">"com.itheima"</span> <span class="attr">level</span>=<span class="string">"DEBUG"</span> <span class="attr">additivity</span>=<span class="string">"false"</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">appender-ref</span> <span class="attr">ref</span>=<span class="string">"Console"</span>/&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">logger</span>&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">   <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">     level:用来设置打印级别，大小写无关：TRACE, DEBUG, INFO, WARN, ERROR, ALL 和 OFF</span></span><br><span class="line"><span class="comment">    ， 默认debug</span></span><br><span class="line"><span class="comment">     &lt;root&gt;可以包含零个或多个&lt;appender-ref&gt;元素，标识这个输出位置将会被本日志级别控制。</span></span><br><span class="line"><span class="comment">     --&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">root</span> <span class="attr">level</span>=<span class="string">"DEBUG"</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">appender-ref</span> <span class="attr">ref</span>=<span class="string">"Console"</span>/&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">root</span>&gt;</span></span><br><span class="line">&gt;<span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="3-测试代码-配置文件导入"><a href="#3-测试代码-配置文件导入" class="headerlink" title="3. 测试代码- 配置文件导入"></a>3. 测试代码- 配置文件导入</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">&gt;<span class="comment">//      构建 SqlSessionFactory  Mybatis实现配置好的，直接复制即可</span></span><br><span class="line">    <span class="comment">//  导入配置文件 创建对象</span></span><br><span class="line">       String resource = <span class="string">"mybatis-config.xml"</span>;</span><br><span class="line">       InputStream inputStream = Resources.getResourceAsStream(resource);</span><br><span class="line">       SqlSessionFactory sqlSessionFactory = <span class="keyword">new</span> SqlSessionFactoryBuilder().build(inputStream);</span><br><span class="line">    </span><br><span class="line">&gt;<span class="comment">//        获取SqlSession对象 执行sql</span></span><br><span class="line">       SqlSession sqlSession = sqlSessionFactory.openSession();</span><br><span class="line">&gt;<span class="comment">//        执行sql  SQL映射文件的名称空间地址</span></span><br><span class="line">       List&lt;User&gt; users = sqlSession.selectList(<span class="string">"test.selectAll"</span>);</span><br><span class="line">       </span><br><span class="line">       System.out.println(users);</span><br><span class="line">       </span><br><span class="line">       sqlSession.close();</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+
+</blockquote>
+
+      
+      <!-- 打赏 -->
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2021/10/20/Day04_Maven%E5%92%8CMyBatis/" data-id="ckuzdlgt9000kw0uehmgi0iy7"
+        class="article-share-link">分享</a>
+        
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+
+</article>
+    
+    <article id="post-day03_JDBC" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2021/10/19/day03_JDBC/"
+    >JDBC和连接池DUird</a
+  >
+</h2>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2021/10/19/day03_JDBC/" class="article-date">
+  <time datetime="2021-10-19T09:16:49.000Z" itemprop="datePublished">2021-10-19</time>
+</a>
+      
+      
+      
+      
+    </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h3 id="1-JDBC"><a href="#1-JDBC" class="headerlink" title="1. JDBC"></a>1. JDBC</h3><h4 id="1-1-概述"><a href="#1-1-概述" class="headerlink" title="1.1 概述"></a>1.1 概述</h4><blockquote>
+<ul>
+<li>JDBC就是使用Java语言操作关系型数据库的一套API</li>
+</ul>
+<p>好处：</p>
+<ul>
+<li>各数据库厂商使用相同的接口，Java代码不需要针对不数据库分别开发</li>
+<li>可随时替代底层数据库，访问数据库的Java代码基本不变</li>
+</ul>
+</blockquote>
+<h5 id="1-2-基本使用"><a href="#1-2-基本使用" class="headerlink" title="1.2 基本使用"></a>1.2 基本使用</h5><blockquote>
+<p>DML的使用：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//        注册驱动</span></span><br><span class="line">       Class.forName(<span class="string">"mysql.JDBC"</span>);</span><br><span class="line">&gt;<span class="comment">//        获取连接</span></span><br><span class="line"> <span class="built_in">String</span> url = <span class="string">"jdbc:mysql://127.0.0.1:3306/demotest"</span>;</span><br><span class="line">       <span class="built_in">String</span> username = <span class="string">"root"</span>;</span><br><span class="line">       <span class="built_in">String</span> passwored = <span class="string">"root"</span>;</span><br><span class="line">       Connection conn = DriverManager.getConnection(url, username, passwored);</span><br><span class="line">&gt;<span class="comment">//        定义SQL语句</span></span><br><span class="line"> <span class="built_in">String</span> sql = <span class="string">"UPDATE stu set age = 22 WHERE id =1 "</span>;</span><br><span class="line">&gt;<span class="comment">//        获取执行SQL对象</span></span><br><span class="line">       Statement stmt = conn.createStatement();</span><br><span class="line">&gt;<span class="comment">//        执行SQL</span></span><br><span class="line">       int count = stmt.executeUpdate(sql);</span><br><span class="line">&gt;<span class="comment">//        返回结果</span></span><br><span class="line">       System.out.println(count);</span><br><span class="line">&gt;<span class="comment">//        结束资源</span></span><br><span class="line">       stmt.close();</span><br><span class="line">       conn.close();</span><br></pre></td></tr></table></figure>
+
+<p>DQL的使用：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="comment">//        注册驱动</span></span><br><span class="line">       Class.forName(<span class="string">"com.mysql.jdbc.Driver"</span>);</span><br><span class="line">&gt;<span class="comment">//        获取连接  </span></span><br><span class="line">&gt;<span class="comment">// 		默认本机端口 可以省略jdbc:mysql:///demotest</span></span><br><span class="line">       String url = <span class="string">"jdbc:mysql://127.0.0.1:3306/demotest"</span>;</span><br><span class="line">       String username = <span class="string">"root"</span>;</span><br><span class="line">       String password = <span class="string">"root"</span>;</span><br><span class="line">       Connection conn = DriverManager.getConnection(url, username, password);</span><br><span class="line">&gt;<span class="comment">//        定义SQL语句  DML</span></span><br><span class="line">       String sql = <span class="string">"UPDATE stu set age = 44 WHERE id =1 "</span>;</span><br><span class="line">&gt;<span class="comment">//        DQL</span></span><br><span class="line">       String sql1 = <span class="string">"SELECT * FROM stu"</span>;</span><br><span class="line">&gt;<span class="comment">//        创建对象</span></span><br><span class="line">       Statement stmt = conn.createStatement();</span><br><span class="line">&gt;<span class="comment">//        执行语句</span></span><br><span class="line">       <span class="keyword">int</span> i = stmt.executeUpdate(sql);</span><br><span class="line">       ResultSet resultSet = stmt.executeQuery(sql1);</span><br><span class="line">&gt;<span class="comment">//        处理结果</span></span><br><span class="line">       <span class="keyword">while</span> (resultSet.next()) &#123;</span><br><span class="line">&gt;<span class="comment">//            设置参数</span></span><br><span class="line">           String id = resultSet.getString(<span class="number">1</span>);</span><br><span class="line">           String name = resultSet.getString(<span class="number">2</span>);</span><br><span class="line">           String age = resultSet.getString(<span class="number">3</span>);</span><br><span class="line">           String sex = resultSet.getString(<span class="number">4</span>);</span><br><span class="line">           String address = resultSet.getString(<span class="number">5</span>);</span><br><span class="line"></span><br><span class="line">           System.out.println(id);</span><br><span class="line">           System.out.println(name);</span><br><span class="line">           System.out.println(age);</span><br><span class="line">           System.out.println(sex);</span><br><span class="line">           System.out.println(address);</span><br><span class="line"></span><br><span class="line">     System.out.println(<span class="string">"------------------------"</span>);</span><br><span class="line">       &#125;</span><br><span class="line">       System.out.println(i);</span><br><span class="line">&gt;<span class="comment">//        关闭资源</span></span><br><span class="line">       resultSet.close();</span><br><span class="line">       stmt.close();</span><br><span class="line">       conn.close();</span><br></pre></td></tr></table></figure>
+
+
+</blockquote>
+<h4 id="1-3-JDBC-API"><a href="#1-3-JDBC-API" class="headerlink" title="1.3 JDBC API"></a>1.3 JDBC API</h4><blockquote>
+<p>（1）DriverManager（驱动管理类）作用</p>
+<ul>
+<li><p>注册驱动</p>
+</li>
+<li><p>获取数据库连接</p>
+<ul>
+<li><pre><code class="java">jdbc:mysql:<span class="comment">//ip:端口/数据库名？自定义参数</span>
+&lt;!--￼<span class="number">2</span>--&gt;</code></pre>
+</li>
+<li><p>预编译SQL的执行SQL对象：防止SQL注入</p>
+</li>
+<li><pre><code class="java"><span class="function">PrepareStatement <span class="title">prepareStatement</span><span class="params">(sql)</span> </span>
+<span class="function"><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 执行存储过程对象</span><br><span class="line"></span><br><span class="line">- &#96;&#96;&#96;java</span><br><span class="line">  CallableStatement prepareCall(sql)</span><br></pre></td></tr></table></figure></span></code></pre>
+</li>
+</ul>
+</li>
+<li><p>事务管理</p>
+<ul>
+<li><p>MySQL事务管理</p>
+</li>
+<li><p>JDBC事务管理</p>
+</li>
+<li><pre><code>// true  自动提交 false 手动提交
+开启事务：   conn.setAutoCommit(bolean autoCommit);
+提交事务：    commit()
+回滚事务：    rollback()
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&#96;&#96;&#96;java</span><br><span class="line">        try &#123;</span><br><span class="line">&#x2F;&#x2F;            开启事务  手动开启</span><br><span class="line">            conn.setAutoCommit(false);</span><br><span class="line">&#x2F;&#x2F;        执行SQL</span><br><span class="line">            int count &#x3D; stmt.executeUpdate(sql);</span><br><span class="line">&#x2F;&#x2F;        返回结果</span><br><span class="line">            System.out.println(count &gt; 0);</span><br><span class="line">&#x2F;&#x2F;            提交事务</span><br><span class="line">            conn.commit();</span><br><span class="line">        &#125; catch (SQLException e) &#123;</span><br><span class="line">&#x2F;&#x2F;            回滚事务</span><br><span class="line">            conn.rollback();</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+</code></pre></li>
+</ul>
+</li>
+</ul>
+<p>（3）Statement</p>
+<ul>
+<li><p>执行DDL、DML</p>
+<ul>
+<li><pre><code class="java"><span class="function"><span class="keyword">int</span> <span class="title">executeUpdate</span><span class="params">(sql)</span></span>
+<span class="function"><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 执行DQL</span><br><span class="line"></span><br><span class="line">  - &#96;&#96;&#96;java</span><br><span class="line">    ResultSet  stmt.executeQuery(sql)</span><br></pre></td></tr></table></figure></span>
+<span class="function"></span></code></pre>
+</li>
+</ul>
+</li>
+</ul>
+<p>（4）ResultSet(结果集对象)</p>
+<ul>
+<li><p>ResultSet作用</p>
+</li>
+<li><p>获取查询结果</p>
+<ul>
+<li><pre><code class="javascript">boolean next():（<span class="number">1</span>）光标从当前位置向前移动一行 （<span class="number">2</span>）判断当前行是否为有效行
+    返回值：
+     - <span class="literal">true</span>：有效行，当前行有数据
+     - <span class="literal">false</span>：无效行，当前没有数据
+&lt;!--￼<span class="number">6</span>--&gt;
+</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+<p>（5）PreparedStatement</p>
+<p>sql注入：==’ ‘ or ‘1’ =  ‘ 1==</p>
+<ul>
+<li>PreparedStatament 作用<ul>
+<li>预编译SQL并执行SQL</li>
+<li>防止SQL注入：将铭感字符进行转义</li>
+</ul>
+</li>
+<li>PreparedStatament  预编译功能开启：useServerPrepStmts = true；</li>
+<li>PreparedStatament原理<ul>
+<li>在获取PreparedStatament对象时，将sql语句发送给mysql服务器进行检查，编译（这些步骤耗时）</li>
+<li>执行时就不用再进行步骤了，速度更快</li>
+<li>如果sql模块一样，则只需要进行一次检查、编译</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h3 id="2-数据库连接池"><a href="#2-数据库连接池" class="headerlink" title="2.数据库连接池"></a>2.数据库连接池</h3><h5 id="2-1-数据库概述"><a href="#2-1-数据库概述" class="headerlink" title="2.1 数据库概述"></a>2.1 数据库概述</h5><blockquote>
+<p>简介;</p>
+<ul>
+<li>数据库连接池是个容器，负责分配，管理数据库连接</li>
+<li>她允许应用程序重复使用一个现有的数据库连接，而不是再重新建立一个</li>
+<li>释放空间时间超过最大空闲时间的数据连接来避免因为没有释放数据库连接而引起的数据库连接遗漏</li>
+</ul>
+<p>好处：</p>
+<ul>
+<li>资源再用</li>
+<li>提升系统响应速度</li>
+<li>避免数据库连接遗漏</li>
+</ul>
+</blockquote>
+<h5 id="2-2-数据库实现"><a href="#2-2-数据库实现" class="headerlink" title="2.2 数据库实现"></a>2.2 数据库实现</h5><blockquote>
+<p>标准接口：DataSource</p>
+<ul>
+<li><p>官方（SUN）提供的数据库连接池标准接口，由第三方组织实现此接口</p>
+</li>
+<li><p>功能：获取连接</p>
+<ul>
+<li><pre><code class="java">Connection getDConnection
+&lt;!--￼<span class="number">7</span>--&gt;
+</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+
+      
+      <!-- 打赏 -->
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2021/10/19/day03_JDBC/" data-id="ckuzdlgte000uw0ue2hmnghoe"
+        class="article-share-link">分享</a>
+        
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+
+</article>
+    
     <article id="post-Day02_MySQL高级" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
@@ -281,7 +632,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2021/10/17/Day02_MySQL%E9%AB%98%E7%BA%A7/" data-id="ckuvcxgdt000dykuecbva74b3"
+      <a data-url="http://yoursite.com/2021/10/17/Day02_MySQL%E9%AB%98%E7%BA%A7/" data-id="ckuzdlgtb000ow0uefflme6am"
         class="article-share-link">分享</a>
         
       
@@ -585,7 +936,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2021/10/16/Day01_MySQL%E5%92%8CNavicat/" data-id="ckuvcxgdr000aykue0wch4t2c"
+      <a data-url="http://yoursite.com/2021/10/16/Day01_MySQL%E5%92%8CNavicat/" data-id="ckuzdlgt5000cw0ue2ummbzby"
         class="article-share-link">分享</a>
         
       
@@ -936,7 +1287,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2021/10/15/DAY24_%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%92%8C%E6%9E%9A%E4%B8%BE/" data-id="ckuvcxgdu000fykueenzr0sxa"
+      <a data-url="http://yoursite.com/2021/10/15/DAY24_%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%92%8C%E6%9E%9A%E4%B8%BE/" data-id="ckuzdlgt7000gw0uecrw536gm"
         class="article-share-link">分享</a>
         
       
@@ -1103,7 +1454,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2021/10/15/DAY25_%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/" data-id="ckuvcxgdw000kykue82m59lkg"
+      <a data-url="http://yoursite.com/2021/10/15/DAY25_%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/" data-id="ckuzdlgt8000iw0ue6f5oe1h5"
         class="article-share-link">分享</a>
         
       
@@ -1242,7 +1593,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2021/10/13/Day22_%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" data-id="ckuvcxgec0017ykuees33dkjb"
+      <a data-url="http://yoursite.com/2021/10/13/Day22_%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" data-id="ckuzdlgws001nw0ue2hld0gwn"
         class="article-share-link">分享</a>
         
       
@@ -1573,7 +1924,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2021/10/07/DAY23_%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8%E5%92%8C%E5%8F%8D%E5%B0%84/" data-id="ckuvcxgdv000iykue06hwcnnb"
+      <a data-url="http://yoursite.com/2021/10/07/DAY23_%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8%E5%92%8C%E5%8F%8D%E5%B0%84/" data-id="ckuzdlgt4000aw0ueeey2e234"
         class="article-share-link">分享</a>
         
       
@@ -2074,7 +2425,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2021/10/07/Day21_%E5%A4%9A%E7%BA%BF%E7%A8%8B/" data-id="ckuvcxgdy000nykue9zozbhg0"
+      <a data-url="http://yoursite.com/2021/10/07/Day21_%E5%A4%9A%E7%BA%BF%E7%A8%8B/" data-id="ckuzdlgta000mw0uegcq8asif"
         class="article-share-link">分享</a>
         
       
@@ -2462,426 +2813,7 @@ fos.close();
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2021/10/06/DAY20_file%E5%92%8CIO%E6%B5%81/" data-id="ckuvcxgdn0004ykuehqdcbty6"
-        class="article-share-link">分享</a>
-        
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%90%8E%E7%AB%AF%E5%AD%A6%E4%B9%A0/" rel="tag">后端学习</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-  
-  
-
-  
-
-</article>
-    
-    <article id="post-DAY19_可变参数和Steam流" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2021/09/27/DAY19_%E5%8F%AF%E5%8F%98%E5%8F%82%E6%95%B0%E5%92%8CSteam%E6%B5%81/"
-    >可变参数和Steam流</a
-  >
-</h2>
-  
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2021/09/27/DAY19_%E5%8F%AF%E5%8F%98%E5%8F%82%E6%95%B0%E5%92%8CSteam%E6%B5%81/" class="article-date">
-  <time datetime="2021-09-27T15:13:19.000Z" itemprop="datePublished">2021-09-27</time>
-</a>
-      
-      
-      
-      
-    </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-      <h3 id="33-可变参数"><a href="#33-可变参数" class="headerlink" title="33. 可变参数"></a>33. 可变参数</h3><h4 id="33-1-可变参数概述"><a href="#33-1-可变参数概述" class="headerlink" title="33.1 可变参数概述"></a>33.1 可变参数概述</h4><blockquote>
-<p>可变参数：就是形参的个数是可以变化的</p>
-<ul>
-<li>格式：修饰符 返回值类型 方法名｛数据类型…变量名｝</li>
-<li>范例：public static int sum (int… a)</li>
-<li>示例</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="comment">//求多个数的和</span></span><br><span class="line">&gt;<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">       <span class="keyword">int</span> sum = getSum(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>);</span><br><span class="line">       System.out.<span class="function">printl <span class="title">n</span><span class="params">(sum)</span></span>;</span><br><span class="line">   &#125;</span><br><span class="line">&gt;<span class="comment">// 可变参数</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">getSum</span><span class="params">(<span class="keyword">int</span>... arr)</span> </span>&#123;</span><br><span class="line">       <span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">       <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">           sum += arr[i];</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">return</span> sum;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
-
-<p>注意：</p>
-<ul>
-<li>这里变量其实就是一个数组</li>
-<li>如果一个方法有多个参数，包含可变参数，<font color= "red">可变参数要放在最后</font></li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">       <span class="keyword">int</span> sum = getSum(<span class="number">2</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>);</span><br><span class="line">       System.out.println(sum);</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="comment">// 可变参数</span></span><br><span class="line">&gt;<span class="comment">//    添加新参数，必须放在可变参数前面</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">getSum</span><span class="params">(<span class="keyword">int</span> num, <span class="keyword">int</span>... arr)</span> </span>&#123;</span><br><span class="line">       <span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">       <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">           sum += arr[i];</span><br><span class="line">       &#125;</span><br><span class="line">       sum += num;</span><br><span class="line">       <span class="keyword">return</span> sum;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
-
-
-</blockquote>
-<h4 id="33-2-不可变集合-JDK-1-8-不支持"><a href="#33-2-不可变集合-JDK-1-8-不支持" class="headerlink" title="33.2 不可变集合(JDK.1.8 不支持)"></a>33.2 不可变集合(JDK.1.8 不支持)</h4><blockquote>
-<p>成员方法：</p>
-<table>
-<thead>
-<tr>
-<th>方法名</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>static <E> List of(E….elements)</td>
-<td>创建一个具有指定元素的List集合对象</td>
-</tr>
-<tr>
-<td>static <E> Set<E> of(E….elements)</td>
-<td>创建一个具有指定元素的Set集合对象（不能出现重复的元素）</td>
-</tr>
-<tr>
-<td>static &lt;K,V&gt;  Map&lt;K,V&gt; of(E….elements)</td>
-<td>创建一个具有指定元素的Map集合对象</td>
-</tr>
-</tbody></table>
-<p>注意：</p>
-<ul>
-<li>集合不可变，不可以添加和删除 、修改</li>
-<li>可以结合集合的带参构造，实现集合的批量添加</li>
-</ul>
-<ul>
-<li>在Map接口中，还有一个ofEntries方法可以提高代码的阅读性</li>
-<li>首先会把键值对封装成一个Entry对象，再把这个Entry对象添加到集合当中</li>
-</ul>
-</blockquote>
-<h3 id="34-Stream流"><a href="#34-Stream流" class="headerlink" title="34. Stream流"></a>34. Stream流</h3><h4 id="34-1-Stream流"><a href="#34-1-Stream流" class="headerlink" title="34.1 Stream流"></a>34.1 Stream流</h4><blockquote>
-<h3 id="Stream流不能直接修改数据源中的数据"><a href="#Stream流不能直接修改数据源中的数据" class="headerlink" title="Stream流不能直接修改数据源中的数据"></a><strong>Stream流不能直接修改数据源中的数据</strong></h3><p>可以使用：</p>
-<ul>
-<li><p>单列集合</p>
-<ul>
-<li><p>使用stream() 生成流</p>
-</li>
-<li><p>default Stream<E> stream()</p>
-</li>
-<li><pre><code>//        单列集合
-       ArrayList&lt;String&gt; list = new ArrayList&lt;&gt;();
-       list.add(&quot;aaa&quot;);
-       list.add(&quot;bbb&quot;);
-       list.add(&quot;ccc&quot;);
-      list.stream().forEach(c -&gt; System.out.println(c));
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&gt;- 双列集合</span><br><span class="line">- 间接的生成流</span><br><span class="line"></span><br><span class="line">- 先通过keySet或者entrySet获取一个单列Set集合，再获取stream流</span><br><span class="line"></span><br><span class="line"> - </span><br></pre></td></tr></table></figure>
-//        双列集合
-       HashMap&lt;String, String&gt; maps = new HashMap&lt;&gt;();
-       maps.put(&quot;aaa&quot;, &quot;001&quot;);
-       maps.put(&quot;bbb&quot;, &quot;002&quot;);
-       maps.put(&quot;ccc&quot;, &quot;003&quot;);
-       //输出键
-       maps.keySet().stream().forEach(c -&gt; System.out.println(c));
-       //输出键值对
-       maps.entrySet().stream().forEach(c -&gt; System.out.println(c));
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure></code></pre></li>
-</ul>
-</li>
-<li><p>数组</p>
-<ul>
-<li><p>Arrays中的静态方法stream生成流</p>
-</li>
-<li><pre><code>//        数组
-       int[] arr = {1, 2, 3, 4};
-       Arrays.stream(arr).forEach(c -&gt; System.out.println(c));
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&gt;- 同数据类型的多个数据</span><br><span class="line">- 使用Stream.of(T…values)生成流</span><br><span class="line"></span><br><span class="line">- </span><br></pre></td></tr></table></figure>
-//         多个同数据类型
-       String a = &quot;aaa&quot;;
-       String b = &quot;bbb&quot;;
-       String c = &quot;ccc&quot;;
-       String d = &quot;ddd&quot;;
-       Stream.of(a, b, c, d).forEach(i -&gt; System.out.println(i));</code></pre></li>
-</ul>
-</li>
-</ul>
-</blockquote>
-<h5 id="34-1-1-Stream常见中间操作方法"><a href="#34-1-1-Stream常见中间操作方法" class="headerlink" title="34.1.1 Stream常见中间操作方法"></a>34.1.1 Stream常见中间操作方法</h5><blockquote>
-<p>条件筛选：</p>
-<ul>
-<li><p>Stream <T> filter(Predicate predicate)：用户对流中的数据进行过滤</p>
-<ul>
-<li>Predicate接口汇总的方法</li>
-<li>boolean test(T  t) :对给定的参数进行判断，返回一个布尔值</li>
-</ul>
-</li>
-<li><p>Stream<T> limit(long maxSize) ：截取指定参数个数的数据</p>
-</li>
-<li><p>Stream<T> skip(long n)：跳过指定参数个数的数据</p>
-</li>
-<li><p>static<T> Stream<T> concat(Stream a,Stream b)：合并a和b两个流为一个流</p>
-</li>
-<li><p>Stream<T> distinct：去除流中重复的元素，依赖（hashCode和equals方法）</p>
-</li>
-</ul>
-<p>结束后返回值：</p>
-<ul>
-<li>void forEach(Consumer action)：对此流的每个元素执行操作<ul>
-<li>Consumer 接口中的方法</li>
-<li>void accept(T  t) ：对给定的参数执行此操作</li>
-</ul>
-</li>
-<li>long count()  ：返回此流中的元素数</li>
-</ul>
-</blockquote>
-<h5 id="34-1-2-Stream流的收集操作"><a href="#34-1-2-Stream流的收集操作" class="headerlink" title="34.1.2 Stream流的收集操作"></a>34.1.2 Stream流的收集操作</h5><blockquote>
-<p>收集方法：</p>
-<ul>
-<li>R collect(Collector collector)<ul>
-<li>toList()  ：元素收集到List集合中</li>
-<li>toSet()   ：元素收集到Set集合中</li>
-<li>toMap(Function keyMapper,Function valueMapper)  ：元素收集到Map集合中</li>
-</ul>
-</li>
-</ul>
-</blockquote>
-
-      
-      <!-- 打赏 -->
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2021/09/27/DAY19_%E5%8F%AF%E5%8F%98%E5%8F%82%E6%95%B0%E5%92%8CSteam%E6%B5%81/" data-id="ckuvcxgdo0005ykue2l2z38dp"
-        class="article-share-link">分享</a>
-        
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%90%8E%E7%AB%AF%E5%AD%A6%E4%B9%A0/" rel="tag">后端学习</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-  
-  
-
-  
-
-</article>
-    
-    <article id="post-DAY17_泛型和高级集合" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2021/09/23/DAY17_%E6%B3%9B%E5%9E%8B%E5%92%8C%E9%AB%98%E7%BA%A7%E9%9B%86%E5%90%88/"
-    >高级集合-Set和泛型</a
-  >
-</h2>
-  
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2021/09/23/DAY17_%E6%B3%9B%E5%9E%8B%E5%92%8C%E9%AB%98%E7%BA%A7%E9%9B%86%E5%90%88/" class="article-date">
-  <time datetime="2021-09-23T08:23:19.000Z" itemprop="datePublished">2021-09-23</time>
-</a>
-      
-      
-      
-      
-    </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-      <h3 id="28-泛型"><a href="#28-泛型" class="headerlink" title="28. 泛型"></a>28. 泛型</h3><h4 id="28-1-泛型的概念"><a href="#28-1-泛型的概念" class="headerlink" title="28.1 泛型的概念"></a>28.1 泛型的概念</h4><blockquote>
-<p>泛型：是JDK5中引入的特性，它提供了编译时类型安全检测机制</p>
-<p>泛型的好处：</p>
-<ul>
-<li>把运行使其的问题提前到了编译期间</li>
-<li>避免了强制类型转换</li>
-</ul>
-</blockquote>
-<h4 id="28-2-泛型的使用"><a href="#28-2-泛型的使用" class="headerlink" title="28.2 泛型的使用"></a>28.2 泛型的使用</h4><blockquote>
-<p>泛型可以使用在：</p>
-<ul>
-<li><p>类后面 —-&gt; 泛型类</p>
-</li>
-<li><p>方法声明 —-&gt; 泛型方法</p>
-</li>
-<li><p>接口后面 —-&gt; 泛型接口</p>
-</li>
-</ul>
-<p>总结：</p>
-<p>​    创建泛型类的对象时，必须要给这个泛型确定具体的数据类型</p>
-<p>定义格式：</p>
-<ul>
-<li>修饰符 class 类名 &lt;类型&gt;｛｝</li>
-</ul>
-<p>示例：</p>
-<ul>
-<li><p>public class Demo <T>{ }    </p>
-<p>//  T的位置可以写任意标识，常见的如T、E、K、V</p>
-</li>
-</ul>
-<p>案例：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Box&lt;String&gt; box1 = <span class="keyword">new</span> Box&lt;&gt;();</span><br><span class="line">        box1.setElement(<span class="string">"给小丽的土味情话"</span>);</span><br><span class="line">        String element01 = box1.getElement();</span><br><span class="line">        System.out.println(element01);</span><br><span class="line"></span><br><span class="line">        Box&lt;Integer&gt; box2 = <span class="keyword">new</span> Box&lt;&gt;();</span><br><span class="line">        box2.setElement(<span class="number">19</span>);</span><br><span class="line">        <span class="keyword">int</span> element02 = box2.getElement();</span><br><span class="line">        System.out.println(element02);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Box</span>&lt;<span class="title">E</span>&gt; </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> E element;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> E <span class="title">getElement</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> element;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setElement</span><span class="params">(E element)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.element = element;</span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-</blockquote>
-<h5 id="28-2-1-泛型方法的使用"><a href="#28-2-1-泛型方法的使用" class="headerlink" title="28.2.1 泛型方法的使用"></a>28.2.1 泛型方法的使用</h5><blockquote>
-<p>定义格式：</p>
-<ul>
-<li>格式：修饰符&lt;类型&gt; 返回值类型 方法名 (类型 变量名) {  }</li>
-</ul>
-<p>范例：</p>
-<ul>
-<li>public <T> void show(T t) { }</li>
-</ul>
-<p>案例：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">   <span class="comment">//字符串</span></span><br><span class="line">   ArrayList&lt;String&gt; list1 = addElement(<span class="keyword">new</span> ArrayList&lt;&gt;(), <span class="string">"a"</span>, <span class="string">"b"</span>, <span class="string">"v"</span>, <span class="string">"d"</span>);</span><br><span class="line">   System.out.println(list1);</span><br><span class="line">   <span class="comment">//整数</span></span><br><span class="line">   ArrayList&lt;Integer&gt; list2 = addElement(<span class="keyword">new</span> ArrayList&lt;&gt;(), <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>);</span><br><span class="line">   System.out.println(list2);</span><br><span class="line">&gt;&#125;</span><br><span class="line"></span><br><span class="line">&gt;<span class="comment">// 集合批量添加的功能</span></span><br><span class="line">&gt;<span class="comment">//让类，方法，接口更加通用</span></span><br><span class="line">&gt;<span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; <span class="function">ArrayList&lt;T&gt; <span class="title">addElement</span><span class="params">(ArrayList&lt;T&gt; list, T ti1, T ti2, T ti3, T ti4)</span> </span>&#123;</span><br><span class="line">   list.add(ti1);</span><br><span class="line">   list.add(ti2);</span><br><span class="line">   list.add(ti3);</span><br><span class="line">   list.add(ti4);</span><br><span class="line">   <span class="keyword">return</span> list;</span><br><span class="line">&gt;&#125;</span><br></pre></td></tr></table></figure>
-
-
-</blockquote>
-<h5 id="28-2-2-泛型接口的使用"><a href="#28-2-2-泛型接口的使用" class="headerlink" title="28.2.2 泛型接口的使用"></a>28.2.2 泛型接口的使用</h5><blockquote>
-<p>使用方式：</p>
-<ul>
-<li>实现类也不给泛型</li>
-<li>实现类确定具体的数据类型</li>
-</ul>
-<p>定义格式：</p>
-<ul>
-<li>修饰符  interface 接口类 &lt; 泛型&gt; { }</li>
-</ul>
-<p>范例：</p>
-<ul>
-<li>范例：public interface Demo<T> { } </li>
-</ul>
-<p>示例：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">       <span class="comment">//没有定义数据类型的引用</span></span><br><span class="line">       demo04Impl method = <span class="keyword">new</span> demo04Impl();</span><br><span class="line">       method.method(<span class="string">"你说的好"</span>);</span><br><span class="line">       <span class="comment">//定义了数据类型的引用</span></span><br><span class="line">       demo04Impl02 method02 = <span class="keyword">new</span> demo04Impl02();</span><br><span class="line">       method02.method(<span class="number">19</span>);</span><br><span class="line">   &#125;</span><br><span class="line">&gt;&#125;</span><br><span class="line"></span><br><span class="line">&gt;<span class="class"><span class="keyword">interface</span> <span class="title">demo04</span>&lt;<span class="title">E</span>&gt; </span>&#123;</span><br><span class="line">   <span class="function"><span class="keyword">void</span> <span class="title">method</span><span class="params">(E e)</span></span>;</span><br><span class="line">&gt;&#125;</span><br><span class="line"></span><br><span class="line">&gt;<span class="comment">//不定义数据类型</span></span><br><span class="line">&gt;<span class="class"><span class="keyword">class</span> <span class="title">demo04Impl</span>&lt;<span class="title">E</span>&gt; <span class="keyword">implements</span> <span class="title">demo04</span>&lt;<span class="title">E</span>&gt; </span>&#123;</span><br><span class="line"></span><br><span class="line">   <span class="meta">@Override</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">method</span><span class="params">(E e)</span> </span>&#123;</span><br><span class="line">       System.out.println(e);</span><br><span class="line">   &#125;</span><br><span class="line">&gt;&#125;</span><br><span class="line"></span><br><span class="line">&gt;<span class="comment">//定义了数据类型</span></span><br><span class="line">&gt;<span class="class"><span class="keyword">class</span> <span class="title">demo04Impl02</span> <span class="keyword">implements</span> <span class="title">demo04</span>&lt;<span class="title">Integer</span>&gt; </span>&#123;</span><br><span class="line"></span><br><span class="line">   <span class="meta">@Override</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">method</span><span class="params">(Integer integer)</span> </span>&#123;</span><br><span class="line">       System.out.println(integer);</span><br><span class="line">   &#125;</span><br><span class="line">&gt;&#125;</span><br></pre></td></tr></table></figure>
-</blockquote>
-<h5 id="28-2-3-泛型的通配符"><a href="#28-2-3-泛型的通配符" class="headerlink" title="28.2.3 泛型的通配符"></a>28.2.3 泛型的通配符</h5><blockquote>
-<p>类型通配符：&lt;?&gt;</p>
-<ul>
-<li>获取出来的是父类类型</li>
-</ul>
-<p>类型通配符上限：&lt;? extends 类型&gt;</p>
-<ul>
-<li>获取出来的是其他类型或者其子类型</li>
-</ul>
-<p>类型通配符下限：&lt;? super 类型&gt;</p>
-<ul>
-<li>获取出来的是其他类型或者其父类型</li>
-</ul>
-<p>示例：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">       ArrayList&lt;Integer&gt; list1 = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">       ArrayList&lt;String&gt; list2 = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">       ArrayList&lt;Number&gt; list3 = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">       ArrayList&lt;Object&gt; list4 = <span class="keyword">new</span> ArrayList();</span><br><span class="line">       <span class="comment">// 所有父类</span></span><br><span class="line">       printList(list1);</span><br><span class="line">       printList(list2);</span><br><span class="line">       printList(list3);</span><br><span class="line">       printList(list4);</span><br><span class="line">       <span class="comment">// Number及所有子类</span></span><br><span class="line">       method01(list1);</span><br><span class="line">&gt;<span class="comment">//        method01(list2); // 不是Number类型</span></span><br><span class="line">       method01(list3);</span><br><span class="line">&gt;<span class="comment">//        method01(list4);  // 超出Number区域</span></span><br><span class="line">       <span class="comment">// Number及所有父类</span></span><br><span class="line">&gt;<span class="comment">//        method02(list1);    //不是Number的父类</span></span><br><span class="line">&gt;<span class="comment">//        method02(list2);    //不是Number的父类</span></span><br><span class="line">       method02(list3);</span><br><span class="line">       method02(list4);</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="comment">// 设定通配符区域</span></span><br><span class="line">   <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">printList</span><span class="params">(ArrayList&lt;?&gt; list)</span> </span>&#123;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="comment">//表示传递进来的集合的类型，可以是Number类型，也可以是Number的所有父类类型</span></span><br><span class="line">   <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">method02</span><span class="params">(ArrayList&lt;? <span class="keyword">super</span> Number&gt; list)</span> </span>&#123;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="comment">//表示传递进来的集合的类型，可以是Number类型，也可以是Number的所有子类类型</span></span><br><span class="line">   <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">method01</span><span class="params">(ArrayList&lt;? extends Number&gt; list)</span> </span>&#123;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
-</blockquote>
-<h3 id="29-集合体系结构—Set"><a href="#29-集合体系结构—Set" class="headerlink" title="29.集合体系结构—Set"></a>29.集合体系结构—Set</h3><h5 id="29-1-Set的概念"><a href="#29-1-Set的概念" class="headerlink" title="29.1 Set的概念"></a>29.1 Set的概念</h5><blockquote>
-<p>Set的特点</p>
-<ul>
-<li>可以去除重复</li>
-<li>存储顺序不一致</li>
-<li>没有带索引的方法，不能使用普通for和通过索引来获取、删除Set集合的元素</li>
-</ul>
-<p>可以使用迭代器和增强For进行遍历</p>
-<p>示例：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">       Set&lt;String&gt; set = <span class="keyword">new</span> TreeSet&lt;&gt;();</span><br><span class="line">       <span class="comment">//默认自然顺序 排序</span></span><br><span class="line">       set.add(<span class="string">"ddd"</span>);</span><br><span class="line">       set.add(<span class="string">"aaa"</span>);</span><br><span class="line">       set.add(<span class="string">"bbb"</span>);</span><br><span class="line">       set.add(<span class="string">"aaa"</span>);</span><br><span class="line">       set.add(<span class="string">"ccc"</span>);</span><br><span class="line"></span><br><span class="line">       <span class="comment">//迭代器遍历</span></span><br><span class="line">       Iterator&lt;String&gt; it = set.iterator();</span><br><span class="line">       <span class="keyword">while</span> (it.hasNext()) &#123;</span><br><span class="line">           System.out.println(it.next());</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">       System.out.println(<span class="string">"----------"</span>);</span><br><span class="line"></span><br><span class="line">       <span class="comment">//增强for遍历，没有索引，因此无法使用普通for</span></span><br><span class="line">       <span class="keyword">for</span> (String s : set) &#123;</span><br><span class="line">           System.out.println(s);</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">       System.out.println(<span class="string">"----------"</span>);</span><br><span class="line">       <span class="comment">//foreach的遍历---Lambda</span></span><br><span class="line">       set.forEach(c -&gt; System.out.println(c));</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
-</blockquote>
-<h5 id="29-1-1-TreeSet集合"><a href="#29-1-1-TreeSet集合" class="headerlink" title="29.1.1 TreeSet集合"></a>29.1.1 TreeSet集合</h5><blockquote>
-<p>特点：</p>
-<ul>
-<li>不包含重复元素</li>
-<li>没有索引</li>
-<li>可以将元素按照规则排序</li>
-</ul>
-<p>设置TreeSet排序规则：</p>
-<p>自然排序</p>
-<ul>
-<li>Comparable     </li>
-</ul>
-<p>示例：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">       TreeSet&lt;Test&gt; list = <span class="keyword">new</span> TreeSet&lt;&gt;();</span><br><span class="line">       <span class="comment">//新建测试对象</span></span><br><span class="line">       Test s1 = <span class="keyword">new</span> Test(<span class="string">"xiaoli"</span>,<span class="number">10</span>);</span><br><span class="line">       Test s2 = <span class="keyword">new</span> Test(<span class="string">"liuhuang"</span>,<span class="number">20</span>);</span><br><span class="line">       Test s3 = <span class="keyword">new</span> Test(<span class="string">"aotemang"</span>,<span class="number">30</span>);</span><br><span class="line">       Test s4 = <span class="keyword">new</span> Test(<span class="string">"xiyangyang"</span>,<span class="number">110</span>);</span><br><span class="line">       Test s5 = <span class="keyword">new</span> Test(<span class="string">"gaiya"</span>,<span class="number">30</span>);</span><br><span class="line">       <span class="comment">//TreeSet添加对象</span></span><br><span class="line">       list.add(s1);</span><br><span class="line">       list.add(s2);</span><br><span class="line">       list.add(s3);</span><br><span class="line">       list.add(s4);</span><br><span class="line">       list.add(s5);</span><br><span class="line"></span><br><span class="line">       System.out.println(list);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
-
-<p>示例对象：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">&gt;public class Test  implements Comparable&lt;Test&gt;&#123;</span><br><span class="line">   private  String name;</span><br><span class="line">   private  int age;</span><br><span class="line"></span><br><span class="line">   public String getName() &#123;</span><br><span class="line">       return name;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   public void setName(String name) &#123;</span><br><span class="line">       this.name &#x3D; name;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   public int getAge() &#123;</span><br><span class="line">       return age;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   public void setAge(int age) &#123;</span><br><span class="line">       this.age &#x3D; age;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   public Test(String name, int age) &#123;</span><br><span class="line">       this.name &#x3D; name;</span><br><span class="line">       this.age &#x3D; age;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   public Test() &#123;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   @Override</span><br><span class="line">   public String toString() &#123;</span><br><span class="line">       return &quot;Test&#123;&quot; +</span><br><span class="line">               &quot;name&#x3D;&#39;&quot; + name + &#39;\&#39;&#39; +</span><br><span class="line">               &quot;, age&#x3D;&quot; + age +</span><br><span class="line">               &#39;&#125;&#39;;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">&gt;&#x2F;&#x2F;自然排序  Compareable</span><br><span class="line">&gt;&#x2F;&#x2F; return返回三个数   负数在左，正数在右，相同重复或次要判断</span><br><span class="line">   @Override</span><br><span class="line">   public int compareTo(Test o) &#123;</span><br><span class="line">       &#x2F;&#x2F;主要条件</span><br><span class="line">       &#x2F;&#x2F;从小到大</span><br><span class="line">      int result &#x3D; this.age - o.age;</span><br><span class="line">      &#x2F;&#x2F;次要条件</span><br><span class="line">      result &#x3D; this.age &#x3D;&#x3D; o.age ?  this.name.compareTo(o.name) :result ;</span><br><span class="line">      return result;</span><br><span class="line">   &#125;</span><br><span class="line">&gt;&#125;</span><br></pre></td></tr></table></figure>
-
-<p>比较器排序</p>
-<ul>
-<li>Comparator</li>
-</ul>
-<p>示例：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">   <span class="comment">//比较器 Comparator 的方法重写；两个对象对比</span></span><br><span class="line">   <span class="comment">// o1 表示要存入的，o2 表示 集合中已经存在的</span></span><br><span class="line">   TreeSet&lt;Test02&gt; list = <span class="keyword">new</span> TreeSet&lt;&gt;(<span class="keyword">new</span> Comparator&lt;Test02&gt;() &#123;</span><br><span class="line">       <span class="meta">@Override</span></span><br><span class="line">       <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compare</span><span class="params">(Test02 o1, Test02 o2)</span> </span>&#123;</span><br><span class="line">           <span class="keyword">int</span> result = o1.getAge() - o2.getAge();</span><br><span class="line">           result = result == <span class="number">0</span> ? o1.getName().compareTo(o2.getName()) : result;</span><br><span class="line">           <span class="keyword">return</span> result;</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;);</span><br><span class="line">   <span class="comment">//新建测试对象</span></span><br><span class="line">   Test02 s1 = <span class="keyword">new</span> Test02(<span class="string">"xiaoli"</span>, <span class="number">10</span>);</span><br><span class="line">   Test02 s2 = <span class="keyword">new</span> Test02(<span class="string">"liuhuang"</span>, <span class="number">20</span>);</span><br><span class="line">   Test02 s3 = <span class="keyword">new</span> Test02(<span class="string">"aotemang"</span>, <span class="number">30</span>);</span><br><span class="line">   Test02 s4 = <span class="keyword">new</span> Test02(<span class="string">"xiyangyang"</span>, <span class="number">110</span>);</span><br><span class="line">   Test02 s5 = <span class="keyword">new</span> Test02(<span class="string">"gaiya"</span>, <span class="number">30</span>);</span><br><span class="line">   <span class="comment">//TreeSet添加对象</span></span><br><span class="line">   list.add(s1);</span><br><span class="line">   list.add(s2);</span><br><span class="line">   list.add(s3);</span><br><span class="line">   list.add(s4);</span><br><span class="line">   list.add(s5);</span><br><span class="line"></span><br><span class="line">   System.out.println(list);</span><br><span class="line">&gt;&#125;</span><br></pre></td></tr></table></figure>
-</blockquote>
-<h5 id="29-1-2-比较方式小结"><a href="#29-1-2-比较方式小结" class="headerlink" title="29.1.2 比较方式小结"></a>29.1.2 比较方式小结</h5><blockquote>
-<p>小结：</p>
-<ul>
-<li>自然排序：自定义实现Comparable，重写comparaTo方法，根据返回值进行排序</li>
-<li>比较器排序：创建TreeSet对象的时候传递Comparator的实现类对象，重写compara方法，根据返回值进行排序</li>
-<li>在使用的时候，默认使用自然排序，当自然排序不满足现在的需求，使用比较器排序</li>
-</ul>
-<p>关于返回值的规则：</p>
-<ul>
-<li>如果返回值为负数，表示当前存入的元素是最小值，存左边</li>
-<li>如果返回值为0，表示当前存入的元素b跟集合中元素重复了，不存</li>
-<li>如果返回值为正数表示当前存入的元素是较大值，存右边</li>
-</ul>
-</blockquote>
-<h3 id="30-二叉树"><a href="#30-二叉树" class="headerlink" title="30. 二叉树"></a>30. 二叉树</h3><h4 id="30-1-二叉查找树"><a href="#30-1-二叉查找树" class="headerlink" title="30.1 二叉查找树"></a>30.1 二叉查找树</h4><blockquote>
-<p>特点：</p>
-<ul>
-<li>小的存左边</li>
-<li><h6 id="大的存右边"><a href="#大的存右边" class="headerlink" title="大的存右边"></a>大的存右边</h6></li>
-<li>一样的不存</li>
-</ul>
-<h5 id=""><a href="#" class="headerlink" title=""></a><img src="/image/%E4%BA%8C%E5%8F%89%E6%9F%A5%E6%89%BE%E6%A0%91.png" alt=""></h5></blockquote>
-<h4 id="30-2-二叉平衡树"><a href="#30-2-二叉平衡树" class="headerlink" title="30.2 二叉平衡树"></a>30.2 二叉平衡树</h4><blockquote>
-<p>特点：</p>
-<ul>
-<li><p>左子树和右子树的高度差不超过1</p>
-</li>
-<li><p>任意节点的左右两个子树都是一个平衡二叉树</p>
-</li>
-</ul>
-<h6 id="-1"><a href="#-1" class="headerlink" title=""></a><img src="/image/%E5%B9%B3%E8%A1%A1%E4%BA%8C%E5%8F%89%E6%A0%91.png" alt=""></h6></blockquote>
-<h5 id="30-2-1-二叉树平衡机制—左旋、右旋"><a href="#30-2-1-二叉树平衡机制—左旋、右旋" class="headerlink" title="30.2.1 二叉树平衡机制—左旋、右旋"></a>30.2.1 二叉树平衡机制—左旋、右旋</h5><blockquote>
-<p>左旋：就是将根节点的右侧往左转，原先的右节点变成新的父节点，并将多余的左子节点出让，给已经降级的根节点当右子节点</p>
-<h6 id="-2"><a href="#-2" class="headerlink" title=""></a><img src="/image/%E4%BA%8C%E5%8F%89%E6%A0%91%E5%B7%A6%E6%97%8B.png" alt=""></h6><p>右旋：就是将根节点的左侧往右转，原先的左节点变成新的父节点，并将多余的右子节点出让，给已经降级的根节点当左  子节点</p>
-<p><img src="/image/%E5%8F%B3%E6%97%8B02.png" alt=""></p>
-</blockquote>
-
-      
-      <!-- 打赏 -->
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2021/09/23/DAY17_%E6%B3%9B%E5%9E%8B%E5%92%8C%E9%AB%98%E7%BA%A7%E9%9B%86%E5%90%88/" data-id="ckuvcxgdl0003ykuehhtyc8th"
+      <a data-url="http://yoursite.com/2021/10/06/DAY20_file%E5%92%8CIO%E6%B5%81/" data-id="ckuzdlgt6000ew0ue8i879ntj"
         class="article-share-link">分享</a>
         
       
