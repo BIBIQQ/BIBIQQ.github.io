@@ -59,7 +59,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">1.2k字</span>
+            <span class="post-count">1.5k字</span>
         </span>
     </span>
 
@@ -68,7 +68,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">5分钟</span>
+            <span class="post-count">6分钟</span>
         </span>
     </span>
 </div>
@@ -191,7 +191,29 @@
 
 <h4 id="3-测试代码-配置文件导入"><a href="#3-测试代码-配置文件导入" class="headerlink" title="3. 测试代码- 配置文件导入"></a>3. 测试代码- 配置文件导入</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">&gt;<span class="comment">//      构建 SqlSessionFactory  Mybatis实现配置好的，直接复制即可</span></span><br><span class="line">    <span class="comment">//  导入配置文件 创建对象</span></span><br><span class="line">       String resource = <span class="string">"mybatis-config.xml"</span>;</span><br><span class="line">       InputStream inputStream = Resources.getResourceAsStream(resource);</span><br><span class="line">       SqlSessionFactory sqlSessionFactory = <span class="keyword">new</span> SqlSessionFactoryBuilder().build(inputStream);</span><br><span class="line">    </span><br><span class="line">&gt;<span class="comment">//        获取SqlSession对象 执行sql</span></span><br><span class="line">       SqlSession sqlSession = sqlSessionFactory.openSession();</span><br><span class="line">&gt;<span class="comment">//        执行sql  SQL映射文件的名称空间地址</span></span><br><span class="line">       List&lt;User&gt; users = sqlSession.selectList(<span class="string">"test.selectAll"</span>);</span><br><span class="line">       </span><br><span class="line">       System.out.println(users);</span><br><span class="line">       </span><br><span class="line">       sqlSession.close();</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
 
+</blockquote>
+<h3 id="3-Mapper"><a href="#3-Mapper" class="headerlink" title="3. Mapper"></a>3. Mapper</h3><blockquote>
+<p>简化JDBC的框架</p>
+<p>使用步骤：</p>
+<ul>
+<li>创建映射文件同名的接口，创建抽象方法，返回值和方法名保持一致</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">UserMapper</span> </span>&#123;</span><br><span class="line">     <span class="function">List&lt;User&gt;  <span class="title">selectAll</span><span class="params">()</span></span>;</span><br><span class="line">&gt;&#125;</span><br></pre></td></tr></table></figure>
 
+<ul>
+<li><p>接口文件和映射文件在编译后保证在同一文件夹，在resources文件下，创建==接口文件同层级的文件夹==将映像文件存入</p>
+</li>
+<li><p>修改核心配置文件mybatis-config.xml</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--加载sql的映射文件--&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">mapper</span> <span class="attr">resource</span>=<span class="string">"com/mapper/UserMapper.xml"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>修改映射文件UserMapper.xml</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">mapper</span></span></span><br><span class="line"><span class="meta">        <span class="meta-keyword">PUBLIC</span> <span class="meta-string">"-//mybatis.org//DTD Mapper 3.0//EN"</span></span></span><br><span class="line"><span class="meta">        <span class="meta-string">"http://mybatis.org/dtd/mybatis-3-mapper.dtd"</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">namepace:名称空间</span></span><br><span class="line"><span class="comment">注意点：namepace 必须 UserMapper全路径一致</span></span><br><span class="line"><span class="comment">注意点：接口中的方法名必须和id标识一致</span></span><br><span class="line"><span class="comment">--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mapper</span> <span class="attr">namespace</span>=<span class="string">"com.mapper.UserMapper"</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">    select 执行的查询</span></span><br><span class="line"><span class="comment">    id  唯一标识</span></span><br><span class="line"><span class="comment">    namepace+id = sql 的绝对路径</span></span><br><span class="line"><span class="comment">    resultType 返回值的数据</span></span><br><span class="line"><span class="comment">    --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"selectAll"</span> <span class="attr">resultType</span>=<span class="string">"com.pojo.User"</span>&gt;</span></span><br><span class="line">       select * from tb_user ;</span><br><span class="line">  <span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mapper</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>测试文件执行</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line"><span class="comment">//      构建 SqlSessionFactory</span></span><br><span class="line">        String resource = <span class="string">"mybatis-config.xml"</span>;</span><br><span class="line">        InputStream inputStream = Resources.getResourceAsStream(resource);</span><br><span class="line">        SqlSessionFactory sqlSessionFactory = <span class="keyword">new</span> SqlSessionFactoryBuilder().build(inputStream);</span><br><span class="line"><span class="comment">//        获取SqlSession对象 执行sql</span></span><br><span class="line">        SqlSession sqlSession = sqlSessionFactory.openSession();</span><br><span class="line"><span class="comment">//        执行sql  SQL映射文件的名称空间地址</span></span><br><span class="line">        UserMapper mapper = sqlSession.getMapper(UserMapper<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">        List&lt;User&gt; users = mapper.selectAll();</span><br><span class="line">        </span><br><span class="line">        System.out.println(users);</span><br><span class="line"></span><br><span class="line">        sqlSession.close();</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
 </blockquote>
 
       
@@ -199,7 +221,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2021/10/20/Day04_Maven%E5%92%8CMyBatis/" data-id="ckuzdlgt9000kw0uehmgi0iy7"
+      <a data-url="http://yoursite.com/2021/10/20/Day04_Maven%E5%92%8CMyBatis/" data-id="ckv11nvp2000j98ue7l1ad24d"
         class="article-share-link">分享</a>
         
       
