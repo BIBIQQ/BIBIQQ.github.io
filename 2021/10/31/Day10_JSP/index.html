@@ -6,7 +6,7 @@
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>
-    递归排序 |  ONE PEAC
+    JSP |  ONE PEAC
   </title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   
@@ -31,7 +31,7 @@
   <div id="app">
     <main class="content">
       <section class="outer">
-  <article id="post-递归排序" class="article article-type-post" itemscope
+  <article id="post-Day10_JSP" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
   <div class="article-inner">
@@ -39,7 +39,7 @@
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  递归排序
+  JSP
 </h1>
   
 
@@ -48,8 +48,8 @@
 
     
     <div class="article-meta">
-      <a href="/2021/09/09/%E9%80%92%E5%BD%92%E6%8E%92%E5%BA%8F/" class="article-date">
-  <time datetime="2021-09-09T13:13:19.000Z" itemprop="datePublished">2021-09-09</time>
+      <a href="/2021/10/31/Day10_JSP/" class="article-date">
+  <time datetime="2021-10-31T14:41:19.000Z" itemprop="datePublished">2021-10-31</time>
 </a>
       
       
@@ -59,7 +59,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">106字</span>
+            <span class="post-count">1.3k字</span>
         </span>
     </span>
 
@@ -68,7 +68,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">1分钟</span>
+            <span class="post-count">5分钟</span>
         </span>
     </span>
 </div>
@@ -94,19 +94,205 @@
       
 
       
-      <h3 id="递归排序"><a href="#递归排序" class="headerlink" title="递归排序"></a>递归排序</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Demo5</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> [] arr = &#123;<span class="number">12</span>,<span class="number">4</span>,<span class="number">67</span>,<span class="number">89</span>,<span class="number">34</span>,<span class="number">25</span>&#125;;</span><br><span class="line">        <span class="comment">//哪些索引需要往后比</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; arr.length-<span class="number">1</span>; i++) &#123;</span><br><span class="line">            <span class="comment">//每一次从哪开始比的位置</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = i+<span class="number">1</span>; j &lt; arr.length; j++) &#123;</span><br><span class="line">                <span class="keyword">if</span>(arr[i]&lt;arr[j])&#123;</span><br><span class="line">                    <span class="keyword">int</span> temp = arr[j];</span><br><span class="line">                    arr[j]=arr[i];</span><br><span class="line">                    arr[i]=temp;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">            System.out.print(arr[i]+<span class="string">" "</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      <h3 id="1-JSP"><a href="#1-JSP" class="headerlink" title="1. JSP"></a>1. JSP</h3><h4 id="1-1-JSP概述"><a href="#1-1-JSP概述" class="headerlink" title="1.1 JSP概述"></a>1.1 JSP概述</h4><blockquote>
+<p>概念：Java页面</p>
+<p>JSP = HTML + Java</p>
+<p>==JSP本质上是一个Servlet==</p>
+</blockquote>
+<h4 id="1-2-JSP-脚本"><a href="#1-2-JSP-脚本" class="headerlink" title="1.2 JSP 脚本"></a>1.2 JSP 脚本</h4><blockquote>
+<p>JSP脚本用于在 JSP页面内定义 Java代码。在之前的入门案例中我们就在 JSP 页面定义的 Java 代码就是 JSP 脚本。</p>
+<p>分类：</p>
+<p>JSP 脚本有如下三个分类：</p>
+<ul>
+<li>&lt;%…%&gt;：内容会直接放到_jspService()方法之中</li>
+<li>&lt;%=…%&gt;：内容会放到out.print()中，作为out.print()的参数</li>
+<li>&lt;%!…%&gt;：内容会放到_jspService()方法之外，被类直接包含</li>
+</ul>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&lt;%</span><br><span class="line">  System.out.println(<span class="string">"hello,jsp~"</span>);</span><br><span class="line">  <span class="keyword">int</span> i = <span class="number">3</span>;</span><br><span class="line">&gt;%&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h5 id="1-3-JSP-缺点"><a href="#1-3-JSP-缺点" class="headerlink" title="1.3 JSP 缺点"></a>1.3 JSP 缺点</h5><blockquote>
+<p>由于 JSP页面内，既可以定义 HTML 标签，又可以定义 Java代码，造成了以下问题：</p>
+<ul>
+<li>书写麻烦：特别是复杂的页面</li>
+</ul>
+<p>既要写 HTML 标签，还要写 Java 代码</p>
+<ul>
+<li>阅读麻烦</li>
+</ul>
+<p>上面案例的代码，相信你后期再看这段代码时还需要花费很长的时间去梳理</p>
+<ul>
+<li><p>复杂度高：运行需要依赖于各种环境，JRE，JSP容器，JavaEE…</p>
+</li>
+<li><p>占内存和磁盘：JSP会自动生成.java和.class文件占磁盘，运行的是.class文件占内存</p>
+</li>
+<li><p>调试困难：出错后，需要找到自动生成的.java文件进行调试</p>
+</li>
+<li><p>不利于团队协作：前端人员不会 Java，后端人员不精 HTML</p>
+</li>
+</ul>
+<p>如果页面布局发生变化，前端工程师对静态页面进行修改，然后再交给后端工程师，由后端工程师再将该页面改为 JSP 页面</p>
+<p>由于上述的问题， ==JSP 已逐渐退出历史舞台，==以后开发更多的是使用 ==HTML +  Ajax== 来替代。</p>
+</blockquote>
+<h3 id="2-EL表达式"><a href="#2-EL表达式" class="headerlink" title="2. EL表达式"></a>2. EL表达式</h3><blockquote>
+<ul>
+<li><p>用户简化jSP页面内的代码</p>
+</li>
+<li><p>主要功能:获取数据</p>
+</li>
+<li><p>语法：${expression}</p>
+</li>
+</ul>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$&#123;expression&#125;:获取域中存储的key为brands的数据</span><br></pre></td></tr></table></figure>
 
+<ul>
+<li><p>四大域对象</p>
+</li>
+<li><p>paga:当前页面有效</p>
+</li>
+<li><p>request：当前请求有效</p>
+</li>
+<li><p>session：当前会话有效</p>
+</li>
+<li><p>appication：当前应用有效</p>
+</li>
+<li><p>el表达式获取数据，会依次从这四个域中寻找，直到找到为止</p>
+</li>
+</ul>
+</blockquote>
+<h4 id="3-JSTL标签"><a href="#3-JSTL标签" class="headerlink" title="3.  JSTL标签"></a>3.  JSTL标签</h4><blockquote>
+<p>JSP标准标签库(Jsp Standarded Tag Library) ，使用标签取代JSP页面上的Java代码。如下代码就是JSTL标签</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;&lt;c:<span class="keyword">if</span> test=<span class="string">"$&#123;flag == 1&#125;"</span>&gt;</span><br><span class="line">&gt;男</span><br><span class="line">&gt;&lt;/c:if&gt;</span><br><span class="line">&gt;&lt;c:<span class="keyword">if</span> test=<span class="string">"$&#123;flag == 2&#125;"</span>&gt;</span><br><span class="line">&gt;女</span><br><span class="line">&gt;&lt;/c:if&gt;</span><br></pre></td></tr></table></figure>
+
+<p>引用核心标签库的语法如下：</p>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt;&lt;%@ taglib prefix=<span class="string">"c"</span> uri=<span class="string">"http://java.sun.com/jsp/jstl/core"</span> %&gt;</span><br></pre></td></tr></table></figure>
+
+<p><strong>分类</strong></p>
+<table>
+<thead>
+<tr>
+<th>标签</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>&lt; c:out &gt;</td>
+<td>用于在JSP中显示数据，就像&lt;%= … &gt;</td>
+</tr>
+<tr>
+<td>&lt; c:set &gt;</td>
+<td>用于保存数据</td>
+</tr>
+<tr>
+<td>&lt; c:remove &gt;</td>
+<td>用于删除数据</td>
+</tr>
+<tr>
+<td>&lt; c:catch &gt;</td>
+<td>用来处理产生错误的异常状况，并且将错误信息储存起来</td>
+</tr>
+<tr>
+<td>&lt; c:if &gt;</td>
+<td>与我们在一般程序中用的if一样</td>
+</tr>
+<tr>
+<td>&lt; c:choose &gt;</td>
+<td>本身只当做&lt;c:when&gt;和&lt;c:otherwise&gt;的父标签</td>
+</tr>
+<tr>
+<td>&lt; c:when &gt;</td>
+<td>&lt;c:choose&gt;的子标签，用来判断条件是否成立</td>
+</tr>
+<tr>
+<td>&lt; c:otherwise &gt;</td>
+<td>&lt;c:choose&gt;的子标签，接在&lt;c:when&gt;标签后，当&lt;c:when&gt;标签判断为false时被执行</td>
+</tr>
+<tr>
+<td>&lt; c:import &gt;</td>
+<td>检索一个绝对或相对 URL，然后将其内容暴露给页面</td>
+</tr>
+<tr>
+<td>&lt; c:forEach &gt;</td>
+<td>基础迭代标签，接受多种集合类型</td>
+</tr>
+<tr>
+<td>&lt; c:forTokens &gt;</td>
+<td>根据指定的分隔符来分隔内容并迭代输出</td>
+</tr>
+<tr>
+<td>&lt; c:param &gt;</td>
+<td>用来给包含或重定向的页面传递参数</td>
+</tr>
+<tr>
+<td>&lt; c:redirect &gt;</td>
+<td>重定向至一个新的URL.</td>
+</tr>
+<tr>
+<td>&lt; c:url &gt;</td>
+<td>使用可选的查询参数来创造一个URL</td>
+</tr>
+</tbody></table>
+<p><strong>格式化标签</strong></p>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&lt;%@ taglib prefix=<span class="string">"fmt"</span> </span><br><span class="line">     uri=<span class="string">"http://java.sun.com/jsp/jstl/fmt"</span> %&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>&lt; c : if &gt; 标签</strong> ：相当于 if 判断</p>
+<p>属性：test，用于定义条件表达式   </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;&lt;c:if test&#x3D;&quot;$&#123;flag &#x3D;&#x3D; 1&#125;&quot;&gt;</span><br><span class="line">&gt;男</span><br><span class="line">&gt;&lt;&#x2F;c:if&gt;</span><br><span class="line">&gt;&lt;c:if test&#x3D;&quot;$&#123;flag &#x3D;&#x3D; 2&#125;&quot;&gt;</span><br><span class="line">&gt;女</span><br><span class="line">&gt;&lt;&#x2F;c:if&gt;</span><br></pre></td></tr></table></figure>
+
+<p><strong>&lt; c : forEach &gt; 标签</strong> ：相当于 if 判断</p>
+<p>相当于 for 循环。java中有增强for循环和普通for循环，JSTL 中的 <code>&lt;c:forEach&gt;</code> 也有两种用法</p>
+<p>类似于 Java 中的增强for循环。涉及到的 <code>&lt;c:forEach&gt;</code> 中的属性如下</p>
+<ul>
+<li>items：被遍历的容器</li>
+<li>var：遍历产生的临时变量</li>
+<li>varStatus：遍历状态对象</li>
+</ul>
+<p>一：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&gt;&lt;c:forEach items=<span class="string">"$&#123;brands&#125;"</span> <span class="keyword">var</span>=<span class="string">"brand"</span>&gt;   <span class="keyword">for</span>(Brand brand:brands)</span><br><span class="line">  &lt;tr align=<span class="string">"center"</span>&gt;</span><br><span class="line">      &lt;td&gt;$&#123;brand.id&#125;&lt;/td&gt;</span><br><span class="line">      &lt;td&gt;$&#123;brand.brandName&#125;&lt;/td&gt;</span><br><span class="line">      &lt;td&gt;$&#123;brand.companyName&#125;&lt;/td&gt;</span><br><span class="line">      &lt;td&gt;$&#123;brand.description&#125;&lt;/td&gt;</span><br><span class="line">  &lt;/tr&gt;</span><br><span class="line">&gt;&lt;/c:forEach&gt;</span><br></pre></td></tr></table></figure>
+
+<p>二：</p>
+<p>类似于 Java 中的普通for循环。涉及到的 <code>&lt;c:forEach&gt;</code> 中的属性如下</p>
+<ul>
+<li>begin：开始数</li>
+<li>end：结束数</li>
+<li>step：步长</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&lt;c:forEach begin=<span class="string">"0"</span> end=<span class="string">"10"</span> step=<span class="string">"1"</span> <span class="keyword">var</span>=<span class="string">"i"</span>&gt;</span><br><span class="line">  $&#123;i&#125;</span><br><span class="line">&gt;&lt;/c:forEach&gt;</span><br></pre></td></tr></table></figure>
+
+
+</blockquote>
+<h4 id="4-MVC模式和三层架构"><a href="#4-MVC模式和三层架构" class="headerlink" title="4. MVC模式和三层架构"></a>4. MVC模式和三层架构</h4><blockquote>
+<p>MVC 是一种分层开发的模式，其中：</p>
+<ul>
+<li><p>M：Model，业务模型，处理业务</p>
+</li>
+<li><p>V：View，视图，界面展示</p>
+</li>
+<li><p>C：Controller，控制器，处理请求，调用模型和视图</p>
+</li>
+</ul>
+<p><strong>MVC 好处：</strong></p>
+<ul>
+<li><p>职责单一，互不影响。每个角色做它自己的事，各司其职。</p>
+</li>
+<li><p>有利于分工协作。</p>
+</li>
+<li><p>有利于组件重用</p>
+</li>
+</ul>
+</blockquote>
 
       
       <!-- 打赏 -->
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2021/09/09/%E9%80%92%E5%BD%92%E6%8E%92%E5%BA%8F/" data-id="ckvfda1co001zr0uees0t99ji"
+      <a data-url="http://yoursite.com/2021/10/31/Day10_JSP/" data-id="ckvfda19n000jr0ue0o4a9uf6"
         class="article-share-link">分享</a>
         
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%90%8E%E7%AB%AF%E5%AD%A6%E4%B9%A0/" rel="tag">后端学习</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java-Web/" rel="tag">Java Web</a></li></ul>
 
     </footer>
 
@@ -116,19 +302,10 @@
   
   <nav class="article-nav">
     
-      <a href="/2021/09/09/day08-String%E7%9A%84%E4%BD%BF%E7%94%A8/" class="article-nav-link">
-        <strong class="article-nav-caption">上一篇</strong>
-        <div class="article-nav-title">
-          
-            API和String的使用
-          
-        </div>
-      </a>
     
-    
-      <a href="/2021/09/09/%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/" class="article-nav-link">
+      <a href="/2021/10/28/Day05_MyBatis%E9%AB%98%E7%BA%A7/" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">冒泡排序</div>
+        <div class="article-nav-title">MyBatis高级</div>
       </a>
     
   </nav>

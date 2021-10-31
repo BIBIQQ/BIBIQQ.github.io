@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    MyBatis高级 |  ONE PEAC
+  </title>
+  <meta name="generator" content="hexo-theme-yilia-plus">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+<script src="/js/pace.min.js"></script>
+
+
+  
+
+  
+
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    <main class="content">
+      <section class="outer">
+  <article id="post-Day05_MyBatis高级" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  MyBatis高级
+</h1>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2021/10/28/Day05_MyBatis%E9%AB%98%E7%BA%A7/" class="article-date">
+  <time datetime="2021-10-28T01:13:19.000Z" itemprop="datePublished">2021-10-28</time>
+</a>
+      
+      
+      
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">1k字</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">4分钟</span>
+        </span>
+    </span>
+</div>
+
+      
+    </div>
+    
+
+    
+    
+    <div class="tocbot"></div>
+
+
+
+
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h3 id="1-MyBatis高级"><a href="#1-MyBatis高级" class="headerlink" title="1. MyBatis高级"></a>1. MyBatis高级</h3><blockquote>
+<p>注意点：</p>
+<ul>
+<li><p>数据库的字段列表 和 实体类的属性名称不一样  ，则不能自动封装数据</p>
+<ul>
+<li><p>其别名   </p>
+<p><strong>as</strong>  :对不一样的列名起别名，让别名和实体类的属性名一致</p>
+<p>每次查询都要定义一次别名</p>
+<p><strong>sql片段</strong>：不灵活</p>
+<p><strong>resultMap</strong>：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">resultMap</span> <span class="attr">id</span>=<span class="string">"brandResultMap"</span> <span class="attr">type</span>=<span class="string">"Brand"</span>&gt;</span></span><br><span class="line">     <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">        id：主键映射  名称</span></span><br><span class="line"><span class="comment">            * column  不一致的名称</span></span><br><span class="line"><span class="comment">            * roperty   需要映射的名称</span></span><br><span class="line"><span class="comment">        result：一般键 映射</span></span><br><span class="line"><span class="comment">        --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"brand_name"</span> <span class="attr">property</span>=<span class="string">"brandName"</span>/&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"company_Name"</span> <span class="attr">property</span>=<span class="string">"companyName"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">resultMap</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h4 id="1-1-查询"><a href="#1-1-查询" class="headerlink" title="1.1 查询"></a>1.1 查询</h4><blockquote>
+<p><strong>全查询</strong>:注意数据库的字段列表 和 实体类的属性名称保持一致</p>
+<p><strong>单条件查询</strong>:</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">&gt;#&#123;&#125;： 防止SQL注入 - -参数传递    如果只有一个参数叫什么都可以，多个参数遵循字段列名</span></span><br><span class="line"><span class="comment">&gt;$&#123;&#125;: 拼SQL，存在诸如问题  -  - 表面或者列名不固定的时候</span></span><br><span class="line"><span class="comment">&gt;参数类型：parameterType 指定参数的数据类型 可以省略</span></span><br><span class="line"><span class="comment">&gt;特殊字符： 转义字符       CDATA区  &lt;![CDATA[ 比较字符 ]]&gt; </span></span><br><span class="line"><span class="comment">&gt;--&gt;</span></span><br><span class="line">&gt;<span class="comment">&lt;!--单条件查询--&gt;</span></span><br><span class="line">&gt;<span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"selectID"</span> <span class="attr">resultMap</span>=<span class="string">"brandResultMap"</span>&gt;</span></span><br><span class="line">  select * from $&#123;tb_brand&#125; where id = #&#123;id&#125;;</span><br><span class="line">&gt;<span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>多条件查询</strong>：</p>
+<p>接口设置三种方式：</p>
+<ul>
+<li>@param注解          使用比较麻烦</li>
+<li>实体类封装          多个相关联数据</li>
+<li>map封装         多个不相关联数据</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="comment">//    多条件查询</span></span><br><span class="line">&gt;<span class="comment">//	@Param("SQL参数占位符名称")  </span></span><br><span class="line">  <span class="function">List&lt;Brand&gt; <span class="title">selectBymulti</span><span class="params">(@Param(<span class="string">"status"</span>)</span> <span class="keyword">int</span> status,</span></span><br><span class="line"><span class="function">                            @<span class="title">Param</span><span class="params">(<span class="string">"companyName"</span>)</span> String companyName,</span></span><br><span class="line"><span class="function">                            @<span class="title">Param</span><span class="params">(<span class="string">"brandName"</span>)</span> String brandName)</span>;</span><br><span class="line">  <span class="function">List&lt;Brand&gt; <span class="title">selectBymulti</span> <span class="params">(Brand brand)</span></span>;</span><br><span class="line"></span><br><span class="line">  <span class="function">List&lt;Brand&gt; <span class="title">selectBymulti</span> <span class="params">(Map map)</span></span>;</span><br><span class="line">&lt;!-- 测试类map添加--&gt;</span><br><span class="line">  &lt;!--保证SQL参数和map参数的键的名称对应上 --&gt;</span><br><span class="line">   Map map = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">   map.put(<span class="string">"status"</span>, status);    </span><br></pre></td></tr></table></figure>
+
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"selectBymulti"</span> <span class="attr">resultMap</span>=<span class="string">"brandResultMap"</span>&gt;</span></span><br><span class="line">        select * from</span><br><span class="line">        tb_brand</span><br><span class="line">        where status = #&#123;status&#125;  <span class="comment">&lt;!-- 参数占位符和字段列表名一致--&gt;</span></span><br><span class="line">        and company_name like #&#123;companyName&#125;</span><br><span class="line">        and brand_name like #&#123;brandName&#125;;</span><br><span class="line">&gt;<span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>动态多条件查询</strong>：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--动态多条件查询</span></span><br><span class="line"><span class="comment">       * if ：条件判断</span></span><br><span class="line"><span class="comment">           test :逻辑表达语句</span></span><br><span class="line"><span class="comment">   --&gt;</span></span><br><span class="line">&gt;<span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"selectBymulti"</span> <span class="attr">resultMap</span>=<span class="string">"brandResultMap"</span>&gt;</span></span><br><span class="line">      select * from</span><br><span class="line">      tb_brand</span><br><span class="line">     <span class="comment">&lt;!--where 1 = 1 恒等式  第一个不存在条件--&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">where</span>&gt;</span>-- Mybatis的包装Where和sql的where语句一致，会自动等判断 是否有 and</span><br><span class="line">          <span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">"status != null"</span>&gt;</span></span><br><span class="line">              and status = #&#123;status&#125;</span><br><span class="line">          <span class="tag">&lt;/<span class="name">if</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">"companyName != null and companyName != '' "</span>&gt;</span></span><br><span class="line">              and company_name like #&#123;companyName&#125;</span><br><span class="line">          <span class="tag">&lt;/<span class="name">if</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">"brandName != null and brandName != '' "</span>&gt;</span></span><br><span class="line">              and brand_name like #&#123;brandName&#125;</span><br><span class="line">          <span class="tag">&lt;/<span class="name">if</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">where</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>动态单条件查询</strong>：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"selectBySingle"</span> <span class="attr">resultMap</span>=<span class="string">"brandResultMap"</span>&gt;</span></span><br><span class="line">       select * from tb_brand</span><br><span class="line">       <span class="tag">&lt;<span class="name">where</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">choose</span>&gt;</span></span><br><span class="line">               <span class="tag">&lt;<span class="name">when</span> <span class="attr">test</span>=<span class="string">"status != null"</span>&gt;</span></span><br><span class="line">                   status = #&#123;status&#125;</span><br><span class="line">               <span class="tag">&lt;/<span class="name">when</span>&gt;</span></span><br><span class="line">               <span class="tag">&lt;<span class="name">when</span> <span class="attr">test</span>=<span class="string">"companyName != null and companyName != '' "</span>&gt;</span></span><br><span class="line">                   company_name like #&#123;companyName&#125;</span><br><span class="line">               <span class="tag">&lt;/<span class="name">when</span>&gt;</span></span><br><span class="line">               <span class="tag">&lt;<span class="name">when</span> <span class="attr">test</span>=<span class="string">"brandName != null and brandName != '' "</span>&gt;</span></span><br><span class="line">                   brand_name like #&#123;brandName&#125;</span><br><span class="line">               <span class="tag">&lt;/<span class="name">when</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;/<span class="name">choose</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;/<span class="name">where</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+</blockquote>
+<h4 id="1-2-添加"><a href="#1-2-添加" class="headerlink" title="1.2 添加"></a>1.2 添加</h4><blockquote>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="comment">&lt;!--可以返回主键</span></span><br><span class="line"><span class="comment">实现新增功能 ，需要添加   useGeneratedKeys="true" keyProperty="id"</span></span><br><span class="line"><span class="comment">&gt;--&gt;</span></span><br><span class="line">&gt;<span class="tag">&lt;<span class="name">insert</span> <span class="attr">id</span>=<span class="string">"add"</span> <span class="attr">useGeneratedKeys</span>=<span class="string">"true"</span> <span class="attr">keyProperty</span>=<span class="string">"id"</span>&gt;</span></span><br><span class="line">     insert into tb_brand (brand_name, company_name, ordered, description, status)</span><br><span class="line">     values (#&#123;brandName&#125;,#&#123;companyName&#125;,#&#123;ordered&#125;,#&#123;description&#125;,#&#123;status&#125;)</span><br><span class="line">   <span class="tag">&lt;/<span class="name">insert</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+</blockquote>
+<h4 id="1-3-修改"><a href="#1-3-修改" class="headerlink" title="1.3 修改"></a>1.3 修改</h4><blockquote>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--动态修改--&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">update</span> <span class="attr">id</span>=<span class="string">"updata"</span>&gt;</span></span><br><span class="line">       update tb_brand</span><br><span class="line">       <span class="tag">&lt;<span class="name">set</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">"status != null"</span>&gt;</span></span><br><span class="line">               brand_name = #&#123;brandName&#125;,</span><br><span class="line">           <span class="tag">&lt;/<span class="name">if</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">"companyName != null and companyName != '' "</span>&gt;</span></span><br><span class="line">               company_name = #&#123;companyName&#125;,</span><br><span class="line">           <span class="tag">&lt;/<span class="name">if</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">"brandName != null and brandName != '' "</span>&gt;</span></span><br><span class="line">               brand_name = #&#123;brandName&#125;,</span><br><span class="line">           <span class="tag">&lt;/<span class="name">if</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">"ordered != null "</span>&gt;</span></span><br><span class="line">               ordered = #&#123;ordered&#125;,</span><br><span class="line">           <span class="tag">&lt;/<span class="name">if</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">"description != null and description != '' "</span>&gt;</span></span><br><span class="line">               description = #&#123;description&#125;,</span><br><span class="line">           <span class="tag">&lt;/<span class="name">if</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">"status != null and status != '' "</span>&gt;</span></span><br><span class="line">               status = #&#123;status&#125;</span><br><span class="line">           <span class="tag">&lt;/<span class="name">if</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;/<span class="name">set</span>&gt;</span></span><br><span class="line">       where id = #&#123;id&#125;;</span><br><span class="line">   <span class="tag">&lt;/<span class="name">update</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</blockquote>
+<h4 id="1-4-删除"><a href="#1-4-删除" class="headerlink" title="1.4 删除"></a>1.4 删除</h4><blockquote>
+<p><strong>单个删除：</strong>添加单个参数即可</p>
+<p><strong>批量删除：</strong></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="comment">&lt;!-- 批量删除 --&gt;</span></span><br><span class="line">&gt;<span class="tag">&lt;<span class="name">delete</span> <span class="attr">id</span>=<span class="string">"deletByIds"</span>&gt;</span></span><br><span class="line">       delete from tb_brand where id in</span><br><span class="line">       <span class="tag">&lt;<span class="name">foreach</span> <span class="attr">collection</span>=<span class="string">"ids"</span> <span class="attr">item</span>=<span class="string">"id"</span> <span class="attr">separator</span>=<span class="string">","</span> <span class="attr">open</span>=<span class="string">"("</span> <span class="attr">close</span>=<span class="string">")"</span>&gt;</span></span><br><span class="line">           #&#123;id&#125;</span><br><span class="line">       <span class="tag">&lt;/<span class="name">foreach</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">delete</span>&gt;</span></span><br><span class="line">           </span><br><span class="line">&gt;<span class="comment">&lt;!-- 接口 --&gt;</span></span><br><span class="line">//  批量删除</span><br><span class="line">   //  可以是数组也可以是集合</span><br><span class="line">   void deletByIds(@Param("ids")int[] ids);</span><br></pre></td></tr></table></figure>
+
+
+</blockquote>
+<h4 id="1-5-注解开发"><a href="#1-5-注解开发" class="headerlink" title="1.5 注解开发"></a>1.5 注解开发</h4><blockquote>
+<ul>
+<li>查询：@Select</li>
+<li>添加：@Insert</li>
+<li>修改：@Updata</li>
+<li>删除：@Delete</li>
+</ul>
+<p>注解完成简单功能</p>
+<p>配置文件复杂功能</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="meta">@Select</span>(value = <span class="string">"select * from tb_user where id = #&#123;id&#125;"</span>)</span><br><span class="line">&gt;<span class="function"><span class="keyword">public</span> User <span class="title">select</span><span class="params">(<span class="keyword">int</span> id)</span></span>;</span><br></pre></td></tr></table></figure>
+
+</blockquote>
+
+      
+      <!-- 打赏 -->
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2021/10/28/Day05_MyBatis%E9%AB%98%E7%BA%A7/" data-id="ckvfda19q000or0uee74e6ckk"
+        class="article-share-link">分享</a>
+        
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java-Web/" rel="tag">Java Web</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+  
+  <nav class="article-nav">
+    
+      <a href="/2021/10/31/Day10_JSP/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            JSP
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2021/10/20/Day04_Maven%E5%92%8CMyBatis/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">Maven和MyBatis</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+  
+<!-- valine评论 -->
+<div id="vcomments-box">
+    <div id="vcomments">
+    </div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js'></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        notify: false,
+        verify: '',
+        app_id: '',
+        app_key: '',
+        path: window.location.pathname,
+        avatar: 'mp',
+        placeholder: '给我的文章加点评论吧~',
+        recordIP: true
+    });
+    const infoEle = document.querySelector('#vcomments .info');
+    if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+        infoEle.childNodes.forEach(function (item) {
+            item.parentNode.removeChild(item);
+        });
+    }
+</script>
+<style>
+    #vcomments-box {
+        padding: 5px 30px;
+    }
+
+    @media screen and (max-width: 800px) {
+        #vcomments-box {
+            padding: 5px 0px;
+        }
+    }
+
+    #vcomments-box #vcomments {
+        background-color: #fff;
+    }
+
+    .v .vlist .vcard .vh {
+        padding-right: 20px;
+    }
+
+    .v .vlist .vcard {
+        padding-left: 10px;
+    }
+</style>
+
+  
+
+  
+  
+  
+
+</article>
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul class="list-inline">
+      <li>
+        &copy;
+        2020-2021
+        ff
+      </li>
+      <li>
+        
+          Powered by
+        
+        
+        <a href="https://hexo.io" target="_blank">Hexo</a> Theme <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul class="list-inline">
+      <li>
+        
+        
+        <ul class="list-inline">
+  <li>PV:<span id="busuanzi_value_page_pv"></span></li>
+  <li>UV:<span id="busuanzi_value_site_uv"></span></li>
+</ul>
+        
+      </li>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+    <div class="to_top">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+      </div>
+    </main>
+      <aside class="sidebar">
+        <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="ONE PEAC"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/2019/about">关于我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜索">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+      </aside>
+      <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+      
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script>
+  try {
+    var typed = new Typed("#subtitle", {
+    strings: ['面朝大海，春暖花开','愿你一生努力，一生被爱','想要的都拥有，得不到的都释怀'],
+    startDelay: 0,
+    typeSpeed: 200,
+    loop: true,
+    backSpeed: 100,
+    showCursor: true
+    });
+  } catch (err) {
+  }
+  
+</script>
+
+
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer:'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto',
+    onClick: (e) => {
+      $('.toc-link').removeClass('is-active-link');
+      $(`a[href=${e.target.hash}]`).addClass('is-active-link');
+      $(e.target.hash).scrollIntoView();
+      return false;
+    }
+  });
+</script>
+
+
+<script>
+  var ayerConfig = {
+    mathjax: false
+  }
+</script>
+
+
+<script src="/js/ayer.js"></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+
+
+
+<script type="text/javascript" src="https://js.users.51.la/20544303.js"></script>
+  </div>
+</body>
+
+</html>
