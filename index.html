@@ -76,6 +76,319 @@
     
     
     
+    <article id="post-day01_Spring" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2021/11/06/day01_Spring/"
+    >Spring入门</a
+  >
+</h2>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2021/11/06/day01_Spring/" class="article-date">
+  <time datetime="2021-11-06T10:32:19.000Z" itemprop="datePublished">2021-11-06</time>
+</a>
+      
+      
+      
+      
+    </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h3 id="Spring"><a href="#Spring" class="headerlink" title="Spring"></a>Spring</h3><h4 id="1-初识Spring技术"><a href="#1-初识Spring技术" class="headerlink" title="1.初识Spring技术"></a>1.初识Spring技术</h4><blockquote>
+<p>简化开发：降低企业级开发的复杂性</p>
+<ul>
+<li>IOC（反转控制）</li>
+<li>AOP（面向切面编程）<ul>
+<li>事务处理</li>
+</ul>
+</li>
+</ul>
+<p>框架整合：高效整合其他技术，提高企业级应用开发与运行效率</p>
+<ul>
+<li>MyBatis</li>
+<li>MyBatis-plus</li>
+<li>Struts</li>
+<li>Struts2</li>
+<li>Hibernate</li>
+</ul>
+<p>Spring Framework</p>
+<p>Spring Boot</p>
+<p>Spring Cloud</p>
+</blockquote>
+<h4 id="2-Spring-Framework技术"><a href="#2-Spring-Framework技术" class="headerlink" title="2. Spring Framework技术"></a>2. Spring Framework技术</h4><blockquote>
+<p>Spring Framework的架构 ：是Spring生态的最基本的项目，是其他的框架基础</p>
+<ul>
+<li>Data Access：数据访问</li>
+<li>Data Integration：数据集成</li>
+</ul>
+<ul>
+<li>Web：web开发</li>
+</ul>
+<ul>
+<li>AOP:面向切面编程</li>
+<li>Aspects：AOP思想实现</li>
+</ul>
+<ul>
+<li>Core Container：核心容器</li>
+</ul>
+<ul>
+<li>Test:单元测试与集成测试</li>
+</ul>
+</blockquote>
+<h4 id="3-Spring-Framework的核心概念"><a href="#3-Spring-Framework的核心概念" class="headerlink" title="3. Spring Framework的核心概念"></a>3. Spring Framework的核心概念</h4><blockquote>
+<p><strong>IoC:控制反转</strong></p>
+<ul>
+<li>使用对象时，主动new产生对象转换为由外部提供对象，此过程中对象创建控制权由程序转移到外部</li>
+</ul>
+<p><strong>IoC容器</strong></p>
+<ul>
+<li>Spring提供了一个容器，称之为IoC容器，用来充当IoC思想中的“外部”</li>
+</ul>
+<p><strong>Bean</strong></p>
+<ul>
+<li>IoC容器负责对象的创建、初始化等一系列工作，被创建或被管理的对象在IoC容器中统称为Bean</li>
+</ul>
+</blockquote>
+<h4 id="4-IoC的使用"><a href="#4-IoC的使用" class="headerlink" title="4. IoC的使用"></a>4. IoC的使用</h4><blockquote>
+<ul>
+<li><p>通过pom.xml导入Spring坐标</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">--Spring-context</span> 依赖坐标 <span class="attr">--</span>&gt;</span>  </span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-context<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>5.2.10.RELEASE <span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>IoC容器通过配置得知需要管理的对象</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"bookDao"</span> <span class="attr">class</span>=<span class="string">"com.ff.dao.impl.BookDaoImpl"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"bookService"</span> <span class="attr">class</span>=<span class="string">"com.ff.Service.Impl.BookServiceImpl"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>被管理的对象交给IoC容器，通过接口获得IoC容器</p>
+</li>
+<li><p>IoC容器从接口方法获得Bean</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">app2</span><span class="params">()</span></span>&#123;</span><br><span class="line">      <span class="comment">//获取Ioc容器</span></span><br><span class="line">       ApplicationContext ca = <span class="keyword">new</span> ClassPathXmlApplicationContext(<span class="string">"applicationContext.xml"</span>);</span><br><span class="line">       <span class="comment">//获取Bean</span></span><br><span class="line">       BookService bookService = (BookService) ca.getBean(<span class="string">"bookService"</span>);</span><br><span class="line">       bookService.save();</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>管理Service和Dao</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//业务层</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BookServiceImpl</span>  <span class="keyword">implements</span> <span class="title">BookService</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> BookDao bookDao = <span class="keyword">new</span> BookDao();</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">save</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"book serivce save.."</span>);</span><br><span class="line">        bookDao.save();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//资源层</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BookDaoImpl</span> <span class="keyword">implements</span> <span class="title">BookDao</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">save</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"book Dao save.."</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</blockquote>
+<h4 id="5-DI的使用"><a href="#5-DI的使用" class="headerlink" title="5.DI的使用"></a>5.DI的使用</h4><blockquote>
+<ul>
+<li><p>基于IoC管理Bean</p>
+</li>
+<li><p>Service中不保留new形式创建的Dao对象</p>
+</li>
+<li><p>Service中的Dao通过提供的方法进入Service</p>
+</li>
+</ul>
+<ul>
+<li>配置Bean</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"bookDao"</span> <span class="attr">class</span>=<span class="string">"com.ff.dao.impl.BookDaoImpl"</span> <span class="attr">init-method</span>=<span class="string">"init"</span> <span class="attr">destroy-method</span>=<span class="string">"destory"</span>/&gt;</span></span><br><span class="line">&gt;<span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"bookService"</span> <span class="attr">class</span>=<span class="string">"com.ff.Service.Impl.BookServiceImpl"</span>&gt;</span></span><br><span class="line">       <span class="comment">&lt;!--配置Dao和Service的关系--&gt;</span></span><br><span class="line">      <span class="comment">&lt;!-- property 当前bean的属性</span></span><br><span class="line"><span class="comment">       name属性表示配置哪一个具体的属性</span></span><br><span class="line"><span class="comment">       ref表示参照哪一个bean--&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"bookDao"</span> <span class="attr">ref</span>=<span class="string">"bookDao"</span>/&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>管理Service和Dao</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">&gt;&#x2F;&#x2F;业务层</span><br><span class="line">&gt;public class BookServiceImpl  implements BookService &#123;</span><br><span class="line">   &#x2F;&#x2F;删除业务层使用new的方式创建对象</span><br><span class="line">   private BookDao bookDao ;</span><br><span class="line"></span><br><span class="line">   @Override</span><br><span class="line">   public void save() &#123;</span><br><span class="line">       System.out.println(&quot;book serivce save..&quot;);</span><br><span class="line">       bookDao.save();</span><br><span class="line">   &#125;</span><br><span class="line">   &#x2F;&#x2F;提供对应的set方法</span><br><span class="line">   public void setBookDao(BookDao bookDao)&#123;</span><br><span class="line">       this.bookDao &#x3D; bookDao;</span><br><span class="line">   &#125;</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line">&gt;&#x2F;&#x2F;资源层</span><br><span class="line">&gt;public class BookDaoImpl implements BookDao &#123;</span><br><span class="line"></span><br><span class="line">   @Override</span><br><span class="line">   public void save() &#123;</span><br><span class="line">       System.out.println(&quot;book Dao save..&quot;);</span><br><span class="line">   &#125;</span><br><span class="line">&gt;&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>Bean的作用范围：默认是单例     </p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt;scope="prototype"  通过属性scope   prtotype 非单例   singleton单例</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="tag">&lt;<span class="name">--name</span> 给<span class="attr">id</span>取别名   <span class="attr">name</span>里可以取多个 中间可以用 空格  逗号 分隔 <span class="attr">--</span>&gt;</span></span><br><span class="line">&gt;<span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"bookService"</span> <span class="attr">class</span>=<span class="string">"com.ff.Service.Impl.BookServiceImpl"</span> <span class="attr">name</span>=<span class="string">"bookService2 bookService3 bookService4"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>适合交给容器进行管理的bean<ul>
+<li>表现层</li>
+<li>业务层</li>
+<li>数据层</li>
+<li>工具对象</li>
+</ul>
+</li>
+<li>不适合交给容器管理的bean<ul>
+<li>实体类</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h4 id="6-静态工厂实例化Bean"><a href="#6-静态工厂实例化Bean" class="headerlink" title="6. 静态工厂实例化Bean"></a>6. 静态工厂实例化Bean</h4><blockquote>
+<ul>
+<li><p>创建一个工厂类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">OrderDaoFactory</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> OrderDao <span class="title">getOrderDao</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"order Dao Factory 。。。"</span>);</span><br><span class="line">        <span class="keyword">return</span>  <span class="keyword">new</span> OrderDaoImpl();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>配置Bean</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"orderDao"</span> <span class="attr">class</span>=<span class="string">"com.ff.factory.OrderDaoFactory"</span> <span class="attr">factory-method</span>=<span class="string">"getOrderDao"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</blockquote>
+<h4 id="7-实例化工厂实例化Bean"><a href="#7-实例化工厂实例化Bean" class="headerlink" title="7. 实例化工厂实例化Bean"></a>7. 实例化工厂实例化Bean</h4><blockquote>
+<ul>
+<li>创建一个工厂类</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserDaoFactory</span> </span>&#123;</span><br><span class="line">   <span class="function"><span class="keyword">public</span>  UserDao <span class="title">getUserDao</span><span class="params">()</span></span>&#123;</span><br><span class="line">       <span class="keyword">return</span>  <span class="keyword">new</span> UserDaoImpl();</span><br><span class="line">   &#125;</span><br><span class="line">&gt;&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>配置Bean</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"userDaoFactory"</span> <span class="attr">class</span>=<span class="string">"com.ff.factory.UserDaoFactory"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">--factory-method</span> 实现<span class="attr">Bean</span>的工厂方法    <span class="attr">factory-bean</span>的<span class="attr">id</span>名称 <span class="attr">--</span> &gt;</span></span><br><span class="line">&gt;<span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"userDao"</span> <span class="attr">factory-method</span>=<span class="string">"getUserDao"</span> <span class="attr">factory-bean</span>=<span class="string">"userDaoFactory"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+</blockquote>
+<h4 id="8-使用FactoryBean实例化"><a href="#8-使用FactoryBean实例化" class="headerlink" title="8. 使用FactoryBean实例化"></a>8. 使用FactoryBean实例化</h4><blockquote>
+<ul>
+<li>创建一个工厂类实现FactoryBean接口，重写方法</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserDaoFactoryBean</span> <span class="keyword">implements</span> <span class="title">FactoryBean</span>&lt;<span class="title">UserDao</span>&gt; </span>&#123;</span><br><span class="line">   <span class="comment">//代替原始实例工厂中创建对象的方法</span></span><br><span class="line">   <span class="meta">@Override</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> UserDao <span class="title">getObject</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">       <span class="keyword">return</span> <span class="keyword">new</span> UserDaoImpl();</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="comment">//传递需要实现类的字节码对象</span></span><br><span class="line">   <span class="meta">@Override</span></span><br><span class="line">   <span class="keyword">public</span> Class&lt;?&gt; getObjectType() &#123;</span><br><span class="line">       <span class="keyword">return</span> UserDao<span class="class">.<span class="keyword">class</span></span>;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="comment">/**</span></span><br><span class="line"><span class="comment">    * 选择是否是单例对象</span></span><br><span class="line"><span class="comment">    * true 单例  false 非单例</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">   <span class="meta">@Override</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isSingleton</span><span class="params">()</span> </span>&#123;</span><br><span class="line">       <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">   &#125;</span><br><span class="line">&gt;&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>配置Bean</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"userDaoFactoryBean"</span> <span class="attr">class</span>=<span class="string">"com.ff.factory.UserDaoFactoryBean"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+
+</blockquote>
+<h4 id="9-Bean的生命周期"><a href="#9-Bean的生命周期" class="headerlink" title="9. Bean的生命周期"></a>9. Bean的生命周期</h4><blockquote>
+<ul>
+<li>初始化容器</li>
+</ul>
+<ol>
+<li>创建对象（内存分配）</li>
+<li>执行构造方法</li>
+<li>执行属性注入（set操作）</li>
+<li>执行bean初始化方法</li>
+</ol>
+<ul>
+<li>使用bean</li>
+</ul>
+<ol>
+<li>执行业务操作</li>
+</ol>
+<ul>
+<li>关闭/销毁容器</li>
+</ul>
+<ol>
+<li>执行bean销毁方法</li>
+</ol>
+<h4 id="方式一："><a href="#方式一：" class="headerlink" title="方式一："></a><strong>方式一：</strong></h4><p><strong>创建开始\销毁：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Bean创建后</span></span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      System.out.println(<span class="string">"init...."</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">//Bean销毁前</span></span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">destory</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      System.out.println(<span class="string">"destory..."</span>);</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>配置bean：</strong></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"bookDao"</span> <span class="attr">class</span>=<span class="string">"com.ff.dao.impl.BookDaoImpl"</span> <span class="attr">init-method</span>=<span class="string">"init"</span> <span class="attr">destroy-method</span>=<span class="string">"destory"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>设置结束：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">  ClassPathXmlApplicationContext ioc = <span class="keyword">new</span> ClassPathXmlApplicationContext(<span class="string">"applicationContext.xml"</span>);</span><br><span class="line"><span class="comment">//暴力销毁，只能放在最后</span></span><br><span class="line">ioc.close();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 设置结束标记 ,位置没有关系</span></span><br><span class="line">ioc.registerShutdownHook();</span><br></pre></td></tr></table></figure>
+
+<h4 id="方式二："><a href="#方式二：" class="headerlink" title="方式二："></a><strong>方式二：</strong></h4><p><strong>实现Service实现InitializingBean, DisposableBean接口</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BookServiceImpl</span>  <span class="keyword">implements</span> <span class="title">BookService</span>, <span class="title">InitializingBean</span>, <span class="title">DisposableBean</span> </span>&#123;</span><br><span class="line">   <span class="comment">//删除业务层使用new的方式创建对象</span></span><br><span class="line">   <span class="keyword">private</span> BookDao bookDao;</span><br><span class="line"></span><br><span class="line">   <span class="meta">@Override</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">save</span><span class="params">()</span> </span>&#123;</span><br><span class="line">       System.out.println(<span class="string">"book serivce save.."</span>);</span><br><span class="line">       bookDao.save();</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="comment">//提供对应的set方法</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setBookDao</span><span class="params">(BookDao bookDao)</span></span>&#123;</span><br><span class="line">       <span class="keyword">this</span>.bookDao = bookDao;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="meta">@Override</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">destroy</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">       System.out.println(<span class="string">"service destroy"</span>);</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="meta">@Override</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">afterPropertiesSet</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">       System.out.println(<span class="string">"service  init"</span>);</span><br><span class="line">   &#125;</span><br><span class="line">&gt;&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+</blockquote>
+<h4 id="10-依赖注入方式"><a href="#10-依赖注入方式" class="headerlink" title="10. 依赖注入方式"></a>10. 依赖注入方式</h4><blockquote>
+<p><strong>注入方式：</strong></p>
+<ul>
+<li><p>普通方法(setter方法)</p>
+<ol>
+<li>简单类型</li>
+</ol>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"diDao"</span> <span class="attr">class</span>=<span class="string">"com.ff.dao.impl.DIDaoImpl"</span>/&gt;</span> </span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"diService"</span> <span class="attr">class</span>=<span class="string">"com.ff.Service.Impl.DIServiceImpl"</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--setter注入--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"diDao"</span> <span class="attr">ref</span>=<span class="string">"diDao"</span>/&gt;</span><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>引用类型</li>
+</ol>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"> <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"diDao"</span> <span class="attr">class</span>=<span class="string">"com.ff.dao.impl.DIDaoImpl"</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--setter 引用注入--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"num"</span> <span class="attr">value</span>=<span class="string">"100"</span>/&gt;</span></span><br><span class="line">    	<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"str.."</span> <span class="attr">value</span>=<span class="string">"setter引用"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"diService"</span> <span class="attr">class</span>=<span class="string">"com.ff.Service.Impl.DIServiceImpl"</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--setter注入--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"diDao"</span> <span class="attr">ref</span>=<span class="string">"diDao"</span>/&gt;</span><span class="tag">&lt;/<span class="name">bean</span>&gt;</span>      </span><br></pre></td></tr></table></figure>
+
+<p><strong>Service 和Dao</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DIServiceImpl</span> <span class="keyword">implements</span> <span class="title">DIService</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> DIDao diDao;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//提供setter方法 注入</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setDiDao</span><span class="params">(DIDao diDao)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.diDao = diDao;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">save</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        diDao.save();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DIDaoImpl</span> <span class="keyword">implements</span> <span class="title">DIDao</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span>  <span class="keyword">int</span> num;</span><br><span class="line">    <span class="keyword">private</span> String str;</span><br><span class="line"></span><br><span class="line"><span class="comment">//    setter 的set</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setNum</span><span class="params">(<span class="keyword">int</span> num)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.num = num;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setStr</span><span class="params">(String str)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.str = str;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">save</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"DI Dao save..."</span>);</span><br><span class="line">        System.out.println(<span class="string">"num = "</span> + num);</span><br><span class="line">        System.out.println(<span class="string">"str = "</span> + str);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+<ul>
+<li><p>构造方法</p>
+<ol>
+<li>简单类型</li>
+</ol>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"diDao"</span> <span class="attr">class</span>=<span class="string">"com.ff.dao.impl.DIDaoImpl"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"diService"</span> <span class="attr">class</span>=<span class="string">"com.ff.Service.Impl.DIServiceImpl"</span>&gt;</span></span><br><span class="line">      <span class="comment">&lt;!--构造方法 简单注入--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">constructor-arg</span> <span class="attr">name</span>=<span class="string">"diDao"</span> <span class="attr">ref</span>=<span class="string">"diDao"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+<ol start="2">
+<li><p>引用类型</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"diDao"</span> <span class="attr">class</span>=<span class="string">"com.ff.dao.impl.DIDaoImpl"</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!--构造方法 引入注入--&gt;</span></span><br><span class="line">       <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">       name 根据形参名称</span></span><br><span class="line"><span class="comment">       type 根据参数数据类型</span></span><br><span class="line"><span class="comment">       index 根据形参的排序</span></span><br><span class="line"><span class="comment">       --&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">constructor-arg</span> <span class="attr">name</span>=<span class="string">"num"</span> <span class="attr">value</span>=<span class="string">"100"</span> /&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">constructor-arg</span> <span class="attr">name</span>=<span class="string">"str"</span> <span class="attr">value</span>=<span class="string">"引入注入。。"</span> /&gt;</span></span><br><span class="line"> <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"diService"</span> <span class="attr">class</span>=<span class="string">"com.ff.Service.Impl.DIServiceImpl"</span>&gt;</span></span><br><span class="line">     <span class="comment">&lt;!--构造方法 简单注入--&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">constructor-arg</span> <span class="attr">name</span>=<span class="string">"diDao"</span> <span class="attr">ref</span>=<span class="string">"diDao"</span>/&gt;</span></span><br><span class="line"> <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p> <strong>Service 和Dao</strong></p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DIDaoImpl</span> <span class="keyword">implements</span> <span class="title">DIDao</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span>  <span class="keyword">int</span> num;</span><br><span class="line">    <span class="keyword">private</span> String str;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 构造方法的引入注入</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">DIDaoImpl</span><span class="params">(<span class="keyword">int</span> num, String str)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.num = num;</span><br><span class="line">        <span class="keyword">this</span>.str = str;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">save</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"DI Dao save..."</span>);</span><br><span class="line">        System.out.println(<span class="string">"num = "</span> + num);</span><br><span class="line">        System.out.println(<span class="string">"str = "</span> + str);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DIServiceImpl</span> <span class="keyword">implements</span> <span class="title">DIService</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> DIDao diDao;</span><br><span class="line"></span><br><span class="line">   </span><br><span class="line">    <span class="comment">//构造方式注入</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">DIServiceImpl</span><span class="params">(DIDao diDao)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.diDao = diDao;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">save</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        diDao.save();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+</blockquote>
+<h4 id="11-依赖自动装配"><a href="#11-依赖自动装配" class="headerlink" title="11. 依赖自动装配"></a>11. 依赖自动装配</h4><blockquote>
+<p>自动装配：根据bean所依赖的资源在容器中自动查找并注入到bean中的过程</p>
+<p>方式： bean标签autowire配置</p>
+<ul>
+<li>按类型（常用） autowire=”byType”</li>
+<li>按名称                 autowire=”byName”</li>
+<li>按构造方法         autowire=”constructor”</li>
+</ul>
+<p>自动装配的注意</p>
+<ol>
+<li>强制依赖使用构造器进行，使用setter注入有概率不进行注入导致null对象出现</li>
+<li>可选依赖使用setter注入进行，灵活性强</li>
+<li>Spring框架倡导使用构造器，第三方框架内部大多数采用构造器注入的形式进行数据初始化，相对严谨</li>
+<li>如果有必要可以两者同时使用，使用构造器注入完成强制依赖的注入，使用setter注入完成可选依赖的注入</li>
+<li>实际开发过程中还要根据实际情况分析，如果受控对象没有提供setter方法就必须使用构造器注入</li>
+<li><strong>==自己开发的模块推荐使用setter注入==</strong></li>
+</ol>
+</blockquote>
+<h4 id="12-集合注入"><a href="#12-集合注入" class="headerlink" title="12. 集合注入"></a>12. 集合注入</h4><blockquote>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--数组--&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"array"</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">array</span>&gt;</span></span><br><span class="line">               <span class="tag">&lt;<span class="name">value</span>&gt;</span>1<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">               <span class="tag">&lt;<span class="name">value</span>&gt;</span>2<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">               <span class="tag">&lt;<span class="name">value</span>&gt;</span>3<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;/<span class="name">array</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">       <span class="comment">&lt;!--集合--&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"list"</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">list</span>&gt;</span></span><br><span class="line">               <span class="tag">&lt;<span class="name">value</span>&gt;</span>1<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">               <span class="tag">&lt;<span class="name">value</span>&gt;</span>2<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;/<span class="name">list</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">       <span class="comment">&lt;!--集合--&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"map"</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">map</span>&gt;</span></span><br><span class="line">               <span class="tag">&lt;<span class="name">entry</span> <span class="attr">key</span>=<span class="string">"a"</span> <span class="attr">value</span>=<span class="string">"1"</span>/&gt;</span></span><br><span class="line">               <span class="tag">&lt;<span class="name">entry</span> <span class="attr">key</span>=<span class="string">"b"</span> <span class="attr">value</span>=<span class="string">"2"</span>/&gt;</span></span><br><span class="line">               <span class="tag">&lt;<span class="name">entry</span> <span class="attr">key</span>=<span class="string">"c"</span> <span class="attr">value</span>=<span class="string">"3"</span>/&gt;</span></span><br><span class="line">           <span class="tag">&lt;/<span class="name">map</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">       <span class="comment">&lt;!--配置文件--&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"properties"</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">props</span>&gt;</span></span><br><span class="line">               <span class="tag">&lt;<span class="name">prop</span> <span class="attr">key</span>=<span class="string">"a"</span>&gt;</span>1<span class="tag">&lt;/<span class="name">prop</span>&gt;</span></span><br><span class="line">               <span class="tag">&lt;<span class="name">prop</span> <span class="attr">key</span>=<span class="string">"b"</span>&gt;</span>2<span class="tag">&lt;/<span class="name">prop</span>&gt;</span></span><br><span class="line">               <span class="tag">&lt;<span class="name">prop</span> <span class="attr">key</span>=<span class="string">"c"</span>&gt;</span>3<span class="tag">&lt;/<span class="name">prop</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;/<span class="name">props</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+</blockquote>
+
+      
+      <!-- 打赏 -->
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2021/11/06/day01_Spring/" data-id="ckvno4lio0011ggue9re9g3wn"
+        class="article-share-link">分享</a>
+        
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Spring/" rel="tag">Spring</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+
+</article>
+    
     <article id="post-Day10_JSP" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
@@ -308,7 +621,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2021/10/31/Day10_JSP/" data-id="ckvfda19n000jr0ue0o4a9uf6"
+      <a data-url="http://yoursite.com/2021/10/31/Day10_JSP/" data-id="ckvno4lik000tggueeza88tn1"
         class="article-share-link">分享</a>
         
       
@@ -439,7 +752,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2021/10/28/Day05_MyBatis%E9%AB%98%E7%BA%A7/" data-id="ckvfda19q000or0uee74e6ckk"
+      <a data-url="http://yoursite.com/2021/10/28/Day05_MyBatis%E9%AB%98%E7%BA%A7/" data-id="ckvno4lie000mggue91wnb4i3"
         class="article-share-link">分享</a>
         
       
@@ -624,7 +937,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2021/10/20/Day04_Maven%E5%92%8CMyBatis/" data-id="ckvfda19l000hr0ueh3zrgii5"
+      <a data-url="http://yoursite.com/2021/10/20/Day04_Maven%E5%92%8CMyBatis/" data-id="ckvno4lig000oggue04eqfl9e"
         class="article-share-link">分享</a>
         
       
@@ -812,7 +1125,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2021/10/19/day03_JDBC/" data-id="ckvfda19y0017r0ue4ju4c4gq"
+      <a data-url="http://yoursite.com/2021/10/19/day03_JDBC/" data-id="ckvno4lir0018ggueb3s45i0x"
         class="article-share-link">分享</a>
         
       
@@ -1037,7 +1350,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2021/10/17/Day02_MySQL%E9%AB%98%E7%BA%A7/" data-id="ckvfda19p000mr0uehuzi04s7"
+      <a data-url="http://yoursite.com/2021/10/17/Day02_MySQL%E9%AB%98%E7%BA%A7/" data-id="ckvno4lij000rggue7yvx06h8"
         class="article-share-link">分享</a>
         
       
@@ -1341,7 +1654,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2021/10/16/Day01_MySQL%E5%92%8CNavicat/" data-id="ckvfda19x0015r0ue08h73vk1"
+      <a data-url="http://yoursite.com/2021/10/16/Day01_MySQL%E5%92%8CNavicat/" data-id="ckvno4li5000cgguedaf18cqx"
         class="article-share-link">分享</a>
         
       
@@ -1692,7 +2005,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2021/10/15/DAY24_%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%92%8C%E6%9E%9A%E4%B8%BE/" data-id="ckvfda19j000cr0ueb8pw6o38"
+      <a data-url="http://yoursite.com/2021/10/15/DAY24_%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%92%8C%E6%9E%9A%E4%B8%BE/" data-id="ckvno4lia000kggue96l8eo11"
         class="article-share-link">分享</a>
         
       
@@ -1859,7 +2172,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2021/10/15/DAY25_%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/" data-id="ckvfda19k000fr0ued3vhcz38"
+      <a data-url="http://yoursite.com/2021/10/15/DAY25_%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/" data-id="ckvno4li7000fggueexahfz9c"
         class="article-share-link">分享</a>
         
       
@@ -1998,338 +2311,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2021/10/13/Day22_%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" data-id="ckvfda19t000vr0ue08o95i92"
-        class="article-share-link">分享</a>
-        
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%90%8E%E7%AB%AF%E5%AD%A6%E4%B9%A0/" rel="tag">后端学习</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-  
-  
-
-  
-
-</article>
-    
-    <article id="post-DAY23_类加载器和反射" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2021/10/07/DAY23_%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8%E5%92%8C%E5%8F%8D%E5%B0%84/"
-    >类加载器和反射</a
-  >
-</h2>
-  
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2021/10/07/DAY23_%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8%E5%92%8C%E5%8F%8D%E5%B0%84/" class="article-date">
-  <time datetime="2021-10-07T14:13:19.000Z" itemprop="datePublished">2021-10-07</time>
-</a>
-      
-      
-      
-      
-    </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-      <h3 id="43-类加载器"><a href="#43-类加载器" class="headerlink" title="43. 类加载器"></a>43. 类加载器</h3><h4 id="43-1-类加载器的基础"><a href="#43-1-类加载器的基础" class="headerlink" title="43.1 类加载器的基础"></a>43.1 类加载器的基础</h4><h5 id="43-1-1-类加载器的概念"><a href="#43-1-1-类加载器的概念" class="headerlink" title="43.1.1 类加载器的概念"></a>43.1.1 类加载器的概念</h5><blockquote>
-<p>类加载器：负责将.class文件(存储的物理文件)加载到内存中</p>
-</blockquote>
-<h4 id="43-2-类加载器的过程"><a href="#43-2-类加载器的过程" class="headerlink" title="43.2 类加载器的过程"></a>43.2 类加载器的过程</h4><blockquote>
-<p>类加载时机</p>
-<ul>
-<li>创建类的实例（对象）</li>
-<li>调用类的类方法</li>
-<li>访问类或者接口的类变量，或者为该类变量赋值</li>
-<li>使用反射方式来强制创建某个类或接口对应的java.lang.Class对象</li>
-<li>初始化某个类的子类</li>
-<li>直接使用java.exe命令来运行某个主类、</li>
-</ul>
-<h6 id="使用的时候加载，不运行不加载"><a href="#使用的时候加载，不运行不加载" class="headerlink" title="==使用的时候加载，不运行不加载=="></a>==使用的时候加载，不运行不加载==</h6><p>过程：</p>
-<p>加载—验证—准备—解析—初始化</p>
-<p>链接：验证-准备-解析 </p>
-<p>加载：（把Class文件加载到内存中）</p>
-<p>​    全限定类名 ： 包名+类名  （相当于类的绝对路径）</p>
-<ul>
-<li>通过包名+类名，来获取这个类，准备用进行传输</li>
-<li>在这个类加载到内存中</li>
-<li>加载完毕创建一个Class对象</li>
-</ul>
-<p>验证：</p>
-<ul>
-<li>文件中的信息是否符合规范</li>
-</ul>
-<p>准备：</p>
-<ul>
-<li>初始化静态变量</li>
-</ul>
-<p>解析：</p>
-<ul>
-<li>如果使用到其他的类，就找到该类</li>
-</ul>
-<p>初始化：</p>
-<ul>
-<li>静态变量赋值以及初始化其他资源</li>
-</ul>
-</blockquote>
-<h4 id="43-3-类加载器的分类"><a href="#43-3-类加载器的分类" class="headerlink" title="43.3 类加载器的分类"></a>43.3 类加载器的分类</h4><blockquote>
-<p>三种加载器</p>
-<ul>
-<li>启动类加载器：虚拟机内置的类加载<ul>
-<li>加载JRE        </li>
-</ul>
-</li>
-<li>平台类加载器：负责加载JDK一些特殊的模块  <ul>
-<li>加载JDK   </li>
-</ul>
-</li>
-<li>系统类加载器：负责加载用户类路径上所指定的类库  <ul>
-<li>加载自己的类或者别人的工具类   </li>
-</ul>
-</li>
-</ul>
-</blockquote>
-<h4 id="43-4-双亲委派模型"><a href="#43-4-双亲委派模型" class="headerlink" title="43.4 双亲委派模型"></a>43.4 双亲委派模型</h4><blockquote>
-<p>方法：</p>
-<table>
-<thead>
-<tr>
-<th>方法名</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>public static ClassLoader getSystemClassLoader()</td>
-<td>获取系统类加载器</td>
-</tr>
-<tr>
-<td>public InputStream getResourceAsStream(String name)</td>
-<td>加载某一个资源文件</td>
-</tr>
-</tbody></table>
-<p>示例：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ClassLoaderDemo2</span> </span>&#123;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">       <span class="comment">//static ClassLoader getSystemClassLoader() 获取系统类加载器</span></span><br><span class="line">       <span class="comment">//InputStream getResourceAsStream(String name)  加载某一个资源文件</span></span><br><span class="line"></span><br><span class="line">       <span class="comment">//获取系统类加载器</span></span><br><span class="line">       ClassLoader systemClassLoader = ClassLoader.getSystemClassLoader();</span><br><span class="line"></span><br><span class="line">       <span class="comment">//利用加载器去加载一个指定的文件</span></span><br><span class="line">       <span class="comment">//参数：文件的路径（放在src的根目录下，默认去那里加载）</span></span><br><span class="line">       <span class="comment">//返回值：字节流。</span></span><br><span class="line">     InputStream is = systemClassLoader.getResourceAsStream(<span class="string">"prop.properties"</span>);</span><br><span class="line"></span><br><span class="line">       Properties prop = <span class="keyword">new</span> Properties();</span><br><span class="line">     prop.load(is);</span><br><span class="line"></span><br><span class="line">     System.out.println(prop);</span><br><span class="line"></span><br><span class="line">       is.close();</span><br><span class="line">   &#125;</span><br><span class="line">&gt;&#125;</span><br></pre></td></tr></table></figure>
-
-
-</blockquote>
-<h3 id="44-反射"><a href="#44-反射" class="headerlink" title="44. 反射"></a>44. 反射</h3><h4 id="44-1-反射的概念"><a href="#44-1-反射的概念" class="headerlink" title="44.1 反射的概念"></a>44.1 反射的概念</h4><blockquote>
-<p>Java反射机制：</p>
-<ul>
-<li>在运行状态下，对于任何一个类，都能够知道这个类的所有属性和方法</li>
-<li>对于任何一个对象，都能调用它的任意属性和方法</li>
-</ul>
-<p>==利用反射调用它类中的属性和方法时，无视修饰符==</p>
-<p>先获取配置文件中的信息，动态获取信息并创建对象和调动方法</p>
-</blockquote>
-<h4 id="44-2-使用反射的前提条件"><a href="#44-2-使用反射的前提条件" class="headerlink" title="44.2 使用反射的前提条件"></a>44.2 使用反射的前提条件</h4><h5 id="44-2-1-获取Class类的对象"><a href="#44-2-1-获取Class类的对象" class="headerlink" title="44.2.1 获取Class类的对象"></a>44.2.1 获取Class类的对象</h5><blockquote>
-<p>三种方法：</p>
-<ul>
-<li>Class类中的静态方法forName（“包名+类名”）</li>
-<li>通过class属性来获得</li>
-<li>利用对象的getClass方法来获得class对象；getClass方法是定义在Object类中</li>
-</ul>
-<p>示例：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">text</span> </span>&#123;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> ClassNotFoundException </span>&#123;</span><br><span class="line">&gt;<span class="comment">//        1.Class类中的静态方法forName（“全类名”）</span></span><br><span class="line">       <span class="comment">//全类名：包名+类名</span></span><br><span class="line">       Class clazz = Class.forName(<span class="string">"DAY24.Demo.Demo01.Staff"</span>);</span><br><span class="line">       System.out.println(clazz);</span><br><span class="line"></span><br><span class="line">&gt;<span class="comment">//        2.通过class属性来获得</span></span><br><span class="line">       Class clazz2 = Staff<span class="class">.<span class="keyword">class</span></span>;</span><br><span class="line">       System.out.println(clazz2);</span><br><span class="line"></span><br><span class="line">&gt;<span class="comment">//        3.利用对象的getClass方法来获得class对象</span></span><br><span class="line">&gt;<span class="comment">//            getClass方法是定义在Object类中</span></span><br><span class="line">       Staff staff= <span class="keyword">new</span> Staff();</span><br><span class="line">       Class clazz3 = staff.getClass();</span><br><span class="line">       System.out.println(clazz3);</span><br><span class="line"></span><br><span class="line">   &#125;</span><br><span class="line">&gt;&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-</blockquote>
-<h4 id="44-3-Class的使用"><a href="#44-3-Class的使用" class="headerlink" title="44.3 Class的使用"></a>44.3 Class的使用</h4><h5 id="44-3-1-Class的方法"><a href="#44-3-1-Class的方法" class="headerlink" title="44.3.1 Class的方法"></a>44.3.1 Class的方法</h5><blockquote>
-<p>获取构造方法：</p>
-<table>
-<thead>
-<tr>
-<th>方法名</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>Constructor&lt;?&gt;[] getDeclaredConstructors()</td>
-<td>返回所有构造方法对象的数组</td>
-</tr>
-<tr>
-<td>Constructor&lt;?&gt;[] getConstructors()</td>
-<td>返回所有公共构造方法对象的数组</td>
-</tr>
-<tr>
-<td>Constructor<T> getConstructor(Class&lt;?&gt;… parameterTypes)</td>
-<td>返回单个公共构造方法对象</td>
-</tr>
-<tr>
-<td>Constructor<T> getDeclaredConstructor(Class&lt;?&gt;… parameterTypes)</td>
-<td>返回单个构造方法对象</td>
-</tr>
-</tbody></table>
-<p>示例：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ClassDemo02</span> </span>&#123;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> NoSuchMethodException </span>&#123;</span><br><span class="line">       <span class="comment">//返回单个公共构造方法</span></span><br><span class="line">&gt;<span class="comment">//        method01();</span></span><br><span class="line">       <span class="comment">//获取单个构造方法</span></span><br><span class="line">&gt;<span class="comment">//        method02();</span></span><br><span class="line">       <span class="comment">//返回所有构造方法对象数组</span></span><br><span class="line">&gt;<span class="comment">//        method03();</span></span><br><span class="line">       <span class="comment">//返回所有公共方法对象</span></span><br><span class="line">&gt;<span class="comment">//        method04();</span></span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">method04</span><span class="params">()</span> </span>&#123;</span><br><span class="line">       <span class="comment">//获取class对象</span></span><br><span class="line">       Class clazz = Staff<span class="class">.<span class="keyword">class</span></span>;</span><br><span class="line">       <span class="comment">//返回所有公共方法对象</span></span><br><span class="line">       Constructor[] cs = clazz.getConstructors();</span><br><span class="line">       System.out.println(Arrays.toString(cs));</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">method03</span><span class="params">()</span> </span>&#123;</span><br><span class="line">       <span class="comment">//获取class对象</span></span><br><span class="line">       Class clazz = Staff<span class="class">.<span class="keyword">class</span></span>;</span><br><span class="line">       <span class="comment">//返回所有构造方法对象数组</span></span><br><span class="line">       Constructor[] dc = clazz.getDeclaredConstructors();</span><br><span class="line">       System.out.println(Arrays.toString(dc));</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">method02</span><span class="params">()</span> <span class="keyword">throws</span> NoSuchMethodException </span>&#123;</span><br><span class="line">       <span class="comment">//获取class对象</span></span><br><span class="line">       Class clazz = Staff<span class="class">.<span class="keyword">class</span></span>;</span><br><span class="line">       <span class="comment">//获取单个构造方法</span></span><br><span class="line">       Constructor dc = clazz.getDeclaredConstructor();</span><br><span class="line">       System.out.println(dc);</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">method01</span><span class="params">()</span> <span class="keyword">throws</span> NoSuchMethodException </span>&#123;</span><br><span class="line">       <span class="comment">//获取class对象</span></span><br><span class="line">       Class clazz = Staff<span class="class">.<span class="keyword">class</span></span>;</span><br><span class="line">       <span class="comment">//获取无参构造</span></span><br><span class="line">       Constructor cs = clazz.getConstructor();</span><br><span class="line">       System.out.println(cs);</span><br><span class="line">       <span class="comment">//获取有参构造，顺序需要和构造方法的顺序一致</span></span><br><span class="line">       Constructor cs2 = clazz.getConstructor(String<span class="class">.<span class="keyword">class</span>, <span class="title">String</span>.<span class="title">class</span>)</span>;</span><br><span class="line">       System.out.println(cs2);</span><br><span class="line">   &#125;</span><br><span class="line">&gt;&#125;</span><br></pre></td></tr></table></figure>
-</blockquote>
-<h5 id="44-3-2-Class的成员方法使用"><a href="#44-3-2-Class的成员方法使用" class="headerlink" title="44.3.2 Class的成员方法使用"></a>44.3.2 Class的成员方法使用</h5><blockquote>
-<p>成员方法：</p>
-<table>
-<thead>
-<tr>
-<th>方法名</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>T newInstance(Object…initargs)</td>
-<td>根据指定的构造方法创建对象</td>
-</tr>
-<tr>
-<td>setAccessible(boolean flag)</td>
-<td>设置为true,表示取消访问检查</td>
-</tr>
-</tbody></table>
-<p>示例：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ClassDemo03</span> </span>&#123;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException </span>&#123;</span><br><span class="line">&gt;<span class="comment">//        method01();</span></span><br><span class="line">&gt;<span class="comment">//        method02();</span></span><br><span class="line">&gt;<span class="comment">//        method03();</span></span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">method03</span><span class="params">()</span> <span class="keyword">throws</span> NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException </span>&#123;</span><br><span class="line">       <span class="comment">//获取Class对象</span></span><br><span class="line">       Class clazz = Staff<span class="class">.<span class="keyword">class</span></span>;</span><br><span class="line">       <span class="comment">//获取无参构造</span></span><br><span class="line">       Constructor dc = clazz.getDeclaredConstructor(String<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">       <span class="comment">//被private修饰的成员，不能直接使用</span></span><br><span class="line">       <span class="comment">//如果用反射强行获取并且使用，需要临时取消访问检查</span></span><br><span class="line">       dc.setAccessible(<span class="keyword">true</span>);</span><br><span class="line">       Staff staff = (Staff) dc.newInstance(<span class="string">"李四"</span>);</span><br><span class="line">       System.out.println(staff);</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">method02</span><span class="params">()</span> <span class="keyword">throws</span> NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException </span>&#123;</span><br><span class="line">       <span class="comment">//获取Class对象</span></span><br><span class="line">       Class clazz = Staff<span class="class">.<span class="keyword">class</span></span>;</span><br><span class="line">       <span class="comment">//获取公共的无参构造</span></span><br><span class="line">       Constructor cs = clazz.getConstructor();</span><br><span class="line">       <span class="comment">//使用对象</span></span><br><span class="line">       Staff staff = (Staff) cs.newInstance();</span><br><span class="line">       System.out.println(staff);</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">method01</span><span class="params">()</span> <span class="keyword">throws</span> NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException </span>&#123;</span><br><span class="line">       <span class="comment">//获取Class对象</span></span><br><span class="line">       Class clazz = Staff<span class="class">.<span class="keyword">class</span></span>;</span><br><span class="line">       <span class="comment">//获取构造方法 有参</span></span><br><span class="line">       Constructor cs = clazz.getConstructor(String<span class="class">.<span class="keyword">class</span>, <span class="title">String</span>.<span class="title">class</span>)</span>;</span><br><span class="line">       Staff sta1 = (Staff) cs.newInstance(<span class="string">"六四"</span>, <span class="string">"14"</span>);</span><br><span class="line">       <span class="comment">//        System.out.println(sta1);</span></span><br><span class="line">   &#125;</span><br><span class="line">&gt;&#125;</span><br></pre></td></tr></table></figure>
-
-
-</blockquote>
-<h5 id="44-3-3-Clas的成员变量-Field对象"><a href="#44-3-3-Clas的成员变量-Field对象" class="headerlink" title="44.3.3 Clas的成员变量 - Field对象"></a>44.3.3 Clas的成员变量 - Field对象</h5><blockquote>
-<p>方法分类：</p>
-<table>
-<thead>
-<tr>
-<th>方法名</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>Field[] getFields()</td>
-<td>返回所有公共成员变量对象的数组</td>
-</tr>
-<tr>
-<td>Field[] getDeclaredFields()</td>
-<td>返回所有成员变量对象的数组</td>
-</tr>
-<tr>
-<td>Field getField(String name)</td>
-<td>返回单个公共成员变量对象</td>
-</tr>
-<tr>
-<td>Field getDeclaredField(String name)</td>
-<td>返回单个成员变量对象</td>
-</tr>
-</tbody></table>
-<p>示例：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ClassFieldDemo</span> </span>&#123;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> NoSuchFieldException, IllegalAccessException </span>&#123;</span><br><span class="line">&gt;<span class="comment">//        method01();</span></span><br><span class="line">&gt;<span class="comment">//        method02();</span></span><br><span class="line">&gt;<span class="comment">//        method03();</span></span><br><span class="line">&gt;<span class="comment">//        mothod04();</span></span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">mothod04</span><span class="params">()</span> </span>&#123;</span><br><span class="line">       <span class="comment">//获取Class对象</span></span><br><span class="line">       Class&lt;Staff&gt; clazz = Staff<span class="class">.<span class="keyword">class</span></span>;</span><br><span class="line">       <span class="comment">//获取所有成员变量数组对象</span></span><br><span class="line">       Field[] declaredFields = clazz.getDeclaredFields();</span><br><span class="line">       System.out.println(Arrays.toString(declaredFields));</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">method03</span><span class="params">()</span> </span>&#123;</span><br><span class="line">       <span class="comment">//获取Class对象</span></span><br><span class="line">       Class&lt;Staff&gt; clazz = Staff<span class="class">.<span class="keyword">class</span></span>;</span><br><span class="line">       <span class="comment">//获取所有公共成员变量对象的数组</span></span><br><span class="line">       Field[] fields = clazz.getFields();</span><br><span class="line">       System.out.println(Arrays.toString(fields));</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">method02</span><span class="params">()</span> <span class="keyword">throws</span> NoSuchFieldException </span>&#123;</span><br><span class="line">       <span class="comment">//获取Class对象</span></span><br><span class="line">       Class&lt;Staff&gt; clazz = Staff<span class="class">.<span class="keyword">class</span></span>;</span><br><span class="line">       <span class="comment">//获取私有成员变量</span></span><br><span class="line">       Field field = clazz.getDeclaredField(<span class="string">"name"</span>);</span><br><span class="line">       System.out.println(field);</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">method01</span><span class="params">()</span> <span class="keyword">throws</span> NoSuchFieldException </span>&#123;</span><br><span class="line">       <span class="comment">//获取Class对象</span></span><br><span class="line">       Class&lt;Staff&gt; clazz = Staff<span class="class">.<span class="keyword">class</span></span>;</span><br><span class="line">       <span class="comment">//获取的成员变量必须是真实存在的</span></span><br><span class="line">       <span class="comment">//且必须是public修饰的</span></span><br><span class="line">       <span class="comment">//获取name的成员变量</span></span><br><span class="line">       Field field = clazz.getField(<span class="string">"sex"</span>);</span><br><span class="line">       System.out.println(field);</span><br><span class="line">   &#125;</span><br><span class="line">&gt;&#125;</span><br></pre></td></tr></table></figure>
-
-
-</blockquote>
-<h5 id="44-3-4-Class的Field对象进行赋值并使用"><a href="#44-3-4-Class的Field对象进行赋值并使用" class="headerlink" title="44.3.4 Class的Field对象进行赋值并使用"></a>44.3.4 Class的Field对象进行赋值并使用</h5><blockquote>
-<p>方法介绍</p>
-<table>
-<thead>
-<tr>
-<th>方法名</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>void set(Object obj, Object value)</td>
-<td>赋值</td>
-</tr>
-<tr>
-<td>Object get(Object obj)</td>
-<td>获取值</td>
-</tr>
-</tbody></table>
-<p>示例:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&gt;public class ClassFieldSetDemo &#123;</span><br><span class="line">   public static void main(String[] args) throws NoSuchFieldException, IllegalAccessException, InstantiationException &#123;</span><br><span class="line">       </span><br><span class="line">       &#x2F;&#x2F;获取Class对象</span><br><span class="line">       Class clazz &#x3D; Staff.class;</span><br><span class="line">       &#x2F;&#x2F;获取成员变量</span><br><span class="line">       Field field &#x3D; clazz.getDeclaredField(&quot;sex&quot;);</span><br><span class="line">       &#x2F;&#x2F;避免访问</span><br><span class="line">       field.setAccessible(true);</span><br><span class="line">       &#x2F;&#x2F;获取成员对象</span><br><span class="line">       Staff staff &#x3D; (Staff)clazz.newInstance();</span><br><span class="line">&gt;&#x2F;&#x2F;        Staff o &#x3D; (Staff)df.get(staff);</span><br><span class="line">       &#x2F;&#x2F;设置成员变量</span><br><span class="line">       field.set(staff,&quot;女&quot;);</span><br><span class="line">       &#x2F;&#x2F;获取成员变量</span><br><span class="line">       String  sex &#x3D;(String) field.get(staff);</span><br><span class="line">       System.out.println(sex);</span><br><span class="line">   &#125;</span><br><span class="line">&gt;&#125;</span><br></pre></td></tr></table></figure>
-
-
-</blockquote>
-<h5 id="44-3-4-Class的调用成员方法"><a href="#44-3-4-Class的调用成员方法" class="headerlink" title="44.3.4 Class的调用成员方法"></a>44.3.4 Class的调用成员方法</h5><blockquote>
-<p>方法分类</p>
-<table>
-<thead>
-<tr>
-<th>方法名</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>Method[] getMethods()</td>
-<td>返回所有公共成员方法对象的数组，包括继承的</td>
-</tr>
-<tr>
-<td>Method[] getDeclaredMethods()</td>
-<td>返回所有成员方法对象的数组，不包括继承的</td>
-</tr>
-<tr>
-<td>Method getMethod(String name, Class&lt;?&gt;… parameterTypes)</td>
-<td>返回单个公共成员方法对象</td>
-</tr>
-<tr>
-<td>Method getDeclaredMethod(String name, Class&lt;?&gt;… parameterTypes)</td>
-<td>返回单个成员方法对象</td>
-</tr>
-</tbody></table>
-<p>示例：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ClassGetMethodDemo</span> </span>&#123;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> NoSuchMethodException </span>&#123;</span><br><span class="line">&gt;<span class="comment">//        method01();</span></span><br><span class="line">&gt;<span class="comment">//        method02();</span></span><br><span class="line">   &#125;</span><br><span class="line">   <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">method02</span><span class="params">()</span> <span class="keyword">throws</span> NoSuchMethodException </span>&#123;</span><br><span class="line"></span><br><span class="line">       <span class="comment">//创建Class对象</span></span><br><span class="line">       Class&lt;Staff&gt; clazz = Staff<span class="class">.<span class="keyword">class</span></span>;</span><br><span class="line">       <span class="comment">//获取方法method02</span></span><br><span class="line">       Method method02 = clazz.getDeclaredMethod(<span class="string">"method02"</span>);</span><br><span class="line">       System.out.println(method02);</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">method01</span><span class="params">()</span> <span class="keyword">throws</span> NoSuchMethodException </span>&#123;</span><br><span class="line">       <span class="comment">//创建Class对象</span></span><br><span class="line">       Class&lt;Staff&gt; clazz = Staff<span class="class">.<span class="keyword">class</span></span>;</span><br><span class="line">       <span class="comment">//获取成员方法method01</span></span><br><span class="line">       Method method01 = clazz.getMethod(<span class="string">"method01"</span>);</span><br><span class="line">       System.out.println(method01);</span><br><span class="line">   &#125;</span><br><span class="line">&gt;&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p><strong>成员方法使用：</strong></p>
-<p>方法介绍</p>
-<table>
-<thead>
-<tr>
-<th>方法名</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>Object invoke(Object obj, Object… args)</td>
-<td>运行方法</td>
-</tr>
-</tbody></table>
-<p>参数一: 用obj对象调用该方法</p>
-<p>参数二: 调用方法的传递的参数(如果没有就不写)</p>
-<p>返回值: 方法的返回值(如果没有就不写)</p>
-<p>示例：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ClassMethodUser</span> </span>&#123;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> NoSuchMethodException, IllegalAccessException, InstantiationException, InvocationTargetException </span>&#123;</span><br><span class="line">       <span class="comment">//创建Class对象</span></span><br><span class="line">       Class clazz = Staff<span class="class">.<span class="keyword">class</span></span>;</span><br><span class="line">       <span class="comment">//构造成员方法</span></span><br><span class="line">       Constructor dc = clazz.getDeclaredConstructor();</span><br><span class="line">       <span class="comment">//避免访问</span></span><br><span class="line">       dc.setAccessible(<span class="keyword">true</span>);</span><br><span class="line">       <span class="comment">//调用方法</span></span><br><span class="line">       Method method02 = clazz.getDeclaredMethod(<span class="string">"method02"</span>);</span><br><span class="line">       <span class="comment">//避免访问</span></span><br><span class="line">       method02.setAccessible(<span class="keyword">true</span>);</span><br><span class="line">       <span class="comment">//创建Staff对象</span></span><br><span class="line">       Staff staff = (Staff) dc.newInstance();</span><br><span class="line">       method02.invoke(staff);</span><br><span class="line">   &#125;</span><br><span class="line">&gt;&#125;</span><br></pre></td></tr></table></figure>
-
-
-</blockquote>
-<h4 id="44-4-注意事项"><a href="#44-4-注意事项" class="headerlink" title="44.4 注意事项"></a>44.4 注意事项</h4><blockquote>
-<ul>
-<li>调用私有成员或者私有方法，需要添加 <code>T setAccessible(true);</code>语句，暴力破解</li>
-<li>创建Class后，需要创建成员构造方法</li>
-<li>不能直接使用Class对象直接创建成员对象,需要创建构造方法后，构造方法对象进行构造</li>
-</ul>
-</blockquote>
-
-      
-      <!-- 打赏 -->
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2021/10/07/DAY23_%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8%E5%92%8C%E5%8F%8D%E5%B0%84/" data-id="ckvfda19i000ar0uefcyr7ug9"
+      <a data-url="http://yoursite.com/2021/10/13/Day22_%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" data-id="ckvno4lj9001qggue9tzf7o42"
         class="article-share-link">分享</a>
         
       

@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    Spring入门 |  ONE PEAC
+  </title>
+  <meta name="generator" content="hexo-theme-yilia-plus">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+<script src="/js/pace.min.js"></script>
+
+
+  
+
+  
+
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    <main class="content">
+      <section class="outer">
+  <article id="post-day01_Spring" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  Spring入门
+</h1>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2021/11/06/day01_Spring/" class="article-date">
+  <time datetime="2021-11-06T10:32:19.000Z" itemprop="datePublished">2021-11-06</time>
+</a>
+      
+      
+      
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">2.2k字</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">10分钟</span>
+        </span>
+    </span>
+</div>
+
+      
+    </div>
+    
+
+    
+    
+    <div class="tocbot"></div>
+
+
+
+
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h3 id="Spring"><a href="#Spring" class="headerlink" title="Spring"></a>Spring</h3><h4 id="1-初识Spring技术"><a href="#1-初识Spring技术" class="headerlink" title="1.初识Spring技术"></a>1.初识Spring技术</h4><blockquote>
+<p>简化开发：降低企业级开发的复杂性</p>
+<ul>
+<li>IOC（反转控制）</li>
+<li>AOP（面向切面编程）<ul>
+<li>事务处理</li>
+</ul>
+</li>
+</ul>
+<p>框架整合：高效整合其他技术，提高企业级应用开发与运行效率</p>
+<ul>
+<li>MyBatis</li>
+<li>MyBatis-plus</li>
+<li>Struts</li>
+<li>Struts2</li>
+<li>Hibernate</li>
+</ul>
+<p>Spring Framework</p>
+<p>Spring Boot</p>
+<p>Spring Cloud</p>
+</blockquote>
+<h4 id="2-Spring-Framework技术"><a href="#2-Spring-Framework技术" class="headerlink" title="2. Spring Framework技术"></a>2. Spring Framework技术</h4><blockquote>
+<p>Spring Framework的架构 ：是Spring生态的最基本的项目，是其他的框架基础</p>
+<ul>
+<li>Data Access：数据访问</li>
+<li>Data Integration：数据集成</li>
+</ul>
+<ul>
+<li>Web：web开发</li>
+</ul>
+<ul>
+<li>AOP:面向切面编程</li>
+<li>Aspects：AOP思想实现</li>
+</ul>
+<ul>
+<li>Core Container：核心容器</li>
+</ul>
+<ul>
+<li>Test:单元测试与集成测试</li>
+</ul>
+</blockquote>
+<h4 id="3-Spring-Framework的核心概念"><a href="#3-Spring-Framework的核心概念" class="headerlink" title="3. Spring Framework的核心概念"></a>3. Spring Framework的核心概念</h4><blockquote>
+<p><strong>IoC:控制反转</strong></p>
+<ul>
+<li>使用对象时，主动new产生对象转换为由外部提供对象，此过程中对象创建控制权由程序转移到外部</li>
+</ul>
+<p><strong>IoC容器</strong></p>
+<ul>
+<li>Spring提供了一个容器，称之为IoC容器，用来充当IoC思想中的“外部”</li>
+</ul>
+<p><strong>Bean</strong></p>
+<ul>
+<li>IoC容器负责对象的创建、初始化等一系列工作，被创建或被管理的对象在IoC容器中统称为Bean</li>
+</ul>
+</blockquote>
+<h4 id="4-IoC的使用"><a href="#4-IoC的使用" class="headerlink" title="4. IoC的使用"></a>4. IoC的使用</h4><blockquote>
+<ul>
+<li><p>通过pom.xml导入Spring坐标</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">--Spring-context</span> 依赖坐标 <span class="attr">--</span>&gt;</span>  </span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-context<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>5.2.10.RELEASE <span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>IoC容器通过配置得知需要管理的对象</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"bookDao"</span> <span class="attr">class</span>=<span class="string">"com.ff.dao.impl.BookDaoImpl"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"bookService"</span> <span class="attr">class</span>=<span class="string">"com.ff.Service.Impl.BookServiceImpl"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>被管理的对象交给IoC容器，通过接口获得IoC容器</p>
+</li>
+<li><p>IoC容器从接口方法获得Bean</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">app2</span><span class="params">()</span></span>&#123;</span><br><span class="line">      <span class="comment">//获取Ioc容器</span></span><br><span class="line">       ApplicationContext ca = <span class="keyword">new</span> ClassPathXmlApplicationContext(<span class="string">"applicationContext.xml"</span>);</span><br><span class="line">       <span class="comment">//获取Bean</span></span><br><span class="line">       BookService bookService = (BookService) ca.getBean(<span class="string">"bookService"</span>);</span><br><span class="line">       bookService.save();</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>管理Service和Dao</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//业务层</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BookServiceImpl</span>  <span class="keyword">implements</span> <span class="title">BookService</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> BookDao bookDao = <span class="keyword">new</span> BookDao();</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">save</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"book serivce save.."</span>);</span><br><span class="line">        bookDao.save();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//资源层</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BookDaoImpl</span> <span class="keyword">implements</span> <span class="title">BookDao</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">save</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"book Dao save.."</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</blockquote>
+<h4 id="5-DI的使用"><a href="#5-DI的使用" class="headerlink" title="5.DI的使用"></a>5.DI的使用</h4><blockquote>
+<ul>
+<li><p>基于IoC管理Bean</p>
+</li>
+<li><p>Service中不保留new形式创建的Dao对象</p>
+</li>
+<li><p>Service中的Dao通过提供的方法进入Service</p>
+</li>
+</ul>
+<ul>
+<li>配置Bean</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"bookDao"</span> <span class="attr">class</span>=<span class="string">"com.ff.dao.impl.BookDaoImpl"</span> <span class="attr">init-method</span>=<span class="string">"init"</span> <span class="attr">destroy-method</span>=<span class="string">"destory"</span>/&gt;</span></span><br><span class="line">&gt;<span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"bookService"</span> <span class="attr">class</span>=<span class="string">"com.ff.Service.Impl.BookServiceImpl"</span>&gt;</span></span><br><span class="line">       <span class="comment">&lt;!--配置Dao和Service的关系--&gt;</span></span><br><span class="line">      <span class="comment">&lt;!-- property 当前bean的属性</span></span><br><span class="line"><span class="comment">       name属性表示配置哪一个具体的属性</span></span><br><span class="line"><span class="comment">       ref表示参照哪一个bean--&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"bookDao"</span> <span class="attr">ref</span>=<span class="string">"bookDao"</span>/&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>管理Service和Dao</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">&gt;&#x2F;&#x2F;业务层</span><br><span class="line">&gt;public class BookServiceImpl  implements BookService &#123;</span><br><span class="line">   &#x2F;&#x2F;删除业务层使用new的方式创建对象</span><br><span class="line">   private BookDao bookDao ;</span><br><span class="line"></span><br><span class="line">   @Override</span><br><span class="line">   public void save() &#123;</span><br><span class="line">       System.out.println(&quot;book serivce save..&quot;);</span><br><span class="line">       bookDao.save();</span><br><span class="line">   &#125;</span><br><span class="line">   &#x2F;&#x2F;提供对应的set方法</span><br><span class="line">   public void setBookDao(BookDao bookDao)&#123;</span><br><span class="line">       this.bookDao &#x3D; bookDao;</span><br><span class="line">   &#125;</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line">&gt;&#x2F;&#x2F;资源层</span><br><span class="line">&gt;public class BookDaoImpl implements BookDao &#123;</span><br><span class="line"></span><br><span class="line">   @Override</span><br><span class="line">   public void save() &#123;</span><br><span class="line">       System.out.println(&quot;book Dao save..&quot;);</span><br><span class="line">   &#125;</span><br><span class="line">&gt;&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>Bean的作用范围：默认是单例     </p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt;scope="prototype"  通过属性scope   prtotype 非单例   singleton单例</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="tag">&lt;<span class="name">--name</span> 给<span class="attr">id</span>取别名   <span class="attr">name</span>里可以取多个 中间可以用 空格  逗号 分隔 <span class="attr">--</span>&gt;</span></span><br><span class="line">&gt;<span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"bookService"</span> <span class="attr">class</span>=<span class="string">"com.ff.Service.Impl.BookServiceImpl"</span> <span class="attr">name</span>=<span class="string">"bookService2 bookService3 bookService4"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>适合交给容器进行管理的bean<ul>
+<li>表现层</li>
+<li>业务层</li>
+<li>数据层</li>
+<li>工具对象</li>
+</ul>
+</li>
+<li>不适合交给容器管理的bean<ul>
+<li>实体类</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h4 id="6-静态工厂实例化Bean"><a href="#6-静态工厂实例化Bean" class="headerlink" title="6. 静态工厂实例化Bean"></a>6. 静态工厂实例化Bean</h4><blockquote>
+<ul>
+<li><p>创建一个工厂类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">OrderDaoFactory</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> OrderDao <span class="title">getOrderDao</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"order Dao Factory 。。。"</span>);</span><br><span class="line">        <span class="keyword">return</span>  <span class="keyword">new</span> OrderDaoImpl();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>配置Bean</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"orderDao"</span> <span class="attr">class</span>=<span class="string">"com.ff.factory.OrderDaoFactory"</span> <span class="attr">factory-method</span>=<span class="string">"getOrderDao"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</blockquote>
+<h4 id="7-实例化工厂实例化Bean"><a href="#7-实例化工厂实例化Bean" class="headerlink" title="7. 实例化工厂实例化Bean"></a>7. 实例化工厂实例化Bean</h4><blockquote>
+<ul>
+<li>创建一个工厂类</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserDaoFactory</span> </span>&#123;</span><br><span class="line">   <span class="function"><span class="keyword">public</span>  UserDao <span class="title">getUserDao</span><span class="params">()</span></span>&#123;</span><br><span class="line">       <span class="keyword">return</span>  <span class="keyword">new</span> UserDaoImpl();</span><br><span class="line">   &#125;</span><br><span class="line">&gt;&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>配置Bean</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"userDaoFactory"</span> <span class="attr">class</span>=<span class="string">"com.ff.factory.UserDaoFactory"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">--factory-method</span> 实现<span class="attr">Bean</span>的工厂方法    <span class="attr">factory-bean</span>的<span class="attr">id</span>名称 <span class="attr">--</span> &gt;</span></span><br><span class="line">&gt;<span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"userDao"</span> <span class="attr">factory-method</span>=<span class="string">"getUserDao"</span> <span class="attr">factory-bean</span>=<span class="string">"userDaoFactory"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+</blockquote>
+<h4 id="8-使用FactoryBean实例化"><a href="#8-使用FactoryBean实例化" class="headerlink" title="8. 使用FactoryBean实例化"></a>8. 使用FactoryBean实例化</h4><blockquote>
+<ul>
+<li>创建一个工厂类实现FactoryBean接口，重写方法</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserDaoFactoryBean</span> <span class="keyword">implements</span> <span class="title">FactoryBean</span>&lt;<span class="title">UserDao</span>&gt; </span>&#123;</span><br><span class="line">   <span class="comment">//代替原始实例工厂中创建对象的方法</span></span><br><span class="line">   <span class="meta">@Override</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> UserDao <span class="title">getObject</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">       <span class="keyword">return</span> <span class="keyword">new</span> UserDaoImpl();</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="comment">//传递需要实现类的字节码对象</span></span><br><span class="line">   <span class="meta">@Override</span></span><br><span class="line">   <span class="keyword">public</span> Class&lt;?&gt; getObjectType() &#123;</span><br><span class="line">       <span class="keyword">return</span> UserDao<span class="class">.<span class="keyword">class</span></span>;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="comment">/**</span></span><br><span class="line"><span class="comment">    * 选择是否是单例对象</span></span><br><span class="line"><span class="comment">    * true 单例  false 非单例</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">   <span class="meta">@Override</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isSingleton</span><span class="params">()</span> </span>&#123;</span><br><span class="line">       <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">   &#125;</span><br><span class="line">&gt;&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>配置Bean</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"userDaoFactoryBean"</span> <span class="attr">class</span>=<span class="string">"com.ff.factory.UserDaoFactoryBean"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+
+</blockquote>
+<h4 id="9-Bean的生命周期"><a href="#9-Bean的生命周期" class="headerlink" title="9. Bean的生命周期"></a>9. Bean的生命周期</h4><blockquote>
+<ul>
+<li>初始化容器</li>
+</ul>
+<ol>
+<li>创建对象（内存分配）</li>
+<li>执行构造方法</li>
+<li>执行属性注入（set操作）</li>
+<li>执行bean初始化方法</li>
+</ol>
+<ul>
+<li>使用bean</li>
+</ul>
+<ol>
+<li>执行业务操作</li>
+</ol>
+<ul>
+<li>关闭/销毁容器</li>
+</ul>
+<ol>
+<li>执行bean销毁方法</li>
+</ol>
+<h4 id="方式一："><a href="#方式一：" class="headerlink" title="方式一："></a><strong>方式一：</strong></h4><p><strong>创建开始\销毁：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Bean创建后</span></span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      System.out.println(<span class="string">"init...."</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">//Bean销毁前</span></span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">destory</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      System.out.println(<span class="string">"destory..."</span>);</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>配置bean：</strong></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"bookDao"</span> <span class="attr">class</span>=<span class="string">"com.ff.dao.impl.BookDaoImpl"</span> <span class="attr">init-method</span>=<span class="string">"init"</span> <span class="attr">destroy-method</span>=<span class="string">"destory"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>设置结束：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">  ClassPathXmlApplicationContext ioc = <span class="keyword">new</span> ClassPathXmlApplicationContext(<span class="string">"applicationContext.xml"</span>);</span><br><span class="line"><span class="comment">//暴力销毁，只能放在最后</span></span><br><span class="line">ioc.close();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 设置结束标记 ,位置没有关系</span></span><br><span class="line">ioc.registerShutdownHook();</span><br></pre></td></tr></table></figure>
+
+<h4 id="方式二："><a href="#方式二：" class="headerlink" title="方式二："></a><strong>方式二：</strong></h4><p><strong>实现Service实现InitializingBean, DisposableBean接口</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BookServiceImpl</span>  <span class="keyword">implements</span> <span class="title">BookService</span>, <span class="title">InitializingBean</span>, <span class="title">DisposableBean</span> </span>&#123;</span><br><span class="line">   <span class="comment">//删除业务层使用new的方式创建对象</span></span><br><span class="line">   <span class="keyword">private</span> BookDao bookDao;</span><br><span class="line"></span><br><span class="line">   <span class="meta">@Override</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">save</span><span class="params">()</span> </span>&#123;</span><br><span class="line">       System.out.println(<span class="string">"book serivce save.."</span>);</span><br><span class="line">       bookDao.save();</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="comment">//提供对应的set方法</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setBookDao</span><span class="params">(BookDao bookDao)</span></span>&#123;</span><br><span class="line">       <span class="keyword">this</span>.bookDao = bookDao;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="meta">@Override</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">destroy</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">       System.out.println(<span class="string">"service destroy"</span>);</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="meta">@Override</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">afterPropertiesSet</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">       System.out.println(<span class="string">"service  init"</span>);</span><br><span class="line">   &#125;</span><br><span class="line">&gt;&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+</blockquote>
+<h4 id="10-依赖注入方式"><a href="#10-依赖注入方式" class="headerlink" title="10. 依赖注入方式"></a>10. 依赖注入方式</h4><blockquote>
+<p><strong>注入方式：</strong></p>
+<ul>
+<li><p>普通方法(setter方法)</p>
+<ol>
+<li>简单类型</li>
+</ol>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"diDao"</span> <span class="attr">class</span>=<span class="string">"com.ff.dao.impl.DIDaoImpl"</span>/&gt;</span> </span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"diService"</span> <span class="attr">class</span>=<span class="string">"com.ff.Service.Impl.DIServiceImpl"</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--setter注入--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"diDao"</span> <span class="attr">ref</span>=<span class="string">"diDao"</span>/&gt;</span><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>引用类型</li>
+</ol>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"> <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"diDao"</span> <span class="attr">class</span>=<span class="string">"com.ff.dao.impl.DIDaoImpl"</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--setter 引用注入--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"num"</span> <span class="attr">value</span>=<span class="string">"100"</span>/&gt;</span></span><br><span class="line">    	<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"str.."</span> <span class="attr">value</span>=<span class="string">"setter引用"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"diService"</span> <span class="attr">class</span>=<span class="string">"com.ff.Service.Impl.DIServiceImpl"</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--setter注入--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"diDao"</span> <span class="attr">ref</span>=<span class="string">"diDao"</span>/&gt;</span><span class="tag">&lt;/<span class="name">bean</span>&gt;</span>      </span><br></pre></td></tr></table></figure>
+
+<p><strong>Service 和Dao</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DIServiceImpl</span> <span class="keyword">implements</span> <span class="title">DIService</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> DIDao diDao;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//提供setter方法 注入</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setDiDao</span><span class="params">(DIDao diDao)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.diDao = diDao;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">save</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        diDao.save();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DIDaoImpl</span> <span class="keyword">implements</span> <span class="title">DIDao</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span>  <span class="keyword">int</span> num;</span><br><span class="line">    <span class="keyword">private</span> String str;</span><br><span class="line"></span><br><span class="line"><span class="comment">//    setter 的set</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setNum</span><span class="params">(<span class="keyword">int</span> num)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.num = num;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setStr</span><span class="params">(String str)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.str = str;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">save</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"DI Dao save..."</span>);</span><br><span class="line">        System.out.println(<span class="string">"num = "</span> + num);</span><br><span class="line">        System.out.println(<span class="string">"str = "</span> + str);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+<ul>
+<li><p>构造方法</p>
+<ol>
+<li>简单类型</li>
+</ol>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"diDao"</span> <span class="attr">class</span>=<span class="string">"com.ff.dao.impl.DIDaoImpl"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"diService"</span> <span class="attr">class</span>=<span class="string">"com.ff.Service.Impl.DIServiceImpl"</span>&gt;</span></span><br><span class="line">      <span class="comment">&lt;!--构造方法 简单注入--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">constructor-arg</span> <span class="attr">name</span>=<span class="string">"diDao"</span> <span class="attr">ref</span>=<span class="string">"diDao"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+<ol start="2">
+<li><p>引用类型</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"diDao"</span> <span class="attr">class</span>=<span class="string">"com.ff.dao.impl.DIDaoImpl"</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!--构造方法 引入注入--&gt;</span></span><br><span class="line">       <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">       name 根据形参名称</span></span><br><span class="line"><span class="comment">       type 根据参数数据类型</span></span><br><span class="line"><span class="comment">       index 根据形参的排序</span></span><br><span class="line"><span class="comment">       --&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">constructor-arg</span> <span class="attr">name</span>=<span class="string">"num"</span> <span class="attr">value</span>=<span class="string">"100"</span> /&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">constructor-arg</span> <span class="attr">name</span>=<span class="string">"str"</span> <span class="attr">value</span>=<span class="string">"引入注入。。"</span> /&gt;</span></span><br><span class="line"> <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"diService"</span> <span class="attr">class</span>=<span class="string">"com.ff.Service.Impl.DIServiceImpl"</span>&gt;</span></span><br><span class="line">     <span class="comment">&lt;!--构造方法 简单注入--&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">constructor-arg</span> <span class="attr">name</span>=<span class="string">"diDao"</span> <span class="attr">ref</span>=<span class="string">"diDao"</span>/&gt;</span></span><br><span class="line"> <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p> <strong>Service 和Dao</strong></p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DIDaoImpl</span> <span class="keyword">implements</span> <span class="title">DIDao</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span>  <span class="keyword">int</span> num;</span><br><span class="line">    <span class="keyword">private</span> String str;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 构造方法的引入注入</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">DIDaoImpl</span><span class="params">(<span class="keyword">int</span> num, String str)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.num = num;</span><br><span class="line">        <span class="keyword">this</span>.str = str;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">save</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"DI Dao save..."</span>);</span><br><span class="line">        System.out.println(<span class="string">"num = "</span> + num);</span><br><span class="line">        System.out.println(<span class="string">"str = "</span> + str);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DIServiceImpl</span> <span class="keyword">implements</span> <span class="title">DIService</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> DIDao diDao;</span><br><span class="line"></span><br><span class="line">   </span><br><span class="line">    <span class="comment">//构造方式注入</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">DIServiceImpl</span><span class="params">(DIDao diDao)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.diDao = diDao;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">save</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        diDao.save();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+</blockquote>
+<h4 id="11-依赖自动装配"><a href="#11-依赖自动装配" class="headerlink" title="11. 依赖自动装配"></a>11. 依赖自动装配</h4><blockquote>
+<p>自动装配：根据bean所依赖的资源在容器中自动查找并注入到bean中的过程</p>
+<p>方式： bean标签autowire配置</p>
+<ul>
+<li>按类型（常用） autowire=”byType”</li>
+<li>按名称                 autowire=”byName”</li>
+<li>按构造方法         autowire=”constructor”</li>
+</ul>
+<p>自动装配的注意</p>
+<ol>
+<li>强制依赖使用构造器进行，使用setter注入有概率不进行注入导致null对象出现</li>
+<li>可选依赖使用setter注入进行，灵活性强</li>
+<li>Spring框架倡导使用构造器，第三方框架内部大多数采用构造器注入的形式进行数据初始化，相对严谨</li>
+<li>如果有必要可以两者同时使用，使用构造器注入完成强制依赖的注入，使用setter注入完成可选依赖的注入</li>
+<li>实际开发过程中还要根据实际情况分析，如果受控对象没有提供setter方法就必须使用构造器注入</li>
+<li><strong>==自己开发的模块推荐使用setter注入==</strong></li>
+</ol>
+</blockquote>
+<h4 id="12-集合注入"><a href="#12-集合注入" class="headerlink" title="12. 集合注入"></a>12. 集合注入</h4><blockquote>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--数组--&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"array"</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">array</span>&gt;</span></span><br><span class="line">               <span class="tag">&lt;<span class="name">value</span>&gt;</span>1<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">               <span class="tag">&lt;<span class="name">value</span>&gt;</span>2<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">               <span class="tag">&lt;<span class="name">value</span>&gt;</span>3<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;/<span class="name">array</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">       <span class="comment">&lt;!--集合--&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"list"</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">list</span>&gt;</span></span><br><span class="line">               <span class="tag">&lt;<span class="name">value</span>&gt;</span>1<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">               <span class="tag">&lt;<span class="name">value</span>&gt;</span>2<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;/<span class="name">list</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">       <span class="comment">&lt;!--集合--&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"map"</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">map</span>&gt;</span></span><br><span class="line">               <span class="tag">&lt;<span class="name">entry</span> <span class="attr">key</span>=<span class="string">"a"</span> <span class="attr">value</span>=<span class="string">"1"</span>/&gt;</span></span><br><span class="line">               <span class="tag">&lt;<span class="name">entry</span> <span class="attr">key</span>=<span class="string">"b"</span> <span class="attr">value</span>=<span class="string">"2"</span>/&gt;</span></span><br><span class="line">               <span class="tag">&lt;<span class="name">entry</span> <span class="attr">key</span>=<span class="string">"c"</span> <span class="attr">value</span>=<span class="string">"3"</span>/&gt;</span></span><br><span class="line">           <span class="tag">&lt;/<span class="name">map</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">       <span class="comment">&lt;!--配置文件--&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"properties"</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">props</span>&gt;</span></span><br><span class="line">               <span class="tag">&lt;<span class="name">prop</span> <span class="attr">key</span>=<span class="string">"a"</span>&gt;</span>1<span class="tag">&lt;/<span class="name">prop</span>&gt;</span></span><br><span class="line">               <span class="tag">&lt;<span class="name">prop</span> <span class="attr">key</span>=<span class="string">"b"</span>&gt;</span>2<span class="tag">&lt;/<span class="name">prop</span>&gt;</span></span><br><span class="line">               <span class="tag">&lt;<span class="name">prop</span> <span class="attr">key</span>=<span class="string">"c"</span>&gt;</span>3<span class="tag">&lt;/<span class="name">prop</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;/<span class="name">props</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+</blockquote>
+
+      
+      <!-- 打赏 -->
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2021/11/06/day01_Spring/" data-id="ckvno4lio0011ggue9re9g3wn"
+        class="article-share-link">分享</a>
+        
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Spring/" rel="tag">Spring</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+  
+  <nav class="article-nav">
+    
+    
+      <a href="/2021/10/31/Day10_JSP/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">JSP</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+  
+<!-- valine评论 -->
+<div id="vcomments-box">
+    <div id="vcomments">
+    </div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js'></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        notify: false,
+        verify: '',
+        app_id: '',
+        app_key: '',
+        path: window.location.pathname,
+        avatar: 'mp',
+        placeholder: '给我的文章加点评论吧~',
+        recordIP: true
+    });
+    const infoEle = document.querySelector('#vcomments .info');
+    if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+        infoEle.childNodes.forEach(function (item) {
+            item.parentNode.removeChild(item);
+        });
+    }
+</script>
+<style>
+    #vcomments-box {
+        padding: 5px 30px;
+    }
+
+    @media screen and (max-width: 800px) {
+        #vcomments-box {
+            padding: 5px 0px;
+        }
+    }
+
+    #vcomments-box #vcomments {
+        background-color: #fff;
+    }
+
+    .v .vlist .vcard .vh {
+        padding-right: 20px;
+    }
+
+    .v .vlist .vcard {
+        padding-left: 10px;
+    }
+</style>
+
+  
+
+  
+  
+  
+
+</article>
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul class="list-inline">
+      <li>
+        &copy;
+        2020-2021
+        ff
+      </li>
+      <li>
+        
+          Powered by
+        
+        
+        <a href="https://hexo.io" target="_blank">Hexo</a> Theme <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul class="list-inline">
+      <li>
+        
+        
+        <ul class="list-inline">
+  <li>PV:<span id="busuanzi_value_page_pv"></span></li>
+  <li>UV:<span id="busuanzi_value_site_uv"></span></li>
+</ul>
+        
+      </li>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+    <div class="to_top">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+      </div>
+    </main>
+      <aside class="sidebar">
+        <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="ONE PEAC"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/2019/about">关于我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜索">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+      </aside>
+      <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+      
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script>
+  try {
+    var typed = new Typed("#subtitle", {
+    strings: ['面朝大海，春暖花开','愿你一生努力，一生被爱','想要的都拥有，得不到的都释怀'],
+    startDelay: 0,
+    typeSpeed: 200,
+    loop: true,
+    backSpeed: 100,
+    showCursor: true
+    });
+  } catch (err) {
+  }
+  
+</script>
+
+
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer:'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto',
+    onClick: (e) => {
+      $('.toc-link').removeClass('is-active-link');
+      $(`a[href=${e.target.hash}]`).addClass('is-active-link');
+      $(e.target.hash).scrollIntoView();
+      return false;
+    }
+  });
+</script>
+
+
+<script>
+  var ayerConfig = {
+    mathjax: false
+  }
+</script>
+
+
+<script src="/js/ayer.js"></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+
+
+
+<script type="text/javascript" src="https://js.users.51.la/20544303.js"></script>
+  </div>
+</body>
+
+</html>
