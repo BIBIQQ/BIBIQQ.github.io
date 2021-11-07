@@ -76,6 +76,276 @@
     
     
     
+    <article id="post-day02_注解开发" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2021/11/07/day02_%E6%B3%A8%E8%A7%A3%E5%BC%80%E5%8F%91/"
+    >Spring注解开发</a
+  >
+</h2>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2021/11/07/day02_%E6%B3%A8%E8%A7%A3%E5%BC%80%E5%8F%91/" class="article-date">
+  <time datetime="2021-11-07T13:16:19.000Z" itemprop="datePublished">2021-11-07</time>
+</a>
+      
+      
+      
+      
+    </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h3 id="Spring-注解开发"><a href="#Spring-注解开发" class="headerlink" title="Spring 注解开发"></a>Spring 注解开发</h3><h4 id="1-数据源对象管理"><a href="#1-数据源对象管理" class="headerlink" title="1.数据源对象管理"></a>1.数据源对象管理</h4><h5 id="1-1-管理第三方资源–druid"><a href="#1-1-管理第三方资源–druid" class="headerlink" title="1.1 管理第三方资源–druid"></a>1.1 管理第三方资源–druid</h5><blockquote>
+<ul>
+<li>导入依赖坐标</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.alibaba<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>druid<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.1.16<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>配置文件配置</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"dataSource"</span> <span class="attr">class</span>=<span class="string">"com.alibaba.druid.pool.DruidDataSource"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"driverClassName"</span> <span class="attr">value</span>=<span class="string">"com.mysql.jdbc.Driver"</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"url"</span> <span class="attr">value</span>=<span class="string">"jdbc:mysq:///spring_dao"</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"username"</span> <span class="attr">value</span>=<span class="string">"root"</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"password"</span> <span class="attr">value</span>=<span class="string">"root"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>查找驱动依赖网站：<a href="https://mvnrepository.com/" target="_blank" rel="noopener">https://mvnrepository.com/</a></p>
+</blockquote>
+<h5 id="1-2-未知第三方资源–c3p0"><a href="#1-2-未知第三方资源–c3p0" class="headerlink" title="1.2 未知第三方资源–c3p0"></a>1.2 未知第三方资源–c3p0</h5><blockquote>
+<ul>
+<li>导入依赖坐标</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="comment">&lt;!-- https://mvnrepository.com/artifact/c3p0/c3p0 --&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>c3p0<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>c3p0<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">version</span>&gt;</span>0.9.1.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>配置文件配置</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="comment">&lt;!--导入路径 --&gt;</span></span><br><span class="line">&gt;<span class="tag">&lt;<span class="name">bean</span>  <span class="attr">id</span>=<span class="string">"dataSoure"</span> <span class="attr">class</span>=<span class="string">"com.mchange.v2.c3p0.ComboPooledDataSource"</span> &gt;</span></span><br><span class="line">   		<span class="comment">&lt;!--基本配置 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"driverClass"</span> <span class="attr">value</span>=<span class="string">"com.mysql.jdbc.Driver"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"jdbcUrl"</span> <span class="attr">value</span>=<span class="string">"dbc:mysq:///spring_dao"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"user"</span> <span class="attr">value</span>=<span class="string">"root"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"password"</span> <span class="attr">value</span>=<span class="string">"root"</span>/&gt;</span></span><br><span class="line">&gt;<span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</blockquote>
+<h4 id="2-加载properties文件"><a href="#2-加载properties文件" class="headerlink" title="2. 加载properties文件"></a>2. 加载properties文件</h4><blockquote>
+<ul>
+<li>新建*.properties文件</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="comment">&lt;!--对应那个资源，在命名前增加前缀，避免和系统属性名重复--&gt;</span></span><br><span class="line">&gt;jdbc.driver=com.mysql.jdbc.Driver</span><br><span class="line">&gt;jdbc.url=jdbc:mysq:///spring_dao?useSSL = false<span class="symbol">&amp;amp;</span>characterEncoding=utf-8</span><br><span class="line">&gt;jdbc.username=root</span><br><span class="line">&gt;jdbc.password=root</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>开辟新的命名空间   （尽量使用自动生成的，不要自己修改）</li>
+</ul>
+<p><strong>命名空间</strong>：封装对应标签的包</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">"http://www.springframework.org/schema/beans"</span></span></span><br><span class="line"><span class="tag">      <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></span></span><br><span class="line">      &lt;!--新增  复制xmlns 设置命名空间，beans修改成context--&gt; </span><br><span class="line">      xmlns:context="http://www.springframework.org/schema/context"</span><br><span class="line">      xsi:schemaLocation="</span><br><span class="line">       http://www.springframework.org/schema/beans</span><br><span class="line">       http://www.springframework.org/schema/beans/spring-beans.xsd</span><br><span class="line"> 		<span class="comment">&lt;!--新增  复制上面两个 ，将beans修改成context--&gt;</span> </span><br><span class="line">       http://www.springframework.org/schema/context</span><br><span class="line">       http://www.springframework.org/schema/context/spring-context.xsd"&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>加载properties文件</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="tag">&lt;<span class="name">context:property-placeholder</span> <span class="attr">location</span>=<span class="string">"jdbc.properties"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>使用属性占位符${}读取properties文件</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">"com.alibaba.druid.pool.DruidDataSource"</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"driverClassName"</span> <span class="attr">value</span>=<span class="string">"$&#123;jdbc.driver&#125;"</span>/&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"url"</span> <span class="attr">value</span>=<span class="string">"$&#123;jdbc.url&#125;"</span>/&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"username"</span> <span class="attr">value</span>=<span class="string">"$&#123;jdbc.username&#125;"</span>/&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"password"</span> <span class="attr">value</span>=<span class="string">"$&#123;jdbc.password&#125;"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>注意事项：</strong></p>
+<ul>
+<li>系统属性大于properties参数等级</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="comment">&lt;!--解决方法--&gt;</span></span><br><span class="line">&gt;<span class="comment">&lt;!--增加system-properties-mode 属性  定义properties文件为系统属性 --&gt;</span></span><br><span class="line">&gt;<span class="tag">&lt;<span class="name">context:property-placeholder</span> <span class="attr">location</span>=<span class="string">"jdbc.properties"</span>  <span class="attr">system-properties-mode</span>=<span class="string">"NEVER"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>需要加载多个properties文件格式</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="comment">&lt;!--加载指定properties文件--&gt;</span></span><br><span class="line">&gt;<span class="tag">&lt;<span class="name">context:property-placeholder</span> <span class="attr">location</span>=<span class="string">"jdbc.properties,jdbc2.properties"</span>  <span class="attr">system-properties-mode</span>=<span class="string">"NEVER"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">&gt;<span class="comment">&lt;!--加载properties文件格式--&gt;</span></span><br><span class="line">&gt;<span class="tag">&lt;<span class="name">context:property-placeholder</span> <span class="attr">location</span>=<span class="string">"*.properties"</span>  <span class="attr">system-properties-mode</span>=<span class="string">"NEVER"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">&gt;<span class="comment">&lt;!--classpath:   当前文件    classpath*:  当前文件和依赖的jar文件都可以读取--&gt;</span></span><br><span class="line">&gt;<span class="comment">&lt;!--加载properties标准格式--&gt;</span></span><br><span class="line">&gt;<span class="tag">&lt;<span class="name">context:property-placeholder</span> <span class="attr">location</span>=<span class="string">"classpath:*.properties"</span>  <span class="attr">system-properties-mode</span>=<span class="string">"NEVER"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+</blockquote>
+<h4 id="3-容器"><a href="#3-容器" class="headerlink" title="3. 容器"></a>3. 容器</h4><h5 id="3-1-创建容器"><a href="#3-1-创建容器" class="headerlink" title="3.1  创建容器"></a>3.1  <strong>创建容器</strong></h5><blockquote>
+<p>使用绝对路径获取配置文件</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ApplicationContext ios = <span class="keyword">new</span> FileSystemXmlApplicationContext(<span class="string">"E:\\HEIMA\\Demo\\Spring\\Spring02_Other\\src\\main\\resources\\applicationContext.xml"</span>);</span><br></pre></td></tr></table></figure>
+
+<p>相对路径获取配置文件</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ApplicationContext ios = <span class="keyword">new</span> ClassPathXmlApplicationContext(<span class="string">"applicationContext.xml"</span>);</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h5 id="3-2-获取bean"><a href="#3-2-获取bean" class="headerlink" title="3.2  获取bean"></a>3.2  获取bean</h5><blockquote>
+<ul>
+<li>使用bean名称</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt;BookDao bookDao = (BookDao) ios.getBean(<span class="string">"bookDao"</span>);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>使用bean名称并获取指定类型</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">BookDao bookDao = (BookDao) ios.getBean(<span class="string">"bookDao"</span>,BookDao<span class="class">.<span class="keyword">class</span>)</span>;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>使用bean类型获取</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt;BookDao bookDao = (BookDao) ios.getBean(BookDao<span class="class">.<span class="keyword">class</span>)</span>;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h5 id="3-3-容器类层次结构"><a href="#3-3-容器类层次结构" class="headerlink" title="3.3  容器类层次结构"></a>3.3  容器类层次结构</h5><h5 id="3-4-BeanFactory"><a href="#3-4-BeanFactory" class="headerlink" title="3.4  BeanFactory"></a>3.4  BeanFactory</h5><blockquote>
+<ul>
+<li>所有容器的顶层接口</li>
+</ul>
+</blockquote>
+<h4 id="4-核心容器总结"><a href="#4-核心容器总结" class="headerlink" title="4. 核心容器总结"></a>4. 核心容器总结</h4><h4 id="5-注解开发"><a href="#5-注解开发" class="headerlink" title="5.注解开发"></a>5.注解开发</h4><h5 id="5-1-注解开发定义bean"><a href="#5-1-注解开发定义bean" class="headerlink" title="5.1 注解开发定义bean"></a>5.1 注解开发定义bean</h5><blockquote>
+<ul>
+<li>使用@Component定义Bean</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt;等同于 ： <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"bookDao"</span> <span class="attr">class</span>=<span class="string">"com.ff.dao.Impl.BookDaoImpl"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>Dao和Service</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="meta">@Component</span>(<span class="string">"userDao"</span>)</span><br><span class="line">&gt;<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserDaoImpl</span>  <span class="keyword">implements</span> <span class="title">UDao</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">   <span class="meta">@Override</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">save</span><span class="params">()</span> </span>&#123;</span><br><span class="line">       System.out.println(<span class="string">"user dao compnent..."</span>);</span><br><span class="line">   &#125;</span><br><span class="line">&gt;&#125;</span><br><span class="line"></span><br><span class="line">&gt;<span class="meta">@Component</span></span><br><span class="line">&gt;<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserServiceImpl</span> <span class="keyword">implements</span> <span class="title">UserService</span> </span>&#123;</span><br><span class="line">   <span class="keyword">private</span> UDao userDao;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setUserDao</span><span class="params">(UDao userDao)</span> </span>&#123;</span><br><span class="line">       <span class="keyword">this</span>.userDao = userDao;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="meta">@Override</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">save</span><span class="params">()</span> </span>&#123;</span><br><span class="line">       System.out.println(<span class="string">"user service save ..."</span>);</span><br><span class="line">       userDao.save();</span><br><span class="line">   &#125;</span><br><span class="line">&gt;&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>核心配置文件配置注解扫描</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--开启注解扫描--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">context:component-scan</span> <span class="attr">base-package</span>=<span class="string">"com.ff"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>@Component   Spring有三个衍生注解</strong></p>
+<ul>
+<li><strong><code>@Controller</code></strong>：用于表现层bean定义</li>
+<li><strong><code>@Service</code></strong>：用于业务层bean定义</li>
+<li><code>@Repository</code>：用于数据层bean定义</li>
+</ul>
+</blockquote>
+<h5 id="5-2-纯注解开发"><a href="#5-2-纯注解开发" class="headerlink" title="5.2 纯注解开发"></a>5.2 纯注解开发</h5><blockquote>
+<p>Java类代替Spring核心配置文件</p>
+<p>@Configuration   用于设定当前类为配置类</p>
+<p>@ComponentScan  用于设定扫描路径，此注解只能添加一次，多个数据用数组格式</p>
+<ul>
+<li><p>创建配置类 </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//配置类</span></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="comment">//扫描    只能添加一次</span></span><br><span class="line"><span class="meta">@ComponentScan</span>(<span class="string">"com.ff"</span>)</span><br><span class="line"><span class="comment">//加载properties文件</span></span><br><span class="line"><span class="meta">@PropertySource</span>(<span class="string">"classpath:mybatis.properties"</span>)</span><br><span class="line"><span class="meta">@Import</span>(&#123;JdbcConfig<span class="class">.<span class="keyword">class</span>,<span class="title">MybatisConfig</span>.<span class="title">class</span>&#125;)</span></span><br><span class="line"><span class="class"><span class="title">public</span> <span class="title">class</span> <span class="title">SpringConfig</span> </span>&#123;   </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>测试类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">app4</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">//使用AnnotationConfigApplicationContext 加载配置类的字节码文件</span></span><br><span class="line">        ApplicationContext ios = <span class="keyword">new</span> AnnotationConfigApplicationContext(SpringConfig<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">        UDao userDao = (UDao) ios.getBean(<span class="string">"userDao"</span>);</span><br><span class="line">        System.out.println(userDao);</span><br><span class="line">        UserService userService = ios.getBean(UserService<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">        System.out.println(userService);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+<p><strong>生命周期配置：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="meta">@Scope</span>(<span class="string">"prototype"</span>)     <span class="comment">//多例</span></span><br><span class="line">&gt;<span class="meta">@Scope</span>(<span class="string">"singleton"</span>)		<span class="comment">//单例</span></span><br><span class="line">   </span><br><span class="line">&gt;<span class="meta">@PostConstruct</span>		<span class="comment">//创建后</span></span><br><span class="line">&gt;<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span></span>&#123;</span><br><span class="line">       System.out.println(<span class="string">"init.."</span>);</span><br><span class="line">   &#125;</span><br><span class="line">&gt;<span class="meta">@PreDestroy</span>			<span class="comment">//销毁前</span></span><br><span class="line">&gt;<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">destory</span><span class="params">()</span></span>&#123;</span><br><span class="line">       System.out.println(<span class="string">" destory.."</span>);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>依赖注入：</strong></p>
+<p>查找bean的策略</p>
+<ol>
+<li>先按照类型匹配，如果找到一个，直接匹配成功；</li>
+<li>如果有多个，按照名称去匹配，去查找当前变量同名的bean对象</li>
+<li>如果多个名称也无法匹配，需要使用@Qualifie指定具体要找的那个bean的名字</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="meta">@Autowired</span>  <span class="comment">//自动装配   不需要setter  自动加载无参构造</span></span><br><span class="line">&gt;<span class="meta">@Qualifie</span>	<span class="comment">//无法单独使用，必须配合@Autowired注解使用   指定Bean名称和别名</span></span><br><span class="line">&gt;<span class="meta">@Value</span>		<span class="comment">//赋值</span></span><br><span class="line"></span><br><span class="line">&gt;<span class="meta">@Service</span></span><br><span class="line">&gt;<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserServiceImpl</span> <span class="keyword">implements</span> <span class="title">UserService</span> </span>&#123;</span><br><span class="line">   <span class="meta">@Autowired</span></span><br><span class="line">   <span class="meta">@Qualifier</span>(<span class="string">"userDao"</span>)</span><br><span class="line">   <span class="keyword">private</span> UDao userDao;</span><br><span class="line"><span class="meta">@Value</span>(<span class="string">"李四"</span>)</span><br><span class="line">   <span class="keyword">private</span> String name;</span><br><span class="line"> <span class="comment">/*  public void setUserDao(UDao userDao) &#123;</span></span><br><span class="line"><span class="comment">       this.userDao = userDao;</span></span><br><span class="line"><span class="comment">   &#125;*/</span></span><br><span class="line"></span><br><span class="line">   <span class="meta">@Override</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">save</span><span class="params">()</span> </span>&#123;</span><br><span class="line">       System.out.println(<span class="string">"name = "</span> + name);</span><br><span class="line">       System.out.println(<span class="string">"user service save ..."</span>);</span><br><span class="line">       userDao.save();</span><br><span class="line">   &#125;</span><br><span class="line">&gt;&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>加载properties文件：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="meta">@PropertySource</span>(<span class="string">"classpath:mybatis.properties"</span>)</span><br></pre></td></tr></table></figure>
+
+<p>多个properties文件使用数组形式，不可以使用通配符，不识别</p>
+<p><strong>第三方Bean资源注解管理：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="comment">//配置类</span></span><br><span class="line">&gt;<span class="meta">@Configuration</span></span><br><span class="line">&gt;<span class="comment">//扫描</span></span><br><span class="line">&gt;<span class="meta">@ComponentScan</span>(<span class="string">"com.ff"</span>)</span><br><span class="line">&gt;<span class="comment">//加载properties文件</span></span><br><span class="line">&gt;<span class="meta">@PropertySource</span>(<span class="string">"mybatis.properties"</span>)</span><br><span class="line">&gt;<span class="comment">//导入第三方配置类</span></span><br><span class="line">&gt;<span class="meta">@Import</span>(&#123;JdbcConfig<span class="class">.<span class="keyword">class</span>,<span class="title">MybatisConfig</span>.<span class="title">class</span>&#125;)</span></span><br><span class="line"><span class="class">&gt;<span class="title">public</span> <span class="title">class</span> <span class="title">SpringConfig</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">&gt;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>第三方bean：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JdbcConfig</span> </span>&#123;</span><br><span class="line">   <span class="meta">@Value</span>(<span class="string">"$&#123;jdbc.driver&#125;"</span>)</span><br><span class="line">   <span class="keyword">private</span> String driver;</span><br><span class="line">   <span class="meta">@Value</span>(<span class="string">"$&#123;jdbc.url&#125;"</span>)</span><br><span class="line">   <span class="keyword">private</span> String url;</span><br><span class="line">   <span class="meta">@Value</span>(<span class="string">"$&#123;jdbc.username&#125;"</span>)</span><br><span class="line">   <span class="keyword">private</span> String username;</span><br><span class="line">   <span class="meta">@Value</span>(<span class="string">"$&#123;jdbc.password&#125;"</span>)</span><br><span class="line">   <span class="keyword">private</span> String password;</span><br><span class="line">   <span class="comment">//定义一个方法获得需要管理的对象</span></span><br><span class="line">   <span class="comment">//添加@Bean,表示当前是一个Bean</span></span><br><span class="line">   <span class="comment">//参数是自动装配，在容器中寻找</span></span><br><span class="line">   <span class="meta">@Bean</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> DataSource <span class="title">dataSource</span><span class="params">(UDao userDao)</span></span>&#123;</span><br><span class="line">       System.out.println(<span class="string">"userDao = "</span> + userDao);</span><br><span class="line">       DruidDataSource ds = <span class="keyword">new</span> DruidDataSource();</span><br><span class="line">       ds.setDriverClassName(driver);</span><br><span class="line">       ds.setUrl(url);</span><br><span class="line">       ds.setUsername(username);</span><br><span class="line">       ds.setPassword(password);</span><br><span class="line">       <span class="keyword">return</span>  ds;</span><br><span class="line">   &#125;</span><br><span class="line">&gt;&#125;</span><br></pre></td></tr></table></figure>
+
+
+</blockquote>
+<h4 id="6-整合Mybatis"><a href="#6-整合Mybatis" class="headerlink" title="6. 整合Mybatis"></a>6. 整合Mybatis</h4><blockquote>
+<ol>
+<li>创建项目<ol>
+<li>引入依赖坐标</li>
+<li>搭建项目结构</li>
+</ol>
+</li>
+<li>将数据源对象交给Spring容器管理</li>
+<li>将整合Mybatis对应两个对象交给Spring<ol>
+<li>SqlSessionFactoryBean</li>
+<li>MapperScannerConfigurer</li>
+</ol>
+</li>
+<li>将Service交给Spring对象<ol>
+<li>在内部注入dao对象</li>
+</ol>
+</li>
+<li>编写配置类，导入所有配置的Bean</li>
+<li>编写控制层，进行测试</li>
+</ol>
+<hr>
+<ul>
+<li>导入依赖</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">         <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">         <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-jdbc<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">         <span class="tag">&lt;<span class="name">version</span>&gt;</span>5.2.10.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line">     <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">         <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.mybatis<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">         <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mybatis-spring<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">         <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.3.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>创建配置类</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//配置类</span></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="comment">//扫描</span></span><br><span class="line"><span class="meta">@ComponentScan</span>(<span class="string">"com.ff"</span>)</span><br><span class="line"><span class="comment">//加载properties文件</span></span><br><span class="line"><span class="meta">@PropertySource</span>(<span class="string">"classpath:mybatis.properties"</span>)</span><br><span class="line"><span class="comment">//导入第三方配置类</span></span><br><span class="line"><span class="meta">@Import</span>(&#123;JdbcConfig<span class="class">.<span class="keyword">class</span>,<span class="title">MybatisConfig</span>.<span class="title">class</span>&#125;)</span></span><br><span class="line"><span class="class"><span class="title">public</span> <span class="title">class</span> <span class="title">SpringConfig</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>JdbcConfig类：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JdbcConfig</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Value</span>(<span class="string">"$&#123;jdbc.driver&#125;"</span>)</span><br><span class="line">    <span class="keyword">private</span> String driver;</span><br><span class="line">    <span class="meta">@Value</span>(<span class="string">"$&#123;jdbc.url&#125;"</span>)</span><br><span class="line">    <span class="keyword">private</span> String url;</span><br><span class="line">    <span class="meta">@Value</span>(<span class="string">"$&#123;jdbc.username&#125;"</span>)</span><br><span class="line">    <span class="keyword">private</span> String username;</span><br><span class="line">    <span class="meta">@Value</span>(<span class="string">"$&#123;jdbc.password&#125;"</span>)</span><br><span class="line">    <span class="keyword">private</span> String password;</span><br><span class="line">    <span class="comment">//定义一个方法获得需要管理的对象</span></span><br><span class="line">    <span class="comment">//添加@Bean,表示当前是一个Bean</span></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> DataSource <span class="title">dataSource</span><span class="params">()</span></span>&#123;</span><br><span class="line">        DruidDataSource ds = <span class="keyword">new</span> DruidDataSource();</span><br><span class="line">        ds.setDriverClassName(driver);</span><br><span class="line">        ds.setUrl(url);</span><br><span class="line">        ds.setUsername(username);</span><br><span class="line">        ds.setPassword(password);</span><br><span class="line">        <span class="keyword">return</span>  ds;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>MybatisConfig类：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MybatisConfig</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> SqlSessionFactoryBean <span class="title">sqlSessionFactory</span><span class="params">(DataSource dataSource)</span></span>&#123;</span><br><span class="line">        SqlSessionFactoryBean ssfb = <span class="keyword">new</span> SqlSessionFactoryBean();</span><br><span class="line">        ssfb.setTypeAliasesPackage(<span class="string">"com.ff.domain"</span>);</span><br><span class="line">        ssfb.setDataSource(dataSource);</span><br><span class="line">        <span class="keyword">return</span> ssfb;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> MapperScannerConfigurer <span class="title">mapperScannerConfigurer</span><span class="params">()</span></span>&#123;</span><br><span class="line">        MapperScannerConfigurer msc = <span class="keyword">new</span> MapperScannerConfigurer();</span><br><span class="line">        msc.setBasePackage(<span class="string">"com.ff.dao"</span>);</span><br><span class="line">        <span class="keyword">return</span> msc;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>properties文件</strong></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">jdbc.driver=com.mysql.jdbc.Driver</span><br><span class="line">jdbc.url=jdbc:mysql://127.0.0.1:3306/spring_dao?useSSL = false</span><br><span class="line">jdbc.username=root</span><br><span class="line">jdbc.password=root</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>整合junit：</strong></p>
+<ul>
+<li>导入依赖坐标</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--单元测试--&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>junit<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>junit<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">version</span>&gt;</span>4.13.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line">       <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-test<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">version</span>&gt;</span>5.1.9.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>创建测试类</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//设置主运行</span></span><br><span class="line"><span class="meta">@RunWith</span>(SpringJUnit4ClassRunner<span class="class">.<span class="keyword">class</span>)</span></span><br><span class="line"><span class="class">//导入配置类</span></span><br><span class="line"><span class="class">@<span class="title">ContextConfiguration</span>(<span class="title">classes</span> </span>= SpringConfig<span class="class">.<span class="keyword">class</span>)</span></span><br><span class="line"><span class="class"><span class="title">public</span> <span class="title">class</span> <span class="title">AccountServiceTest</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span>  AccountService accountService;</span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">findAll</span><span class="params">()</span></span>&#123;</span><br><span class="line">        Acount acount = accountService.selectAcount(<span class="number">1</span>);</span><br><span class="line">        System.out.println(acount);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</blockquote>
+
+      
+      <!-- 打赏 -->
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2021/11/07/day02_%E6%B3%A8%E8%A7%A3%E5%BC%80%E5%8F%91/" data-id="ckvp9fb7g000054ue8lic2irx"
+        class="article-share-link">分享</a>
+        
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Spring/" rel="tag">Spring</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+
+</article>
+    
     <article id="post-day01_Spring" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
@@ -2173,145 +2443,6 @@
     </div>
     <footer class="article-footer">
       <a data-url="http://yoursite.com/2021/10/15/DAY25_%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/" data-id="ckvno4li7000fggueexahfz9c"
-        class="article-share-link">分享</a>
-        
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%90%8E%E7%AB%AF%E5%AD%A6%E4%B9%A0/" rel="tag">后端学习</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-  
-  
-
-  
-
-</article>
-    
-    <article id="post-Day22_网络编程" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2021/10/13/Day22_%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/"
-    >网络编程</a
-  >
-</h2>
-  
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2021/10/13/Day22_%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" class="article-date">
-  <time datetime="2021-10-13T14:43:19.000Z" itemprop="datePublished">2021-10-13</time>
-</a>
-      
-      
-      
-      
-    </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-      <h3 id="42-网络编程-物联网"><a href="#42-网络编程-物联网" class="headerlink" title="42.网络编程(物联网)"></a>42.网络编程(物联网)</h3><h4 id="42-1-网络编程概述"><a href="#42-1-网络编程概述" class="headerlink" title="42.1 网络编程概述"></a>42.1 网络编程概述</h4><h5 id="42-1-1-基本概念"><a href="#42-1-1-基本概念" class="headerlink" title="42.1.1 基本概念"></a>42.1.1 基本概念</h5><blockquote>
-<p>网络编程三要素：</p>
-<ul>
-<li><p>IP地址</p>
-</li>
-<li><p>端口</p>
-<ul>
-<li><p>端口号的取值范围：0~65535，普通的应用程序需要使用1024以上的端口号</p>
-</li>
-<li><p>==一个端口只能被一个应用程序使用==</p>
-</li>
-</ul>
-</li>
-</ul>
-<ul>
-<li>协议</li>
-</ul>
-</blockquote>
-<h4 id="42-2-IntAddress的使用"><a href="#42-2-IntAddress的使用" class="headerlink" title="42.2 IntAddress的使用"></a>42.2 IntAddress的使用</h4><blockquote>
-<p>示例：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">test</span> </span>&#123;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> UnknownHostException </span>&#123;</span><br><span class="line">       <span class="comment">//设置地址</span></span><br><span class="line">       InetAddress byName = InetAddress.getByName(<span class="string">"192.168.31.58"</span>);</span><br><span class="line">       <span class="comment">//获取地址的名字</span></span><br><span class="line">       String hostName = byName.getHostName();</span><br><span class="line">       System.out.println(hostName);</span><br><span class="line">       <span class="comment">//获得地址的ip地址</span></span><br><span class="line">       String hostAddress = byName.getHostAddress();</span><br><span class="line">       System.out.println(hostAddress);</span><br><span class="line">   &#125;</span><br><span class="line">&gt;&#125;</span><br></pre></td></tr></table></figure>
-
-
-</blockquote>
-<h4 id="42-3-UDP通信程序"><a href="#42-3-UDP通信程序" class="headerlink" title="42.3 UDP通信程序"></a>42.3 UDP通信程序</h4><blockquote>
-<p>发送端：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="comment">//DUP发送</span></span><br><span class="line">&gt;<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">test</span> </span>&#123;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">       Scanner sc = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">       <span class="comment">//确认发送端口</span></span><br><span class="line">       DatagramSocket ds = <span class="keyword">new</span> DatagramSocket();</span><br><span class="line">       <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">           <span class="comment">//打包礼物</span></span><br><span class="line">           String s = <span class="string">"🤘🎈"</span>;</span><br><span class="line">           String num = sc.next();</span><br><span class="line"></span><br><span class="line">           <span class="keyword">byte</span>[] bytes = num.getBytes();</span><br><span class="line">           <span class="comment">//确认发送ip</span></span><br><span class="line">           InetAddress address = InetAddress.getByName(<span class="string">"192.168.31.108"</span>);</span><br><span class="line">           <span class="keyword">int</span> port = <span class="number">10000</span>;</span><br><span class="line">           <span class="comment">//封装成数据包</span></span><br><span class="line">           DatagramPacket dp = <span class="keyword">new</span> DatagramPacket(bytes, bytes.length, address, port);</span><br><span class="line">           <span class="comment">//发送信息</span></span><br><span class="line">           ds.send(dp);</span><br><span class="line">           System.err.println(<span class="string">"已发送"</span>);</span><br><span class="line">           <span class="keyword">if</span>(num.equals(<span class="string">"886"</span>))&#123;</span><br><span class="line">               <span class="keyword">break</span>;</span><br><span class="line">           &#125;</span><br><span class="line"></span><br><span class="line">       &#125;</span><br><span class="line">       System.out.println(<span class="string">"结束聊天"</span>);</span><br><span class="line">       <span class="comment">//释放资源</span></span><br><span class="line">&gt;<span class="comment">//        ds.close();</span></span><br><span class="line"></span><br><span class="line">   &#125;</span><br><span class="line">&gt;&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-
-<p>接收端：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="comment">//DUP接收</span></span><br><span class="line">&gt;<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Accept</span> </span>&#123;</span><br><span class="line">       <span class="comment">//注意点</span></span><br><span class="line">   <span class="comment">//1.需要先运行发送端再运行发送端</span></span><br><span class="line">   <span class="comment">//2.如果接收端启动之后，没有收到信息，就会死等(阻塞)</span></span><br><span class="line">   <span class="comment">//3.接收的时候需要调用getLength</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">       <span class="comment">//确认发送端口</span></span><br><span class="line">       DatagramSocket ds = <span class="keyword">new</span> DatagramSocket(<span class="number">10000</span>);</span><br><span class="line"></span><br><span class="line">       <span class="keyword">while</span> (<span class="keyword">true</span>)&#123;</span><br><span class="line">           <span class="comment">//构建数据包，接收数据</span></span><br><span class="line">           <span class="keyword">byte</span>[] bytes = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">8042</span>];</span><br><span class="line">           DatagramPacket dp = <span class="keyword">new</span> DatagramPacket(bytes,bytes.length);</span><br><span class="line">           <span class="comment">//接收信息</span></span><br><span class="line">           ds.receive(dp);</span><br><span class="line">           <span class="comment">//解析数据包</span></span><br><span class="line">           <span class="keyword">byte</span>[] data = dp.getData();</span><br><span class="line">           <span class="keyword">int</span> length = dp.getLength();</span><br><span class="line">           InetAddress address = dp.getAddress();</span><br><span class="line">           System.out.println(<span class="string">"用户名："</span>+address.getHostName());</span><br><span class="line">           System.out.println(<span class="keyword">new</span> String(data,<span class="number">0</span>,length));</span><br><span class="line">&gt;<span class="comment">//            System.out.println(address.getHostAddress() );</span></span><br><span class="line">       &#125;</span><br><span class="line">       </span><br><span class="line">       <span class="comment">//关闭</span></span><br><span class="line">&gt;<span class="comment">//        ds.close();</span></span><br><span class="line">       </span><br><span class="line">   &#125;</span><br><span class="line">&gt;&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>UDP的三种通讯方式</p>
-<ul>
-<li>单播<ul>
-<li>1-1</li>
-<li>创建DatagramSocket</li>
-<li>打包DatagramPacket</li>
-<li>发送send</li>
-</ul>
-</li>
-<li>组播<ul>
-<li>1- 组(多)</li>
-</ul>
-</li>
-<li>广播<ul>
-<li>1-多</li>
-</ul>
-</li>
-</ul>
-</blockquote>
-<h4 id="42-4-TCP通信程序"><a href="#42-4-TCP通信程序" class="headerlink" title="42.4 TCP通信程序"></a>42.4 TCP通信程序</h4><blockquote>
-<p>发送：</p>
-<p>Socket</p>
-<p>示例：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">send</span> </span>&#123;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">       <span class="comment">//创建一个Socket对象</span></span><br><span class="line">       Socket socket = <span class="keyword">new</span> Socket(<span class="string">"192.168.31.87"</span>, <span class="number">10010</span>);</span><br><span class="line"></span><br><span class="line">       <span class="comment">//获取IO流</span></span><br><span class="line">       OutputStream os = socket.getOutputStream(); <span class="comment">//网络流</span></span><br><span class="line">       os.write(<span class="string">"hello"</span>.getBytes());</span><br><span class="line">       <span class="comment">//关闭流</span></span><br><span class="line">       os.close();</span><br><span class="line">       socket.close();</span><br><span class="line">   &#125;</span><br><span class="line">&gt;&#125;</span><br></pre></td></tr></table></figure>
-
-<p>接收：</p>
-<p>SeverSocket</p>
-<p>示例：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">receive</span> </span>&#123;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">       <span class="comment">//接收</span></span><br><span class="line">       ServerSocket accept = <span class="keyword">new</span> ServerSocket(<span class="number">10000</span>);</span><br><span class="line">       InputStream is = <span class="keyword">null</span>;</span><br><span class="line">       <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">           <span class="comment">//调用等待</span></span><br><span class="line">           Socket ss =accept.accept();</span><br><span class="line"></span><br><span class="line">           <span class="comment">//获取输入流</span></span><br><span class="line">           is = ss.getInputStream();</span><br><span class="line">           <span class="keyword">int</span> b;</span><br><span class="line">           <span class="keyword">while</span> ((b = is.read()) != -<span class="number">1</span>) &#123;</span><br><span class="line">               System.out.print((<span class="keyword">char</span>)b);</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">&gt;<span class="comment">//        //关闭</span></span><br><span class="line">&gt;<span class="comment">//        is.close();</span></span><br><span class="line">&gt;<span class="comment">//        accept.close();</span></span><br><span class="line">   &#125;</span><br><span class="line">&gt;&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-
-<ol>
-<li>accpet方法是阻塞，作用就是等待客户端连接</li>
-<li>客户端创建对象并连接服务器，通过 三次握手协议保证连接</li>
-<li>对于客服端，往外写，所以是输出；对于服务器是，往里输，所以是输入</li>
-<li>read也是阻塞</li>
-<li>通过四次挥手协议，确认连接终止</li>
-</ol>
-</blockquote>
-
-      
-      <!-- 打赏 -->
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2021/10/13/Day22_%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" data-id="ckvno4lj9001qggue9tzf7o42"
         class="article-share-link">分享</a>
         
       
