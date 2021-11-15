@@ -76,6 +76,758 @@
     
     
     
+    <article id="post-day04_SpringMVC" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2021/11/15/day04_SpringMVC/"
+    >Spring_MVC</a
+  >
+</h2>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2021/11/15/day04_SpringMVC/" class="article-date">
+  <time datetime="2021-11-15T01:08:24.000Z" itemprop="datePublished">2021-11-15</time>
+</a>
+      
+      
+      
+      
+    </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h3 id="SpringMVC"><a href="#SpringMVC" class="headerlink" title="SpringMVC"></a>SpringMVC</h3><h4 id="1-SpringMVC的简介"><a href="#1-SpringMVC的简介" class="headerlink" title="1.SpringMVC的简介"></a>1.SpringMVC的简介</h4><blockquote>
+<ul>
+<li><p>MVC模式</p>
+</li>
+<li><p>异步调用</p>
+</li>
+</ul>
+<p>概述：</p>
+<ul>
+<li>Spring是一种基于Java实现MVC轻量级Web框架</li>
+<li>优点：使用灵活，开发便利，灵活性强</li>
+</ul>
+</blockquote>
+<h5 id="SpringMvc入门案例"><a href="#SpringMvc入门案例" class="headerlink" title="SpringMvc入门案例"></a>SpringMvc入门案例</h5><blockquote>
+<p>Controller:管理控制层对象 （子容器）</p>
+<p>Model：管理Model层对象（父容器）</p>
+<p>Spring限制：子容器可以访问父容器的对象，父容器是不可以访问子容器的对象</p>
+<p>SpringMvc实现流程</p>
+<ul>
+<li>添加依赖</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>javax.servlet<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>javax.servlet-api<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">version</span>&gt;</span>4.0.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">scope</span>&gt;</span>provided<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line">&gt;<span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line">&gt;<span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-webmvc<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">version</span>&gt;</span>5.2.10.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">&gt;<span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>配置前端控制器（DispatcherServlet）<ol>
+<li>将对象创建并添加到tomcat容器中</li>
+<li>配置Servlet的访问路径</li>
+<li>配置Web层的容器，交给这个servlet</li>
+<li>创建Model层的容器，交给这个servlet，实现父子关联</li>
+</ol>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="comment">//初始化容器</span></span><br><span class="line">&gt;<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ServletContainersInitConggif</span>  <span class="keyword">extends</span> <span class="title">AbstractDispatcherServletInitializer</span> </span>&#123;</span><br><span class="line">   <span class="comment">//加载容器   创建web层的容器   子容器</span></span><br><span class="line">   <span class="meta">@Override</span></span><br><span class="line">   <span class="function"><span class="keyword">protected</span> WebApplicationContext <span class="title">createServletApplicationContext</span><span class="params">()</span> </span>&#123;</span><br><span class="line">       AnnotationConfigWebApplicationContext ctx = <span class="keyword">new</span> AnnotationConfigWebApplicationContext();</span><br><span class="line">       <span class="comment">//所有请求都归属SpringMvc管理</span></span><br><span class="line">       ctx.register(SpringMvcConfig<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">       <span class="keyword">return</span> ctx;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="comment">//配置前端控制器DispatcherServlet拦截什么样的浏览器请求</span></span><br><span class="line">   <span class="meta">@Override</span></span><br><span class="line">   <span class="keyword">protected</span> String[] getServletMappings() &#123;</span><br><span class="line">       <span class="comment">//表示所有请求都归属Mvc管理   拦截所有</span></span><br><span class="line">       <span class="keyword">return</span> <span class="keyword">new</span> String[]&#123;<span class="string">"/"</span>&#125;;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="comment">//创建model的容器   父容器</span></span><br><span class="line">   <span class="meta">@Override</span></span><br><span class="line">   <span class="function"><span class="keyword">protected</span> WebApplicationContext <span class="title">createRootApplicationContext</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        AnnotationConfigWebApplicationContext modeIoc = <span class="keyword">new</span> AnnotationConfigWebApplicationContext();</span><br><span class="line">        modeIoc.register(SpringConfig<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">       <span class="keyword">return</span> modeIoc;</span><br><span class="line">   &#125;</span><br><span class="line">&gt;&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="Spring设置bean的加载"><a href="#Spring设置bean的加载" class="headerlink" title="Spring设置bean的加载"></a><strong>Spring设置bean的加载</strong></h4><p>Spring不加载SpringMvc管理的bean</p>
+<p>方法一：精确范围，精确到包名</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="meta">@Configuration</span></span><br><span class="line">&gt;<span class="meta">@ComponentScan</span>(&#123;<span class="string">"com.ff.service"</span>,<span class="string">"com.ff.dao"</span>&#125;)</span><br><span class="line">&gt;<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SpringConfig</span> </span>&#123;</span><br><span class="line">&gt;&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>方法二：搜索大范围，排除SpringMvc管理bean的包名</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="meta">@Configuration</span></span><br><span class="line">&gt;<span class="meta">@ComponentScan</span>(value = <span class="string">"com.ff"</span>,excludeFilters = <span class="meta">@ComponentScan</span>.Filter(</span><br><span class="line">       <span class="comment">/*过滤规则  注解过滤*/</span></span><br><span class="line">       type = FilterType.ANNOTATION,</span><br><span class="line">       <span class="comment">/*排除Controller注解*/</span></span><br><span class="line">       classes = Controller<span class="class">.<span class="keyword">class</span></span></span><br><span class="line"><span class="class">&gt;))</span></span><br><span class="line"><span class="class">&gt;<span class="title">public</span> <span class="title">class</span> <span class="title">SpringConfig</span> </span>&#123;</span><br><span class="line">&gt;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>注意：增加配置排除的过滤条件后，需要注意其他的配置类，不会再次加载</p>
+<h4 id="简化开发：-等同于前端控制器（DispatcherServlet）"><a href="#简化开发：-等同于前端控制器（DispatcherServlet）" class="headerlink" title="简化开发：  等同于前端控制器（DispatcherServlet）"></a><strong>简化开发：</strong>  等同于前端控制器（DispatcherServlet）</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ServletEasyConfig</span>  <span class="keyword">extends</span> <span class="title">AbstractAnnotationConfigDispatcherServletInitializer</span> </span>&#123;</span><br><span class="line">   <span class="comment">//Web容器</span></span><br><span class="line">   <span class="meta">@Override</span></span><br><span class="line">   <span class="keyword">protected</span> Class&lt;?&gt;[] getRootConfigClasses() &#123;</span><br><span class="line">       <span class="keyword">return</span> <span class="keyword">new</span> Class[]&#123;SpringMvcConfig<span class="class">.<span class="keyword">class</span>&#125;</span>;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="comment">//model容器</span></span><br><span class="line">   <span class="meta">@Override</span></span><br><span class="line">   <span class="keyword">protected</span> Class&lt;?&gt;[] getServletConfigClasses() &#123;</span><br><span class="line">       <span class="keyword">return</span> <span class="keyword">new</span> Class[]&#123;SpringConfig<span class="class">.<span class="keyword">class</span>&#125;</span>;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="comment">//拦截条件</span></span><br><span class="line">   <span class="meta">@Override</span></span><br><span class="line">   <span class="keyword">protected</span> String[] getServletMappings() &#123;</span><br><span class="line">       <span class="keyword">return</span> <span class="keyword">new</span> String[]&#123;<span class="string">"/"</span>&#125;;</span><br><span class="line">   &#125;</span><br><span class="line">&gt;&#125;</span><br></pre></td></tr></table></figure>
+
+
+</blockquote>
+<h4 id="2-请求与响应"><a href="#2-请求与响应" class="headerlink" title="2.请求与响应"></a>2.请求与响应</h4><blockquote>
+<p>PostMan插件</p>
+<p>作用：常用于进行接口测试</p>
+<p>请求方式：</p>
+<ul>
+<li>Get请求</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&gt;&lt;build&gt;</span><br><span class="line"> &lt;plugins&gt;</span><br><span class="line">   &lt;!-- tomcat插件的模板 --&gt;</span><br><span class="line">   &lt;plugin&gt;</span><br><span class="line">     &lt;groupId&gt;org.apache.tomcat.maven&lt;/groupId&gt;</span><br><span class="line">     &lt;artifactId&gt;tomcat7-maven-plugin&lt;/artifactId&gt;</span><br><span class="line">     &lt;version&gt;2.1&lt;/version&gt;</span><br><span class="line">     &lt;configuration&gt;</span><br><span class="line">       &lt;port&gt;80&lt;/port&gt;</span><br><span class="line">       &lt;path&gt;/&lt;/path&gt;</span><br><span class="line">  	<span class="comment">//请求解决中文乱码问题   只解决jdk8之前的  jdk8之后就自动处理了</span></span><br><span class="line">       &lt;uriEncoding&gt;UTF-8&lt;/uriEncoding&gt;</span><br><span class="line">     &lt;/configuration&gt;</span><br><span class="line">   &lt;/plugin&gt;</span><br><span class="line"> &lt;/plugins&gt;</span><br><span class="line">&gt;&lt;/build&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Post请求</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//修改请求中文乱码问题  修改解码字符集为UTF-8</span></span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="keyword">protected</span> Filter[] getServletFilters() &#123;</span><br><span class="line">      CharacterEncodingFilter filter = <span class="keyword">new</span> CharacterEncodingFilter();</span><br><span class="line">      <span class="comment">//设置请求体的解码字符集，解决post请求中文乱码问题</span></span><br><span class="line">      filter.setEncoding(<span class="string">"UTF-8"</span>);</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">new</span> Filter[]&#123;filter&#125;;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>常见的传递参数的类型</p>
+<ul>
+<li>字符串     对象    数组    集合    </li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//设置请求路径</span></span><br><span class="line">  <span class="meta">@RequestMapping</span>(<span class="string">"/commonParam"</span>)</span><br><span class="line">  <span class="comment">//设置返回结果是响应体的内容</span></span><br><span class="line">  <span class="meta">@ResponseBody</span></span><br><span class="line">  <span class="comment">//@RequestParam("name") String username    将请求的name和username关联</span></span><br><span class="line">  <span class="comment">//集合  需要添加注解 ，避免被识别成对象</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> String  <span class="title">commonParam</span><span class="params">(@RequestParam(<span class="string">"name"</span>)</span> String username, String[] age, @RequestParam List&lt;String&gt; list)</span>&#123;</span><br><span class="line">      System.out.println(<span class="string">"name = "</span> + username);</span><br><span class="line">      System.out.println(<span class="string">"age = "</span> + Arrays.toString(age));</span><br><span class="line">      System.out.println(<span class="string">"list = "</span> + list);</span><br><span class="line">      <span class="comment">//默认返回的字符串会被作为资源路径</span></span><br><span class="line">      <span class="keyword">return</span> <span class="string">"&#123;'info':'springmvc'&#125;"</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&gt;&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//设置请求路径</span></span><br><span class="line">   <span class="meta">@RequestMapping</span>(<span class="string">"/param2"</span>)</span><br><span class="line">   <span class="comment">//设置返回结果是响应体的内容</span></span><br><span class="line">   <span class="meta">@ResponseBody</span></span><br><span class="line">   <span class="comment">//默认SpringMvc中文支持江yyyy/MM/dd 格式的字符转换成Date对象</span></span><br><span class="line">   <span class="comment">//如果格式不对，需要添加@DateTimeFormat 修改格式</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> String  <span class="title">param2</span><span class="params">(@DateTimeFormat(pattern = <span class="string">"yyyy-MM-dd "</span>)</span> Date date)</span>&#123;</span><br><span class="line">       System.out.println(<span class="string">"date = "</span> + date);</span><br><span class="line">       <span class="comment">//默认返回的字符串会被作为资源路径</span></span><br><span class="line">       <span class="keyword">return</span> <span class="string">"&#123;'info':'json'&#125;"</span>;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>发送Json的请求使用</li>
+</ul>
+<ol>
+<li>导入依赖</li>
+</ol>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.fasterxml.jackson.core<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jackson-databind<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.12.3<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>配置类添加注解，开启Json转换</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@EnableWebMvc</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SpringMvcConfig</span> </span>&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>添加@ResquestBoby注解   备注为Json对象</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//设置请求路径</span></span><br><span class="line">   <span class="meta">@RequestMapping</span>(<span class="string">"/json"</span>)</span><br><span class="line">   <span class="comment">//设置返回结果是响应体的内容</span></span><br><span class="line">   <span class="meta">@ResponseBody</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> String  <span class="title">json</span><span class="params">(@RequestBody User user)</span></span>&#123;</span><br><span class="line">       System.out.println(<span class="string">"user = "</span> + user);</span><br><span class="line">       <span class="comment">//默认返回的字符串会被作为资源路径</span></span><br><span class="line">       <span class="keyword">return</span> <span class="string">"&#123;'info':'json'&#125;"</span>;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>发送Json响应</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/toPage"</span>)</span><br><span class="line">  <span class="meta">@ResponseBody</span></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">如果返回值是String，将会把数据转成字符串的形式响应到客户端</span></span><br><span class="line"><span class="comment">如果返回值是一个实体类型，内部会利用jackSon将实体对象转成json格式字符串，响应到客户端</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> Brand <span class="title">toPage</span><span class="params">()</span></span>&#123;</span><br><span class="line">      Brand brand = <span class="keyword">new</span> Brand();</span><br><span class="line">      brand.setBrandname(<span class="string">"你好"</span>);</span><br><span class="line">      <span class="keyword">return</span> brand;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+
+</blockquote>
+<h4 id="3-REST风格"><a href="#3-REST风格" class="headerlink" title="3.REST风格"></a>3.REST风格</h4><blockquote>
+<p>REST，表现形式状态转换<br>通过使用==行为动作==区分资源进行了何种操作</p>
+<p>注意：是约定方法，不是规范；描述模块的名称通常使用复数，加s的格式描述，表示此类资源，而不是单个</p>
+<p>特点：</p>
+<ul>
+<li>请求参数的携带方式不同</li>
+<li>通过请求方式来描述不同的行为</li>
+<li>增：POST</li>
+<li>删：DELETE</li>
+<li>改：PUT</li>
+<li>查：GET</li>
+</ul>
+<p>REST的使用：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="comment">//REST风格</span></span><br><span class="line"><span class="comment">//post</span></span><br><span class="line">  <span class="comment">//设置请求路径</span></span><br><span class="line">  <span class="meta">@RequestMapping</span>(value = <span class="string">"/users"</span>,method = RequestMethod.POST)</span><br><span class="line">  <span class="comment">//设置返回结果是响应体的内容</span></span><br><span class="line">  <span class="meta">@ResponseBody</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> String  <span class="title">post</span><span class="params">()</span></span>&#123;</span><br><span class="line">      System.out.println(<span class="string">"UserController   save..."</span>);</span><br><span class="line">      <span class="comment">//默认返回的字符串会被作为资源路径</span></span><br><span class="line">      <span class="keyword">return</span> <span class="string">"&#123;'info':'springmvc'&#125;"</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//设置请求路径</span></span><br><span class="line">  <span class="meta">@RequestMapping</span>(value = <span class="string">"/users/&#123;id&#125;"</span>,method =RequestMethod.DELETE)</span><br><span class="line">  <span class="comment">//设置返回结果是响应体的内容</span></span><br><span class="line">  <span class="meta">@ResponseBody</span></span><br><span class="line">  <span class="comment">//有参数需要添加注解@PathVariable</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> String  <span class="title">DELETE</span><span class="params">(@PathVariable Integer id)</span></span>&#123;</span><br><span class="line">      System.out.println(<span class="string">"id = "</span> + id);</span><br><span class="line">      <span class="comment">//默认返回的字符串会被作为资源路径</span></span><br><span class="line">      <span class="keyword">return</span> <span class="string">"&#123;'info':'springmvc'&#125;"</span>;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>简化开发</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="comment">//集合Countroller和value</span></span><br><span class="line">&gt;<span class="meta">@RestController</span></span><br><span class="line">&gt;<span class="meta">@RequestMapping</span>(<span class="string">"/brands"</span>)</span><br><span class="line">&gt;<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserController2</span> </span>&#123;</span><br><span class="line">  <span class="comment">//删除</span></span><br><span class="line">  <span class="meta">@DeleteMapping</span>(<span class="string">"/&#123;id&#125;"</span>)</span><br><span class="line">  <span class="comment">//设置返回结果是响应体的内容</span></span><br><span class="line">  <span class="meta">@ResponseBody</span></span><br><span class="line">  <span class="comment">//有参数需要添加注解@PathVariable</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> String  <span class="title">DELETE</span><span class="params">(@PathVariable Integer id)</span></span>&#123;</span><br><span class="line">      System.out.println(<span class="string">"id = "</span> + id);</span><br><span class="line">      <span class="comment">//默认返回的字符串会被作为资源路径</span></span><br><span class="line">      <span class="keyword">return</span> <span class="string">"&#123;'delete':'springmvc'&#125;"</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">//添加</span></span><br><span class="line">  <span class="meta">@PostMapping</span>(<span class="string">"/&#123;id&#125;"</span>)</span><br><span class="line">  <span class="comment">//设置返回结果是响应体的内容</span></span><br><span class="line">  <span class="meta">@ResponseBody</span></span><br><span class="line">  <span class="comment">//有参数需要添加注解@PathVariable</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> String  <span class="title">post</span><span class="params">(@PathVariable Integer id)</span></span>&#123;</span><br><span class="line">      System.out.println(<span class="string">"id = "</span> + id);</span><br><span class="line">      <span class="comment">//默认返回的字符串会被作为资源路径</span></span><br><span class="line">      <span class="keyword">return</span> <span class="string">"&#123;'post':'springmvc'&#125;"</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">//查询</span></span><br><span class="line">  <span class="meta">@GetMapping</span>(<span class="string">"/&#123;id&#125;"</span>)</span><br><span class="line">  <span class="comment">//设置返回结果是响应体的内容</span></span><br><span class="line">  <span class="meta">@ResponseBody</span></span><br><span class="line">  <span class="comment">//有参数需要添加注解@PathVariable</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> String  <span class="title">get</span><span class="params">(@PathVariable Integer id)</span></span>&#123;</span><br><span class="line">      System.out.println(<span class="string">"id = "</span> + id);</span><br><span class="line">      <span class="comment">//默认返回的字符串会被作为资源路径</span></span><br><span class="line">      <span class="keyword">return</span> <span class="string">"&#123;'get':'springmvc'&#125;"</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">//修改</span></span><br><span class="line">  <span class="meta">@PutMapping</span>(<span class="string">"/&#123;id&#125;"</span>)</span><br><span class="line">  <span class="comment">//设置返回结果是响应体的内容</span></span><br><span class="line">  <span class="meta">@ResponseBody</span></span><br><span class="line">  <span class="comment">//有参数需要添加注解@PathVariable</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> String  <span class="title">put</span><span class="params">(@PathVariable Integer id)</span></span>&#123;</span><br><span class="line">      System.out.println(<span class="string">"id = "</span> + id);</span><br><span class="line">      <span class="comment">//默认返回的字符串会被作为资源路径</span></span><br><span class="line">      <span class="keyword">return</span> <span class="string">"&#123;'put':'springmvc'&#125;"</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&gt;&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="页面交互"><a href="#页面交互" class="headerlink" title="页面交互"></a>页面交互</h4><ul>
+<li>创建资源访问路径</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="meta">@Configuration</span></span><br><span class="line">&gt;<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SpringMvcSupport</span>  <span class="keyword">extends</span> <span class="title">WebMvcConfigurationSupport</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="comment">//方式一</span></span><br><span class="line">   <span class="meta">@Override</span></span><br><span class="line">   <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">addResourceHandlers</span><span class="params">(ResourceHandlerRegistry registry)</span> </span>&#123;</span><br><span class="line">       <span class="comment">//路径指向访问文件</span></span><br><span class="line">       registry.addResourceHandler(<span class="string">"/css/*"</span>).addResourceLocations(<span class="string">"/css/"</span>);</span><br><span class="line">       registry.addResourceHandler(<span class="string">"/pages/*"</span>).addResourceLocations(<span class="string">"/pages/"</span>);</span><br><span class="line">       registry.addResourceHandler(<span class="string">"/plugins/*"</span>).addResourceLocations(<span class="string">"/plugins/"</span>);</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="comment">//方式二</span></span><br><span class="line">   <span class="meta">@Override</span></span><br><span class="line">   <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">configureDefaultServletHandling</span><span class="params">(DefaultServletHandlerConfigurer configurer)</span> </span>&#123;</span><br><span class="line">       configurer.enable();</span><br><span class="line">   &#125;</span><br><span class="line">&gt;&#125;</span><br></pre></td></tr></table></figure>
+
+
+</blockquote>
+<h4 id="4-SSM整合"><a href="#4-SSM整合" class="headerlink" title="4.SSM整合"></a>4.SSM整合</h4><blockquote>
+<p>接口涵盖：请求路径、请求参数、共同、非共同、响应结果</p>
+<p>方式一： 响应结果、结果code、响应语句</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="comment">/**</span></span><br><span class="line"><span class="comment">* 字段不是固定 根据需求可自行加减</span></span><br><span class="line"><span class="comment">* 提供若干个方法 方便操作</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line">&gt;<span class="comment">/*</span></span><br><span class="line"><span class="comment">&gt;* 一个接口</span></span><br><span class="line"><span class="comment">&gt;* 请求的路径</span></span><br><span class="line"><span class="comment">&gt;* 请求的参数</span></span><br><span class="line"><span class="comment">&gt;* 共同</span></span><br><span class="line"><span class="comment">&gt;* 非共同</span></span><br><span class="line"><span class="comment">&gt;* 响应结果</span></span><br><span class="line"><span class="comment">&gt;* */</span></span><br><span class="line">&gt;<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Result</span> </span>&#123;</span><br><span class="line">   <span class="comment">// 描述统一格式中的数据</span></span><br><span class="line">   <span class="keyword">private</span> Object data;</span><br><span class="line">   <span class="comment">// 描述统一格式中的编码，用于区分操作，可以简化配置0或1表示成功失败</span></span><br><span class="line">   <span class="keyword">private</span> Integer code;</span><br><span class="line">   <span class="comment">// 描述统一格式中的响应消息</span></span><br><span class="line">   <span class="keyword">private</span> String msg;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="title">Result</span><span class="params">()</span> </span>&#123;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="title">Result</span><span class="params">(Integer code,Object data)</span> </span>&#123;</span><br><span class="line">       <span class="keyword">this</span>.data = data;</span><br><span class="line">       <span class="keyword">this</span>.code = code;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="title">Result</span><span class="params">(Integer code, Object data, String msg)</span> </span>&#123;</span><br><span class="line">       <span class="keyword">this</span>.data = data;</span><br><span class="line">       <span class="keyword">this</span>.code = code;</span><br><span class="line">       <span class="keyword">this</span>.msg = msg;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">public</span> Object <span class="title">getData</span><span class="params">()</span> </span>&#123;</span><br><span class="line">       <span class="keyword">return</span> data;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setData</span><span class="params">(Object data)</span> </span>&#123;</span><br><span class="line">       <span class="keyword">this</span>.data = data;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">public</span> Integer <span class="title">getCode</span><span class="params">()</span> </span>&#123;</span><br><span class="line">       <span class="keyword">return</span> code;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setCode</span><span class="params">(Integer code)</span> </span>&#123;</span><br><span class="line">       <span class="keyword">this</span>.code = code;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">public</span> String <span class="title">getMsg</span><span class="params">()</span> </span>&#123;</span><br><span class="line">       <span class="keyword">return</span> msg;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setMsg</span><span class="params">(String msg)</span> </span>&#123;</span><br><span class="line">       <span class="keyword">this</span>.msg = msg;</span><br><span class="line">   &#125;</span><br><span class="line">&gt;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Code:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Code</span> </span>&#123;</span><br><span class="line">   <span class="comment">//代表成功或者失败的标记</span></span><br><span class="line">   <span class="comment">//1  成功    0失败</span></span><br><span class="line">   <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> Integer SAVE_OK = <span class="number">20011</span>;</span><br><span class="line">   <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> Integer DELETE_OK = <span class="number">20021</span>;</span><br><span class="line">   <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> Integer UPDATE_OK = <span class="number">20031</span>;</span><br><span class="line">   <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> Integer GET_OK = <span class="number">20041</span>;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> Integer SAVE_ERR = <span class="number">20010</span>;</span><br><span class="line">   <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> Integer DELETE_ERR = <span class="number">20020</span>;</span><br><span class="line">   <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> Integer UPDATE_ERR = <span class="number">20030</span>;</span><br><span class="line">   <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> Integer GET_ERR = <span class="number">20040</span>;</span><br><span class="line"></span><br><span class="line">&gt;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>异常处理器：</p>
+<ul>
+<li>集中的同意的处理项目中出现的异常</li>
+</ul>
+<p>异常处理器的使用：</p>
+<ul>
+<li>添加@RestControllerAdvice 注解 ，声明异常处理类，包含了@ResponseBody注解与@Component注解功能</li>
+<li>方法上添加@ExceptionHandler注解，设置指定异常的处理方案，功能</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="comment">//异常类</span></span><br><span class="line">&gt;<span class="comment">//声明成异常处理器类</span></span><br><span class="line">&gt;<span class="meta">@RestControllerAdvice</span></span><br><span class="line">&gt;<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ProjectExceptionAdvice</span> </span>&#123;</span><br><span class="line">   <span class="comment">//声明处理哪一类异常</span></span><br><span class="line">   <span class="meta">@ExceptionHandler</span>(Exception<span class="class">.<span class="keyword">class</span>)</span></span><br><span class="line"><span class="class">   <span class="title">public</span> <span class="title">Result</span> <span class="title">doException</span>(<span class="title">Exception</span> <span class="title">ex</span>)</span>&#123;</span><br><span class="line">       <span class="keyword">return</span>  <span class="keyword">new</span> Result(<span class="keyword">null</span>,<span class="number">666</span>,<span class="string">"异常错误"</span>);</span><br><span class="line">   &#125;</span><br><span class="line">&gt;&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="项目异常分类"><a href="#项目异常分类" class="headerlink" title="项目异常分类"></a><strong>项目异常分类</strong></h4><ul>
+<li>业务异常<ul>
+<li>规范的用户行为产生的异常</li>
+<li>不规范的用户行为操作产生的异常</li>
+</ul>
+</li>
+<li>系统异常<ul>
+<li>项目运行过程中可预计且无法避免的异常</li>
+</ul>
+</li>
+<li>其他异常<ul>
+<li>编程人员未预期的异常</li>
+</ul>
+</li>
+</ul>
+<p><strong>项目处理方式</strong></p>
+<ul>
+<li>业务异常<ul>
+<li>发送对应消息床底给用户，提醒规范操作</li>
+</ul>
+</li>
+<li>系统异常<ul>
+<li>发送固定消息传递给用户，安抚用户</li>
+<li>*记录日志</li>
+<li>发送给运维人员</li>
+</ul>
+</li>
+<li>其他异常<ul>
+<li>发送固定消息传递给用户，安抚用户</li>
+<li>*记录日志</li>
+<li>发送给编程人员</li>
+</ul>
+</li>
+</ul>
+<p><strong>项目分异常的处理：</strong></p>
+<ul>
+<li>创建异常响应码</li>
+<li>创建异常类，制定三种异常响应情况</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;异常响应码</span><br><span class="line">   public static final Integer SYSTEM_ERR &#x3D; 50001;</span><br><span class="line">   public static final Integer SYSTEM_TIMEOUT_ERR &#x3D; 50002;</span><br><span class="line">   public static final Integer SYSTEM_UNKNOW_ERR &#x3D; 59999;</span><br><span class="line"></span><br><span class="line">   public static final Integer BUSINESS_ERR &#x3D; 60002;</span><br><span class="line">   &#x2F;&#x2F;声明成异常处理器类</span><br><span class="line">&gt;@RestControllerAdvice</span><br><span class="line">&gt;public class ProjectExceptionAdvice &#123;</span><br><span class="line">   &#x2F;&#x2F;声明处理哪一类异常</span><br><span class="line">   @ExceptionHandler(Exception.class)</span><br><span class="line">   public Result doException(Exception ex) &#123;</span><br><span class="line">       &#x2F;&#x2F;记录日志</span><br><span class="line">       &#x2F;&#x2F;发送消息给运维</span><br><span class="line">       &#x2F;&#x2F;发送邮件给开发人员,ex对象发送给开发人员</span><br><span class="line">       return new Result(Code.SYSTEM_UNKNOW_ERR, null, &quot;系统繁忙，请稍后再试！&quot;);</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   @ExceptionHandler(SystemException.class)</span><br><span class="line">   public Result doSystemException(SystemException ex) &#123;</span><br><span class="line">       &#x2F;&#x2F;记录日志</span><br><span class="line">       &#x2F;&#x2F;发送消息给运维</span><br><span class="line">       &#x2F;&#x2F;发送邮件给开发人员</span><br><span class="line">       return new Result(ex.getCode(), null, ex.getMessage());</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   @ExceptionHandler(BusinessException.class)</span><br><span class="line">   public Result doBusinessException(BusinessException ex) &#123;</span><br><span class="line">       return new Result(ex.getCode(), null, ex.getMessage());</span><br><span class="line">   &#125;</span><br><span class="line">&gt;&#125;</span><br></pre></td></tr></table></figure>
+
+
+</blockquote>
+<h4 id="5-拦截器"><a href="#5-拦截器" class="headerlink" title="5.拦截器"></a>5.拦截器</h4><blockquote>
+<p>拦截器的概念：一种动态拦截方法调用的机制，在SpringMvc中动态拦截控制器方法的执行</p>
+<p>作用：</p>
+<ul>
+<li>在指定的方法调用前后执行预先设定的代码</li>
+<li>阻止原始方法的执行</li>
+</ul>
+<p>执行时机：在控制器的前或后执行</p>
+<p>拦截器与过滤器区别</p>
+<ul>
+<li>归属不同：Filter属于Servlet技术，Interceptor属于SpringMvc技术</li>
+<li>拦截内容：Filter对所有访问增强，Interceptor仅针对SpringMvc的访问进行增强  </li>
+</ul>
+<p>拦截器的使用：</p>
+<ul>
+<li>创建一个拦截器类，配置拦截</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="comment">//声明拦截器类</span></span><br><span class="line">&gt;<span class="meta">@Component</span></span><br><span class="line">&gt;<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Projectinterceptor</span> <span class="keyword">implements</span> <span class="title">HandlerInterceptor</span> </span>&#123;</span><br><span class="line">   <span class="comment">/**</span></span><br><span class="line"><span class="comment">    * 拦截之前</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@param</span> request</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@param</span> response</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@param</span> handler</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">    * <span class="doctag">@throws</span> Exception</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">   <span class="meta">@Override</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">preHandle</span><span class="params">(HttpServletRequest request, HttpServletResponse response, Object handler)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">       System.out.println(<span class="string">"preHandle..."</span>);</span><br><span class="line">       <span class="comment">//可以终止原始操作的执行</span></span><br><span class="line">        <span class="comment">//相当于拦截器放行  true  放行  false  拦截</span></span><br><span class="line">       <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="comment">/**</span></span><br><span class="line"><span class="comment">    * 控制器方法正常执行之后</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@param</span> request</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@param</span> response</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@param</span> handler</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@param</span> modelAndView</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@throws</span> Exception</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">   <span class="meta">@Override</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">postHandle</span><span class="params">(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">       System.out.println(<span class="string">"postHandle..."</span>);</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="comment">/**</span></span><br><span class="line"><span class="comment">    * preHandle返回true 会执行</span></span><br><span class="line"><span class="comment">    * 拦截之后</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@param</span> request</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@param</span> response</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@param</span> handler</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@param</span> ex</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@throws</span> Exception</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">   <span class="meta">@Override</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">afterCompletion</span><span class="params">(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">       System.out.println(<span class="string">"afterCompletion..."</span>);</span><br><span class="line">   &#125;</span><br><span class="line">&gt;&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>配置拦截器基本配置</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SpringMvcSupport</span> <span class="keyword">extends</span> <span class="title">WebMvcConfigurationSupport</span> </span>&#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">   <span class="meta">@Autowired</span></span><br><span class="line">   <span class="keyword">private</span> Projectinterceptor projectinterceptor;</span><br><span class="line">   <span class="comment">//拦截器配置</span></span><br><span class="line"></span><br><span class="line">   <span class="meta">@Override</span></span><br><span class="line">   <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">addInterceptors</span><span class="params">(InterceptorRegistry registry)</span> </span>&#123;</span><br><span class="line">       <span class="comment">//添加需要拦截的内容</span></span><br><span class="line">       registry.addInterceptor(projectinterceptor).addPathPatterns(<span class="string">"/brands"</span>,<span class="string">"/brands/*"</span>);</span><br><span class="line"></span><br><span class="line">   &#125;</span><br><span class="line">&gt;&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>在配置类扫描拦截器路径</li>
+</ul>
+<p>注意：可以将拦截器放在Controller目录下，SpringMvc配置类不需要添加扫描目录</p>
+<h4 id="拦截器简化配置："><a href="#拦截器简化配置：" class="headerlink" title="拦截器简化配置："></a><strong>拦截器简化配置：</strong></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&gt;@Configuration</span><br><span class="line">&gt;@ComponentScan(&#123;&quot;com.ff.controller&quot;&#125;)</span><br><span class="line">&gt;&#x2F;&#x2F;开启Mvc容器</span><br><span class="line">&gt;@EnableWebMvc</span><br><span class="line">&gt;public class SpingMvcConfig  implements WebMvcConfigurer &#123;</span><br><span class="line"></span><br><span class="line">   @Autowired</span><br><span class="line">   private Projectinterceptor projectinterceptor;</span><br><span class="line">   &#x2F;&#x2F;拦截器配置</span><br><span class="line"></span><br><span class="line">   &#x2F;&#x2F;向前端控制器，注册拦截器对象</span><br><span class="line">   @Override</span><br><span class="line">   public void addInterceptors(InterceptorRegistry registry) &#123;</span><br><span class="line">       &#x2F;&#x2F;添加需要拦截的内容</span><br><span class="line">       registry.addInterceptor(projectinterceptor).addPathPatterns(&quot;&#x2F;brands&quot;,&quot;&#x2F;brands&#x2F;*&quot;);</span><br><span class="line"></span><br><span class="line">   &#125;</span><br><span class="line">&gt;&#125;</span><br></pre></td></tr></table></figure>
+
+</blockquote>
+
+      
+      <!-- 打赏 -->
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2021/11/15/day04_SpringMVC/" data-id="ckvzyymig001k60ue8se69gbt"
+        class="article-share-link">分享</a>
+        
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Spring/" rel="tag">Spring</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+
+</article>
+    
+    <article id="post-day03_Spring的Aop" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2021/11/15/day03_Spring%E7%9A%84Aop/"
+    >Spring_AOP</a
+  >
+</h2>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2021/11/15/day03_Spring%E7%9A%84Aop/" class="article-date">
+  <time datetime="2021-11-15T01:06:19.000Z" itemprop="datePublished">2021-11-15</time>
+</a>
+      
+      
+      
+      
+    </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h3 id="Spring的Aop"><a href="#Spring的Aop" class="headerlink" title="Spring的Aop"></a>Spring的Aop</h3><h4 id="1-Aop的简介"><a href="#1-Aop的简介" class="headerlink" title="1. Aop的简介"></a>1. Aop的简介</h4><blockquote>
+<p>Aop:面向切面编程，一种编程范式，指导开发者如何组织程序结构</p>
+<p>OOP：面向对象编程</p>
+<p>作用：在==不惊动原始设计==的基础上为其进行功能增强。简单的说就是在不改变方法源代码的基础上对方法进行功能增强。</p>
+<p>Spring：无侵入式/无入侵式</p>
+</blockquote>
+<h5 id="1-2-AOP的核心概念"><a href="#1-2-AOP的核心概念" class="headerlink" title="1.2. AOP的核心概念"></a>1.2. AOP的核心概念</h5><blockquote>
+<p><strong>切入点</strong>：匹配连接点的式子</p>
+<ul>
+<li>一个切入点可以是一个连接点也可以是多个连接点</li>
+</ul>
+<p><strong>连接点</strong>：需要执行共性功能的程序</p>
+<p><strong>切面</strong>：通知的共性功能和切入点的对应关系</p>
+<p><strong>通知</strong>：程序中的共性的功能</p>
+<p><strong>通知类</strong>：定义通知的类</p>
+<p>切入点在连接点中；切入点范围小</p>
+</blockquote>
+<h4 id="2-AOP的使用"><a href="#2-AOP的使用" class="headerlink" title="2. AOP的使用"></a>2. AOP的使用</h4><blockquote>
+<ul>
+<li>导入坐标pom.xml</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.mybatis<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mybatis-spring<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.3.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">&gt;<span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line">&gt;<span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.aspectj<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>aspectjweaver<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.9.5<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">&gt;<span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>制作连接点方法</li>
+<li>制作共性功能</li>
+<li>定义切入点</li>
+<li>绑定切入点和通知点的关系（切面 绑定）</li>
+</ul>
+<p><strong>通知类配置</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="meta">@Component</span></span><br><span class="line">&gt;<span class="comment">//通知类</span></span><br><span class="line">&gt;<span class="meta">@Aspect</span></span><br><span class="line">&gt;<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyAdvice</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="comment">//定义切入点   参数    需要切入的方法</span></span><br><span class="line">  <span class="meta">@Pointcut</span>(<span class="string">"execution(void com.ff.dao.BookDao.updata())"</span>)</span><br><span class="line">  <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">pt</span><span class="params">()</span></span>&#123;&#125;;</span><br><span class="line"></span><br><span class="line">  <span class="comment">//绑定切入点和共性方法的关系</span></span><br><span class="line">  <span class="comment">//设置在执行之前</span></span><br><span class="line">  <span class="meta">@Before</span>(<span class="string">"pt()"</span>)</span><br><span class="line">  <span class="function"><span class="keyword">public</span>  <span class="keyword">void</span> <span class="title">mehtod</span><span class="params">()</span></span>&#123;</span><br><span class="line">      System.out.println(System.currentTimeMillis());</span><br><span class="line">  &#125;</span><br><span class="line">&gt;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>说明：切入点定义依托一个不具有实际意义的方法进行，即无参数，无返回值，方法体无实际逻辑</p>
+<p><strong>配置类配置：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="comment">//配置类</span></span><br><span class="line">&gt;<span class="meta">@Configuration</span></span><br><span class="line">&gt;<span class="comment">//扫描注解</span></span><br><span class="line">&gt;<span class="meta">@ComponentScan</span>(<span class="string">"com.ff"</span>)</span><br><span class="line">&gt;<span class="comment">//告知配置类有通知类</span></span><br><span class="line">&gt;<span class="meta">@EnableAspectJAutoProxy</span></span><br><span class="line">&gt;<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SpringConfig</span> </span>&#123;</span><br><span class="line">&gt;&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>dao和实现类：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="comment">//数据层</span></span><br><span class="line">&gt;<span class="meta">@Repository</span></span><br><span class="line">&gt;<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BookDaoImpl</span> <span class="keyword">implements</span> <span class="title">BookDao</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">save</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      System.out.println(System.currentTimeMillis());</span><br><span class="line">      System.out.println(<span class="string">"book dao save ..."</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">updata</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      System.out.println(<span class="string">"book dao updata..."</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&gt;&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+</blockquote>
+<h5 id="2-1-AOP的工作流程"><a href="#2-1-AOP的工作流程" class="headerlink" title="2.1 AOP的工作流程"></a><strong>2.1 AOP的工作流程</strong></h5><blockquote>
+<ol>
+<li><p>Spring容器启动</p>
+</li>
+<li><p>读取所有切面配置中的切入点</p>
+</li>
+<li><p>初始化Bean,判定对应的类中的方法是否匹配到任意切入点</p>
+<ol>
+<li><p>匹配失败，创建对象        </p>
+</li>
+<li><p>匹配成功，创建原始对象（目标对象）的代理对象</p>
+</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//匹配失败</span></span><br><span class="line">com.ff.dao.Impl.BookDaoImpl@<span class="number">10f</span>eca44</span><br><span class="line"><span class="comment">//匹配成功</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">com</span>.<span class="title">sun</span>.<span class="title">proxy</span>.$<span class="title">Proxy21</span>   </span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>获取bean执行方法</p>
+<ol>
+<li>获取bean，调用方法并执行，完成操作</li>
+<li>获取的bean是代理对象时，根据代理对象的运行模式运行原始方法与增强的内容，完成操作</li>
+</ol>
+</li>
+</ol>
+</blockquote>
+<h5 id="2-2-AOP的切入点表达式"><a href="#2-2-AOP的切入点表达式" class="headerlink" title="2.2 AOP的切入点表达式"></a><strong>2.2 AOP的切入点表达式</strong></h5><blockquote>
+<p>切入点表达式：要进行增强的方法的描述方法</p>
+<p>描述方法：</p>
+<ul>
+<li>到接口类  @Pointcut(“execution(void com.ff.dao.BookDao.Updata())”)</li>
+<li>到接口实现类   @Pointcut(“execution(void com.ff.dao.Impl.BookDaoImpl.updata())”)</li>
+</ul>
+<p>切入点表达式标准格式：动作关键字（访问修饰符  返回值   全路径类名.方法名（参数）异常名）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Pointcut</span>(<span class="string">"execution(void com.ff.dao.BookDao.updata())"</span>)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>动作关键字：描述切入点的行为动作 </li>
+<li>访问修饰符: public ，private等  可以省略</li>
+<li>返回值</li>
+<li>包名</li>
+<li>类/接口名</li>
+<li>方法名</li>
+<li>参数</li>
+<li>异常名：方法定义中抛出指定异常，可以省略</li>
+</ul>
+<p>通配符：</p>
+<ul>
+<li><code>*</code>  表示任意一个的类名/包名/方法名/返回值 /任意一个参数</li>
+<li><code>..</code>   表示任意数量的类名/包名/方法名/返回值 /任意参数</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="comment">//任意一个参数</span></span><br><span class="line">&gt;<span class="meta">@Pointcut</span>(<span class="string">"execution(void com.ff.dao.BookDao.updata(*))"</span>)</span><br><span class="line">&gt;<span class="comment">//任意包名/方法名/返回值</span></span><br><span class="line">&gt;<span class="meta">@Pointcut</span>(<span class="string">"execution(* com.ff.dao.*.*())"</span>)</span><br><span class="line">&gt;<span class="comment">//u开头的方法</span></span><br><span class="line">&gt;<span class="meta">@Pointcut</span>(<span class="string">"execution(void com.ff.dao.BookDao.u*())"</span>)</span><br><span class="line">&gt;<span class="comment">//a结尾的方法</span></span><br><span class="line">&gt;<span class="meta">@Pointcut</span>(<span class="string">"execution(void com.ff.dao.BookDao.*a())"</span>)</span><br><span class="line">&gt;<span class="comment">//任意数量参数</span></span><br><span class="line">&gt;<span class="meta">@Pointcut</span>(<span class="string">"execution(void com.ff.dao.BookDao.updata(..))"</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+</blockquote>
+<h5 id="2-3-AOP的通知类型"><a href="#2-3-AOP的通知类型" class="headerlink" title="2.3 AOP的通知类型"></a><strong>2.3 AOP的通知类型</strong></h5><blockquote>
+<p>AOP通知分为五种类型</p>
+<ul>
+<li>前置通知</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//设置在执行之前</span></span><br><span class="line">   <span class="meta">@Before</span>(<span class="string">"pt()"</span>)</span><br><span class="line">   <span class="function"><span class="keyword">public</span>  <span class="keyword">void</span> <span class="title">mehtod</span><span class="params">()</span></span>&#123;</span><br><span class="line">       System.out.println(System.currentTimeMillis());</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>后置通知</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//设置在执行之后</span></span><br><span class="line"><span class="meta">@After</span>(<span class="string">"pt()"</span>)</span><br><span class="line"> <span class="function"><span class="keyword">public</span>  <span class="keyword">void</span> <span class="title">after</span><span class="params">()</span></span>&#123;</span><br><span class="line">     System.out.println(System.currentTimeMillis());</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>环绕通知</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">	<span class="comment">//环绕通知 前后都有</span></span><br><span class="line">   <span class="comment">//参数  代理的原始方法</span></span><br><span class="line">   <span class="comment">//切入点有返回值   通知需要同步返回</span></span><br><span class="line"><span class="comment">//不能确认方法时候会有异常，调用需要强制抛出</span></span><br><span class="line"><span class="comment">//如果有接收返回值，必须设定为Object类型</span></span><br><span class="line">   <span class="meta">@Around</span>(<span class="string">"pt()"</span>)</span><br><span class="line">   <span class="function"><span class="keyword">public</span> Object <span class="title">around</span><span class="params">(ProceedingJoinPoint pjp)</span> <span class="keyword">throws</span> Throwable </span>&#123;</span><br><span class="line">       System.out.println(<span class="string">"around before.."</span>);</span><br><span class="line">       <span class="comment">//对原始方法的调用</span></span><br><span class="line">       pjp.proceed();</span><br><span class="line">       System.out.println(<span class="string">"around after..."</span>);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>返回后通知</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="comment">//方法正常结束好后才会执行</span></span><br><span class="line">  <span class="meta">@AfterReturning</span>(<span class="string">"pt()"</span>)</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">afterReturning</span><span class="params">()</span></span>&#123;</span><br><span class="line">       System.out.println(<span class="string">"afterReturning....."</span>);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>抛出异常后通知</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="comment">//抛出异常后执行</span></span><br><span class="line">   <span class="meta">@AfterThrowing</span>(<span class="string">"pt()"</span>)</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">afterThrowing</span><span class="params">()</span></span>&#123;</span><br><span class="line">       System.out.println(<span class="string">"afterThrowing...."</span>);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+
+</blockquote>
+<h5 id="案例-测试业务层接口执行效率"><a href="#案例-测试业务层接口执行效率" class="headerlink" title="案例:测试业务层接口执行效率"></a>案例:测试业务层接口执行效率</h5><blockquote>
+<p>需求：任意业务层接口执行均可以显示其执行效率（执行时长）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//接口执行效率</span></span><br><span class="line">   <span class="meta">@Around</span>(<span class="string">"pt()"</span>)</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">timeResult</span><span class="params">(ProceedingJoinPoint pjp)</span> <span class="keyword">throws</span> Throwable </span>&#123;</span><br><span class="line">       <span class="comment">//一次执行的签名信息</span></span><br><span class="line">       Signature signature = pjp.getSignature();</span><br><span class="line">       <span class="comment">//类型名</span></span><br><span class="line">       String classname = signature.getDeclaringTypeName();</span><br><span class="line">       <span class="comment">//方法名</span></span><br><span class="line">       String name = signature.getName();</span><br><span class="line"></span><br><span class="line">       <span class="keyword">long</span> startTime = System.currentTimeMillis();</span><br><span class="line">       <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">1000</span>; i++) &#123;</span><br><span class="line">           pjp.proceed();</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">long</span> endTime = System.currentTimeMillis();</span><br><span class="line">       <span class="keyword">long</span> resultTimme = endTime - startTime;</span><br><span class="line">       System.out.println(<span class="string">"执行时间："</span> + classname + <span class="string">"."</span> + name + <span class="string">"-----&gt;"</span> + resultTimme + <span class="string">"ms"</span>);</span><br><span class="line"></span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+
+</blockquote>
+<h5 id="2-4-AOP通知获取数据"><a href="#2-4-AOP通知获取数据" class="headerlink" title="2.4 AOP通知获取数据"></a>2.4 AOP通知获取数据</h5><blockquote>
+<ul>
+<li>获取参数<ul>
+<li>JoinPoint：是和前置、后置、返回后、抛出异常后通知</li>
+<li>ProceedJointPoint：适用于环绕通知</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"> <span class="meta">@After</span>(<span class="string">"pt()"</span>)</span><br><span class="line"> <span class="meta">@Before</span>(<span class="string">"pt()"</span>)</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">mehtod</span><span class="params">(JoinPoint jp)</span> </span>&#123;</span><br><span class="line">       <span class="comment">//获取参数</span></span><br><span class="line">       Object[] args = jp.getArgs();</span><br><span class="line">       System.out.println(System.currentTimeMillis());</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Around</span>(<span class="string">"pt()"</span>)</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">around</span><span class="params">(ProceedingJoinPoint pjp)</span> <span class="keyword">throws</span> Throwable </span>&#123;</span><br><span class="line">       <span class="comment">//获取参数	可以修改后再次回传</span></span><br><span class="line">       Object[] args = pjp.getArgs();</span><br><span class="line">       System.out.println(<span class="string">"around before.."</span>);</span><br><span class="line">       <span class="comment">//对原始方法的调用</span></span><br><span class="line">       pjp.proceed();</span><br><span class="line">       System.out.println(<span class="string">"around after..."</span>);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>获取返回值<ul>
+<li>返回后通知</li>
+<li>环绕通知</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//方法正常结束好后才会执行</span></span><br><span class="line">   <span class="meta">@AfterReturning</span>(value = <span class="string">"pt()"</span>,returning = <span class="string">"ret"</span>)</span><br><span class="line"><span class="comment">//参数的顺序不可变</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">afterReturning</span><span class="params">(JoinPoint jp,String ret)</span> </span>&#123;</span><br><span class="line">       System.out.println(<span class="string">"afterReturning....."</span>+ret);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>获取异常<ul>
+<li>抛出异常后通知</li>
+<li>环绕通知</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//抛出异常后执行</span></span><br><span class="line"><span class="meta">@AfterThrowing</span>(value = <span class="string">"pt()"</span>,throwing = <span class="string">"t"</span>)</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">afterThrowing</span><span class="params">(Throwable t)</span> </span>&#123;</span><br><span class="line">       System.out.println(<span class="string">"afterThrowing...."</span>+t);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="Around的五类通知整合格式"><a href="#Around的五类通知整合格式" class="headerlink" title="Around的五类通知整合格式"></a><strong>Around的五类通知整合格式</strong></h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Around</span>(<span class="string">"pt()"</span>)</span><br><span class="line">   <span class="function"><span class="keyword">public</span> Object <span class="title">aroundAll</span><span class="params">(ProceedingJoinPoint pjp)</span> </span>&#123;</span><br><span class="line">       Object proceed = <span class="keyword">null</span>;</span><br><span class="line">       <span class="keyword">try</span> &#123;</span><br><span class="line">           System.out.println(<span class="string">"前置.."</span>);</span><br><span class="line">           <span class="comment">//对原始方法的调用</span></span><br><span class="line">           proceed = pjp.proceed();</span><br><span class="line">           System.out.println(<span class="string">"返回后..."</span>);</span><br><span class="line">       &#125;  <span class="keyword">catch</span> (Throwable throwable) &#123;</span><br><span class="line">           System.out.println(<span class="string">"异常通知..."</span>);</span><br><span class="line">       &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">           System.out.println(<span class="string">"后置通知..."</span>);</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">return</span> proceed;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+
+</blockquote>
+<h4 id="3-AOP的事务管理"><a href="#3-AOP的事务管理" class="headerlink" title="3. AOP的事务管理"></a>3. AOP的事务管理</h4><blockquote>
+<p>事务作用：在数据层保障一系列的数据库操作同失败同成功</p>
+<p>Spring事务作用：在数据层或业务层保障一系列的数据库操作</p>
+<p>使用：</p>
+<ul>
+<li>添加依赖坐标pom.xml</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-jdbc<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">version</span>&gt;</span>5.2.10.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">&gt;<span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>在业务层的接口上添加注解：@Transient  开启事务</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Transient</span></span><br><span class="line">   <span class="function"><span class="keyword">void</span> <span class="title">result</span><span class="params">(String url,String key)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>在配置类添加第三方Bean，设置事务管理器：</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="meta">@Bean</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> PlatformTransactionManager <span class="title">platformTransactionManager</span><span class="params">(DataSource dataSource)</span></span>&#123;</span><br><span class="line">       DataSourceTransactionManager ptm = <span class="keyword">new</span> DataSourceTransactionManager();</span><br><span class="line">       ptm.setDataSource(dataSource);</span><br><span class="line">       <span class="keyword">return</span> ptm;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>在配置类，添加 @EnableTransactionManagement   注解扫描事务注解</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="meta">@EnableTransactionManagement</span></span><br><span class="line">&gt;<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SpringConfig</span> </span>&#123;</span><br><span class="line">&gt;&#125;</span><br></pre></td></tr></table></figure>
+
+
+</blockquote>
+<h5 id="3-1-Spring-事务角色"><a href="#3-1-Spring-事务角色" class="headerlink" title="3.1 Spring 事务角色"></a>3.1 Spring 事务角色</h5><blockquote>
+<p>事务角色：</p>
+<ul>
+<li>事务管理员：发起事务方，在Spring中通常指代业务层开启事务的方法</li>
+<li>事务协调员：加入事务方，在Spring中指代数据层方法，也可以是业务层方法</li>
+</ul>
+</blockquote>
+<h5 id="3-2-Spring-事务属性"><a href="#3-2-Spring-事务属性" class="headerlink" title="3.2 Spring 事务属性"></a>3.2 Spring 事务属性</h5><blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&#x2F;&#x2F;运行时异常、编译时异常</span><br><span class="line">@Transactional(rollbackFor &#x3D; Exception.)</span><br><span class="line">  void result(String url,String key);</span><br></pre></td></tr></table></figure>
+
+
+</blockquote>
+<h5 id="3-3-Spring-事务传播行为"><a href="#3-3-Spring-事务传播行为" class="headerlink" title="3.3 Spring 事务传播行为"></a>3.3 Spring 事务传播行为</h5><blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&#x2F;&#x2F; 表示会新建一个事务，不会受到其他事务的y</span><br><span class="line">&gt;@Transactional(rollbackFor &#x3D; Exception.class,propagation &#x3D; Propagation.REQUIRES_NEW)</span><br><span class="line">   int removeLog(Brand brand);	</span><br></pre></td></tr></table></figure>
+
+
+</blockquote>
+
+      
+      <!-- 打赏 -->
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2021/11/15/day03_Spring%E7%9A%84Aop/" data-id="ckvzyymie001f60ue81kw61ds"
+        class="article-share-link">分享</a>
+        
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Spring/" rel="tag">Spring</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+
+</article>
+    
+    <article id="post-Day12-Filter&amp;Listener&amp;AJAX" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2021/11/15/Day12-Filter&Listener&AJAX/"
+    >Filter&amp;Listener&amp;AJAX</a
+  >
+</h2>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2021/11/15/Day12-Filter&Listener&AJAX/" class="article-date">
+  <time datetime="2021-11-15T01:05:19.000Z" itemprop="datePublished">2021-11-15</time>
+</a>
+      
+      
+      
+      
+    </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h3 id="1-Filter"><a href="#1-Filter" class="headerlink" title="1. Filter"></a>1. Filter</h3><h4 id="1-1-Filter基本概念"><a href="#1-1-Filter基本概念" class="headerlink" title="1.1 Filter基本概念"></a>1.1 Filter基本概念</h4><blockquote>
+<p>概念：Filter表示过滤器，是JavaWeb三大组件(Servlet、Filter、Listener)之一</p>
+<ul>
+<li>过滤器可以吧对资源的请求拦截下来，从而实现一些特殊的功能</li>
+<li>过滤器一般完成一些通用的操作，比如：权限控制，统一编码处理、敏感字符处理等等</li>
+</ul>
+</blockquote>
+<h4 id="1-2-Filter使用"><a href="#1-2-Filter使用" class="headerlink" title="1.2 Filter使用"></a>1.2 Filter使用</h4><blockquote>
+<ol>
+<li><p>写一个类，实现Filter接口</p>
+</li>
+<li><p>配置过滤器</p>
+<ol>
+<li>注解@WebFilter(自己写的)</li>
+<li>web.xml配置 （别人写的）</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;filter&gt;</span><br><span class="line"> 		&lt;filter-name&gt;xx&lt;/filter-name&gt;</span><br><span class="line">		&lt;filter-<span class="class"><span class="keyword">class</span>&gt;&lt;/<span class="title">filter</span>-<span class="title">class</span>&gt;  //全限定名</span></span><br><span class="line"><span class="class"> 	&lt;/<span class="title">filter</span>&gt;</span></span><br><span class="line"><span class="class"> 	&lt;<span class="title">filter</span>-<span class="title">mapping</span>&gt;</span></span><br><span class="line"><span class="class"> 		&lt;<span class="title">filter</span>-<span class="title">name</span>&gt;<span class="title">xx</span>&lt;/<span class="title">filter</span>-<span class="title">name</span>&gt;</span></span><br><span class="line"><span class="class"> 		&lt;<span class="title">url</span>-<span class="title">pattern</span>&gt;/*&lt;/<span class="title">url</span>-<span class="title">pattern</span>&gt;	 //需要拦截哪些资源 等同于@<span class="title">WebFilter</span></span></span><br><span class="line"><span class="class"> 	&lt;/<span class="title">filter</span>-<span class="title">mapping</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>访问资源测试</p>
+</li>
+</ol>
+</blockquote>
+<h4 id="1-3-Filter执行流程"><a href="#1-3-Filter执行流程" class="headerlink" title="1.3 Filter执行流程"></a>1.3 Filter执行流程</h4><blockquote>
+<ul>
+<li>放行后访问对应资源，资源访问完成后，会继续回到Filter中</li>
+<li>回到Filter中，执行放行后的逻辑</li>
+</ul>
+</blockquote>
+<h4 id="1-4-Filter拦截路径配置"><a href="#1-4-Filter拦截路径配置" class="headerlink" title="1.4 Filter拦截路径配置"></a>1.4 Filter拦截路径配置</h4><blockquote>
+<ul>
+<li>具体资源：/index.jsp        访问这个index.jsp才会拦截</li>
+<li>目录拦截：/user/*             访问目录/user下的资源</li>
+<li>后缀名拦截：*.jsp             访问后缀名是jsp的资源</li>
+<li>拦截所有：/*                      访问所有资源</li>
+</ul>
+</blockquote>
+<h4 id="1-5-Filter过滤器链"><a href="#1-5-Filter过滤器链" class="headerlink" title="1.5 Filter过滤器链"></a>1.5 Filter过滤器链</h4><blockquote>
+<ul>
+<li><p>一个Web应用，可以配置多个过滤器，这样的过来称之为过滤器链</p>
+</li>
+<li><p>注解配置的过滤器，按照==类名的自然排序==进行执行</p>
+</li>
+<li><p>web.xml配置的过滤器，按照filter-mapper的编写顺序进行执行</p>
+</li>
+<li><p>如果注解和web.xml的混合过滤器/，web.xml优先顺序，后执行注解过滤器</p>
+</li>
+</ul>
+</blockquote>
+<h4 id="1-5-Filter使用细节"><a href="#1-5-Filter使用细节" class="headerlink" title="1.5 Filter使用细节"></a>1.5 Filter使用细节</h4><blockquote>
+<ul>
+<li>注意Filter的执行顺序</li>
+<li>Filter执行后需要放行的资源，除需要拦截界面外的资源需要放行</li>
+</ul>
+</blockquote>
+<h3 id="2-Listener"><a href="#2-Listener" class="headerlink" title="2. Listener"></a>2. Listener</h3><h4 id="2-1-Listener"><a href="#2-1-Listener" class="headerlink" title="2.1 Listener"></a>2.1 Listener</h4><blockquote>
+<p>listenter：监听器</p>
+<p>使用：</p>
+<ul>
+<li>实现ServletCountextListener接口</li>
+<li>重写接口方法</li>
+<li>在类上添加@WebListener注解</li>
+</ul>
+</blockquote>
+<h3 id="3-AJAX"><a href="#3-AJAX" class="headerlink" title="3. AJAX"></a>3. AJAX</h3><blockquote>
+<ul>
+<li><p>概念：AJAX：异步的JavaScript和XML</p>
+</li>
+<li><p>作用：</p>
+</li>
+<li><p>与服务器进行数据交换：通过AJAX可以给服务器发送请求，并获取服务器响应的数据</p>
+<p>使用AJAX和服务器通信，就可以使用HTML+AJAX替换JSP页面</p>
+</li>
+<li><p>异步交互：可以在不重新加载整个页面的情况下，与服务器交换数据并更新网页的技术：如：搜索联想，用户是否可用校验</p>
+</li>
+<li><p>同步异步区别：</p>
+<ul>
+<li>同步：浏览器发送请求需要等待服务器响应</li>
+<li>异步：浏览器发送请求不需要等待服务器响应，可以同时进行</li>
+</ul>
+</li>
+</ul>
+<p>AJAX可以执行局部更新</p>
+</blockquote>
+<h4 id="3-1-异步框架Axios"><a href="#3-1-异步框架Axios" class="headerlink" title="3.1 异步框架Axios"></a>3.1 异步框架Axios</h4><blockquote>
+<p>Axios 对原生的AJAX进行封装，简化书写。</p>
+<p>Axios官网是：<code>https://www.axios-http.cn</code></p>
+<p>导入：axios-0.18.0.js包</p>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">axios(&#123;</span><br><span class="line">           method:<span class="string">"post"</span>,  &lt;--post/get --&gt;</span><br><span class="line">           url:<span class="string">"http://localhost:8848/selectUserByIdServlet"</span>,</span><br><span class="line">           data:<span class="string">"username="</span>+username	</span><br><span class="line">               &lt;-- 全限定类名 get需要添加在后面参数,post可以使用data标签 --&gt;</span><br><span class="line">       &#125;).then(function (resp) &#123;</span><br><span class="line">          alert(resp.data);       </span><br><span class="line">       &#125;)</span><br></pre></td></tr></table></figure>
+
+<p><code>axios()</code> 是用来发送异步请求的，小括号中使用 js 对象传递请求相关的参数：</p>
+<ul>
+<li><code>method</code> 属性：用来设置请求方式的。取值为 <code>get</code> 或者 <code>post</code>。</li>
+<li><code>url</code> 属性：用来书写请求的资源路径。如果是 <code>get</code> 请求，需要将请求参数拼接到路径的后面，格式为： <code>url?参数名=参数值&amp;参数名2=参数值2</code>。</li>
+<li><code>data</code> 属性：作为请求体被发送的数据。也就是说如果是 <code>post</code> 请求的话，数据需要作为 <code>data</code> 属性的值。</li>
+</ul>
+<p><code>then()</code> 需要传递一个匿名函数。我们将 <code>then()</code> 中传递的匿名函数称为 ==回调函数==，意思是该匿名函数在发送请求时不会被调用，而是在成功响应后调用的函数。而该回调函数中的 <code>resp</code> 参数是对响应的数据进行封装的对象，通过 <code>resp.data</code> 可以获取到响应的数据。</p>
+<p><strong>别名</strong></p>
+<p>了方便起见， Axios 已经为所有支持的请求方法提供了别名。如下：</p>
+<ul>
+<li><code>get</code> 请求 ： <code>axios.get(url[,config])</code></li>
+<li><code>delete</code> 请求 ： <code>axios.delete(url[,config])</code></li>
+<li><code>head</code> 请求 ： <code>axios.head(url[,config])</code></li>
+<li><code>options</code> 请求 ： <code>axios.option(url[,config])</code></li>
+<li><code>post</code> 请求：<code>axios.post(url[,data[,config])</code></li>
+<li><code>put</code> 请求：<code>axios.put(url[,data[,config])</code></li>
+<li><code>patch</code> 请求：<code>axios.patch(url[,data[,config])</code></li>
+</ul>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&lt;-- get --&gt;</span><br><span class="line">&gt;axios.get(<span class="string">"http://localhost:8080/ajax-demo/axiosServlet?username=zhangsan"</span>).then(function (resp) &#123;</span><br><span class="line">   alert(resp.data);</span><br><span class="line">&gt;&#125;);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&lt;-- post --&gt;</span><br><span class="line">&gt;axios.post(<span class="string">"http://localhost:8080/ajax-demo/axiosServlet"</span>,<span class="string">"username=zhangsan"</span>).then(function (resp) &#123;</span><br><span class="line">   alert(resp.data);</span><br><span class="line">&gt;&#125;)</span><br></pre></td></tr></table></figure>
+
+
+</blockquote>
+<h3 id="4-JSON"><a href="#4-JSON" class="headerlink" title="4. JSON"></a>4. JSON</h3><blockquote>
+<p>格式：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt;var 变量名 = '&#123;"key":value,"key":value,...&#125;';</span><br></pre></td></tr></table></figure>
+
+<p><code>JSON</code> 串的键要求必须使用双引号括起来，而值根据要表示的类型确定。value 的数据类型分为如下</p>
+<ul>
+<li>数字（整数或浮点数）</li>
+<li>字符串（使用双引号括起来）</li>
+<li>逻辑值（true或者false）</li>
+<li>数组（在方括号中）</li>
+<li>对象（在花括号中）</li>
+<li>null</li>
+</ul>
+<p>JSON和实体类的相互转换</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"> User user = <span class="keyword">new</span> User();</span><br><span class="line">      user.setId(<span class="number">1</span>);</span><br><span class="line">      user.setUsername(<span class="string">"李四"</span>);</span><br><span class="line">      user.setPassword(<span class="string">"123"</span>);</span><br><span class="line">      user.setTel(<span class="string">"111111"</span>);</span><br><span class="line"><span class="comment">//实体对象转换成JSON语句</span></span><br><span class="line">      String string = JSON.toJSONString(user);</span><br><span class="line">      System.out.println(<span class="string">"string = "</span> + string);</span><br><span class="line"><span class="comment">//JSON解析成实体对象</span></span><br><span class="line">      User user1 = JSON.parseObject(string, User<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">      System.out.println(<span class="string">"user1 = "</span> + user1);</span><br></pre></td></tr></table></figure>
+
+</blockquote>
+
+      
+      <!-- 打赏 -->
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2021/11/15/Day12-Filter&Listener&AJAX/" data-id="ckvzyymi2000t60ue4o3l2ct1"
+        class="article-share-link">分享</a>
+        
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java-Web/" rel="tag">Java Web</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+
+</article>
+    
     <article id="post-day02_注解开发" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
@@ -326,7 +1078,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2021/11/07/day02_%E6%B3%A8%E8%A7%A3%E5%BC%80%E5%8F%91/" data-id="ckvp9h7qr00158cue23sb8fkc"
+      <a data-url="http://yoursite.com/2021/11/07/day02_%E6%B3%A8%E8%A7%A3%E5%BC%80%E5%8F%91/" data-id="ckvzyymib001a60ue2ha87m7a"
         class="article-share-link">分享</a>
         
       
@@ -639,7 +1391,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2021/11/06/day01_Spring/" data-id="ckvp9h7qo00108cue29ds63pm"
+      <a data-url="http://yoursite.com/2021/11/06/day01_Spring/" data-id="ckvzyymi7001360ue2501dbez"
         class="article-share-link">分享</a>
         
       
@@ -891,7 +1643,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2021/10/31/Day10_JSP/" data-id="ckvp9h7qd000q8cuedg51b4lo"
+      <a data-url="http://yoursite.com/2021/10/31/Day10_JSP/" data-id="ckvzyymi0000q60ue61ra80te"
         class="article-share-link">分享</a>
         
       
@@ -1022,7 +1774,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2021/10/28/Day05_MyBatis%E9%AB%98%E7%BA%A7/" data-id="ckvp9h7qz001f8cue2xttdkdw"
+      <a data-url="http://yoursite.com/2021/10/28/Day05_MyBatis%E9%AB%98%E7%BA%A7/" data-id="ckvzyymi3000v60ueh2li1vxa"
         class="article-share-link">分享</a>
         
       
@@ -1207,7 +1959,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2021/10/20/Day04_Maven%E5%92%8CMyBatis/" data-id="ckvp9h7q4000h8cuecnao7cru"
+      <a data-url="http://yoursite.com/2021/10/20/Day04_Maven%E5%92%8CMyBatis/" data-id="ckvzyymhz000o60uea1ofez14"
         class="article-share-link">分享</a>
         
       
@@ -1395,7 +2147,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2021/10/19/day03_JDBC/" data-id="ckvp9h7rd001t8cuefycf7myq"
+      <a data-url="http://yoursite.com/2021/10/19/day03_JDBC/" data-id="ckvzyymif001i60ue3mtp3wde"
         class="article-share-link">分享</a>
         
       
@@ -1620,833 +2372,11 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2021/10/17/Day02_MySQL%E9%AB%98%E7%BA%A7/" data-id="ckvp9h7q9000m8cue2sle9pvx"
+      <a data-url="http://yoursite.com/2021/10/17/Day02_MySQL%E9%AB%98%E7%BA%A7/" data-id="ckvzyymhy000m60ue5bt753l6"
         class="article-share-link">分享</a>
         
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-  
-  
-
-  
-
-</article>
-    
-    <article id="post-Day01_MySQL和Navicat" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2021/10/16/Day01_MySQL%E5%92%8CNavicat/"
-    >MySQL基础</a
-  >
-</h2>
-  
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2021/10/16/Day01_MySQL%E5%92%8CNavicat/" class="article-date">
-  <time datetime="2021-10-16T13:19:19.000Z" itemprop="datePublished">2021-10-16</time>
-</a>
-      
-      
-      
-      
-    </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-      <h3 id="1-数据库"><a href="#1-数据库" class="headerlink" title="1. 数据库"></a>1. 数据库</h3><h4 id="1-1-数据库相关概念"><a href="#1-1-数据库相关概念" class="headerlink" title="1.1 数据库相关概念"></a>1.1 数据库相关概念</h4><blockquote>
-<p>数据库：</p>
-<ul>
-<li>存储数据的仓库，数据是有组织的进行存储</li>
-<li>英文：DataBase ，简称DB</li>
-</ul>
-<p>数据库管理系统：</p>
-<ul>
-<li>管理数据库的大型软件</li>
-<li>英文：DataBase Management System，简称 DBMS</li>
-</ul>
-<p>SQL：</p>
-<ul>
-<li>英文：Structured Query Language，简称 SQL，结构化查询语言</li>
-<li>操作关系型数据库的编程语言</li>
-<li>定义操作所有关系型数据库的统一标准</li>
-</ul>
-</blockquote>
-<h4 id="1-2-SQ分类"><a href="#1-2-SQ分类" class="headerlink" title="1.2 SQ分类"></a>1.2 SQ分类</h4><blockquote>
-<p>DDL:操作数据库、表</p>
-<p>DML:操作表中数据的增删改</p>
-<p>DQL:操作表中数据进行查询</p>
-<p>DCL:对数据库中进行权限控制</p>
-<p>基本语句：</p>
-<p><strong>进入数据库</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;#mysql -u 用户名 -p 密码</span><br><span class="line">&gt;mysql -u root -p root</span><br></pre></td></tr></table></figure>
-
-<p><strong>展示所有数据库</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt;show databases;</span><br></pre></td></tr></table></figure>
-
-<p><strong>进入使用数据库</strong>：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt;use 数据库名；</span><br></pre></td></tr></table></figure>
-</blockquote>
-<h4 id="1-3-DDL的语句"><a href="#1-3-DDL的语句" class="headerlink" title="1.3 DDL的语句:"></a>1.3 DDL的语句:</h4><blockquote>
-<p><strong>查看表结构</strong>：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt;desc 表名;</span><br></pre></td></tr></table></figure>
-
-<p><strong>更换表名</strong>：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt;ALTER TABLE 表名 RENAME TO 新的表名</span><br></pre></td></tr></table></figure>
-
-<p><strong>添加一列</strong>：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt;ALTER TABLE 表名 ADD 列名  数据类型；</span><br></pre></td></tr></table></figure>
-
-<p><strong>修改数据类型</strong>：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ALTER TABLE 表名 MODIFY 列名 新数据类型；</span><br></pre></td></tr></table></figure>
-
-<p><strong>修改列名和数据类型</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ALTER TABLE 表名 CHANGE 列名 新列名 新数据类型；</span><br></pre></td></tr></table></figure>
-
-<p><strong>删除列</strong>：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ALTER TABLE 表名 DROP 列名</span><br></pre></td></tr></table></figure>
-
-
-</blockquote>
-<h4 id="1-4-DML的语句"><a href="#1-4-DML的语句" class="headerlink" title="1.4 DML的语句"></a>1.4 DML的语句</h4><blockquote>
-<p><strong>查看所有数据</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;-- 查看所有数据</span><br><span class="line">&gt;SELECT * from stu;</span><br></pre></td></tr></table></figure>
-
-
-
-<p><strong>添加指定列数据</strong>：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;-- 添加指定列数据 表名（列名1，列名2） VALUES (值1，值2。。)</span><br><span class="line">&gt;INSERT INTO stu(id,&#96;name&#96;,age,sex) VALUES (11,&#39;张三&#39;,10,&#39;男&#39;);</span><br></pre></td></tr></table></figure>
-
-<p><strong>给全部列添加数据</strong>：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;-- 给全部列添加数据</span><br><span class="line">&gt;-- 给所有列添加数据，列名的列表可以省略的</span><br><span class="line">&gt;INSERT INTO tb_user (id,&#96;name&#96;,sex,birthday,sroce,emile,tell,state) VALUES (2,&#39;李四&#39;,&#39;男&#39;,&#39;1999-11-11&#39;,88.88,&#39;lisi@itcast.cn&#39;,&#39;13888888888&#39;,1);</span><br><span class="line"></span><br><span class="line">&gt;INSERT INTO tb_user VALUES (2,&#39;李四&#39;,&#39;男&#39;,&#39;1999-11-11&#39;,88.88,&#39;lisi@itcast.cn&#39;,&#39;13888888888&#39;,1);</span><br></pre></td></tr></table></figure>
-
-<p><strong>批量添加数据</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;-- 批量添加数据</span><br><span class="line">&gt;INSERT INTO tb_user VALUES </span><br><span class="line">(4,&#39;李四&#39;,&#39;男&#39;,&#39;1999-11-11&#39;,88.88,&#39;lisi@itcast.cn&#39;,&#39;13888888888&#39;,1),</span><br><span class="line">(5,&#39;李四&#39;,&#39;男&#39;,&#39;1999-11-11&#39;,88.88,&#39;lisi@itcast.cn&#39;,&#39;13888888888&#39;,1),</span><br><span class="line">(6,&#39;李四&#39;,&#39;男&#39;,&#39;1999-11-11&#39;,88.88,&#39;lisi@itcast.cn&#39;,&#39;13888888888&#39;,1);</span><br></pre></td></tr></table></figure>
-
-<p><strong>删除数据</strong>:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;-- 	删除表内数据</span><br><span class="line">&gt;DELETE FROM tb_user WHERE (条件)id &#x3D; 1;</span><br></pre></td></tr></table></figure>
-
-<p><strong>删除表中所有的数据</strong>:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt;delete from 表名;</span><br></pre></td></tr></table></figure>
-</blockquote>
-<h4 id="1-5-DQL的语句"><a href="#1-5-DQL的语句" class="headerlink" title="1.5 DQL的语句"></a>1.5 DQL的语句</h4><blockquote>
-<p>基础语法：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&gt;SELECT </span><br><span class="line">   字段列表</span><br><span class="line">&gt;FROM </span><br><span class="line">   表名列表 </span><br><span class="line">&gt;WHERE </span><br><span class="line">   条件列表</span><br><span class="line">&gt;GROUP BY</span><br><span class="line">   分组字段</span><br><span class="line">&gt;HAVING</span><br><span class="line">   分组后条件</span><br><span class="line">&gt;ORDER BY</span><br><span class="line">   排序字段</span><br><span class="line">&gt;LIMIT</span><br><span class="line">   分页限定</span><br></pre></td></tr></table></figure>
-
-
-</blockquote>
-<h5 id="1-5-1-分组查询"><a href="#1-5-1-分组查询" class="headerlink" title="1.5.1 分组查询"></a>1.5.1 分组查询</h5><blockquote>
-<p><strong>查询多个字段：</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;-- 查询多个字段</span><br><span class="line">&gt;SELECT * FROM tb_user;</span><br></pre></td></tr></table></figure>
-
-<p> <strong>去除重复记录：</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;-- 去除重复记录</span><br><span class="line">&gt;SELECT DISTINCT &#96;name&#96; FROM tb_user;</span><br></pre></td></tr></table></figure>
-
-<p><strong>起别名  as可以省略：</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;-- 起别名  as可以省略</span><br><span class="line">&gt;SELECT id as 学号,&#96;name&#96; as 姓名,sex AS 性别,birthday 出生月份 FROM tb_user;</span><br></pre></td></tr></table></figure>
-</blockquote>
-<h5 id="1-5-2-条件查询"><a href="#1-5-2-条件查询" class="headerlink" title="1.5.2 条件查询"></a>1.5.2 条件查询</h5><blockquote>
-<p>基本格式：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt;SELECT 字段列表 FROM 表名 WHERE 条件列表;</span><br></pre></td></tr></table></figure>
-
-<p><strong>条件</strong>：</p>
-<table>
-<thead>
-<tr>
-<th>符号</th>
-<th>功能</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>&gt;</td>
-<td>大于</td>
-</tr>
-<tr>
-<td>&lt;</td>
-<td>小于</td>
-</tr>
-<tr>
-<td>&gt;=</td>
-<td>大于等于</td>
-</tr>
-<tr>
-<td>&lt;=</td>
-<td>大于等于</td>
-</tr>
-<tr>
-<td>=</td>
-<td>等于</td>
-</tr>
-<tr>
-<td>&lt;&gt; 或!=</td>
-<td>不等于</td>
-</tr>
-<tr>
-<td>BETWEEN..AND..</td>
-<td>在某个范围之内</td>
-</tr>
-<tr>
-<td>IN(..)</td>
-<td>多选一</td>
-</tr>
-<tr>
-<td>LIKE 占位符</td>
-<td>模糊查询 %是多个任意字符</td>
-</tr>
-<tr>
-<td>IS NULL</td>
-<td>是null</td>
-</tr>
-<tr>
-<td>IS NOT NULL</td>
-<td>不是null</td>
-</tr>
-<tr>
-<td>AND 或 &amp;&amp;</td>
-<td>并且</td>
-</tr>
-<tr>
-<td>OR 或 ||</td>
-<td>或者</td>
-</tr>
-<tr>
-<td>NOT或！</td>
-<td>非，不是</td>
-</tr>
-</tbody></table>
-<p>示例：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">&gt;-- 条件查询</span><br><span class="line"></span><br><span class="line">&gt;-- 1. 查询年龄大于20岁的学院信息</span><br><span class="line">&gt;select id,name,age,sex,address,math,english,hire_date from stu where age &gt; 20;</span><br><span class="line"></span><br><span class="line">&gt;-- 2. 查询年龄大于等于20岁的学院信息</span><br><span class="line">&gt;select id,name,age,sex,address,math,english,hire_date from stu where age &gt;&#x3D; 20;</span><br><span class="line"></span><br><span class="line">&gt;-- 3. 查询年龄大于等于30 并且 年龄小于等于30的学员信息</span><br><span class="line">&gt;select id,name,age,sex,address,math,english,hire_date from stu where age &gt;&#x3D; 20 and age &lt;&#x3D; 30;</span><br><span class="line"></span><br><span class="line">&gt;-- 4. 查询入学日期</span><br><span class="line">&gt;select id,name,age,sex,address,math,english,hire_date from stu where hire_date between &#39;1998-09-01&#39; and &#39;1999-09-01&#39;;</span><br><span class="line"></span><br><span class="line">&gt;-- 5. 查询年龄等于20岁的学员信息</span><br><span class="line">&gt;select * from stu where age &#x3D; 20;</span><br><span class="line"></span><br><span class="line">&gt;-- 6. 查询年龄不等于20岁的学员信息</span><br><span class="line">&gt;select * from stu where age !&#x3D; 20;</span><br><span class="line">&gt;select * from stu where age &lt;&gt; 20;</span><br><span class="line"></span><br><span class="line">&gt;-- 7. 查询20岁，45岁，55岁的学员信息</span><br><span class="line">&gt;select * from stu where age &#x3D; 20 or age &#x3D; 45 or age &#x3D; 55;</span><br><span class="line">&gt;select * from stu where age in (20,45,55);</span><br></pre></td></tr></table></figure>
-</blockquote>
-<h5 id="1-5-3-糊查询"><a href="#1-5-3-糊查询" class="headerlink" title="1.5.3 糊查询"></a>1.5.3 糊查询</h5><blockquote>
-<p>使用LIKE关键字，使用通配符进行占位</p>
-<ul>
-<li>_：表示单个字符</li>
-<li>%：表示任意字符</li>
-</ul>
-<ul>
-<li>查询姓’马’的学员信息</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;-- 查询姓&#39;马&#39;的学员信息</span><br><span class="line">&gt;select * from stu where name like &#39;马%&#39;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>查询姓第二个字是’化’的学员信息</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;-- 查询姓第二个字是&#39;化&#39;的学员信息</span><br><span class="line">&gt;select * from stu where name like &#39;_化%&#39;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>查询名字中包含’徳’的学员信息</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;-- 查询名字中包含&#39;徳&#39;的学员信息</span><br><span class="line">&gt;select * from stu where name like &#39;%德%&#39;</span><br></pre></td></tr></table></figure>
-</blockquote>
-<h5 id="1-5-4-排序查询"><a href="#1-5-4-排序查询" class="headerlink" title="1.5.4 排序查询"></a>1.5.4 排序查询</h5><blockquote>
-<p>排序方式：</p>
-<ul>
-<li>ASC 升序排列</li>
-<li>DESC 降序排列</li>
-</ul>
-<p><strong>按照升序排列:</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;-- 1. 年龄按照升序排列</span><br><span class="line">&gt;select * from stu order by age ASC;</span><br></pre></td></tr></table></figure>
-
-<p><strong>数学成绩按照降序排列：</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;-- 2. 数学成绩按照降序排列</span><br><span class="line">&gt;select * from stu order by math DEsc;</span><br></pre></td></tr></table></figure>
-
-<p><strong>数学成绩按照降排列,如果数学成绩一样 英语成绩按照降序排列</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;-- 4. 数学成绩按照降排列,如果数学成绩一样 英语成绩按照降序排列</span><br><span class="line">&gt;SELECT * FROM stu ORDER BY math DESC , english DESC;</span><br></pre></td></tr></table></figure>
-
-<p>注意：如果第一个条件一样，执行第二个条件</p>
-</blockquote>
-<h5 id="1-5-5-聚合查询"><a href="#1-5-5-聚合查询" class="headerlink" title="1.5.5 聚合查询"></a>1.5.5 聚合查询</h5><blockquote>
-<p>函数分类：</p>
-<table>
-<thead>
-<tr>
-<th>函数名</th>
-<th>功能</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>count(列名)</td>
-<td>统计数量（一般选用不为null的列）</td>
-</tr>
-<tr>
-<td>max(列名)</td>
-<td>最大值</td>
-</tr>
-<tr>
-<td>min(列名)</td>
-<td>最小值</td>
-</tr>
-<tr>
-<td>sum(列名)</td>
-<td>求和</td>
-</tr>
-<tr>
-<td>avg(列名)</td>
-<td>平均值</td>
-</tr>
-</tbody></table>
-<p>格式：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt;SELECT 聚合函数名（列名） FROM 表名；</span><br></pre></td></tr></table></figure>
-
-<p>​    ==null值不参与所有聚合函数运算==</p>
-<p>示例：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">&gt;&#x2F;*</span><br><span class="line">&gt;取值：</span><br><span class="line">主键</span><br><span class="line">*</span><br><span class="line">&gt;*&#x2F;</span><br><span class="line"></span><br><span class="line">&gt;-- 1. 统计班级一共有多少学生</span><br><span class="line">&gt;select count(*) from stu;</span><br><span class="line"></span><br><span class="line">&gt;-- 2. 查询数学成绩的最高分</span><br><span class="line">&gt;select max(math) from stu;</span><br><span class="line"></span><br><span class="line">&gt;-- 3. 查询数学成绩的最低分</span><br><span class="line">&gt;select min(math) from stu;</span><br><span class="line"></span><br><span class="line">&gt;-- 4. 查询数学成绩的总分</span><br><span class="line">&gt;select sum(math) from stu;</span><br><span class="line"></span><br><span class="line">&gt;-- 5. 查询数学成绩的平均分</span><br><span class="line">&gt;select avg(math) from stu;</span><br><span class="line"></span><br><span class="line">&gt;-- 6. 查询英语成绩的最低分</span><br><span class="line">&gt;select min(english) from stu;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-</blockquote>
-
-      
-      <!-- 打赏 -->
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2021/10/16/Day01_MySQL%E5%92%8CNavicat/" data-id="ckvp9h7q7000j8cue51m30vew"
-        class="article-share-link">分享</a>
-        
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-  
-  
-
-  
-
-</article>
-    
-    <article id="post-DAY24_配置文件和枚举" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2021/10/15/DAY24_%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%92%8C%E6%9E%9A%E4%B8%BE/"
-    >配置文件和枚举、注解</a
-  >
-</h2>
-  
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2021/10/15/DAY24_%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%92%8C%E6%9E%9A%E4%B8%BE/" class="article-date">
-  <time datetime="2021-10-15T05:45:22.000Z" itemprop="datePublished">2021-10-15</time>
-</a>
-      
-      
-      
-      
-    </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-      <h3 id="45-XML"><a href="#45-XML" class="headerlink" title="45. XML"></a>45. XML</h3><h4 id="45-1-XML的概述"><a href="#45-1-XML的概述" class="headerlink" title="45.1 XML的概述"></a>45.1 XML的概述</h4><blockquote>
-<p><strong>1.xml作为配置文件的优势</strong></p>
-<ul>
-<li>可读性好</li>
-<li>可维护性高</li>
-</ul>
-<p><strong>2.什么是XML?</strong></p>
-<p>XML的全称为(Extensible Markup Language)，是一种可扩展的标记语言<br>标记语言: 通过标签来描述数据的一门语言(标签有时我们也将其称之为元素)<br>可扩展：标签的名字是可以自定义的</p>
-<p>XML文件是由很多标签组成的,而标签名是可以自定义的</p>
-<p>3.作用</p>
-<ul>
-<li>​    用于进行数据存储和数据交换</li>
-<li>​    作为软件的配置文件</li>
-</ul>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="comment">//格式抬头</span></span><br><span class="line">&gt;&lt;?xml version=<span class="string">"1.0"</span> encoding=<span class="string">"UTF-8"</span>?&gt;</span><br><span class="line"></span><br><span class="line">&gt;&lt;web-app &gt; <span class="comment">//首尾不能缺</span></span><br><span class="line"> &lt;welcome-file-list&gt;</span><br><span class="line">   &lt;welcome-file&gt;index.html&lt;/welcome-file&gt;</span><br><span class="line">   &lt;welcome-file&gt;index.htm&lt;/welcome-file&gt;</span><br><span class="line">   &lt;welcome-file&gt;index.jsp&lt;/welcome-file&gt;</span><br><span class="line">   &lt;welcome-file&gt;default.html&lt;/welcome-file&gt;</span><br><span class="line">   &lt;welcome-file&gt;default.htm&lt;/welcome-file&gt;</span><br><span class="line">   &lt;welcome-file&gt;default.jsp&lt;/welcome-file&gt;</span><br><span class="line"> &lt;/welcome-file-list&gt;</span><br><span class="line">&gt;&lt;/web-app&gt;</span><br></pre></td></tr></table></figure>
-
-
-</blockquote>
-<h4 id="45-2-XMl的定义规则"><a href="#45-2-XMl的定义规则" class="headerlink" title="45.2 XMl的定义规则"></a>45.2 XMl的定义规则</h4><blockquote>
-<ul>
-<li>标签必须有关闭标签</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&lt;student&gt; &lt;/student&gt;</span><br><span class="line"> 前边的是开始标签，后边的是结束标签</span><br><span class="line">&gt;&lt;address/&gt;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>XML标签对大小写敏感</li>
-</ul>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt;&lt;Student&gt;这是错误的&lt;/student&gt;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>标签中可以定义属性,属性和标签名空格隔开,属性值必须用引号引起来</li>
-</ul>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt;&lt;student id="1"&gt; &lt;/student&gt;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>标签需要正确的嵌套</li>
-</ul>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;这是正确的: &lt;student id="1"&gt; &lt;name&gt;张三&lt;/name&gt; &lt;/student&gt;</span><br><span class="line">&gt;这是错误的: &lt;student id="1"&gt;&lt;name&gt;张三&lt;/student&gt;&lt;/name&gt;</span><br></pre></td></tr></table></figure>
-
-
-</blockquote>
-<h4 id="45-3-xml语法规则"><a href="#45-3-xml语法规则" class="headerlink" title="45.3 xml语法规则"></a>45.3 xml语法规则</h4><blockquote>
-<p>XML文件中可以存在以下特殊字符</p>
-<ul>
-<li><pre><code class="java">&amp;lt; &lt; 小于
-&amp;gt; &gt; 大于
-&amp;amp; &amp; 和号
-&amp;apos; <span class="string">' 单引号</span>
-<span class="string">&amp;quot; " 引号</span>
-<span class="string"><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure></span>
-<span class="string"></span></code></pre>
-</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&gt;XML文件中可以存在CDATA区</span><br><span class="line"></span><br><span class="line">&gt;- &#96;&#96;&#96;java</span><br><span class="line"> &#x2F;&#x2F;中括号里可以输入任意内容</span><br><span class="line"> &lt;![CDATA[ …内容… ]]&gt;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&gt;文档声明必须是第一行第一列</span><br><span class="line"></span><br><span class="line">&gt;- &#96;&#96;&#96;java</span><br><span class="line">&gt;&lt;?xml version&#x3D;&quot;1.0&quot; encoding&#x3D;&quot;UTF-8&quot; standalone&#x3D;&quot;yes”?&gt;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&gt;- version：该属性是必须存在的</span><br><span class="line">&gt;encoding：该属性不是必须的</span><br><span class="line"></span><br><span class="line">&gt;​	打开当前xml文件的时候应该是使用什么字符编码表(一般取值都是UTF-8)</span><br><span class="line"></span><br><span class="line">&gt;standalone: 该属性不是必须的，描述XML文件是否依赖其他的xml文件，取值为yes&#x2F;no</span><br></pre></td></tr></table></figure>
-</blockquote>
-<h4 id="45-4-xml解析"><a href="#45-4-xml解析" class="headerlink" title="45.4 xml解析"></a>45.4 xml解析</h4><blockquote>
-<p>XML解析:从xml中获取到数据</p>
-<p>数据结构：</p>
-<p>Node对象：Dom结构中最基本的对象，代表每一个标签节点</p>
-<ul>
-<li>Element对象：所有的标签</li>
-<li>Attrubute对象：所有的属性</li>
-<li>Text对象：所有的文本内容</li>
-</ul>
-</blockquote>
-<h4 id="45-5-XML的使用"><a href="#45-5-XML的使用" class="headerlink" title="45.5 XML的使用"></a>45.5 XML的使用</h4><blockquote>
-<p>需求</p>
-<ul>
-<li>解析提供好的xml文件</li>
-<li>将解析到的数据封装到学生对象中</li>
-<li>并将学生对象存储到ArrayList集合中</li>
-<li>遍历集合</li>
-</ul>
-<p>代码示例：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br></pre></td><td class="code"><pre><span class="line">&gt;&lt;?xml version=<span class="string">"1.0"</span> encoding=<span class="string">"UTF-8"</span> ?&gt;</span><br><span class="line">&gt;&lt;!--注释的内容--&gt;</span><br><span class="line">&gt;&lt;!--本xml文件用来描述多个学生信息--&gt;</span><br><span class="line">&gt;&lt;students&gt;</span><br><span class="line"></span><br><span class="line">   &lt;!--第一个学生信息--&gt;</span><br><span class="line">   &lt;student id=<span class="string">"1"</span>&gt;</span><br><span class="line">       &lt;name&gt;张三&lt;/name&gt;</span><br><span class="line">       &lt;age&gt;23&lt;/age&gt;</span><br><span class="line">   &lt;/student&gt;</span><br><span class="line"></span><br><span class="line">   &lt;!--第二个学生信息--&gt;</span><br><span class="line">   &lt;student id=<span class="string">"2"</span>&gt;</span><br><span class="line">       &lt;name&gt;李四&lt;/name&gt;</span><br><span class="line">       &lt;age&gt;24&lt;/age&gt;</span><br><span class="line">   &lt;/student&gt;</span><br><span class="line"></span><br><span class="line">&gt;&lt;/students&gt;</span><br><span class="line"></span><br><span class="line">&gt;<span class="comment">// 上边是已经准备好的student.xml文件</span></span><br><span class="line">&gt;<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Student</span> </span>&#123;</span><br><span class="line">   <span class="keyword">private</span> String id;</span><br><span class="line">   <span class="keyword">private</span> String name;</span><br><span class="line">   <span class="keyword">private</span> <span class="keyword">int</span> age;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="title">Student</span><span class="params">()</span> </span>&#123;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="title">Student</span><span class="params">(String id, String name, <span class="keyword">int</span> age)</span> </span>&#123;</span><br><span class="line">       <span class="keyword">this</span>.id = id;</span><br><span class="line">       <span class="keyword">this</span>.name = name;</span><br><span class="line">       <span class="keyword">this</span>.age = age;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">public</span> String <span class="title">getId</span><span class="params">()</span> </span>&#123;</span><br><span class="line">       <span class="keyword">return</span> id;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setId</span><span class="params">(String id)</span> </span>&#123;</span><br><span class="line">       <span class="keyword">this</span>.id = id;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">       <span class="keyword">return</span> name;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">       <span class="keyword">this</span>.name = name;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getAge</span><span class="params">()</span> </span>&#123;</span><br><span class="line">       <span class="keyword">return</span> age;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAge</span><span class="params">(<span class="keyword">int</span> age)</span> </span>&#123;</span><br><span class="line">       <span class="keyword">this</span>.age = age;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="meta">@Override</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</span><br><span class="line">       <span class="keyword">return</span> <span class="string">"Student&#123;"</span> +</span><br><span class="line">               <span class="string">"id='"</span> + id + <span class="string">'\''</span> +</span><br><span class="line">               <span class="string">", name='"</span> + name + <span class="string">'\''</span> +</span><br><span class="line">               <span class="string">", age="</span> + age +</span><br><span class="line">               <span class="string">'&#125;'</span>;</span><br><span class="line">   &#125;</span><br><span class="line">&gt;&#125;</span><br><span class="line"></span><br><span class="line">&gt;<span class="comment">/**</span></span><br><span class="line"><span class="comment">* 利用dom4j解析xml文件</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">&gt;<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">XmlParse</span> </span>&#123;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> DocumentException </span>&#123;</span><br><span class="line">       <span class="comment">//1.获取一个解析器对象</span></span><br><span class="line">       SAXReader saxReader = <span class="keyword">new</span> SAXReader();</span><br><span class="line">       <span class="comment">//2.利用解析器把xml文件加载到内存中,并返回一个文档对象</span></span><br><span class="line">       Document document = saxReader.read(<span class="keyword">new</span> File(<span class="string">"myxml\\xml\\student.xml"</span>));</span><br><span class="line">       <span class="comment">//3.获取到根标签</span></span><br><span class="line">       Element rootElement = document.getRootElement();</span><br><span class="line">       <span class="comment">//4.通过根标签来获取student标签</span></span><br><span class="line">       <span class="comment">//elements():可以获取调用者所有的子标签.会把这些子标签放到一个集合中返回.</span></span><br><span class="line">       <span class="comment">//elements("标签名"):可以获取调用者所有的指定的子标签,会把这些子标签放到一个集合中并返回</span></span><br><span class="line">       <span class="comment">//List list = rootElement.elements();</span></span><br><span class="line">       List&lt;Element&gt; studentElements = rootElement.elements(<span class="string">"student"</span>);</span><br><span class="line">       <span class="comment">//System.out.println(list.size());</span></span><br><span class="line"></span><br><span class="line">       <span class="comment">//用来装学生对象</span></span><br><span class="line">       ArrayList&lt;Student&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line"></span><br><span class="line">       <span class="comment">//5.遍历集合,得到每一个student标签</span></span><br><span class="line">       <span class="keyword">for</span> (Element element : studentElements) &#123;</span><br><span class="line">           <span class="comment">//element依次表示每一个student标签</span></span><br><span class="line"> </span><br><span class="line">           <span class="comment">//获取id这个属性</span></span><br><span class="line">           Attribute attribute = element.attribute(<span class="string">"id"</span>);</span><br><span class="line">           <span class="comment">//获取id的属性值</span></span><br><span class="line">           String id = attribute.getValue();</span><br><span class="line"></span><br><span class="line">           <span class="comment">//获取name标签</span></span><br><span class="line">           <span class="comment">//element("标签名"):获取调用者指定的子标签</span></span><br><span class="line">           Element nameElement = element.element(<span class="string">"name"</span>);</span><br><span class="line">           <span class="comment">//获取这个标签的标签体内容</span></span><br><span class="line">           String name = nameElement.getText();</span><br><span class="line"></span><br><span class="line">           <span class="comment">//获取age标签</span></span><br><span class="line">           Element ageElement = element.element(<span class="string">"age"</span>);</span><br><span class="line">           <span class="comment">//获取age标签的标签体内容</span></span><br><span class="line">           String age = ageElement.getText();</span><br><span class="line"></span><br><span class="line">&gt;<span class="comment">//            System.out.println(id);</span></span><br><span class="line">&gt;<span class="comment">//            System.out.println(name);</span></span><br><span class="line">&gt;<span class="comment">//            System.out.println(age);</span></span><br><span class="line"></span><br><span class="line">           Student s = <span class="keyword">new</span> Student(id,name,Integer.parseInt(age));</span><br><span class="line">           list.add(s);</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="comment">//遍历操作</span></span><br><span class="line">       <span class="keyword">for</span> (Student student : list) &#123;</span><br><span class="line">           System.out.println(student);</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br><span class="line">&gt;&#125;</span><br></pre></td></tr></table></figure>
-
-
-</blockquote>
-<h4 id="45-6-DTD是XML约束"><a href="#45-6-DTD是XML约束" class="headerlink" title="45.6 DTD是XML约束"></a>45.6 DTD是XML约束</h4><blockquote>
-<p>XML约束:限定xml文件中可使用的标签以及属性</p>
-<p>约束的分类:</p>
-<ul>
-<li>DTD</li>
-<li>schema</li>
-</ul>
-<p>简单元素：没有子元素。<br>复杂元素：有子元素的元素</p>
-<p>DTD的示例：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--&lt;!ELEMENT&gt; 可以定义元素--&gt;</span><br><span class="line"> &lt;!<span class="function">ELEMENT <span class="title">persong</span> <span class="params">(person)</span>&gt;</span></span><br><span class="line"><span class="function"> &lt;!--限制person标签下只能有name和age--&gt;</span></span><br><span class="line"><span class="function"> &lt;!ELEMENT <span class="title">person</span> <span class="params">(name,age)</span>&gt;</span></span><br><span class="line"><span class="function"> &lt;!ELEMENT <span class="title">name</span> <span class="params">(#PCDATA)</span>&gt;</span></span><br><span class="line"><span class="function"> &lt;!ELEMENT <span class="title">age</span> <span class="params">(#PCDATA)</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>在xml中导入：</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&gt;&lt;?xml version=<span class="string">"1.0"</span> encoding=<span class="string">"UTF-8"</span> ?&gt;</span><br><span class="line">&gt;&lt;!--导入本地dtd文件--&gt;</span><br><span class="line">&gt;&lt;!--！DOCTYPE 根元素名称 SYSTEM <span class="string">'dtd文件路径'</span>--&gt;</span><br><span class="line">&gt;&lt;!--！DOCTYPE 根元素名称 dtd文件名字 <span class="string">'dtd的url'</span>--&gt;</span><br><span class="line">&gt;&lt;!DOCTYPE persong SYSTEM <span class="string">'aa.dtd'</span>&gt;</span><br><span class="line">&gt;&lt;persong&gt;</span><br><span class="line">   &lt;person&gt;</span><br><span class="line">       &lt;name&gt;张三&lt;/name&gt;</span><br><span class="line">       &lt;age&gt;19&lt;/age&gt;</span><br><span class="line">   &lt;/person&gt;</span><br><span class="line">&gt;&lt;/persong&gt;</span><br></pre></td></tr></table></figure>
-
-<p>测试：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="comment">/**</span></span><br><span class="line"><span class="comment">* 利用dom4j解析xml文件</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">&gt;<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">XmlParse</span> </span>&#123;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> DocumentException </span>&#123;</span><br><span class="line">       <span class="comment">//1.获取一个解析器对象</span></span><br><span class="line">       SAXReader saxReader = <span class="keyword">new</span> SAXReader();</span><br><span class="line">       <span class="comment">//2.利用解析器把xml文件加载到内存中,并返回一个文档对象</span></span><br><span class="line">       Document document = saxReader.read(<span class="keyword">new</span> File(<span class="string">"myxml\\xml\\student.xml"</span>));</span><br><span class="line">       <span class="comment">//3.获取到根标签</span></span><br><span class="line">       Element rootElement = document.getRootElement();</span><br><span class="line">       <span class="comment">//4.通过根标签来获取student标签</span></span><br><span class="line">       <span class="comment">//elements():可以获取调用者所有的子标签.会把这些子标签放到一个集合中返回.</span></span><br><span class="line">       <span class="comment">//elements("标签名"):可以获取调用者所有的指定的子标签,会把这些子标签放到一个集合中并返回</span></span><br><span class="line">       <span class="comment">//List list = rootElement.elements();</span></span><br><span class="line">       List&lt;Element&gt; studentElements = rootElement.elements(<span class="string">"student"</span>);</span><br><span class="line">       <span class="comment">//System.out.println(list.size());</span></span><br><span class="line"></span><br><span class="line">       <span class="comment">//用来装学生对象</span></span><br><span class="line">       ArrayList&lt;Student&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line"></span><br><span class="line">       <span class="comment">//5.遍历集合,得到每一个student标签</span></span><br><span class="line">       <span class="keyword">for</span> (Element element : studentElements) &#123;</span><br><span class="line">           <span class="comment">//element依次表示每一个student标签</span></span><br><span class="line"> </span><br><span class="line">           <span class="comment">//获取id这个属性</span></span><br><span class="line">           Attribute attribute = element.attribute(<span class="string">"id"</span>);</span><br><span class="line">           <span class="comment">//获取id的属性值</span></span><br><span class="line">           String id = attribute.getValue();</span><br><span class="line"></span><br><span class="line">           <span class="comment">//获取name标签</span></span><br><span class="line">           <span class="comment">//element("标签名"):获取调用者指定的子标签</span></span><br><span class="line">           Element nameElement = element.element(<span class="string">"name"</span>);</span><br><span class="line">           <span class="comment">//获取这个标签的标签体内容</span></span><br><span class="line">           String name = nameElement.getText();</span><br><span class="line"></span><br><span class="line">           <span class="comment">//获取age标签</span></span><br><span class="line">           Element ageElement = element.element(<span class="string">"age"</span>);</span><br><span class="line">           <span class="comment">//获取age标签的标签体内容</span></span><br><span class="line">           String age = ageElement.getText();</span><br><span class="line"></span><br><span class="line">&gt;<span class="comment">//            System.out.println(id);</span></span><br><span class="line">&gt;<span class="comment">//            System.out.println(name);</span></span><br><span class="line">&gt;<span class="comment">//            System.out.println(age);</span></span><br><span class="line"></span><br><span class="line">           Student s = <span class="keyword">new</span> Student(id,name,Integer.parseInt(age));</span><br><span class="line">           list.add(s);</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="comment">//遍历操作</span></span><br><span class="line">       <span class="keyword">for</span> (Student student : list) &#123;</span><br><span class="line">           System.out.println(student);</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br><span class="line">&gt;&#125;</span><br></pre></td></tr></table></figure>
-</blockquote>
-<h4 id="45-7-DTD的语法规则"><a href="#45-7-DTD的语法规则" class="headerlink" title="45.7 DTD的语法规则"></a>45.7 DTD的语法规则</h4><blockquote>
-<p>简单元素：</p>
-<ul>
-<li><p>EMPTY: 表示标签体为空</p>
-</li>
-<li><p>ANY: 表示标签体可以为空也可以不为空</p>
-</li>
-<li><p>PCDATA: 表示该元素的内容部分为字符串</p>
-</li>
-</ul>
-<p>复杂元素：</p>
-<ul>
-<li>直接写子元素名称. 多个子元素可以使用”,”或者”|”隔开</li>
-<li>“,”表示定义子元素的顺序 ; “|”: 表示子元素只能出现任意一个</li>
-<li>“?”零次或一次, “+”一次或多次, “*”零次或多次;如果不写则表示出现一次</li>
-</ul>
-</blockquote>
-<h4 id="45-8-schema的概述"><a href="#45-8-schema的概述" class="headerlink" title="45.8 schema的概述"></a>45.8 schema的概述</h4><blockquote>
-<ul>
-<li><p>步骤</p>
-<p>1，在根标签上定义属性xmlns=”<a href="http://www.w3.org/2001/XMLSchema-instance&quot;" target="_blank" rel="noopener">http://www.w3.org/2001/XMLSchema-instance&quot;</a><br>2，通过xmlns引入约束文件的名称空间<br>3，给某一个xmlns属性添加一个标识，用于区分不同的名称空间<br>​    格式为: xmlns:标识=“名称空间地址” ,标识可以是任意的，但是一般取值都是xsi<br>4，通过xsi:schemaLocation指定名称空间所对应的约束文件路径<br>​    格式为：xsi:schemaLocation = “名称空间url 文件路径“</p>
-</li>
-<li><p>代码实现</p>
-</li>
-</ul>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&gt;&lt;?xml version=<span class="string">"1.0"</span> encoding=<span class="string">"UTF-8"</span> ?&gt;</span><br><span class="line">&gt;&lt;persons</span><br><span class="line">   xmlns:xsi=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></span><br><span class="line">   xmlns=<span class="string">"http://www.itheima.cn/javase"</span></span><br><span class="line">   xsi:schemaLocation=<span class="string">"http://www.itheima.cn/javase person.xsd"</span></span><br><span class="line">&gt;&gt;</span><br><span class="line">   &lt;person id=<span class="string">"001"</span>&gt;</span><br><span class="line">       &lt;name&gt;张三&lt;/name&gt;</span><br><span class="line">       &lt;age&gt;23&lt;/age&gt;</span><br><span class="line">   &lt;/person&gt;</span><br><span class="line">&gt;&lt;/persons&gt;</span><br></pre></td></tr></table></figure>
-
-
-</blockquote>
-<h3 id="46-枚举"><a href="#46-枚举" class="headerlink" title="46.枚举"></a>46.枚举</h3><blockquote>
-<p>枚举：限制元素的范围</p>
-<p>格式：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="keyword">public</span> <span class="keyword">enum</span> s &#123;   </span><br><span class="line">枚举项<span class="number">1</span>,枚举项<span class="number">2</span>,枚举项<span class="number">3</span>;</span><br><span class="line">&gt;&#125;</span><br></pre></td></tr></table></figure>
-
-<p>特点：</p>
-<ul>
-<li><p>所有枚举类都是Enum的子类</p>
-</li>
-<li><p>我们可以通过”枚举类名.枚举项名称”去访问指定的枚举项</p>
-</li>
-<li><p>每一个枚举项其实就是该枚举的一个对象</p>
-</li>
-<li><p>枚举也是一个类，也可以去定义成员变量</p>
-</li>
-<li><p>枚举类的第一行上必须是枚举项，最后一个枚举项后的分号是可以省略的，但是如果枚举类有其他的东西，这个分号就不能省略。建议不要省略</p>
-</li>
-<li><p>枚举类可以有构造器，但必须是private的，它默认的也是private的。</p>
-<p>枚举项的用法比较特殊：枚举(“”);</p>
-</li>
-<li><p>枚举类也可以有抽象方法，但是枚举项必须重写该方法</p>
-</li>
-</ul>
-</blockquote>
-<h4 id="46-1-枚举的方法"><a href="#46-1-枚举的方法" class="headerlink" title="46.1 枚举的方法"></a>46.1 枚举的方法</h4><blockquote>
-<p>枚举中的常见方法</p>
-<table>
-<thead>
-<tr>
-<th>方法名</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>String name()</td>
-<td>获取枚举项的名称</td>
-</tr>
-<tr>
-<td>int ordinal()</td>
-<td>返回枚举项在枚举类中的索引值</td>
-</tr>
-<tr>
-<td>int compareTo(E  o)</td>
-<td>比较两个枚举项，返回的是索引值的差值</td>
-</tr>
-<tr>
-<td>String toString()</td>
-<td>返回枚举常量的名称</td>
-</tr>
-<tr>
-<td>static <T> T  valueOf(Class<T> type,String  name)</td>
-<td>获取指定枚举类中的指定名称的枚举值</td>
-</tr>
-<tr>
-<td>values()</td>
-<td>获得所有的枚举项</td>
-</tr>
-</tbody></table>
-<p>枚举的应用场景是什么？</p>
-<p>  在java中，通常使用枚举表示一组有限的值，实现对输入的约束(例如Month，DayofWeek等)</p>
-<p>3.使用枚举有什么好处？</p>
-<ul>
-<li>枚举可认使代码更易于维护，有助于确保为变量指定合法的值，期望的值</li>
-<li>枚举更易于输入，使用枚举赋值，只需要输入枚举名，然后输入.就能将所有值显示出来</li>
-<li>枚举使代码更清晰，允许用描述性的名称表示数据，使用时直观方便</li>
-</ul>
-</blockquote>
-<h3 id="47-注解"><a href="#47-注解" class="headerlink" title="47. 注解"></a>47. 注解</h3><h4 id="47-1-注解的概念"><a href="#47-1-注解的概念" class="headerlink" title="47.1 注解的概念"></a>47.1 注解的概念</h4><blockquote>
-<p>注解：</p>
-<p>对我们的程序进行标注和解释</p>
-<p>常见注解？</p>
-<table>
-<thead>
-<tr>
-<th>注解名</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>@Override</td>
-<td>描述子类重写父类的方法</td>
-</tr>
-<tr>
-<td>@Deprecated</td>
-<td>描述方法过时</td>
-</tr>
-<tr>
-<td>@SuppressWarnings</td>
-<td>压制警告</td>
-</tr>
-</tbody></table>
-<p>注解和注释的区别</p>
-<ul>
-<li>注释: 给程序员看的</li>
-<li>注解: 给JVM看的</li>
-</ul>
-</blockquote>
-<h4 id="47-2-自定义注解"><a href="#47-2-自定义注解" class="headerlink" title="47.2 自定义注解"></a>47.2 自定义注解</h4><blockquote>
-<p>定义注解的格式</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="keyword">public</span> <span class="meta">@interface</span> 注解名称 &#123;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> 属性类型 属性名() <span class="keyword">default</span> 默认值 ;</span><br><span class="line"></span><br><span class="line">&gt;&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>属性类型</p>
-<ul>
-<li>基本数据类型</li>
-<li>String</li>
-<li>Class</li>
-<li>注解</li>
-<li>枚举</li>
-<li>以上类型的一维数组</li>
-</ul>
-<p>属性类型示例：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="keyword">public</span> <span class="meta">@interface</span> Anno1 &#123;</span><br><span class="line"></span><br><span class="line">   <span class="comment">//定义一个基本类型的属性</span></span><br><span class="line">   <span class="function"><span class="keyword">int</span> <span class="title">a</span> <span class="params">()</span> <span class="keyword">default</span> 23</span>;</span><br><span class="line"></span><br><span class="line">   <span class="comment">//定义一个String类型的属性</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> String <span class="title">name</span><span class="params">()</span> <span class="keyword">default</span> "itheima"</span>;</span><br><span class="line"></span><br><span class="line">   <span class="comment">//定义一个Class类型的属性</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> Class <span class="title">clazz</span><span class="params">()</span> <span class="keyword">default</span> Anno2.class</span>;</span><br><span class="line"></span><br><span class="line">   <span class="comment">//定义一个注解类型的属性</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> Anno2 <span class="title">anno</span><span class="params">()</span> <span class="keyword">default</span> @Anno2</span>;</span><br><span class="line"></span><br><span class="line">   <span class="comment">//定义一个枚举类型的属性</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> Season <span class="title">season</span><span class="params">()</span> <span class="keyword">default</span> Season.SPRING</span>;</span><br><span class="line"></span><br><span class="line">   <span class="comment">//以上类型的一维数组</span></span><br><span class="line">   <span class="comment">//int数组</span></span><br><span class="line">   <span class="keyword">public</span> <span class="keyword">int</span>[] arr() <span class="keyword">default</span> &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>&#125;;</span><br><span class="line"></span><br><span class="line">   <span class="comment">//枚举数组</span></span><br><span class="line">   <span class="keyword">public</span> Season[] seasons() <span class="keyword">default</span> &#123;Season.SPRING,Season.SUMMER&#125;;</span><br><span class="line"></span><br><span class="line">&gt;&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>自定义注解示例：</p>
-<p>使用反射：</p>
-<p>注解使用条件：</p>
-<ul>
-<li>是public</li>
-<li>不能有返回值</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="comment">//表示Test这个注解的存活时间</span></span><br><span class="line">&gt;<span class="meta">@Retention</span>(value = RetentionPolicy.RUNTIME)</span><br><span class="line">&gt;<span class="keyword">public</span> <span class="meta">@interface</span> Test &#123;</span><br><span class="line">&gt;&#125;</span><br><span class="line"></span><br><span class="line">&gt;<span class="keyword">package</span> com.itheima.myanno3;</span><br><span class="line"></span><br><span class="line">&gt;<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UseTest</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">   <span class="comment">//没有使用Test注解</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">show</span><span class="params">()</span></span>&#123;</span><br><span class="line">       System.out.println(<span class="string">"UseTest....show...."</span>);</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line">   <span class="comment">//使用Test注解</span></span><br><span class="line">   <span class="meta">@Test</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">method</span><span class="params">()</span></span>&#123;</span><br><span class="line">       System.out.println(<span class="string">"UseTest....method...."</span>);</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">   <span class="comment">//没有使用Test注解</span></span><br><span class="line">   <span class="meta">@Test</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">function</span><span class="params">()</span></span>&#123;</span><br><span class="line">     System.out.println(<span class="string">"UseTest....function...."</span>);</span><br><span class="line">   &#125;</span><br><span class="line">&gt;&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>测试：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AnnoDemo</span> </span>&#123;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> ClassNotFoundException, IllegalAccessException, InstantiationException, InvocationTargetException </span>&#123;</span><br><span class="line">       <span class="comment">//1.通过反射获取UseTest类的字节码文件对象</span></span><br><span class="line">       Class&lt;?&gt; clazz = Class.forName(<span class="string">"com.itheima.myanno3.UseTest"</span>);</span><br><span class="line"></span><br><span class="line">       <span class="comment">//创建对象</span></span><br><span class="line">       UseTest useTest = (UseTest) clazz.newInstance();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">       <span class="comment">//2.通过反射获取这个类里面所有的方法对象</span></span><br><span class="line">       Method[] methods = clazz.getDeclaredMethods();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">       <span class="comment">//3.遍历数组，得到每一个方法对象</span></span><br><span class="line">       <span class="keyword">for</span> (Method method : methods) &#123;</span><br><span class="line">           <span class="comment">//method依次表示每一个方法对象。</span></span><br><span class="line">           <span class="comment">//isAnnotationPresent​(Class&lt;? extends Annotation&gt; annotationClass)</span></span><br><span class="line">           <span class="comment">//判断当前方法上是否有指定的注解。</span></span><br><span class="line">           <span class="comment">//参数：注解的字节码文件对象</span></span><br><span class="line">           <span class="comment">//返回值：布尔结果。  true 存在  false 不存在</span></span><br><span class="line">           <span class="keyword">if</span>(method.isAnnotationPresent(Test<span class="class">.<span class="keyword">class</span>))</span>&#123;</span><br><span class="line">               method.invoke(useTest);</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br><span class="line">&gt;&#125;</span><br></pre></td></tr></table></figure>
-
-
-</blockquote>
-<h4 id="47-3-元注解"><a href="#47-3-元注解" class="headerlink" title="47.3 元注解"></a>47.3 元注解</h4><blockquote>
-<p>什么是元注解？</p>
-<p>元注解就是描述注解的注解</p>
-<p>2.常用的元注解介绍</p>
-<table>
-<thead>
-<tr>
-<th>元注解名</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>@Target</td>
-<td>指定了注解能在哪里使用</td>
-</tr>
-<tr>
-<td>@Retention</td>
-<td>可以理解为保留时间(生命周期)</td>
-</tr>
-<tr>
-<td>@Inherited</td>
-<td>表示修饰的自定义注解可以被子类继承</td>
-</tr>
-<tr>
-<td>@Documented</td>
-<td>表示该自定义注解，会出现在API文档里面。</td>
-</tr>
-</tbody></table>
-<p>示例：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="comment">//表示Test这个注解的存活时间</span></span><br><span class="line">&gt;<span class="comment">//注解括号里面的注释是元注解</span></span><br><span class="line">&gt;<span class="meta">@Retention</span>(value = RetentionPolicy.RUNTIME)</span><br><span class="line">&gt;<span class="keyword">public</span> <span class="meta">@interface</span> Test &#123;</span><br><span class="line">&gt;&#125;</span><br><span class="line"></span><br><span class="line">&gt;<span class="keyword">package</span> com.itheima.myanno3;</span><br><span class="line"></span><br><span class="line">&gt;<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UseTest</span> </span>&#123;</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line">&gt;&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-</blockquote>
-
-      
-      <!-- 打赏 -->
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2021/10/15/DAY24_%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%92%8C%E6%9E%9A%E4%B8%BE/" data-id="ckvp9h7pz000a8cuego05eg74"
-        class="article-share-link">分享</a>
-        
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%90%8E%E7%AB%AF%E5%AD%A6%E4%B9%A0/" rel="tag">后端学习</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-  
-  
-
-  
-
-</article>
-    
-    <article id="post-DAY25_单元测试" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2021/10/15/DAY25_%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/"
-    >单元测试和日志</a
-  >
-</h2>
-  
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2021/10/15/DAY25_%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/" class="article-date">
-  <time datetime="2021-10-15T05:44:19.000Z" itemprop="datePublished">2021-10-15</time>
-</a>
-      
-      
-      
-      
-    </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-      <h3 id="48-单元测试"><a href="#48-单元测试" class="headerlink" title="48. 单元测试"></a>48. 单元测试</h3><h4 id="48-1-单元测试的概念"><a href="#48-1-单元测试的概念" class="headerlink" title="48.1 单元测试的概念"></a>48.1 单元测试的概念</h4><blockquote>
-<p>单元测试:对软件最小单元的测试</p>
-<p>步骤：</p>
-<p>1.将junit4J添加项目中</p>
-<p>2.编写测试类</p>
-<p>3.编写测试方法</p>
-<p>@Test  :表示一个方法为测试方法</p>
-<p>@Before: 表示一个测试方法执行前要执行的方法</p>
-<p>@After: 表示一个测试方法执行之后要执行的方法</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UseAnno</span> </span>&#123;</span><br><span class="line"><span class="comment">//测试执行之前执行</span></span><br><span class="line">  <span class="meta">@Before</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">method</span><span class="params">()</span></span>&#123;</span><br><span class="line">       System.out.println(<span class="string">"method"</span>);</span><br><span class="line">   &#125;</span><br><span class="line">    <span class="comment">//Before 和After一定会执行</span></span><br><span class="line"><span class="comment">//可以单独运行  </span></span><br><span class="line">   <span class="meta">@Test</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">fountion</span><span class="params">()</span></span>&#123;</span><br><span class="line">       System.out.println(<span class="string">"fountion"</span>);</span><br><span class="line">   &#125;</span><br><span class="line"><span class="comment">//可以单独运行</span></span><br><span class="line">   <span class="meta">@Test</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">fountion1</span><span class="params">()</span></span>&#123;</span><br><span class="line">       System.out.println(<span class="string">"HELLO"</span>);</span><br><span class="line">   &#125;</span><br><span class="line"><span class="comment">//测试执行之后执行</span></span><br><span class="line">  <span class="meta">@After</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">aethod01</span><span class="params">()</span></span>&#123;</span><br><span class="line">       System.out.println(<span class="number">2</span> / <span class="number">1</span>);</span><br><span class="line">   &#125;</span><br><span class="line">&gt;&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-</blockquote>
-<h3 id="49-日志"><a href="#49-日志" class="headerlink" title="49. 日志"></a>49. 日志</h3><blockquote>
-<p>日志：对方法执行过程的记录</p>
-<p>步骤：</p>
-<p>1.将log4j-1.2.17.jar、slf4j-log4j12-1.7.26.jar、slf4j-api-1.7.30.jar添加项目中</p>
-<p>2.导入log4j.properties配置文件到src目录下</p>
-<p>3.配置测试文件</p>
-<p>4.在代码中获取日志的对象</p>
-<p>5.按照级别设置记录日志信息</p>
-<p>日志类别分类</p>
-<ul>
-<li>debug</li>
-<li>info</li>
-<li>warn</li>
-<li>error</li>
-</ul>
-<p>示例：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Log4jDemo</span> </span>&#123;</span><br><span class="line">   <span class="comment">//必须先导入Logger对象 </span></span><br><span class="line">   <span class="comment">//参数写本类字节码文件</span></span><br><span class="line">   <span class="keyword">private</span> <span class="keyword">static</span>  <span class="keyword">final</span> Logger log = LoggerFactory.getLogger(Log4jDemo<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">   </span><br><span class="line">   <span class="meta">@Test</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">()</span></span>&#123;</span><br><span class="line">       log.debug(<span class="string">"debug日志"</span>);</span><br><span class="line">       log.info(<span class="string">"info日志"</span>);</span><br><span class="line">       log.warn(<span class="string">"warn日志"</span>);</span><br><span class="line">       log.error(<span class="string">"error日志"</span>);</span><br><span class="line"></span><br><span class="line">   &#125;</span><br><span class="line">&gt;&#125;</span><br></pre></td></tr></table></figure>
-
-
-<p>配置文件：</p>
-<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">&gt;#debug日志需要修改debug,my,fileAppender</span></span><br><span class="line"><span class="attr">&gt;#通常使用info,my,fileAppender</span></span><br><span class="line"><span class="meta">&gt;log4j.rootLogger</span>=<span class="string">debug,my,fileAppender</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;###</span> <span class="string">direct log messages to my ###</span></span><br><span class="line"><span class="attr">&gt;#输出到控制台</span></span><br><span class="line"><span class="meta">&gt;log4j.appender.my</span>=<span class="string">org.apache.log4j.ConsoleAppender</span></span><br><span class="line"><span class="attr">&gt;##表示所有的消息都会被立刻输出</span></span><br><span class="line"><span class="meta">&gt;log4j.appender.my.ImmediateFlush</span> = <span class="string">true</span></span><br><span class="line"><span class="attr">&gt;#使用System.out方式输出</span></span><br><span class="line"><span class="meta">&gt;log4j.appender.my.Target</span>=<span class="string">System.out</span></span><br><span class="line"><span class="attr">&gt;#使用pattenlayout布局输出日志</span></span><br><span class="line"><span class="meta">&gt;log4j.appender.my.layout</span>=<span class="string">org.apache.log4j.PatternLayout</span></span><br><span class="line"><span class="meta">&gt;log4j.appender.my.layout.ConversionPattern</span>=<span class="string">%d %t %5p %c&#123;1&#125;:%L - %m%n</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;#</span> <span class="string">fileAppender演示</span></span><br><span class="line"><span class="attr">&gt;#输出到地方文件夹</span></span><br><span class="line"><span class="meta">&gt;log4j.appender.fileAppender</span>=<span class="string">org.apache.log4j.FileAppender</span></span><br><span class="line"><span class="attr">&gt;#表示所有的消息都会被立刻输出</span></span><br><span class="line"><span class="meta">&gt;log4j.appender.fileAppender.ImmediateFlush</span> = <span class="string">true</span></span><br><span class="line"><span class="attr">&gt;#表示输出的内容，会从结尾输出，不会重置</span></span><br><span class="line"><span class="meta">&gt;log4j.appender.fileAppender.Append</span>=<span class="string">true</span></span><br><span class="line"><span class="attr">&gt;#输出文件，存储地址</span></span><br><span class="line"><span class="meta">&gt;log4j.appender.fileAppender.File</span>=<span class="string">./log4j-log.log</span></span><br><span class="line"><span class="attr">&gt;#输出文件指定格式</span></span><br><span class="line"><span class="meta">&gt;#</span> <span class="string">灵活使用指定布局</span></span><br><span class="line"><span class="meta">&gt;log4j.appender.fileAppender.layout</span>=<span class="string">org.apache.log4j.PatternLayout</span></span><br><span class="line"><span class="meta">&gt;log4j.appender.fileAppender.layout.ConversionPattern</span>=<span class="string">%d %5p %c&#123;1&#125;:%L - %m%n</span></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-</blockquote>
-<h4 id="49-1-日志技术-三个核心"><a href="#49-1-日志技术-三个核心" class="headerlink" title="49.1 日志技术-三个核心"></a>49.1 日志技术-三个核心</h4><blockquote>
-<p>三个核心</p>
-<ul>
-<li><p>Loggers(记录器)       日志的级别</p>
-<p>Loggers组件在此系统中常见的五个级别：DEBUG、INFO、WARN、ERROR 和 FATAL。</p>
-<p>==DEBUG &lt; INFO &lt; WARN &lt; ERROR &lt; FATAL。==</p>
-<p>==Log4j有一个规则：只输出级别不低于设定级别的日志信息。==</p>
-</li>
-<li><p>Appenders(输出源)   日志要输出的地方</p>
-<p>把日志输出到不同的地方，如控制台==（Console）、文件（Files）==等。</p>
-<ul>
-<li>org.apache.log4j.ConsoleAppender（控制台）</li>
-<li>org.apache.log4j.FileAppender（文件）</li>
-</ul>
-</li>
-<li><p>Layouts(布局)             日志输出的格式</p>
-<p>可以根据自己的喜好规定日志输出的格式</p>
-<p>常用的布局管理器：</p>
-<p>==org.apache.log4j.PatternLayout（可以灵活地指定布局模式）==</p>
-<p>org.apache.log4j.SimpleLayout（包含日志信息的级别和信息字符串）</p>
-<p>org.apache.log4j.TTCCLayout（包含日志产生的时间、线程、类别等信息）  </p>
-</li>
-</ul>
-</blockquote>
-<h4 id="49-2-配置文件的详细配置"><a href="#49-2-配置文件的详细配置" class="headerlink" title="49.2 配置文件的详细配置"></a>49.2 配置文件的详细配置</h4><blockquote>
-<p>1.配置根Logger</p>
-<ul>
-<li><p>格式</p>
-<p>==log4j.rootLogger=日志级别，appenderName1，appenderName2，…==</p>
-<p>日志级别</p>
-<p>OFF、FATAL、ERROR、WARN、INFO、DEBUG、ALL或者自定义的级别。</p>
-</li>
-<li><p>appenderName1</p>
-<p>就是指定日志信息要输出到哪里。可以同时指定多个输出目的地，用逗号隔开。</p>
-<p>例如：log4j.rootLogger＝INFO，ca，fa</p>
-</li>
-</ul>
-<p>2.ConsoleAppender常用的选项</p>
-<ul>
-<li><p>ImmediateFlush=true</p>
-<p>表示所有消息都会被立即输出，设为false则不输出，默认值是true。</p>
-</li>
-<li><p>Target=System.err</p>
-<p>默认值是System.out。</p>
-</li>
-</ul>
-<p>3.FileAppender常用的选项</p>
-<ul>
-<li><p>ImmediateFlush=true</p>
-<p>表示所有消息都会被立即输出。设为false则不输出，默认值是true</p>
-</li>
-<li><p>Append=false</p>
-<p>true表示将消息添加到指定文件中，原来的消息不覆盖。</p>
-<p>false则将消息覆盖指定的文件内容，默认值是true。</p>
-</li>
-<li><p>File=D:/logs/logging.log4j</p>
-<p>指定消息输出到logging.log4j文件中</p>
-</li>
-</ul>
-<p>4.PatternLayout常用的选项</p>
-<p>​    ConversionPattern=%m%n</p>
-<p>​    设定以怎样的格式显示消息</p>
-<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;#########</span> <span class="string">常见参数 #########</span></span><br><span class="line"><span class="attr">&gt;//</span></span><br><span class="line"><span class="meta">&gt;%c&#123;参数&#125;</span> <span class="string">或 %logger&#123;参数&#125;  ##输出日志名称</span></span><br><span class="line"><span class="meta">&gt;%C&#123;参数&#125;</span> <span class="string">或 %class&#123;参数    ##输出类型</span></span><br><span class="line"><span class="meta">&gt;%d&#123;参数&#125;&#123;时区te&#123;参数&#125;&#123;时区&#125;</span> <span class="string">##输出时间</span></span><br><span class="line"><span class="meta">&gt;%F|%file</span>                  <span class="string">##输出文件名</span></span><br><span class="line"><span class="meta">&gt;highlight&#123;pattern&#125;&#123;style&#125;</span> <span class="string">##高亮显示</span></span><br><span class="line"><span class="meta">&gt;%l</span>  <span class="string">##输出错误的完整位置</span></span><br><span class="line"><span class="meta">&gt;%L</span>  <span class="string">##输出错误行号</span></span><br><span class="line"><span class="meta">&gt;%m</span> <span class="string">或 %msg 或 %message ##输出错误信息</span></span><br><span class="line"><span class="meta">&gt;%M</span> <span class="string">或 %method ##输出方法名</span></span><br><span class="line"><span class="meta">&gt;%n</span>            <span class="string">##输出换行符</span></span><br><span class="line"><span class="meta">&gt;%level&#123;参数1&#125;&#123;参数2&#125;&#123;参数3&#125;</span> <span class="string">##输出日志的级别</span></span><br><span class="line"><span class="meta">&gt;%t</span> <span class="string">或 %thread              ##创建logging事件的线程名</span></span><br><span class="line"><span class="attr">&gt;*/</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;#########</span> <span class="string">特殊符号 ############</span></span><br><span class="line"><span class="attr">&gt;#有些特殊符号不能直接打印，需要使用实体名称或者编号</span></span><br><span class="line"><span class="attr">&gt;//</span></span><br><span class="line"><span class="meta">&gt;&amp;</span> <span class="string">—— &amp;amp; 或者 &amp;#38;</span></span><br><span class="line"><span class="meta">&gt;&lt;</span> <span class="string">—— &amp;lt;  或者 &amp;#60;</span></span><br><span class="line"><span class="meta">&gt;&gt;</span> <span class="string">—— &amp;gt;  或者 &amp;#62;</span></span><br><span class="line"><span class="meta">&gt;“</span> <span class="string">—— &amp;quot; 或者 &amp;#34;</span></span><br><span class="line"><span class="meta">&gt;‘</span> <span class="string">—— &amp;apos; 或者 &amp;#39;</span></span><br><span class="line"><span class="attr">&gt;*/</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;########</span> <span class="string">pattern对齐修饰 ##########</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;//</span> <span class="string">对齐修饰，可以指定信息的输出格式，如是否左对齐，是否留空格等。</span></span><br><span class="line"><span class="meta">&gt;##</span> <span class="string">编写格式为在任何pattern和%之间加入一个小数，可以是正数，也可以是负数。</span></span><br><span class="line"><span class="meta">&gt;##</span> <span class="string">整数表示右对齐，负数表示左对齐；</span></span><br><span class="line"><span class="meta">&gt;##</span> <span class="string">整数位表示输出信息的最小n个字符，如果输出信息不够n个字符，将用空格补齐；</span></span><br><span class="line"><span class="meta">&gt;##</span> <span class="string">小数位表示输出信息的最大字符数，如果超过n个字符，则只保留最后n个字符的信息</span></span><br><span class="line"><span class="meta">&gt;##</span> <span class="string">（注意：保留的是后20个字符，而不是前20个字符）</span></span><br><span class="line"><span class="attr">&gt;*/</span></span><br><span class="line"></span><br><span class="line"><span class="attr">&gt;#示例如下</span></span><br><span class="line"><span class="attr">&gt;//</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;%20</span> <span class="string">—— 右对齐，不足20个字符则在信息前面用空格补足，超过20个字符则保留原信息</span></span><br><span class="line"><span class="meta">&gt;%-20</span> <span class="string">—— 左对齐，不足20个字符则在信息后面用空格补足，超过20个字符则保留原信息</span></span><br><span class="line"><span class="meta">&gt;%.30</span> <span class="string">—— 如果信息超过30个字符，则只保留最后30个字符</span></span><br><span class="line"><span class="meta">&gt;%20.30</span> <span class="string">—— 右对齐，不足20个字符则在信息前面用空格补足，超过30个字符则只保留最后30个字符</span></span><br><span class="line"><span class="meta">&gt;%-20.30</span> <span class="string">—— 左对齐，不足20个字符则在信息后面用空格补足，超过30个字符则只保留最后30个字符</span></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-</blockquote>
-
-      
-      <!-- 打赏 -->
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2021/10/15/DAY25_%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/" data-id="ckvp9h7q0000c8cuefdod1ehl"
-        class="article-share-link">分享</a>
-        
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%90%8E%E7%AB%AF%E5%AD%A6%E4%B9%A0/" rel="tag">后端学习</a></li></ul>
 
     </footer>
 
