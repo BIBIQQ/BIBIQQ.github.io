@@ -76,6 +76,205 @@
     
     
     
+    <article id="post-DAY19_可变参数和Steam流" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2021/09/27/DAY19_%E5%8F%AF%E5%8F%98%E5%8F%82%E6%95%B0%E5%92%8CSteam%E6%B5%81/"
+    >可变参数和Steam流</a
+  >
+</h2>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2021/09/27/DAY19_%E5%8F%AF%E5%8F%98%E5%8F%82%E6%95%B0%E5%92%8CSteam%E6%B5%81/" class="article-date">
+  <time datetime="2021-09-27T15:13:19.000Z" itemprop="datePublished">2021-09-27</time>
+</a>
+      
+      
+      
+      
+    </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h3 id="33-可变参数"><a href="#33-可变参数" class="headerlink" title="33. 可变参数"></a>33. 可变参数</h3><h4 id="33-1-可变参数概述"><a href="#33-1-可变参数概述" class="headerlink" title="33.1 可变参数概述"></a>33.1 可变参数概述</h4><blockquote>
+<p>可变参数：就是形参的个数是可以变化的</p>
+<ul>
+<li>格式：修饰符 返回值类型 方法名｛数据类型…变量名｝</li>
+<li>范例：public static int sum (int… a)</li>
+<li>示例</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="comment">//求多个数的和</span></span><br><span class="line">&gt;<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">       <span class="keyword">int</span> sum = getSum(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>);</span><br><span class="line">       System.out.<span class="function">printl <span class="title">n</span><span class="params">(sum)</span></span>;</span><br><span class="line">   &#125;</span><br><span class="line">&gt;<span class="comment">// 可变参数</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">getSum</span><span class="params">(<span class="keyword">int</span>... arr)</span> </span>&#123;</span><br><span class="line">       <span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">       <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">           sum += arr[i];</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">return</span> sum;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<p>注意：</p>
+<ul>
+<li>这里变量其实就是一个数组</li>
+<li>如果一个方法有多个参数，包含可变参数，<font color= "red">可变参数要放在最后</font></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">       <span class="keyword">int</span> sum = getSum(<span class="number">2</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>);</span><br><span class="line">       System.out.println(sum);</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="comment">// 可变参数</span></span><br><span class="line">&gt;<span class="comment">//    添加新参数，必须放在可变参数前面</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">getSum</span><span class="params">(<span class="keyword">int</span> num, <span class="keyword">int</span>... arr)</span> </span>&#123;</span><br><span class="line">       <span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">       <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">           sum += arr[i];</span><br><span class="line">       &#125;</span><br><span class="line">       sum += num;</span><br><span class="line">       <span class="keyword">return</span> sum;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+
+</blockquote>
+<h4 id="33-2-不可变集合-JDK-1-8-不支持"><a href="#33-2-不可变集合-JDK-1-8-不支持" class="headerlink" title="33.2 不可变集合(JDK.1.8 不支持)"></a>33.2 不可变集合(JDK.1.8 不支持)</h4><blockquote>
+<p>成员方法：</p>
+<table>
+<thead>
+<tr>
+<th>方法名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>static <E> List of(E….elements)</td>
+<td>创建一个具有指定元素的List集合对象</td>
+</tr>
+<tr>
+<td>static <E> Set<E> of(E….elements)</td>
+<td>创建一个具有指定元素的Set集合对象（不能出现重复的元素）</td>
+</tr>
+<tr>
+<td>static &lt;K,V&gt;  Map&lt;K,V&gt; of(E….elements)</td>
+<td>创建一个具有指定元素的Map集合对象</td>
+</tr>
+</tbody></table>
+<p>注意：</p>
+<ul>
+<li>集合不可变，不可以添加和删除 、修改</li>
+<li>可以结合集合的带参构造，实现集合的批量添加</li>
+</ul>
+<ul>
+<li>在Map接口中，还有一个ofEntries方法可以提高代码的阅读性</li>
+<li>首先会把键值对封装成一个Entry对象，再把这个Entry对象添加到集合当中</li>
+</ul>
+</blockquote>
+<h3 id="34-Stream流"><a href="#34-Stream流" class="headerlink" title="34. Stream流"></a>34. Stream流</h3><h4 id="34-1-Stream流"><a href="#34-1-Stream流" class="headerlink" title="34.1 Stream流"></a>34.1 Stream流</h4><blockquote>
+<h3 id="Stream流不能直接修改数据源中的数据"><a href="#Stream流不能直接修改数据源中的数据" class="headerlink" title="Stream流不能直接修改数据源中的数据"></a><strong>Stream流不能直接修改数据源中的数据</strong></h3><p>可以使用：</p>
+<ul>
+<li><p>单列集合</p>
+<ul>
+<li><p>使用stream() 生成流</p>
+</li>
+<li><p>default Stream<E> stream()</p>
+</li>
+<li><pre><code>//        单列集合
+       ArrayList&lt;String&gt; list = new ArrayList&lt;&gt;();
+       list.add(&quot;aaa&quot;);
+       list.add(&quot;bbb&quot;);
+       list.add(&quot;ccc&quot;);
+      list.stream().forEach(c -&gt; System.out.println(c));
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&gt;- 双列集合</span><br><span class="line">- 间接的生成流</span><br><span class="line"></span><br><span class="line">- 先通过keySet或者entrySet获取一个单列Set集合，再获取stream流</span><br><span class="line"></span><br><span class="line"> - </span><br></pre></td></tr></table></figure>
+//        双列集合
+       HashMap&lt;String, String&gt; maps = new HashMap&lt;&gt;();
+       maps.put(&quot;aaa&quot;, &quot;001&quot;);
+       maps.put(&quot;bbb&quot;, &quot;002&quot;);
+       maps.put(&quot;ccc&quot;, &quot;003&quot;);
+       //输出键
+       maps.keySet().stream().forEach(c -&gt; System.out.println(c));
+       //输出键值对
+       maps.entrySet().stream().forEach(c -&gt; System.out.println(c));
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure></code></pre></li>
+</ul>
+</li>
+<li><p>数组</p>
+<ul>
+<li><p>Arrays中的静态方法stream生成流</p>
+</li>
+<li><pre><code>//        数组
+       int[] arr = {1, 2, 3, 4};
+       Arrays.stream(arr).forEach(c -&gt; System.out.println(c));
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&gt;- 同数据类型的多个数据</span><br><span class="line">- 使用Stream.of(T…values)生成流</span><br><span class="line"></span><br><span class="line">- </span><br></pre></td></tr></table></figure>
+//         多个同数据类型
+       String a = &quot;aaa&quot;;
+       String b = &quot;bbb&quot;;
+       String c = &quot;ccc&quot;;
+       String d = &quot;ddd&quot;;
+       Stream.of(a, b, c, d).forEach(i -&gt; System.out.println(i));</code></pre></li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h5 id="34-1-1-Stream常见中间操作方法"><a href="#34-1-1-Stream常见中间操作方法" class="headerlink" title="34.1.1 Stream常见中间操作方法"></a>34.1.1 Stream常见中间操作方法</h5><blockquote>
+<p>条件筛选：</p>
+<ul>
+<li><p>Stream <T> filter(Predicate predicate)：用户对流中的数据进行过滤</p>
+<ul>
+<li>Predicate接口汇总的方法</li>
+<li>boolean test(T  t) :对给定的参数进行判断，返回一个布尔值</li>
+</ul>
+</li>
+<li><p>Stream<T> limit(long maxSize) ：截取指定参数个数的数据</p>
+</li>
+<li><p>Stream<T> skip(long n)：跳过指定参数个数的数据</p>
+</li>
+<li><p>static<T> Stream<T> concat(Stream a,Stream b)：合并a和b两个流为一个流</p>
+</li>
+<li><p>Stream<T> distinct：去除流中重复的元素，依赖（hashCode和equals方法）</p>
+</li>
+</ul>
+<p>结束后返回值：</p>
+<ul>
+<li>void forEach(Consumer action)：对此流的每个元素执行操作<ul>
+<li>Consumer 接口中的方法</li>
+<li>void accept(T  t) ：对给定的参数执行此操作</li>
+</ul>
+</li>
+<li>long count()  ：返回此流中的元素数</li>
+</ul>
+</blockquote>
+<h5 id="34-1-2-Stream流的收集操作"><a href="#34-1-2-Stream流的收集操作" class="headerlink" title="34.1.2 Stream流的收集操作"></a>34.1.2 Stream流的收集操作</h5><blockquote>
+<p>收集方法：</p>
+<ul>
+<li>R collect(Collector collector)<ul>
+<li>toList()  ：元素收集到List集合中</li>
+<li>toSet()   ：元素收集到Set集合中</li>
+<li>toMap(Function keyMapper,Function valueMapper)  ：元素收集到Map集合中</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+
+      
+      <!-- 打赏 -->
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2021/09/27/DAY19_%E5%8F%AF%E5%8F%98%E5%8F%82%E6%95%B0%E5%92%8CSteam%E6%B5%81/" data-id="ckw4xsjso000a08ue3cpde55u"
+        class="article-share-link">分享</a>
+        
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%90%8E%E7%AB%AF%E5%AD%A6%E4%B9%A0/" rel="tag">后端学习</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+
+</article>
+    
     <article id="post-DAY17_泛型和高级集合" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
@@ -276,7 +475,327 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2021/09/23/DAY17_%E6%B3%9B%E5%9E%8B%E5%92%8C%E9%AB%98%E7%BA%A7%E9%9B%86%E5%90%88/" data-id="ckw20s8c7000310uee30xgw0d"
+      <a data-url="http://yoursite.com/2021/09/23/DAY17_%E6%B3%9B%E5%9E%8B%E5%92%8C%E9%AB%98%E7%BA%A7%E9%9B%86%E5%90%88/" data-id="ckw4xsjsj000508uec80ygc4u"
+        class="article-share-link">分享</a>
+        
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%90%8E%E7%AB%AF%E5%AD%A6%E4%B9%A0/" rel="tag">后端学习</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+
+</article>
+    
+    <article id="post-DAY16_高级集合和数据集合" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2021/09/23/DAY16_%E9%AB%98%E7%BA%A7%E9%9B%86%E5%90%88%E5%92%8C%E6%95%B0%E6%8D%AE%E9%9B%86%E5%90%88/"
+    >高级集合-list和数据结构</a
+  >
+</h2>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2021/09/23/DAY16_%E9%AB%98%E7%BA%A7%E9%9B%86%E5%90%88%E5%92%8C%E6%95%B0%E6%8D%AE%E9%9B%86%E5%90%88/" class="article-date">
+  <time datetime="2021-09-23T08:23:19.000Z" itemprop="datePublished">2021-09-23</time>
+</a>
+      
+      
+      
+      
+    </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h3 id="26-集合的高级"><a href="#26-集合的高级" class="headerlink" title="26. 集合的高级"></a>26. 集合的高级</h3><h4 id="26-1-集合的概述和继承体系"><a href="#26-1-集合的概述和继承体系" class="headerlink" title="26.1 集合的概述和继承体系"></a>26.1 集合的概述和继承体系</h4><blockquote>
+<ol>
+<li>集合和数组的对比：</li>
+</ol>
+<ul>
+<li>集合长度可变，数组长度不可变</li>
+<li>集合只能存储引用数据类型或者<font color = "red">存储基本数据类型的包装类</font>，集合可以存储引用数据类型和基本数据类型</li>
+</ul>
+<ol start="2">
+<li>集合类体系结构</li>
+</ol>
+<ul>
+<li>Collection (单列)(接口)<ul>
+<li>list（可重复)(接口)<ul>
+<li>ArrayList（实现类）</li>
+<li>LinkedList（实现类）</li>
+</ul>
+</li>
+<li>Set（不重复)(接口)<ul>
+<li>HashSet（实现类）</li>
+<li>TreeSet（实现类）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Map（双列)(接口)<ul>
+<li>HashMap（实现类）</li>
+<li>TreeMap（实现类）</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h4 id="26-2-Collection"><a href="#26-2-Collection" class="headerlink" title="26.2 Collection"></a>26.2 Collection</h4><h5 id="26-2-1-成员方法"><a href="#26-2-1-成员方法" class="headerlink" title="26.2.1 成员方法"></a>26.2.1 成员方法</h5><blockquote>
+<table>
+<thead>
+<tr>
+<th align="left">方法名</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">boolean add(E e)</td>
+<td align="left">添加元素</td>
+</tr>
+<tr>
+<td align="left">boolean remove(Object o)</td>
+<td align="left">从集合中移除指定的元素</td>
+</tr>
+<tr>
+<td align="left">boolean removeIf(Object o)</td>
+<td align="left">根据条件进行移除</td>
+</tr>
+<tr>
+<td align="left">void   clear()</td>
+<td align="left">清空集合中的元素</td>
+</tr>
+<tr>
+<td align="left">boolean contains(Object o)</td>
+<td align="left">判断集合中是否存在指定的元素</td>
+</tr>
+<tr>
+<td align="left">boolean isEmpty()</td>
+<td align="left">判断集合是否为空</td>
+</tr>
+<tr>
+<td align="left">int   size()</td>
+<td align="left">集合的长度，也就是集合中元素的个数</td>
+</tr>
+</tbody></table>
+<p>示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    Collection&lt;String&gt; collection = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    collection.add(<span class="string">"aaa"</span>);</span><br><span class="line">    collection.add(<span class="string">"bbb"</span>);</span><br><span class="line">    collection.add(<span class="string">"ccc"</span>);</span><br><span class="line">    collection.add(<span class="string">"dddd"</span>);</span><br><span class="line">    collection.add(<span class="string">"eeeee"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 判断是否存在某元素</span></span><br><span class="line">    <span class="keyword">boolean</span> result = collection.contains(<span class="string">"aaa"</span>);</span><br><span class="line">    System.out.println(result);</span><br><span class="line">    <span class="comment">// 删除符合条件的元素</span></span><br><span class="line">    collection.removeIf(s -&gt; s.length() == <span class="number">3</span>);</span><br><span class="line">    System.out.println(collection);</span><br><span class="line">    <span class="comment">//集合是否为空</span></span><br><span class="line">    <span class="keyword">boolean</span> result1 = collection.isEmpty();</span><br><span class="line">    System.out.println(result1);</span><br><span class="line">    <span class="comment">//清空集合</span></span><br><span class="line">    collection.clear();</span><br><span class="line">    System.out.println(collection);</span><br><span class="line">    <span class="comment">//获取集合的长度</span></span><br><span class="line">    <span class="keyword">int</span> size = collection.size();</span><br><span class="line">    System.out.println(size);</span><br><span class="line">    <span class="comment">// removerIf的拓展</span></span><br><span class="line">    collection.removeIf(<span class="keyword">new</span> Predicate&lt;String&gt;() &#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">test</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">if</span>(s.length() == <span class="number">4</span>)&#123;</span><br><span class="line">                <span class="keyword">return</span>  <span class="keyword">true</span>;</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">    System.out.println(collection);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h5 id="26-2-2-Collertion集合的遍历"><a href="#26-2-2-Collertion集合的遍历" class="headerlink" title="26.2.2 Collertion集合的遍历"></a>26.2.2 Collertion集合的遍历</h5><blockquote>
+<ul>
+<li><p>Iterator:迭代器，集合的专用遍历方式</p>
+<ul>
+<li>Iterator<E> itertor(): 返回集合中的迭代器对象，该迭代器对象默认指向当前集合的0索引位置</li>
+</ul>
+</li>
+<li><p>Iterator中的常用方法</p>
+<ul>
+<li>boolean hasNext：判断单签位置是否有元素可以取出</li>
+<li>E next()：获取当前位置的元素；将迭代器对象移动向下一个索引位置</li>
+</ul>
+</li>
+</ul>
+<p>示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"> Collection&lt;String&gt; collection = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line"> collection.add(<span class="string">"aaa"</span>);</span><br><span class="line"> collection.add(<span class="string">"bbb"</span>);</span><br><span class="line"> collection.add(<span class="string">"ccc"</span>);</span><br><span class="line"> collection.add(<span class="string">"dddd"</span>);</span><br><span class="line"> collection.add(<span class="string">"eeeee"</span>);</span><br><span class="line"> <span class="comment">//创建Iterator 对象</span></span><br><span class="line"> Iterator&lt;String&gt; it = collection.iterator();</span><br><span class="line"> <span class="comment">//创建循环遍历</span></span><br><span class="line"> <span class="keyword">while</span> (it.hasNext())&#123;  <span class="comment">// 判断索引位置是否有元素</span></span><br><span class="line">     System.out.println(it.next());  <span class="comment">// 取出索引位置的元素；并且往后推一下元素</span></span><br><span class="line"> &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<p>集合遍历删除相同元素示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">&gt;ArrayList&lt;String&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">      list.add(<span class="string">"a"</span>);</span><br><span class="line">      list.add(<span class="string">"a"</span>);</span><br><span class="line">      list.add(<span class="string">"c"</span>);</span><br><span class="line">      list.add(<span class="string">"b"</span>);</span><br><span class="line">      list.add(<span class="string">"e"</span>);</span><br><span class="line"></span><br><span class="line">&gt;<span class="comment">//数组for循环遍历删除   ----1</span></span><br><span class="line">       <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; list.size(); i++) &#123;</span><br><span class="line">           String s = list.get(i);</span><br><span class="line">           <span class="keyword">if</span>(<span class="string">"a"</span>.equals(s))&#123;</span><br><span class="line">               list.remove(s);</span><br><span class="line">               i--;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">&gt;<span class="comment">// 集合迭代器遍历，删除相同元素   -----2</span></span><br><span class="line">      Iterator&lt;String&gt; it = list.iterator();</span><br><span class="line">      <span class="keyword">while</span> (it.hasNext()) &#123;  <span class="comment">// 迭代器指向0索引</span></span><br><span class="line">          <span class="comment">// 将指向元素，赋值String，取出比较，并移向下一元素</span></span><br><span class="line">          String s = it.next();  </span><br><span class="line">          <span class="keyword">if</span> (<span class="string">"a"</span>.equals(s)) &#123;</span><br><span class="line">              it.remove();</span><br><span class="line">          &#125;</span><br><span class="line"></span><br><span class="line">      &#125;</span><br><span class="line">      System.out.println(list);</span><br></pre></td></tr></table></figure>
+<p>ArrayList集合遍历删除弊端：降低性能（删除中间的数值，需要将后面的元素往前移动一位）</p>
+<p><strong>增强for循环</strong></p>
+<p>概念：简化数组和Collertion集合的遍历</p>
+<ul>
+<li>JDK5后面出现的，其内部原理是一个Iterator迭代器</li>
+<li>实现Iterable接口的类才可以使用迭代器和增强for</li>
+</ul>
+<p>格式：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="keyword">for</span>(元素数据类型  变量名：数组或者Collertion集合)&#123;</span><br><span class="line">	<span class="comment">//在此处使用变量，该变量就是元素</span></span><br><span class="line">&gt;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>案例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt;ArrayList&lt;String&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">&gt;<span class="comment">//  增加元素</span></span><br><span class="line">&gt;<span class="comment">//s只是一个变量，表示集合或者数组中循环的中的每个元素</span></span><br><span class="line">&gt;<span class="comment">// list是需要遍历的集合或者数组</span></span><br><span class="line">&gt;<span class="keyword">for</span>(String s : list)&#123;  </span><br><span class="line">          System.out.println(s);</span><br><span class="line">      &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>Lambda方式遍历</p>
+<p>案例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt;list.forEach(c -&gt; System.out.println(c));</span><br></pre></td></tr></table></figure>
+
+<p>三种循环的使用场景</p>
+<ul>
+<li><p>如果需要操作索引，使用普通for循环</p>
+</li>
+<li><p>如果在遍历过程中需要删除元素，使用迭代器</p>
+</li>
+<li><p>如果只需要遍历，使用增强for，不建议使用删除</p>
+<p>（Iterator迭代器和集合长度可变删除移位冲突）</p>
+<p>// ConcurrentModificationException  并发修改异常</p>
+</li>
+<li><p>普通for循环不通用</p>
+</li>
+</ul>
+</blockquote>
+<h4 id="26-3-List集合"><a href="#26-3-List集合" class="headerlink" title="26.3 List集合"></a>26.3 List集合</h4><h5 id="26-3-1-List的概述和特点"><a href="#26-3-1-List的概述和特点" class="headerlink" title="26.3.1 List的概述和特点"></a>26.3.1 List的概述和特点</h5><blockquote>
+<ol>
+<li><strong>List集合概述</strong></li>
+</ol>
+<ul>
+<li>有序集合，这里的有序指的是存取顺序</li>
+<li>用户可以精确控制列表中每个元素的插入位置，用户可以通过整数索引访问元素，并搜索列表中的元素</li>
+<li>与Set集合不同，列表中通常允许重复的元素</li>
+</ul>
+<ol start="2">
+<li>List集合的<strong>特点</strong></li>
+</ol>
+<ul>
+<li>有序：有序和取出的元素顺序一致</li>
+<li>有索引：可以通过索引操作元素</li>
+<li>可重复：存储的元素可以重复</li>
+</ul>
+</blockquote>
+<h5 id="26-3-2-List集合的方法"><a href="#26-3-2-List集合的方法" class="headerlink" title="26.3.2 List集合的方法"></a>26.3.2 List集合的方法</h5><blockquote>
+<p>成员方法：</p>
+<table>
+<thead>
+<tr>
+<th>方法名</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>void add(int index,E   element)</td>
+<td>在此集合中的指定位置插入指定的元素</td>
+</tr>
+<tr>
+<td>E remove(int   index)</td>
+<td>删除指定索引处的元素，返回被删除的元素</td>
+</tr>
+<tr>
+<td>E set(int index,E   element)</td>
+<td>修改指定索引处的元素，返回被修改的元素</td>
+</tr>
+<tr>
+<td>E get(int   index)</td>
+<td>返回指定索引处的元素</td>
+</tr>
+</tbody></table>
+<p>案例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">       List&lt;String&gt; list  = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">       list.add(<span class="string">"aaa"</span>);</span><br><span class="line">       list.add(<span class="string">"bbb"</span>);</span><br><span class="line">       list.add(<span class="string">"ccc"</span>);</span><br><span class="line"></span><br><span class="line">&gt;<span class="comment">//        Listadd(list);   // 增加</span></span><br><span class="line">&gt;<span class="comment">//       Listremove(list);  //删除</span></span><br><span class="line">&gt;<span class="comment">//        Listset(list);    //修改</span></span><br><span class="line">&gt;<span class="comment">//        Listget(list);    //获取</span></span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Listget</span><span class="params">(List&lt;String&gt; list)</span> </span>&#123;</span><br><span class="line">       <span class="comment">// 获取指定位置的元素</span></span><br><span class="line">       String s = list.get(<span class="number">0</span>);</span><br><span class="line">       System.out.println(s);</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Listset</span><span class="params">(List&lt;String&gt; list)</span> </span>&#123;</span><br><span class="line">       <span class="comment">// 修改指定元素，会返回被修改的元素</span></span><br><span class="line">       <span class="comment">//被替代的元素，在集合中就不存在了</span></span><br><span class="line">       String  result = list.set(<span class="number">0</span>,<span class="string">"qqq"</span>);</span><br><span class="line">       System.out.println(result);</span><br><span class="line">       System.out.println(list);</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Listremove</span><span class="params">(List&lt;String&gt; list)</span> </span>&#123;</span><br><span class="line">       <span class="comment">// 删除指定元素，会返回被删除的元素</span></span><br><span class="line">       String s = list.remove(<span class="number">0</span>);</span><br><span class="line">       <span class="comment">// 删除指定元素，集合中的第一个，返回删除的布尔值</span></span><br><span class="line">       <span class="keyword">boolean</span> result = list.remove(<span class="string">"aaa"</span>);</span><br><span class="line">       System.out.println(result);</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Listadd</span><span class="params">(List&lt;String&gt; list)</span> </span>&#123;</span><br><span class="line">       <span class="comment">// add 在指定位置插入指定元素，原来上的元素往后挪一个索引</span></span><br><span class="line">       list.add(<span class="number">0</span>,<span class="string">"ddd"</span>);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+</blockquote>
+<h5 id="26-3-3-List的常用方法"><a href="#26-3-3-List的常用方法" class="headerlink" title="26.3.3 List的常用方法"></a>26.3.3 List的常用方法</h5><blockquote>
+<ul>
+<li><p>ArrayList集合</p>
+<ul>
+<li>底层是数组结构实现，查询快、增删慢</li>
+</ul>
+</li>
+<li><p>LinkedList集合</p>
+<ul>
+<li>底层是链表结构实现，查询慢、增删快</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h5 id="26-3-4-LinkedList的私有方法"><a href="#26-3-4-LinkedList的私有方法" class="headerlink" title="26.3.4 LinkedList的私有方法"></a>26.3.4 LinkedList的私有方法</h5><blockquote>
+<p>成员方法：</p>
+<table>
+<thead>
+<tr>
+<th>方法名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>public void addFirst(E e)</td>
+<td>在该列表开头插入指定的元素</td>
+</tr>
+<tr>
+<td>public void addLast(E e)</td>
+<td>将指定的元素追加到此列表的末尾</td>
+</tr>
+<tr>
+<td>public E getFirst()</td>
+<td>返回此列表中的第一个元素</td>
+</tr>
+<tr>
+<td>public   E getLast()</td>
+<td>返回此列表中的最后一个元素</td>
+</tr>
+<tr>
+<td>public E removeFirst()</td>
+<td>从此列表中删除并返回第一个元素</td>
+</tr>
+<tr>
+<td>public   E removeLast()</td>
+<td>从此列表中删除并返回最后一个元素</td>
+</tr>
+</tbody></table>
+<p>案例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">LinkedList&lt;String&gt; list = <span class="keyword">new</span> LinkedList&lt;&gt;();</span><br><span class="line">list.add(<span class="string">"aaa"</span>);</span><br><span class="line">list.add(<span class="string">"bbb"</span>);</span><br><span class="line">list.add(<span class="string">"ccc"</span>);</span><br><span class="line">list.add(<span class="string">"ddd"</span>);</span><br><span class="line">&gt;<span class="comment">//添加到最后一位</span></span><br><span class="line">list.addLast(<span class="string">"eee"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//添加到开头</span></span><br><span class="line">list.addFirst(<span class="string">"000"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 返回列表中第一个元素</span></span><br><span class="line">String a =list.getFirst();</span><br><span class="line">System.out.println(a);</span><br><span class="line">System.out.println(<span class="string">"----------------"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 返回列表中最后一个元素</span></span><br><span class="line">String b =list.getLast();</span><br><span class="line">System.out.println(b);</span><br><span class="line">System.out.println(<span class="string">"----------------"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 删除第一个元素</span></span><br><span class="line">list.removeFirst();</span><br><span class="line"></span><br><span class="line"><span class="comment">//删除最后一位</span></span><br><span class="line">list.removeLast();</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h3 id="27-数据结构"><a href="#27-数据结构" class="headerlink" title="27. 数据结构"></a>27. 数据结构</h3><h4 id="27-1-常见的数据结构之一队列"><a href="#27-1-常见的数据结构之一队列" class="headerlink" title="27.1 常见的数据结构之一队列"></a>27.1 常见的数据结构之一队列</h4><blockquote>
+<ul>
+<li><p>栈结构</p>
+<p>​    先进后出</p>
+</li>
+<li><p>队列结构</p>
+<p>​    先进先出</p>
+</li>
+</ul>
+</blockquote>
+<h4 id="27-2-常见的数据结构之一数组"><a href="#27-2-常见的数据结构之一数组" class="headerlink" title="27.2 常见的数据结构之一数组"></a>27.2 常见的数据结构之一数组</h4><blockquote>
+<ul>
+<li>数组<ul>
+<li>查询数据通过地址值和索引定位</li>
+<li>查询快，增删慢</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h4 id="27-3-常见的数据结构之一链表"><a href="#27-3-常见的数据结构之一链表" class="headerlink" title="27.3 常见的数据结构之一链表"></a>27.3 常见的数据结构之一链表</h4><blockquote>
+<ul>
+<li>增删快，查询慢</li>
+</ul>
+<p><img src="image/%E9%93%BE%E8%A1%A8-%E5%8D%95%E9%A1%B9%E9%93%BE%E8%A1%A8.png" alt=""></p>
+<p><img src="image/%E9%93%BE%E8%A1%A8-%E5%8F%8C%E5%90%91%E9%93%BE%E8%A1%A8.png" alt=""></p>
+</blockquote>
+<ul>
+<li>数组在执行查询时效率很高</li>
+<li>数据在增删时候效率很低</li>
+<li>链表在执行查询时候效率低</li>
+<li>链表在执行增删的时候效率很高</li>
+</ul>
+
+      
+      <!-- 打赏 -->
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2021/09/23/DAY16_%E9%AB%98%E7%BA%A7%E9%9B%86%E5%90%88%E5%92%8C%E6%95%B0%E6%8D%AE%E9%9B%86%E5%90%88/" data-id="ckw4xsjsl000708ue4vdkdvs6"
         class="article-share-link">分享</a>
         
       
@@ -802,7 +1321,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2021/09/22/DAY15_JDK8%E6%97%B6%E9%97%B4%E6%97%A5%E6%9C%9F%E7%B1%BB/" data-id="ckw20s8cn000810ue0pbq772s"
+      <a data-url="http://yoursite.com/2021/09/22/DAY15_JDK8%E6%97%B6%E9%97%B4%E6%97%A5%E6%9C%9F%E7%B1%BB/" data-id="ckw4xsjsg000208ue6dgxb157"
         class="article-share-link">分享</a>
         
       
@@ -1136,7 +1655,7 @@ System.out.println(divide);
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2021/09/20/DAY14_API%E5%92%8C%E6%95%B0%E7%BB%84%E9%AB%98%E7%BA%A7%E6%93%8D%E4%BD%9C/" data-id="ckw20s8cs000f10ue0j7yf3gn"
+      <a data-url="http://yoursite.com/2021/09/20/DAY14_API%E5%92%8C%E6%95%B0%E7%BB%84%E9%AB%98%E7%BA%A7%E6%93%8D%E4%BD%9C/" data-id="ckw4xsjs7000008ue4adn7bdi"
         class="article-share-link">分享</a>
         
       
@@ -1320,7 +1839,7 @@ System.out.println(divide);
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2021/09/18/Day13_%E5%86%85%E9%83%A8%E5%92%8CLambda/" data-id="ckw20s8di000y10ue1oed3yjf"
+      <a data-url="http://yoursite.com/2021/09/18/Day13_%E5%86%85%E9%83%A8%E5%92%8CLambda/" data-id="ckw4xsjt2001008ueg0exggra"
         class="article-share-link">分享</a>
         
       
@@ -1562,7 +2081,7 @@ System.out.println(divide);
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2021/09/17/Day12_%E6%8E%A5%E5%8F%A3%E5%92%8C%E5%A4%9A%E6%80%81/" data-id="ckw20s8db000t10ue54310p3l"
+      <a data-url="http://yoursite.com/2021/09/17/Day12_%E6%8E%A5%E5%8F%A3%E5%92%8C%E5%A4%9A%E6%80%81/" data-id="ckw4xsjt1000y08uedsv5c59c"
         class="article-share-link">分享</a>
         
       
@@ -1758,7 +2277,7 @@ System.out.println(divide);
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2021/09/15/day11_%E7%BB%A7%E6%89%BF/" data-id="ckw20s8fa002210ue0i9z9lwy"
+      <a data-url="http://yoursite.com/2021/09/15/day11_%E7%BB%A7%E6%89%BF/" data-id="ckw4xsjtp002008ue569wbyf7"
         class="article-share-link">分享</a>
         
       
@@ -2081,7 +2600,7 @@ System.out.println(divide);
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2021/09/13/day10-%E5%88%86%E7%B1%BB%E5%92%8Cstatic/" data-id="ckw20s8f6001z10ue2srn2uiz"
+      <a data-url="http://yoursite.com/2021/09/13/day10-%E5%88%86%E7%B1%BB%E5%92%8Cstatic/" data-id="ckw4xsjtw002d08ue4ymu9ctl"
         class="article-share-link">分享</a>
         
       
@@ -2308,362 +2827,7 @@ System.out.println(divide);
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2021/09/10/day09%20ArrayList%E9%9B%86%E5%90%88&%E5%AD%A6%E7%94%9F%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/" data-id="ckw20s8fh002810ue6czzemhl"
-        class="article-share-link">分享</a>
-        
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%90%8E%E7%AB%AF%E5%AD%A6%E4%B9%A0/" rel="tag">后端学习</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-  
-  
-
-  
-
-</article>
-    
-    <article id="post-day08-String的使用" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2021/09/09/day08-String%E7%9A%84%E4%BD%BF%E7%94%A8/"
-    >API和String的使用</a
-  >
-</h2>
-  
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2021/09/09/day08-String%E7%9A%84%E4%BD%BF%E7%94%A8/" class="article-date">
-  <time datetime="2021-09-09T13:13:19.000Z" itemprop="datePublished">2021-09-09</time>
-</a>
-      
-      
-      
-      
-    </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-      <h2 id="1-API"><a href="#1-API" class="headerlink" title="1.API"></a>1.API</h2><h3 id="1-1-API概述-帮助文档的使用"><a href="#1-1-API概述-帮助文档的使用" class="headerlink" title="1.1 API概述-帮助文档的使用"></a>1.1 API概述-帮助文档的使用</h3><ul>
-<li><p>什么是API</p>
-<p>​    API (Application Programming Interface) ：应用程序编程接口</p>
-</li>
-<li><p>java中的API</p>
-<p>​    指的就是 JDK 中提供的各种功能的 Java类，这些类将底层的实现封装了起来，我们不需要关心这些类是如何实现的，只需要学习这些类如何使用即可，我们可以通过帮助文档来学习这些API如何使用。</p>
-</li>
-</ul>
-<p><strong>如何使用API帮助文档 :</strong> </p>
-<ul>
-<li>打开帮助文档</li>
-<li>找到索引选项卡中的输入框</li>
-<li>在输入框中输入Random</li>
-<li>看类在哪个包下</li>
-<li>看类的描述</li>
-<li>看构造方法</li>
-<li>看成员方法</li>
-</ul>
-<h3 id="1-2-键盘录入字符串"><a href="#1-2-键盘录入字符串" class="headerlink" title="1.2 键盘录入字符串"></a>1.2 键盘录入字符串</h3><p><strong>Scanner类 :</strong></p>
-<p>​    next() : 遇到了空格, 就不再录入数据了 , 结束标记: 空格, tab键</p>
-<p>​    nextLine() : 可以将数据完整的接收过来 , 结束标记: 回车换行符       </p>
-<p><strong>代码实现 :</strong> </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">import java.util.Scanner;</span><br><span class="line">public class Demo1Scanner &#123;   </span><br><span class="line">&#x2F;*        next() : 遇到了空格, 就不再录入数据了                结束标记: 空格, tab键       </span><br><span class="line">nextLine() : 可以将数据完整的接收过来              </span><br><span class="line">结束标记: 回车换行符     *&#x2F;  </span><br><span class="line">public static void main(String[] args) &#123;        </span><br><span class="line">&#x2F;&#x2F; 1. 创建Scanner对象      </span><br><span class="line">Scanner sc &#x3D; new Scanner(System.in);        System.out.println(&quot;请输入:&quot;);      </span><br><span class="line">&#x2F;&#x2F; 2. 调用nextLine方法接收字符串       </span><br><span class="line">&#x2F;&#x2F; ctrl + alt + v : 快速生成方法的返回值     </span><br><span class="line">String s &#x3D; sc.nextLine();    </span><br><span class="line">System.out.println(s);    &#125;&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">import java.util.Scanner;</span><br><span class="line">public class Demo2Scanner &#123;   </span><br><span class="line">&#x2F;*    nextInt和nextLine方法配合使用的时候, nextLine方法就没有键盘录入的机会了        建议: 今后键盘录入数据的时候, 如果是字符串和整数一起接受, 建议使用next方法接受字符串.     *&#x2F;  </span><br><span class="line">public static void main(String[] args) &#123;   </span><br><span class="line">Scanner sc &#x3D; new Scanner(System.in);        System.out.println(&quot;请输入整数:&quot;);     </span><br><span class="line">int num &#x3D; sc.nextInt(); &#x2F;&#x2F; 10 + 回车换行        System.out.println(&quot;请输入字符串:&quot;);     </span><br><span class="line">String s &#x3D; sc.nextLine();     </span><br><span class="line">System.out.println(num);       </span><br><span class="line">System.out.println(s);    &#125;&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="2-String类"><a href="#2-String类" class="headerlink" title="2. String类"></a>2. String类</h2><h3 id="2-1-String概述"><a href="#2-1-String概述" class="headerlink" title="2.1 String概述"></a>2.1 String概述</h3><p>​    1 String 类在 java.lang 包下，所以使用的时候不需要导包</p>
-<p>​    2 String 类代表字符串，Java 程序中的所有字符串文字（例如“abc”）都被实现为此类的实例也就是说，Java 程序中所有的双引号字符串，都是 String 类的对象</p>
-<p>​    3 字符串不可变，它们的值在创建后不能被更改</p>
-<h3 id="2-2-String类的构造方法"><a href="#2-2-String类的构造方法" class="headerlink" title="2.2 String类的构造方法"></a>2.2 String类的构造方法</h3><p><strong>常用的构造方法</strong></p>
-<p><img src="image/Sting%E7%9A%84%E4%BD%BF%E7%94%A8.png" alt="1590939947722"></p>
-<p><strong>示例代码</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;       String类常见构造方法:      </span><br><span class="line">public String() : 创建一个空白字符串对象，不含有任何内容            public String(char[] chs) : 根据字符数组的内容，来创建字符串对象      public String(String original) : 根据传入的字符串内容，来创建字符串对象            String s &#x3D; “abc”;  直接赋值的方式创建字符串对象，内容就是abc         注意:                String这个类比较特殊, 打印其对象名的时候, 不会出现内存地址                而是该对象所记录的真实内容.                面向对象-继承, Object类     *&#x2F;   </span><br><span class="line">public static void main(String[] args) &#123;        </span><br><span class="line">&#x2F;&#x2F; public String() : 创建一个空白字符串对象，不含有任何内容        String s1 &#x3D; new String();     </span><br><span class="line">System.out.println(s1);       </span><br><span class="line">&#x2F;&#x2F; public String(char[] chs) : 根据字符数组的内容，来创建字符串对象    char[] chs &#x3D; &#123;&#39;a&#39;,&#39;b&#39;,&#39;c&#39;&#125;;    </span><br><span class="line">String s2 &#x3D; new String(chs);     </span><br><span class="line">System.out.println(s2);       </span><br><span class="line">&#x2F;&#x2F; public String(String original) : 根据传入的字符串内容，来创建字符串对象      </span><br><span class="line">String s3 &#x3D; new String(&quot;123&quot;);    </span><br><span class="line">System.out.println(s3);    &#125;&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="2-4-创建字符串对象的区别对比"><a href="#2-4-创建字符串对象的区别对比" class="headerlink" title="2.4 创建字符串对象的区别对比"></a>2.4 创建字符串对象的区别对比</h3><ul>
-<li><p><strong>通过构造方法创建</strong></p>
-<p>​    通过 new 创建的字符串对象，每一次 new 都会申请一个内存空间，虽然内容相同，但是地址值不同</p>
-</li>
-<li><p><strong>直接赋值方式创建</strong></p>
-<p>​    以“”方式给出的字符串，只要字符序列相同(顺序和大小写)，无论在程序代码中出现几次，JVM 都只会建立一个 String 对象，并在字符串池中维护</p>
-</li>
-</ul>
-<h3 id="2-5-字符串的比较"><a href="#2-5-字符串的比较" class="headerlink" title="2.5 字符串的比较"></a>2.5 字符串的比较</h3><h4 id="2-5-1-字符串的比较"><a href="#2-5-1-字符串的比较" class="headerlink" title="2.5.1 字符串的比较"></a>2.5.1 字符串的比较</h4><ul>
-<li>== 比较基本数据类型：比较的是具体的值</li>
-<li>== 比较引用数据类型：比较的是对象地址值</li>
-</ul>
-<p><strong>String类 :  public boolean equals(String s)     比较两个字符串内容是否相同、区分大小写</strong></p>
-<p><strong>代码 :</strong></p>
-<p>package com.itheima.stringmethod;public class Demo1Equals {    public static void main(String[] args) {<br>String s1 = “abc”;<br>String s2 = “ABC”;<br>String s3 = “abc”;    // equals : 比较字符串内容, 区分大小写        System.out.println(s1.equals(s2));        System.out.println(s1.equals(s3));<br>// equalsIgnoreCase : 比较字符串内容, 忽略大小写        System.out.println(s1.equalsIgnoreCase(s2));    }}</p>
-<h3 id="2-6-用户登录案例【应用】"><a href="#2-6-用户登录案例【应用】" class="headerlink" title="2.6 用户登录案例【应用】"></a>2.6 用户登录案例【应用】</h3><p><strong>案例需求 :</strong> </p>
-<p>​    已知用户名和密码，请用程序实现模拟用户登录。总共给三次机会，登录之后，给出相应的提示</p>
-<p><strong>实现步骤 : \</strong></p>
-<ol>
-<li>已知用户名和密码，定义两个字符串表示即可</li>
-<li>键盘录入要登录的用户名和密码，用 Scanner 实现</li>
-<li>拿键盘录入的用户名、密码和已知的用户名、密码进行比较，给出相应的提示。</li>
-<li>字符串的内容比较，用equals() 方法实现</li>
-<li>用循环实现多次机会，这里的次数明确，采用for循环实现，并在登录成功的时候，使用break结束循</li>
-</ol>
-<p><strong>代码实现 :</strong> </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">import java.util.Scanner;</span><br><span class="line">public class Test1 &#123;  </span><br><span class="line">&#x2F;*        需求：已知用户名和密码，请用程序实现模拟用户登录。              总共给三次机会，登录之后，给出相应的提示        </span><br><span class="line">思路：       </span><br><span class="line">1. 已知用户名和密码，定义两个字符串表示即可       </span><br><span class="line">2. 键盘录入要登录的用户名和密码，用 Scanner 实现      </span><br><span class="line">3. 拿键盘录入的用户名、密码和已知的用户名、密码进行比较，给出相应的提示。            字符串的内容比较，用equals() 方法实现        </span><br><span class="line">4. 用循环实现多次机会，这里的次数明确，采用for循环实现，并在登录成功的时候，使用break结束循环     *&#x2F;   </span><br><span class="line">public static void main(String[] args) &#123;      </span><br><span class="line">&#x2F;&#x2F; 1. 已知用户名和密码，定义两个字符串表示即可       </span><br><span class="line">String username &#x3D; &quot;admin&quot;;       </span><br><span class="line">String password &#x3D; &quot;123456&quot;;        </span><br><span class="line">&#x2F;&#x2F; 2. 键盘录入要登录的用户名和密码，用 Scanner 实现   </span><br><span class="line">Scanner sc &#x3D; new Scanner(System.in);        </span><br><span class="line">&#x2F;&#x2F; 4. 用循环实现多次机会，这里的次数明确，采用for循环实现        for(int i &#x3D; 1; i &lt;&#x3D; 3; i++)&#123;            </span><br><span class="line">System.out.println(&quot;请输入用户名:&quot;);            </span><br><span class="line">String scUsername &#x3D; sc.nextLine();            System.out.println(&quot;请输入密码:&quot;);          </span><br><span class="line">String scPassword &#x3D; sc.nextLine();           </span><br><span class="line">&#x2F;&#x2F; 3. 拿键盘录入的用户名、密码和已知的用户名、密码进行比较，给出相应的提示。           </span><br><span class="line">if(username.equals(scUsername) &amp;&amp; password.equals(scPassword))&#123;   System.out.println(&quot;登录成功&quot;);            </span><br><span class="line">break;            </span><br><span class="line">&#125;else&#123; </span><br><span class="line">if(i &#x3D;&#x3D; 3)&#123;   </span><br><span class="line">System.out.println(&quot;您的登录次数已达到今日上限, 请明天再来&quot;);       &#125;else&#123;           </span><br><span class="line">System.out.println(&quot;登录失败,您还剩余&quot; + (3-i) +&quot;次机会&quot;);                &#125;            &#125;        &#125;    &#125;&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="2-7-遍历字符串案例【应用】"><a href="#2-7-遍历字符串案例【应用】" class="headerlink" title="2.7 遍历字符串案例【应用】"></a>2.7 遍历字符串案例【应用】</h3><p><strong>案例需求 :</strong> </p>
-<p>​    键盘录入一个字符串，使用程序实现在控制台遍历该字符串</p>
-<p><strong>实现步骤 :</strong> </p>
-<ol>
-<li>键盘录入一个字符串，用 Scanner 实现</li>
-<li>遍历字符串，首先要能够获取到字符串中的每一个字符, public char charAt(int index)：返回指定索引处的char值，字符串的索引也是从0开始的</li>
-<li>遍历字符串，其次要能够获取到字符串的长度,   public int length()：返回此字符串的长度</li>
-<li>遍历打印</li>
-</ol>
-<p><strong>代码实现 :</strong> </p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test2</span> </span>&#123;    <span class="comment">/*       </span></span><br><span class="line"><span class="comment">需求：键盘录入一个字符串，使用程序实现在控制台遍历该字符串        </span></span><br><span class="line"><span class="comment">思路：</span></span><br><span class="line"><span class="comment">1. 键盘录入一个字符串，用 Scanner 实现       </span></span><br><span class="line"><span class="comment">2. 遍历字符串，首先要能够获取到字符串中的每一个字符            </span></span><br><span class="line"><span class="comment">public char charAt(int index)：返回指定索引处的char值，字符串的索引也是从0开始的        </span></span><br><span class="line"><span class="comment">3. 遍历字符串，其次要能够获取到字符串的长度            </span></span><br><span class="line"><span class="comment">public int length()：返回此字符串的长度        </span></span><br><span class="line"><span class="comment">4. 遍历打印9     */</span>   </span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;        </span><br><span class="line"><span class="comment">//  1. 键盘录入一个字符串，用 Scanner 实现        </span></span><br><span class="line">Scanner sc = <span class="keyword">new</span> Scanner(System.in);        System.out.println(<span class="string">"请输入:"</span>);        </span><br><span class="line">String s = sc.nextLine();        </span><br><span class="line"><span class="comment">// 2. 遍历字符串，首先要能够获取到字符串中的每一个字符        </span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; s.length(); i++)&#123;            </span><br><span class="line"><span class="comment">// i : 字符串的每一个索引            </span></span><br><span class="line"><span class="keyword">char</span> c = s.charAt(i);            </span><br><span class="line">System.out.println(c);        &#125;    &#125;&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="2-8-统计字符次数案例【应用】"><a href="#2-8-统计字符次数案例【应用】" class="headerlink" title="2.8 统计字符次数案例【应用】"></a>2.8 统计字符次数案例【应用】</h3><p><strong>案例需求 :</strong> </p>
-<p>​    键盘录入一个字符串，使用程序实现在控制台遍历该字符串</p>
-<p><strong>实现步骤 :</strong> </p>
-<ol>
-<li>键盘录入一个字符串，用 Scanner 实现</li>
-<li>将字符串拆分为字符数组 , public char[] toCharArray( )：将当前字符串拆分为字符数组并返回</li>
-<li>遍历字符数</li>
-</ol>
-<p><strong>代码实现 :</strong> </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">import java.util.Scanner;</span><br><span class="line">public class Test3 &#123;    </span><br><span class="line">&#x2F;*       需求：键盘录入一个字符串，使用程序实现在控制台遍历该字符串   思路：       </span><br><span class="line">1. 键盘录入一个字符串，用 Scanner 实现       </span><br><span class="line">2. 将字符串拆分为字符数组                </span><br><span class="line">public char[] toCharArray( )：将当前字符串拆分为字符数组并返回       3. 遍历字符数组    *&#x2F;   </span><br><span class="line">public static void main(String[] args) &#123;        </span><br><span class="line">&#x2F;&#x2F;  1. 键盘录入一个字符串，用 Scanner 实现       </span><br><span class="line">Scanner sc &#x3D; new Scanner(System.in);        System.out.println(&quot;请输入:&quot;);       </span><br><span class="line">String s &#x3D; sc.nextLine();        </span><br><span class="line">&#x2F;&#x2F; 2. 将字符串拆分为字符数组        </span><br><span class="line">char[] chars &#x3D; s.toCharArray();     </span><br><span class="line">&#x2F;&#x2F; 3. 遍历字符数组       </span><br><span class="line">for (int i &#x3D; 0; i &lt; chars.length; i++) &#123;            System.out.println(chars[i]);      </span><br><span class="line">&#125;    &#125;&#125;</span><br><span class="line">public class Demo7 &#123;  </span><br><span class="line">public static void main(String[] args) &#123;        System.out.println(&quot;请输入一个字符串&quot;);      </span><br><span class="line">Scanner sc &#x3D; new Scanner(System.in);    </span><br><span class="line">String  s&#x3D; sc.nextLine();    </span><br><span class="line">char[] arr &#x3D; s.toCharArray();      </span><br><span class="line">int countBig&#x3D;0;      </span><br><span class="line">int countSmall&#x3D;0;       </span><br><span class="line">int count3&#x3D;0;     </span><br><span class="line">int countElse&#x3D;0;      </span><br><span class="line">for (int i &#x3D; 0; i &lt; arr.length; i++) &#123;       </span><br><span class="line">char ch&#x3D; arr[i];          </span><br><span class="line">if(ch&gt;&#39;0&#39;&amp;&amp;ch&lt;&#39;9&#39;)&#123;              </span><br><span class="line">count3++;           </span><br><span class="line">&#125;else if(ch&gt;&#39;a&#39;&amp;&amp;ch&lt;&#39;z&#39;)&#123;    </span><br><span class="line">countSmall++;          </span><br><span class="line">&#125;else if(ch&gt;&#39;A&#39;&amp;&amp;ch&lt;&#39;Z&#39;)&#123;      </span><br><span class="line">countBig++;           </span><br><span class="line">&#125;else&#123;              </span><br><span class="line">countElse++;            &#125;        &#125;    </span><br><span class="line">System.out.println(&quot;大写字母有&quot;+countBig+&quot;个&quot;);        System.out.println(&quot;小写字母有&quot;+countSmall+&quot;个&quot;);        System.out.println(&quot;数字有&quot;+count3+&quot;个&quot;);        System.out.println(&quot;其他字符有&quot;+countElse+&quot;个&quot;);    &#125;&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="2-9-手机号屏蔽-字符串截取"><a href="#2-9-手机号屏蔽-字符串截取" class="headerlink" title="2.9 手机号屏蔽-字符串截取"></a>2.9 手机号屏蔽-字符串截取</h3><p><strong>案例需求 :</strong> </p>
-<p>​    以字符串的形式从键盘接受一个手机号，将中间四位号码屏蔽</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">最终效果为：156****1234</span><br></pre></td></tr></table></figure>
-
-<p><strong>实现步骤 :</strong> </p>
-<ol>
-<li>键盘录入一个字符串，用 Scanner 实现</li>
-<li>截取字符串前三位</li>
-<li>截取字符串后四位</li>
-<li>将截取后的两个字符串，中间加上****进行拼接，输出结果</li>
-</ol>
-<p><strong>代码实现 :</strong> </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">import java.util.Scanner;</span><br><span class="line">public class Test5 &#123;    &#x2F;*        需求：以字符串的形式从键盘接受一个手机号，将中间四位号码屏蔽        最终效果为：156****1234        </span><br><span class="line">思路：        </span><br><span class="line">1. 键盘录入一个字符串，用 Scanner 实现        </span><br><span class="line">2. 截取字符串前三位        </span><br><span class="line">3. 截取字符串后四位        </span><br><span class="line">4. 将截取后的两个字符串，中间加上****进行拼接，输出结果     *&#x2F;    public static void main(String[] args) &#123;      </span><br><span class="line">&#x2F;&#x2F; 1. 键盘录入一个字符串，用 Scanner 实现     </span><br><span class="line">Scanner sc &#x3D; new Scanner(System.in);        System.out.println(&quot;请输入手机号:&quot;);    </span><br><span class="line">String telString &#x3D; sc.nextLine();     </span><br><span class="line">&#x2F;&#x2F; 2. 截取字符串前三位       </span><br><span class="line">String start &#x3D; telString.substring(0,3);    </span><br><span class="line">&#x2F;&#x2F; 3. 截取字符串后四位      </span><br><span class="line">String end &#x3D; telString.substring(7);    </span><br><span class="line">&#x2F;&#x2F; 4. 将截取后的两个字符串，中间加上****进行拼接，输出结果        System.out.println(start + &quot;****&quot; + end);    &#125;&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="2-10-敏感词替换-字符串替换"><a href="#2-10-敏感词替换-字符串替换" class="headerlink" title="2.10 敏感词替换-字符串替换"></a>2.10 敏感词替换-字符串替换</h3><p><strong>案例需求 :</strong> </p>
-<p>​    键盘录入一个 字符串，如果字符串中包含（TMD），则使用***替换</p>
-<p><strong>实现步骤 :</strong> </p>
-<ol>
-<li><p>键盘录入一个字符串，用 Scanner 实现</p>
-</li>
-<li><p>替换敏感词</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">String replace(CharSequence target, CharSequence replacement)</span><br><span class="line">将当前字符串中的target内容，使用replacement进行替换，返回新的字符串</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>输出结果</p>
-</li>
-</ol>
-<p><strong>代码实现 :</strong> </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">import java.util.Scanner;</span><br><span class="line">public class Test6 &#123;   </span><br><span class="line">&#x2F;*        需求：键盘录入一个 字符串，如果字符串中包含（TMD），则使用***替换        </span><br><span class="line">思路：        </span><br><span class="line">1. 键盘录入一个字符串，用 Scanner 实现        </span><br><span class="line">2. 替换敏感词                </span><br><span class="line">String replace(CharSequence target, CharSequence replacement)     将当前字符串中的target内容，使用replacement进行替换，返回新的字符串   3. 输出结果     *&#x2F;   </span><br><span class="line">public static void main(String[] args) &#123;    </span><br><span class="line">&#x2F;&#x2F; 1. 键盘录入一个字符串，用 Scanner 实现    </span><br><span class="line">Scanner sc &#x3D; new Scanner(System.in);        System.out.println(&quot;请输入:&quot;);      </span><br><span class="line">String s &#x3D; sc.nextLine();       </span><br><span class="line">&#x2F;&#x2F; 2. 替换敏感词      </span><br><span class="line">String result &#x3D; s.replace(&quot;TMD&quot;,&quot;***&quot;);    </span><br><span class="line">&#x2F;&#x2F; 3. 输出结果        </span><br><span class="line">System.out.println(result);    &#125;&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="2-11-切割字符串"><a href="#2-11-切割字符串" class="headerlink" title="2.11 切割字符串"></a>2.11 切割字符串</h3><p><strong>案例需求 :</strong> </p>
-<p>​    以字符串的形式从键盘录入学生信息，例如：“张三 , 23”</p>
-<p>​    从该字符串中切割出有效数据,封装为Student学生对象</p>
-<p><strong>实现步骤 :</strong> </p>
-<ol>
-<li><p>编写Student类，用于封装数据</p>
-</li>
-<li><p>键盘录入一个字符串，用 Scanner 实现</p>
-</li>
-<li><p>根据逗号切割字符串，得到（张三）（23）</p>
-<p>String[] split(String regex) ：根据传入的字符串作为规则进行切割将切割后的内容存入字符串数组中，并将字符串数组返回</p>
-</li>
-<li><p>从得到的字符串数组中取出元素内容，通过Student类的有参构造方法封装为对象</p>
-</li>
-<li><p>调用对象getXxx方法，取出数据并打印。</p>
-</li>
-</ol>
-<p><strong>代码实现 :</strong> </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">import com.domain.Student;</span><br><span class="line">import java.util.Scanner;</span><br><span class="line">public class Test7 &#123;   </span><br><span class="line">&#x2F;*         需求：以字符串的形式从键盘录入学生信息，例如：“张三 , 23”                从该字符串中切割出有效数据,封装为Student学生对象         思路：           </span><br><span class="line">1. 编写Student类，用于封装数据           </span><br><span class="line">2. 键盘录入一个字符串，用 Scanner 实现       </span><br><span class="line">3. 根据逗号切割字符串，得到（张三）（23）                    String[] split(String regex) ：根据传入的字符串作为规则进行切割      将切割后的内容存入字符串数组中，并将字符串数组返回           </span><br><span class="line">4. 从得到的字符串数组中取出元素内容，通过Student类的有参构造方法封装为对象           </span><br><span class="line">5. 调用对象getXxx方法，取出数据并打印。     *&#x2F;    </span><br><span class="line">public static void main(String[] args) &#123;        </span><br><span class="line">&#x2F;&#x2F; 2. 键盘录入一个字符串，用 Scanner 实现        </span><br><span class="line">Scanner sc &#x3D; new Scanner(System.in);        System.out.println(&quot;请输入学生信息:&quot;);        </span><br><span class="line">String stuInfo &#x3D; sc.nextLine();        </span><br><span class="line">&#x2F;&#x2F; stuInfo &#x3D; &quot;张三,23&quot;;        </span><br><span class="line">&#x2F;&#x2F; 3. 根据逗号切割字符串，得到（张三）（23）     </span><br><span class="line">String[] sArr &#x3D; stuInfo.split(&quot;,&quot;);&#x2F;&#x2F;        System.out.println(sArr[0]);&#x2F;&#x2F;        System.out.println(sArr[1]);       </span><br><span class="line">&#x2F;&#x2F; 4. 从得到的字符串数组中取出元素内容，通过Student类的有参构造方法封装为对象        </span><br><span class="line">Student stu &#x3D; new Student(sArr[0],sArr[1]);       </span><br><span class="line">&#x2F;&#x2F; 5. 调用对象getXxx方法，取出数据并打印。        System.out.println(stu.getName() + &quot;...&quot; + stu.getAge());    &#125;&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="2-12-String方法小结"><a href="#2-12-String方法小结" class="headerlink" title="2.12 String方法小结"></a>2.12 String方法小结</h3><p><strong>String类的常用方法 :</strong> </p>
-<p>​    public boolean equals(Object anObject)  比较字符串的内容，严格区分大小写</p>
-<p>​    public boolean equalsIgnoreCase(String anotherString)  比较字符串的内容，忽略大小写</p>
-<p>​    public int length()  返回此字符串的长度</p>
-<p>​    public char charAt(int index)  返回指定索引处的 char 值</p>
-<p>​    public char[] toCharArray()  将字符串拆分为字符数组后返回</p>
-<p>​    public String substring(int beginIndex, int endIndex)  根据开始和结束索引进行截取，得到新的字符串（包含头，不包含尾）</p>
-<p>​    public String substring(int beginIndex)  从传入的索引处截取，截取到末尾，得到新的字符串</p>
-<p>​    public String replace(CharSequence target, CharSequence replacement)  使用新值，将字符串中的旧值替换，得到新的字符串</p>
-<p>​    public String[] split(String regex)  根据传入的规则切割字符串，得到字符串数组</p>
-<h2 id="3-StringBuilder类"><a href="#3-StringBuilder类" class="headerlink" title="3 StringBuilder类"></a>3 StringBuilder类</h2><h3 id="3-1-StringBuilder类概述"><a href="#3-1-StringBuilder类概述" class="headerlink" title="3.1 StringBuilder类概述"></a>3.1 StringBuilder类概述</h3><p>​    <strong>概述 :</strong> StringBuilder 是一个可变的字符串类，我们可以把它看成是一个容器，这里的可变指的是 StringBuilder 对象中的内容是可变的</p>
-<h3 id="3-2-StringBuilder类和String类的区别"><a href="#3-2-StringBuilder类和String类的区别" class="headerlink" title="3.2 StringBuilder类和String类的区别"></a>3.2 StringBuilder类和String类的区别</h3><ul>
-<li><strong>String类：</strong>内容是不可变的</li>
-<li><strong>StringBuilder类：</strong>内容是可变的</li>
-</ul>
-<h3 id="3-3StringBuilder类的构造方法"><a href="#3-3StringBuilder类的构造方法" class="headerlink" title="3.3StringBuilder类的构造方法"></a>3.3StringBuilder类的构造方法</h3><p><strong>常用的构造方法</strong></p>
-<table>
-<thead>
-<tr>
-<th>方法名</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>public StringBuilder()</td>
-<td>创建一个空白可变字符串对象，不含有任何内容</td>
-</tr>
-<tr>
-<td>public StringBuilder(String   str)</td>
-<td>根据字符串的内容，来创建可变字符串对象</td>
-</tr>
-</tbody></table>
-<p><strong>示例代码</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public class StringBuilderDemo01 &#123;  </span><br><span class="line">public static void main(String[] args) &#123;    </span><br><span class="line">&#x2F;&#x2F;public StringBuilder()：创建一个空白可变字符串对象，不含有任何内容 StringBuilder sb &#x3D; new StringBuilder();        System.out.println(&quot;sb:&quot; + sb);        System.out.println(&quot;sb.length():&quot; + sb.length());        &#x2F;&#x2F;public StringBuilder(String str)：根据字符串的内容，来创建可变字符串对象       </span><br><span class="line">StringBuilder sb2 &#x3D; new StringBuilder(&quot;hello&quot;);        System.out.println(&quot;sb2:&quot; + sb2);        System.out.println(&quot;sb2.length():&quot; + sb2.length());    &#125;&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="3-4-StringBuilder常用的成员方法"><a href="#3-4-StringBuilder常用的成员方法" class="headerlink" title="3.4 StringBuilder常用的成员方法"></a>3.4 StringBuilder常用的成员方法</h3><ul>
-<li><p><strong>添加和反转方法</strong></p>
-<table>
-<thead>
-<tr>
-<th>方法名</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>public StringBuilder   append(任意类型)</td>
-<td>添加数据，并返回对象本身</td>
-</tr>
-<tr>
-<td>public StringBuilder   reverse()</td>
-<td>返回相反的字符序列</td>
-</tr>
-</tbody></table>
-</li>
-<li><p><strong>示例代码</strong></p>
-</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">public class StringBuilderDemo01 &#123;</span><br><span class="line">public static void main(String[] args) &#123;  </span><br><span class="line">&#x2F;&#x2F;创建对象        </span><br><span class="line">StringBuilder sb &#x3D; new StringBuilder();      </span><br><span class="line">&#x2F;&#x2F;public StringBuilder append(任意类型)：添加数据，并返回对象本身&#x2F;&#x2F; StringBuilder sb2 &#x3D; sb.append(&quot;hello&quot;);&#x2F;&#x2F;&#x2F;&#x2F;        System.out.println(&quot;sb:&quot; + sb);&#x2F;&#x2F;        System.out.println(&quot;sb2:&quot; + sb2);&#x2F;&#x2F;     </span><br><span class="line">System.out.println(sb &#x3D;&#x3D; sb2);&#x2F;&#x2F;     </span><br><span class="line">sb.append(&quot;hello&quot;);&#x2F;&#x2F;    </span><br><span class="line">sb.append(&quot;world&quot;);&#x2F;&#x2F;       </span><br><span class="line">sb.append(&quot;java&quot;);&#x2F;&#x2F;      </span><br><span class="line">sb.append(100);        &#x2F;&#x2F;链式编程        sb.append(&quot;hello&quot;).append(&quot;world&quot;).append(&quot;java&quot;).append(100);   System.out.println(&quot;sb:&quot; + sb);   </span><br><span class="line">&#x2F;&#x2F;public StringBuilder reverse()：返回相反的字符序列        sb.reverse();       </span><br><span class="line">System.out.println(&quot;sb:&quot; + sb);    &#125;&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="3-5StringBuilder和String相互转换【应用】"><a href="#3-5StringBuilder和String相互转换【应用】" class="headerlink" title="3.5StringBuilder和String相互转换【应用】"></a>3.5StringBuilder和String相互转换【应用】</h3><ul>
-<li><p><strong>StringBuilder转换为String</strong></p>
-<p>​        public String toString()：通过 toString() 就可以实现把 StringBuilder 转换为 String</p>
-</li>
-<li><p><strong>String转换为StringBuilder</strong></p>
-<p>​        public StringBuilder(String s)：通过构造方法就可以实现把 String 转换为 StringBuilder</p>
-</li>
-<li><p><strong>示例代码</strong></p>
-</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">public class StringBuilderDemo02 &#123; </span><br><span class="line">public static void main(String[] args) &#123;        &#x2F;*        &#x2F;&#x2F;StringBuilder 转换为 String      </span><br><span class="line">StringBuilder sb &#x3D; new StringBuilder();        sb.append(&quot;hello&quot;);     </span><br><span class="line">&#x2F;&#x2F;String s &#x3D; sb; &#x2F;&#x2F;这个是错误的做法   </span><br><span class="line">&#x2F;&#x2F;public String toString()：通过 toString() 就可以实现把 StringBuilder 转换为 String      </span><br><span class="line">String s &#x3D; sb.toString();     </span><br><span class="line">System.out.println(s);        *&#x2F;    </span><br><span class="line">&#x2F;&#x2F;String 转换为 StringBuilder    </span><br><span class="line">String s &#x3D; &quot;hello&quot;;       </span><br><span class="line">&#x2F;&#x2F;StringBuilder sb &#x3D; s; &#x2F;&#x2F;这个是错误的做法    </span><br><span class="line">&#x2F;&#x2F;public StringBuilder(String s)：通过构造方法就可以实现把 String 转换为 StringBuilder     </span><br><span class="line">StringBuilder sb &#x3D; new StringBuilder(s);        System.out.println(sb);    &#125;&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="3-6-StringBuilder拼接字符串案例"><a href="#3-6-StringBuilder拼接字符串案例" class="headerlink" title="3.6 StringBuilder拼接字符串案例"></a>3.6 StringBuilder拼接字符串案例</h3><p><strong>案例需求 :</strong> </p>
-<p>​    定义一个方法，把 int 数组中的数据按照指定的格式拼接成一个字符串返回，调用该方法，</p>
-<p>​    并在控制台输出结果。例如，数组为int[] arr = {1,2,3}; ，执行方法后的输出结果为：[1, 2, 3]</p>
-<p><strong>实现步骤 :</strong> </p>
-<ol>
-<li><p>定义一个 int 类型的数组，用静态初始化完成数组元素的初始化</p>
-</li>
-<li><p>定义一个方法，用于把 int 数组中的数据按照指定格式拼接成一个字符串返回。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">返回值类型 String，参数列表 int[] arr</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>在方法中用 StringBuilder 按照要求进行拼接，并把结果转成 String 返回</p>
-</li>
-<li><p>调用方法，用一个变量接收结果</p>
-</li>
-<li><p>输出结果</p>
-</li>
-</ol>
-<p><strong>代码实现 :</strong> </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;*    思路：     </span><br><span class="line">1:定义一个 int 类型的数组，用静态初始化完成数组元素的初始化  </span><br><span class="line">2:定义一个方法，用于把 int 数组中的数据按照指定格式拼接成一个字符串返回。          返回值类型 String，参数列表 int[] arr      </span><br><span class="line">3:在方法中用 StringBuilder 按照要求进行拼接，并把结果转成 String 返回 4:调用方法，用一个变量接收结果        </span><br><span class="line">5:输出结果 *&#x2F;</span><br><span class="line">public class StringBuilderTest01 &#123;    </span><br><span class="line">public static void main(String[] args) &#123;      </span><br><span class="line">&#x2F;&#x2F;定义一个 int 类型的数组，用静态初始化完成数组元素的初始化        int[] arr &#x3D; &#123;1, 2, 3&#125;;        &#x2F;&#x2F;调用方法，用一个变量接收结果        String s &#x3D; arrayToString(arr);        &#x2F;&#x2F;输出结果        System.out.println(&quot;s:&quot; + s);    &#125;    &#x2F;&#x2F;定义一个方法，用于把 int 数组中的数据按照指定格式拼接成一个字符串返回   </span><br><span class="line">&#x2F;*        两个明确：            返回值类型：String            参数：int[] arr     *&#x2F;   </span><br><span class="line">public static String arrayToString(int[] arr) &#123;   </span><br><span class="line">&#x2F;&#x2F;在方法中用 StringBuilder 按照要求进行拼接，并把结果转成 String 返回  StringBuilder sb &#x3D; new StringBuilder();       </span><br><span class="line">sb.append(&quot;[&quot;);      </span><br><span class="line">for(int i&#x3D;0; i&lt;arr.length; i++) &#123;      </span><br><span class="line">if(i &#x3D;&#x3D; arr.length-1) &#123;            </span><br><span class="line">sb.append(arr[i]);         </span><br><span class="line">&#125; else &#123;               </span><br><span class="line">sb.append(arr[i]).append(&quot;, &quot;);      </span><br><span class="line">&#125;        &#125;       </span><br><span class="line">sb.append(&quot;]&quot;);     </span><br><span class="line">String s &#x3D; sb.toString();    </span><br><span class="line">return  s;    </span><br><span class="line">&#125;&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-      <!-- 打赏 -->
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2021/09/09/day08-String%E7%9A%84%E4%BD%BF%E7%94%A8/" data-id="ckw20s8ff002610ue2bid4ztw"
-        class="article-share-link">分享</a>
-        
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%90%8E%E7%AB%AF%E5%AD%A6%E4%B9%A0/" rel="tag">后端学习</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-  
-  
-
-  
-
-</article>
-    
-    <article id="post-递归排序" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2021/09/09/%E9%80%92%E5%BD%92%E6%8E%92%E5%BA%8F/"
-    >递归排序</a
-  >
-</h2>
-  
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2021/09/09/%E9%80%92%E5%BD%92%E6%8E%92%E5%BA%8F/" class="article-date">
-  <time datetime="2021-09-09T13:13:19.000Z" itemprop="datePublished">2021-09-09</time>
-</a>
-      
-      
-      
-      
-    </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-      <h3 id="递归排序"><a href="#递归排序" class="headerlink" title="递归排序"></a>递归排序</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Demo5</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> [] arr = &#123;<span class="number">12</span>,<span class="number">4</span>,<span class="number">67</span>,<span class="number">89</span>,<span class="number">34</span>,<span class="number">25</span>&#125;;</span><br><span class="line">        <span class="comment">//哪些索引需要往后比</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; arr.length-<span class="number">1</span>; i++) &#123;</span><br><span class="line">            <span class="comment">//每一次从哪开始比的位置</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = i+<span class="number">1</span>; j &lt; arr.length; j++) &#123;</span><br><span class="line">                <span class="keyword">if</span>(arr[i]&lt;arr[j])&#123;</span><br><span class="line">                    <span class="keyword">int</span> temp = arr[j];</span><br><span class="line">                    arr[j]=arr[i];</span><br><span class="line">                    arr[i]=temp;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">            System.out.print(arr[i]+<span class="string">" "</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-      <!-- 打赏 -->
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2021/09/09/%E9%80%92%E5%BD%92%E6%8E%92%E5%BA%8F/" data-id="ckw20s8fj002a10uehux006wk"
+      <a data-url="http://yoursite.com/2021/09/10/day09%20ArrayList%E9%9B%86%E5%90%88&%E5%AD%A6%E7%94%9F%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/" data-id="ckw4xsjto001y08ue5j5q9ew7"
         class="article-share-link">分享</a>
         
       

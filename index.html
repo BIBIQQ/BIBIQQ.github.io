@@ -76,6 +76,239 @@
     
     
     
+    <article id="post-git" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2021/11/18/git/"
+    >Git 使用规范流程</a
+  >
+</h2>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2021/11/18/git/" class="article-date">
+  <time datetime="2021-11-18T12:33:49.000Z" itemprop="datePublished">2021-11-18</time>
+</a>
+      
+      
+      
+      
+    </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h1 id="常用-Git-命令清单"><a href="#常用-Git-命令清单" class="headerlink" title="常用 Git 命令清单"></a>常用 Git 命令清单</h1><p><img src="https://www.ruanyifeng.com/blogimg/asset/2015/bg2015120901.png" alt="img"></p>
+<h2 id="一、新建代码库"><a href="#一、新建代码库" class="headerlink" title="一、新建代码库"></a>一、新建代码库</h2><blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 在当前目录新建一个Git代码库</span></span><br><span class="line">$ git init</span><br><span class="line"></span><br><span class="line"><span class="comment"># 新建一个目录，将其初始化为Git代码库</span></span><br><span class="line">$ git init [project-name]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 下载一个项目和它的整个代码历史</span></span><br><span class="line">$ git <span class="built_in">clone</span> [url]</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h2 id="二、配置"><a href="#二、配置" class="headerlink" title="二、配置"></a>二、配置</h2><p>Git的设置文件为<code>.gitconfig</code>，它可以在用户主目录下（全局配置），也可以在项目目录下（项目配置）。</p>
+<blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 显示当前的Git配置</span></span><br><span class="line">$ git config --list</span><br><span class="line"></span><br><span class="line"><span class="comment"># 编辑Git配置文件</span></span><br><span class="line">$ git config -e [--global]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置提交代码时的用户信息</span></span><br><span class="line">$ git config [--global] user.name <span class="string">"[name]"</span></span><br><span class="line">$ git config [--global] user.email <span class="string">"[email address]"</span></span><br></pre></td></tr></table></figure>
+</blockquote>
+<h2 id="三、增加-删除文件"><a href="#三、增加-删除文件" class="headerlink" title="三、增加/删除文件"></a>三、增加/删除文件</h2><blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 添加指定文件到暂存区</span></span><br><span class="line">$ git add [file1] [file2] ...</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加指定目录到暂存区，包括子目录</span></span><br><span class="line">$ git add [dir]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加当前目录的所有文件到暂存区</span></span><br><span class="line">$ git add .</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加每个变化前，都会要求确认</span></span><br><span class="line"><span class="comment"># 对于同一个文件的多处变化，可以实现分次提交</span></span><br><span class="line">$ git add -p</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除工作区文件，并且将这次删除放入暂存区</span></span><br><span class="line">$ git rm [file1] [file2] ...</span><br><span class="line"></span><br><span class="line"><span class="comment"># 停止追踪指定文件，但该文件会保留在工作区</span></span><br><span class="line">$ git rm --cached [file]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 改名文件，并且将这个改名放入暂存区</span></span><br><span class="line">$ git mv [file-original] [file-renamed]</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h2 id="四、代码提交"><a href="#四、代码提交" class="headerlink" title="四、代码提交"></a>四、代码提交</h2><blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 提交暂存区到仓库区</span></span><br><span class="line">$ git commit -m [message]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 提交暂存区的指定文件到仓库区</span></span><br><span class="line">$ git commit [file1] [file2] ... -m [message]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 提交工作区自上次commit之后的变化，直接到仓库区</span></span><br><span class="line">$ git commit -a</span><br><span class="line"></span><br><span class="line"><span class="comment"># 提交时显示所有diff信息</span></span><br><span class="line">$ git commit -v</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用一次新的commit，替代上一次提交</span></span><br><span class="line"><span class="comment"># 如果代码没有任何新变化，则用来改写上一次commit的提交信息</span></span><br><span class="line">$ git commit --amend -m [message]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 重做上一次commit，并包括指定文件的新变化</span></span><br><span class="line">$ git commit --amend [file1] [file2] ...</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h2 id="五、分支"><a href="#五、分支" class="headerlink" title="五、分支"></a>五、分支</h2><blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 列出所有本地分支</span></span><br><span class="line">$ git branch</span><br><span class="line"></span><br><span class="line"><span class="comment"># 列出所有远程分支</span></span><br><span class="line">$ git branch -r</span><br><span class="line"></span><br><span class="line"><span class="comment"># 列出所有本地分支和远程分支</span></span><br><span class="line">$ git branch -a</span><br><span class="line"></span><br><span class="line"><span class="comment"># 新建一个分支，但依然停留在当前分支</span></span><br><span class="line">$ git branch [branch-name]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 新建一个分支，并切换到该分支</span></span><br><span class="line">$ git checkout -b [branch]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 新建一个分支，指向指定commit</span></span><br><span class="line">$ git branch [branch] [commit]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 新建一个分支，与指定的远程分支建立追踪关系</span></span><br><span class="line">$ git branch --track [branch] [remote-branch]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 切换到指定分支，并更新工作区</span></span><br><span class="line">$ git checkout [branch-name]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 切换到上一个分支</span></span><br><span class="line">$ git checkout -</span><br><span class="line"></span><br><span class="line"><span class="comment"># 建立追踪关系，在现有分支与指定的远程分支之间</span></span><br><span class="line">$ git branch --<span class="built_in">set</span>-upstream [branch] [remote-branch]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 合并指定分支到当前分支</span></span><br><span class="line">$ git merge [branch]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 选择一个commit，合并进当前分支</span></span><br><span class="line">$ git cherry-pick [commit]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除分支</span></span><br><span class="line">$ git branch -d [branch-name]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除远程分支</span></span><br><span class="line">$ git push origin --delete [branch-name]</span><br><span class="line">$ git branch -dr [remote/branch]</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h2 id="六、标签"><a href="#六、标签" class="headerlink" title="六、标签"></a>六、标签</h2><blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 列出所有tag</span></span><br><span class="line">$ git tag</span><br><span class="line"></span><br><span class="line"><span class="comment"># 新建一个tag在当前commit</span></span><br><span class="line">$ git tag [tag]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 新建一个tag在指定commit</span></span><br><span class="line">$ git tag [tag] [commit]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除本地tag</span></span><br><span class="line">$ git tag -d [tag]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除远程tag</span></span><br><span class="line">$ git push origin :refs/tags/[tagName]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看tag信息</span></span><br><span class="line">$ git show [tag]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 提交指定tag</span></span><br><span class="line">$ git push [remote] [tag]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 提交所有tag</span></span><br><span class="line">$ git push [remote] --tags</span><br><span class="line"></span><br><span class="line"><span class="comment"># 新建一个分支，指向某个tag</span></span><br><span class="line">$ git checkout -b [branch] [tag]</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h2 id="七、查看信息"><a href="#七、查看信息" class="headerlink" title="七、查看信息"></a>七、查看信息</h2><blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 显示有变更的文件</span></span><br><span class="line">$ git status</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示当前分支的版本历史</span></span><br><span class="line">$ git <span class="built_in">log</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示commit历史，以及每次commit发生变更的文件</span></span><br><span class="line">$ git <span class="built_in">log</span> --<span class="built_in">stat</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 搜索提交历史，根据关键词</span></span><br><span class="line">$ git <span class="built_in">log</span> -S [keyword]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示某个commit之后的所有变动，每个commit占据一行</span></span><br><span class="line">$ git <span class="built_in">log</span> [tag] HEAD --pretty=format:%s</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示某个commit之后的所有变动，其"提交说明"必须符合搜索条件</span></span><br><span class="line">$ git <span class="built_in">log</span> [tag] HEAD --grep feature</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示某个文件的版本历史，包括文件改名</span></span><br><span class="line">$ git <span class="built_in">log</span> --follow [file]</span><br><span class="line">$ git whatchanged [file]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示指定文件相关的每一次diff</span></span><br><span class="line">$ git <span class="built_in">log</span> -p [file]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示过去5次提交</span></span><br><span class="line">$ git <span class="built_in">log</span> -5 --pretty --oneline</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示所有提交过的用户，按提交次数排序</span></span><br><span class="line">$ git shortlog -sn</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示指定文件是什么人在什么时间修改过</span></span><br><span class="line">$ git blame [file]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示暂存区和工作区的差异</span></span><br><span class="line">$ git diff</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示暂存区和上一个commit的差异</span></span><br><span class="line">$ git diff --cached [file]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示工作区与当前分支最新commit之间的差异</span></span><br><span class="line">$ git diff HEAD</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示两次提交之间的差异</span></span><br><span class="line">$ git diff [first-branch]...[second-branch]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示今天你写了多少行代码</span></span><br><span class="line">$ git diff --shortstat <span class="string">"@&#123;0 day ago&#125;"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示某次提交的元数据和内容变化</span></span><br><span class="line">$ git show [commit]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示某次提交发生变化的文件</span></span><br><span class="line">$ git show --name-only [commit]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示某次提交时，某个文件的内容</span></span><br><span class="line">$ git show [commit]:[filename]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示当前分支的最近几次提交</span></span><br><span class="line">$ git reflog</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h2 id="八、远程同步"><a href="#八、远程同步" class="headerlink" title="八、远程同步"></a>八、远程同步</h2><blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 下载远程仓库的所有变动</span></span><br><span class="line">$ git fetch [remote]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示所有远程仓库</span></span><br><span class="line">$ git remote -v</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示某个远程仓库的信息</span></span><br><span class="line">$ git remote show [remote]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 增加一个新的远程仓库，并命名</span></span><br><span class="line">$ git remote add [shortname] [url]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 取回远程仓库的变化，并与本地分支合并</span></span><br><span class="line">$ git pull [remote] [branch]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 上传本地指定分支到远程仓库</span></span><br><span class="line">$ git push [remote] [branch]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 强行推送当前分支到远程仓库，即使有冲突</span></span><br><span class="line">$ git push [remote] --force</span><br><span class="line"></span><br><span class="line"><span class="comment"># 推送所有分支到远程仓库</span></span><br><span class="line">$ git push [remote] --all</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h2 id="九、撤销"><a href="#九、撤销" class="headerlink" title="九、撤销"></a>九、撤销</h2><blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 恢复暂存区的指定文件到工作区</span></span><br><span class="line">$ git checkout [file]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 恢复某个commit的指定文件到暂存区和工作区</span></span><br><span class="line">$ git checkout [commit] [file]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 恢复暂存区的所有文件到工作区</span></span><br><span class="line">$ git checkout .</span><br><span class="line"></span><br><span class="line"><span class="comment"># 重置暂存区的指定文件，与上一次commit保持一致，但工作区不变</span></span><br><span class="line">$ git reset [file]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 重置暂存区与工作区，与上一次commit保持一致</span></span><br><span class="line">$ git reset --hard</span><br><span class="line"></span><br><span class="line"><span class="comment"># 重置当前分支的指针为指定commit，同时重置暂存区，但工作区不变</span></span><br><span class="line">$ git reset [commit]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 重置当前分支的HEAD为指定commit，同时重置暂存区和工作区，与指定commit一致</span></span><br><span class="line">$ git reset --hard [commit]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 重置当前HEAD为指定commit，但保持暂存区和工作区不变</span></span><br><span class="line">$ git reset --keep [commit]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 新建一个commit，用来撤销指定commit</span></span><br><span class="line"><span class="comment"># 后者的所有变化都将被前者抵消，并且应用到当前分支</span></span><br><span class="line">$ git revert [commit]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 暂时将未提交的变化移除，稍后再移入</span></span><br><span class="line">$ git stash</span><br><span class="line">$ git stash pop</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h2 id="十、其他"><a href="#十、其他" class="headerlink" title="十、其他"></a>十、其他</h2><blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 生成一个可供发布的压缩包</span></span><br><span class="line">$ git archive</span><br></pre></td></tr></table></figure></blockquote>
+
+      
+      <!-- 打赏 -->
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2021/11/18/git/" data-id="ckw4xsjtq002208ue1o25bjmt"
+        class="article-share-link">分享</a>
+        
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Git/" rel="tag">Git</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+
+</article>
+    
+    <article id="post-分支使用" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2021/11/18/%E5%88%86%E6%94%AF%E4%BD%BF%E7%94%A8/"
+    >Git 使用规范流程</a
+  >
+</h2>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2021/11/18/%E5%88%86%E6%94%AF%E4%BD%BF%E7%94%A8/" class="article-date">
+  <time datetime="2021-11-18T12:33:49.000Z" itemprop="datePublished">2021-11-18</time>
+</a>
+      
+      
+      
+      
+    </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h1 id="Git-使用规范流程"><a href="#Git-使用规范流程" class="headerlink" title="Git 使用规范流程"></a>Git 使用规范流程</h1><p><img src="..%5Cimages%5Cbg2015080501.png" alt="使用流程"></p>
+<h2 id="第一步：新建分支"><a href="#第一步：新建分支" class="headerlink" title="第一步：新建分支"></a>第一步：新建分支</h2><p>首先，每次开发新功能，都应该新建一个单独的分支（这方面可以参考<a href="https://www.ruanyifeng.com/blog/2012/07/git.html" target="_blank" rel="noopener">《Git分支管理策略》</a>）。</p>
+<blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 获取主干最新代码</span></span><br><span class="line">$ git checkout master</span><br><span class="line">$ git pull</span><br><span class="line"></span><br><span class="line"><span class="comment"># 新建一个开发分支myfeature</span></span><br><span class="line">$ git checkout -b myfeature</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h2 id="第二步：提交分支commit"><a href="#第二步：提交分支commit" class="headerlink" title="第二步：提交分支commit"></a>第二步：提交分支commit</h2><p>分支修改后，就可以提交commit了。</p>
+<blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ git add --all</span><br><span class="line">$ git status</span><br><span class="line">$ git commit --verbose</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>git add 命令的all参数，表示保存所有变化（包括新建、修改和删除）。从Git 2.0开始，all是 git add 的默认参数，所以也可以用 git add . 代替。</p>
+<p>git status 命令，用来查看发生变动的文件。</p>
+<p>git commit 命令的verbose参数，会列出 <a href="https://www.ruanyifeng.com/blog/2012/08/how_to_read_diff.html" target="_blank" rel="noopener">diff</a> 的结果。</p>
+<h2 id="第三步：撰写提交信息"><a href="#第三步：撰写提交信息" class="headerlink" title="第三步：撰写提交信息"></a>第三步：撰写提交信息</h2><p>提交commit时，必须给出完整扼要的提交信息，下面是一个范本。</p>
+<blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Present-tense summary under 50 characters</span><br><span class="line"></span><br><span class="line">* More information about commit (under 72 characters).</span><br><span class="line">* More information about commit (under 72 characters).</span><br><span class="line"></span><br><span class="line">http://project.management-system.com/ticket/123</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>第一行是不超过50个字的提要，然后空一行，罗列出改动原因、主要变动、以及需要注意的问题。最后，提供对应的网址（比如Bug ticket）。</p>
+<h2 id="第四步：与主干同步"><a href="#第四步：与主干同步" class="headerlink" title="第四步：与主干同步"></a>第四步：与主干同步</h2><p>分支的开发过程中，要经常与主干保持同步。</p>
+<blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git fetch origin</span><br><span class="line">$ git rebase origin/master</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h2 id="第五步：合并commit"><a href="#第五步：合并commit" class="headerlink" title="第五步：合并commit"></a>第五步：合并commit</h2><p>分支开发完成后，很可能有一堆commit，但是合并到主干的时候，往往希望只有一个（或最多两三个）commit，这样不仅清晰，也容易管理。</p>
+<p>那么，怎样才能将多个commit合并呢？这就要用到 git rebase 命令。</p>
+<blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git rebase -i origin/master</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>git rebase命令的i参数表示互动（interactive），这时git会打开一个互动界面，进行下一步操作。</p>
+<p>下面采用<a href="https://robots.thoughtbot.com/git-interactive-rebase-squash-amend-rewriting-history" target="_blank" rel="noopener">Tute Costa</a>的例子，来解释怎么合并commit。</p>
+<blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">pick 07c5abd Introduce OpenPGP and teach basic usage</span><br><span class="line">pick de9b1eb Fix PostChecker::Post<span class="comment">#urls</span></span><br><span class="line">pick 3e7ee36 Hey kids, stop all the highlighting</span><br><span class="line">pick fa20af3 git interactive rebase, squash, amend</span><br><span class="line"></span><br><span class="line"><span class="comment"># Rebase 8db7e8b..fa20af3 onto 8db7e8b</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># Commands:</span></span><br><span class="line"><span class="comment">#  p, pick = use commit</span></span><br><span class="line"><span class="comment">#  r, reword = use commit, but edit the commit message</span></span><br><span class="line"><span class="comment">#  e, edit = use commit, but stop for amending</span></span><br><span class="line"><span class="comment">#  s, squash = use commit, but meld into previous commit</span></span><br><span class="line"><span class="comment">#  f, fixup = like "squash", but discard this commit's log message</span></span><br><span class="line"><span class="comment">#  x, exec = run command (the rest of the line) using shell</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># These lines can be re-ordered; they are executed from top to bottom.</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># If you remove a line here THAT COMMIT WILL BE LOST.</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># However, if you remove everything, the rebase will be aborted.</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># Note that empty commits are commented out</span></span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>上面的互动界面，先列出当前分支最新的4个commit（越下面越新）。每个commit前面有一个操作命令，默认是pick，表示该行commit被选中，要进行rebase操作。</p>
+<p>4个commit的下面是一大堆注释，列出可以使用的命令。</p>
+<blockquote>
+<ul>
+<li>pick：正常选中</li>
+<li>reword：选中，并且修改提交信息；</li>
+<li>edit：选中，rebase时会暂停，允许你修改这个commit（参考<a href="https://schacon.github.io/gitbook/4_interactive_rebasing.html" target="_blank" rel="noopener">这里</a>）</li>
+<li>squash：选中，会将当前commit与上一个commit合并</li>
+<li>fixup：与squash相同，但不会保存当前commit的提交信息</li>
+<li>exec：执行其他shell命令</li>
+</ul>
+</blockquote>
+<p>上面这6个命令当中，squash和fixup可以用来合并commit。先把需要合并的commit前面的动词，改成squash（或者s）。</p>
+<blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">pick 07c5abd Introduce OpenPGP and teach basic usage</span><br><span class="line">s de9b1eb Fix PostChecker::Post<span class="comment">#urls</span></span><br><span class="line">s 3e7ee36 Hey kids, stop all the highlighting</span><br><span class="line">pick fa20af3 git interactive rebase, squash, amend</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>这样一改，执行后，当前分支只会剩下两个commit。第二行和第三行的commit，都会合并到第一行的commit。提交信息会同时包含，这三个commit的提交信息。</p>
+<blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># This is a combination of 3 commits.</span></span><br><span class="line"><span class="comment"># The first commit's message is:</span></span><br><span class="line">Introduce OpenPGP and teach basic usage</span><br><span class="line"></span><br><span class="line"><span class="comment"># This is the 2nd commit message:</span></span><br><span class="line">Fix PostChecker::Post<span class="comment">#urls</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># This is the 3rd commit message:</span></span><br><span class="line">Hey kids, stop all the highlighting</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>如果将第三行的squash命令改成fixup命令。</p>
+<blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">pick 07c5abd Introduce OpenPGP and teach basic usage</span><br><span class="line">s de9b1eb Fix PostChecker::Post<span class="comment">#urls</span></span><br><span class="line">f 3e7ee36 Hey kids, stop all the highlighting</span><br><span class="line">pick fa20af3 git interactive rebase, squash, amend</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>运行结果相同，还是会生成两个commit，第二行和第三行的commit，都合并到第一行的commit。但是，新的提交信息里面，第三行commit的提交信息，会被注释掉。</p>
+<blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># This is a combination of 3 commits.</span></span><br><span class="line"><span class="comment"># The first commit's message is:</span></span><br><span class="line">Introduce OpenPGP and teach basic usage</span><br><span class="line"></span><br><span class="line"><span class="comment"># This is the 2nd commit message:</span></span><br><span class="line">Fix PostChecker::Post<span class="comment">#urls</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># This is the 3rd commit message:</span></span><br><span class="line"><span class="comment"># Hey kids, stop all the highlighting</span></span><br></pre></td></tr></table></figure>
+</blockquote>
+<p><a href="https://ponyfoo.com/articles/git-github-hacks" target="_blank" rel="noopener">Pony Foo</a>提出另外一种合并commit的简便方法，就是先撤销过去5个commit，然后再建一个新的。</p>
+<blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ git reset HEAD~5</span><br><span class="line">$ git add .</span><br><span class="line">$ git commit -am <span class="string">"Here's the bug fix that closes #28"</span></span><br><span class="line">$ git push --force</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>squash和fixup命令，还可以当作命令行参数使用，自动合并commit。</p>
+<blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git commit --fixup  </span><br><span class="line">$ git rebase -i --autosquash </span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>这个用法请参考<a href="https://fle.github.io/git-tip-keep-your-branch-clean-with-fixup-and-autosquash.html" target="_blank" rel="noopener">这篇文章</a>，这里就不解释了。</p>
+<h2 id="第六步：推送到远程仓库"><a href="#第六步：推送到远程仓库" class="headerlink" title="第六步：推送到远程仓库"></a>第六步：推送到远程仓库</h2><p>合并commit后，就可以推送当前分支到远程仓库了。</p>
+<blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git push --force origin myfeature</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>git push命令要加上force参数，因为rebase以后，分支历史改变了，跟远程分支不一定兼容，有可能要强行推送（参见<a href="http://willi.am/blog/2014/08/12/the-dark-side-of-the-force-push/" target="_blank" rel="noopener">这里</a>）。</p>
+<h2 id="第七步：发出Pull-Request"><a href="#第七步：发出Pull-Request" class="headerlink" title="第七步：发出Pull Request"></a>第七步：发出Pull Request</h2><p>提交到远程仓库以后，就可以发出 Pull Request 到master分支，然后请求别人进行代码review，确认可以合并到master。</p>
+
+      
+      <!-- 打赏 -->
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2021/11/18/%E5%88%86%E6%94%AF%E4%BD%BF%E7%94%A8/" data-id="ckw4xsjtu002908ue3wdcfvey"
+        class="article-share-link">分享</a>
+        
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Git/" rel="tag">Git</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+
+</article>
+    
     <article id="post-day06_MybatisPlus" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
@@ -256,7 +489,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2021/11/16/day06_MybatisPlus/" data-id="ckw20s8ed001n10ue87fn6he7"
+      <a data-url="http://yoursite.com/2021/11/16/day06_MybatisPlus/" data-id="ckw4xsjtr002408ueh8usc6hy"
         class="article-share-link">分享</a>
         
       
@@ -539,7 +772,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2021/11/15/day04_SpringMVC/" data-id="ckw20s8ec001l10ue10gigzqk"
+      <a data-url="http://yoursite.com/2021/11/15/day04_SpringMVC/" data-id="ckw4xsjtj001s08ue36duajpv"
         class="article-share-link">分享</a>
         
       
@@ -814,7 +1047,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2021/11/15/day03_Spring%E7%9A%84Aop/" data-id="ckw20s8dw001c10ue84csfnal"
+      <a data-url="http://yoursite.com/2021/11/15/day03_Spring%E7%9A%84Aop/" data-id="ckw4xsjtc001l08ueakvacwt9"
         class="article-share-link">分享</a>
         
       
@@ -1008,7 +1241,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2021/11/15/Day12-Filter&Listener&AJAX/" data-id="ckw20s8de000v10ue49ah71x8"
+      <a data-url="http://yoursite.com/2021/11/15/Day12-Filter&Listener&AJAX/" data-id="ckw4xsjsz000t08ue235tao93"
         class="article-share-link">分享</a>
         
       
@@ -1278,7 +1511,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2021/11/07/day02_%E6%B3%A8%E8%A7%A3%E5%BC%80%E5%8F%91/" data-id="ckw20s8e0001e10uebv271u9m"
+      <a data-url="http://yoursite.com/2021/11/07/day02_%E6%B3%A8%E8%A7%A3%E5%BC%80%E5%8F%91/" data-id="ckw4xsjt7001c08ue2fmd0ijo"
         class="article-share-link">分享</a>
         
       
@@ -1591,7 +1824,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2021/11/06/day01_Spring/" data-id="ckw20s8dp001710ue8fdth208"
+      <a data-url="http://yoursite.com/2021/11/06/day01_Spring/" data-id="ckw4xsjta001h08uehwv303yi"
         class="article-share-link">分享</a>
         
       
@@ -1843,7 +2076,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2021/10/31/Day10_JSP/" data-id="ckw20s8d8000q10ueeiwuhx5p"
+      <a data-url="http://yoursite.com/2021/10/31/Day10_JSP/" data-id="ckw4xsjt0000v08ue2shm0tgf"
         class="article-share-link">分享</a>
         
       
@@ -1974,384 +2207,11 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2021/10/28/Day05_MyBatis%E9%AB%98%E7%BA%A7/" data-id="ckw20s8cu000j10ueb2oi5i7m"
+      <a data-url="http://yoursite.com/2021/10/28/Day05_MyBatis%E9%AB%98%E7%BA%A7/" data-id="ckw4xsjsy000q08ue43xk0yp1"
         class="article-share-link">分享</a>
         
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java-Web/" rel="tag">Java Web</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-  
-  
-
-  
-
-</article>
-    
-    <article id="post-Day04_Maven和MyBatis" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2021/10/20/Day04_Maven%E5%92%8CMyBatis/"
-    >Maven和MyBatis</a
-  >
-</h2>
-  
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2021/10/20/Day04_Maven%E5%92%8CMyBatis/" class="article-date">
-  <time datetime="2021-10-20T10:16:49.000Z" itemprop="datePublished">2021-10-20</time>
-</a>
-      
-      
-      
-      
-    </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-      <h3 id="1-Maven"><a href="#1-Maven" class="headerlink" title="1. Maven"></a>1. Maven</h3><h4 id="1-1-Maven概述"><a href="#1-1-Maven概述" class="headerlink" title="1.1 Maven概述"></a>1.1 Maven概述</h4><blockquote>
-<p>Maven是专门用于管理好构建Java的项目的工具</p>
-<p>管理依赖</p>
-<p>主要功能：</p>
-<ul>
-<li>提供了一套标准haul的项目机构</li>
-<li>提供了一套标准化的构建流程（编译、测试、打包、发布。。）</li>
-<li>提供了一套依赖管理机制</li>
-</ul>
-<p>界面详情：</p>
-<p><img src="E:%5CHEIMA%5CNOTE/MySQL/image/Maven-%E7%95%8C%E9%9D%A2.png" alt=""></p>
-<p>仓库分类：</p>
-<ul>
-<li>本地仓库：自己计算机上的目录</li>
-<li>中央仓库：Maven团队维护的全球唯一仓库  <a href="https://repo1.maven.org/maven2/" target="_blank" rel="noopener">https://repo1.maven.org/maven2/</a></li>
-<li>远程仓库（私服）：公司团队搭建的私有仓库</li>
-</ul>
-<p>本地项目导入驱动jar包</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="comment">&lt;!--pom.xml--&gt;</span></span><br><span class="line">&gt;<span class="comment">&lt;!--mysql服务--&gt;</span></span><br><span class="line">&gt;<span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>mysql<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mysql-connector-java<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">version</span>&gt;</span>5.1.46<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
-</blockquote>
-<h4 id="1-2-Maven的使用"><a href="#1-2-Maven的使用" class="headerlink" title="1.2 Maven的使用"></a>1.2 Maven的使用</h4><blockquote>
-<p>maven生命周期</p>
-<ul>
-<li>Maven构建项目生命周期描述的是一次构建过程经历多少事件</li>
-<li>Maven对项目构建的生命周期划分为3套</li>
-<li>clean：清理工作</li>
-<li>default：核心工作，例如编译、测试、打包、安装等</li>
-<li>site：产生报告，发布站点</li>
-</ul>
-<p>==同一生命周期内，执行后边的命令，前面的所有命令会自动执行==</p>
-<p>Maven坐标详解</p>
-<p>坐标：</p>
-<ul>
-<li>Maven中的坐标是资源的唯一标识</li>
-<li>使用坐标来定义项目或引用项目中需要的依赖</li>
-</ul>
-<p>坐标组成：</p>
-<ul>
-<li>grould：当前Maven项目隶属组织名称</li>
-<li>artifactId：当前项目名称</li>
-<li>version：定义当前项目版本号</li>
-</ul>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">             <span class="comment">&lt;!-- 驱动名称 --&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>mysql<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">             <span class="comment">&lt;!-- 驱动目录地址 --&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mysql-connector-java<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">             <span class="comment">&lt;!--驱动版本号  --&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">version</span>&gt;</span>5.1.46<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-
-</blockquote>
-<h3 id="2-Mybatis"><a href="#2-Mybatis" class="headerlink" title="2. Mybatis"></a>2. Mybatis</h3><h5 id="2-1-基本概述"><a href="#2-1-基本概述" class="headerlink" title="2.1 基本概述"></a>2.1 基本概述</h5><blockquote>
-<ul>
-<li>MyBatis是一款优秀的持久层框架，用于简化JDBC开发</li>
-</ul>
-<p><strong>持久层</strong></p>
-<ul>
-<li>负责将数据保存到数据库的那一层代码</li>
-<li>JavaEE三层架构：表现层、业务层、持久层</li>
-</ul>
-<h5 id="JavaEE三层"><a href="#JavaEE三层" class="headerlink" title="JavaEE三层"></a>JavaEE三层</h5><ul>
-<li>表现层</li>
-<li>业务层</li>
-<li>持久层</li>
-</ul>
-<h5 id="框架："><a href="#框架：" class="headerlink" title="框架："></a>框架：</h5><ul>
-<li>框架是一个半成品软件，是一套可重用，通用的、软件基础代码模型</li>
-<li>在框架的基础之上构建软件编写更加高效、规范、通用、可拓展</li>
-</ul>
-<h5 id="MyBatis简化"><a href="#MyBatis简化" class="headerlink" title="MyBatis简化"></a>MyBatis简化</h5><ul>
-<li><p>硬编码</p>
-<ul>
-<li>注册驱动，获取连接</li>
-<li>SQL语句</li>
-</ul>
-</li>
-<li><p>操作繁琐</p>
-<ul>
-<li>手动设置参数</li>
-<li>手动封装对象</li>
-</ul>
-</li>
-</ul>
-</blockquote>
-<h5 id="2-1-MyBatis的使用"><a href="#2-1-MyBatis的使用" class="headerlink" title="2.1 MyBatis的使用"></a>2.1 MyBatis的使用</h5><blockquote>
-<h4 id="1-创建数据表，导入驱动jar包，定义POJO类"><a href="#1-创建数据表，导入驱动jar包，定义POJO类" class="headerlink" title="1. 创建数据表，导入驱动jar包，定义POJO类"></a>1. 创建数据表，导入驱动jar包，定义POJO类</h4><h4 id="2-配置MyBatis的配置文件"><a href="#2-配置MyBatis的配置文件" class="headerlink" title="2. 配置MyBatis的配置文件"></a>2. 配置MyBatis的配置文件</h4><ul>
-<li><strong>第一步</strong> ： 创建 mybatis-config.xml 核心配置文件</li>
-</ul>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="comment">&lt;!--mybatis-config.xml --&gt;</span></span><br><span class="line">&gt;<span class="meta">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;</span></span><br><span class="line">&gt;<span class="meta">&lt;!DOCTYPE <span class="meta-keyword">configuration</span></span></span><br><span class="line"><span class="meta">       <span class="meta-keyword">PUBLIC</span> <span class="meta-string">"-//mybatis.org//DTD Config 3.0//EN"</span></span></span><br><span class="line"><span class="meta">       <span class="meta-string">"http://mybatis.org/dtd/mybatis-3-config.dtd"</span>&gt;</span></span><br><span class="line">&gt;<span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">environments</span> <span class="attr">default</span>=<span class="string">"development"</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">environment</span> <span class="attr">id</span>=<span class="string">"development"</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">transactionManager</span> <span class="attr">type</span>=<span class="string">"JDBC"</span>/&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">dataSource</span> <span class="attr">type</span>=<span class="string">"POOLED"</span>&gt;</span></span><br><span class="line">               <span class="comment">&lt;!--连接信息--&gt;</span></span><br><span class="line">               <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"driver"</span> <span class="attr">value</span>=<span class="string">"com.mysql.jdbc.Driver"</span>/&gt;</span></span><br><span class="line">               <span class="comment">&lt;!--数据库地址--&gt;</span></span><br><span class="line">               <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"url"</span> <span class="attr">value</span>=<span class="string">"jdbc:mysql:///day04_mybatis?useSSL = false"</span>/&gt;</span></span><br><span class="line">               <span class="comment">&lt;!--用户名密码--&gt;</span></span><br><span class="line">               <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"username"</span> <span class="attr">value</span>=<span class="string">"root"</span>/&gt;</span></span><br><span class="line">               <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"password"</span> <span class="attr">value</span>=<span class="string">"root"</span>/&gt;</span></span><br><span class="line">           <span class="tag">&lt;/<span class="name">dataSource</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;/<span class="name">environment</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">environments</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">mappers</span>&gt;</span></span><br><span class="line">       <span class="comment">&lt;!--加载sql的映射文件--&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">mapper</span> <span class="attr">resource</span>=<span class="string">"UserMapper.xml"</span>/&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">mappers</span>&gt;</span></span><br><span class="line">&gt;<span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><strong>第二步</strong>   创建 UserMapper.xml 映射文件  命名：表名+Mapper</li>
-</ul>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="comment">&lt;!--UserMapper.xml  映射文件 --&gt;</span> </span><br><span class="line">&gt;<span class="meta">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;</span></span><br><span class="line">&gt;<span class="meta">&lt;!DOCTYPE <span class="meta-keyword">mapper</span></span></span><br><span class="line"><span class="meta">       <span class="meta-keyword">PUBLIC</span> <span class="meta-string">"-//mybatis.org//DTD Mapper 3.0//EN"</span></span></span><br><span class="line"><span class="meta">       <span class="meta-string">"http://mybatis.org/dtd/mybatis-3-mapper.dtd"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">&gt;<span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">&gt;namepace:名称空间</span></span><br><span class="line"><span class="comment">&gt;--&gt;</span></span><br><span class="line">&gt;<span class="tag">&lt;<span class="name">mapper</span> <span class="attr">namespace</span>=<span class="string">"test"</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"selectAll"</span> <span class="attr">resultType</span>=<span class="string">"pojo.User"</span>&gt;</span></span><br><span class="line">   select * from tb_user ;</span><br><span class="line"> <span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line">&gt;<span class="tag">&lt;/<span class="name">mapper</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>第三部   创建 logback.xml   日志配置文件</li>
-</ul>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line">&gt;<span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">   <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">       CONSOLE ：表示当前的日志信息是可以输出到控制台的。</span></span><br><span class="line"><span class="comment">   --&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">appender</span> <span class="attr">name</span>=<span class="string">"Console"</span> <span class="attr">class</span>=<span class="string">"ch.qos.logback.core.ConsoleAppender"</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">encoder</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">pattern</span>&gt;</span>[%level] %blue(%d&#123;HH:mm:ss.SSS&#125;) %cyan([%thread]) %boldGreen(%logger&#123;15&#125;) - %msg %n<span class="tag">&lt;/<span class="name">pattern</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;/<span class="name">encoder</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">appender</span>&gt;</span></span><br><span class="line"></span><br><span class="line">   <span class="tag">&lt;<span class="name">logger</span> <span class="attr">name</span>=<span class="string">"com.itheima"</span> <span class="attr">level</span>=<span class="string">"DEBUG"</span> <span class="attr">additivity</span>=<span class="string">"false"</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">appender-ref</span> <span class="attr">ref</span>=<span class="string">"Console"</span>/&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">logger</span>&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">   <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">     level:用来设置打印级别，大小写无关：TRACE, DEBUG, INFO, WARN, ERROR, ALL 和 OFF</span></span><br><span class="line"><span class="comment">    ， 默认debug</span></span><br><span class="line"><span class="comment">     &lt;root&gt;可以包含零个或多个&lt;appender-ref&gt;元素，标识这个输出位置将会被本日志级别控制。</span></span><br><span class="line"><span class="comment">     --&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">root</span> <span class="attr">level</span>=<span class="string">"DEBUG"</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">appender-ref</span> <span class="attr">ref</span>=<span class="string">"Console"</span>/&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">root</span>&gt;</span></span><br><span class="line">&gt;<span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="3-测试代码-配置文件导入"><a href="#3-测试代码-配置文件导入" class="headerlink" title="3. 测试代码- 配置文件导入"></a>3. 测试代码- 配置文件导入</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">&gt;<span class="comment">//      构建 SqlSessionFactory  Mybatis实现配置好的，直接复制即可</span></span><br><span class="line">    <span class="comment">//  导入配置文件 创建对象</span></span><br><span class="line">       String resource = <span class="string">"mybatis-config.xml"</span>;</span><br><span class="line">       InputStream inputStream = Resources.getResourceAsStream(resource);</span><br><span class="line">       SqlSessionFactory sqlSessionFactory = <span class="keyword">new</span> SqlSessionFactoryBuilder().build(inputStream);</span><br><span class="line">    </span><br><span class="line">&gt;<span class="comment">//        获取SqlSession对象 执行sql</span></span><br><span class="line">       SqlSession sqlSession = sqlSessionFactory.openSession();</span><br><span class="line">&gt;<span class="comment">//        执行sql  SQL映射文件的名称空间地址</span></span><br><span class="line">       List&lt;User&gt; users = sqlSession.selectList(<span class="string">"test.selectAll"</span>);</span><br><span class="line">       </span><br><span class="line">       System.out.println(users);</span><br><span class="line">       </span><br><span class="line">       sqlSession.close();</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
-
-</blockquote>
-<h3 id="3-Mapper"><a href="#3-Mapper" class="headerlink" title="3. Mapper"></a>3. Mapper</h3><blockquote>
-<p>简化JDBC的框架</p>
-<p>使用步骤：</p>
-<ul>
-<li>创建映射文件同名的接口，创建抽象方法，返回值和方法名保持一致</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">UserMapper</span> </span>&#123;</span><br><span class="line">     <span class="function">List&lt;User&gt;  <span class="title">selectAll</span><span class="params">()</span></span>;</span><br><span class="line">&gt;&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p>接口文件和映射文件在编译后保证在同一文件夹，在resources文件下，创建==接口文件同层级的文件夹==将映像文件存入</p>
-</li>
-<li><p>修改核心配置文件mybatis-config.xml</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--加载sql的映射文件--&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">mapper</span> <span class="attr">resource</span>=<span class="string">"com/mapper/UserMapper.xml"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>修改映射文件UserMapper.xml</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">mapper</span></span></span><br><span class="line"><span class="meta">        <span class="meta-keyword">PUBLIC</span> <span class="meta-string">"-//mybatis.org//DTD Mapper 3.0//EN"</span></span></span><br><span class="line"><span class="meta">        <span class="meta-string">"http://mybatis.org/dtd/mybatis-3-mapper.dtd"</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">namepace:名称空间</span></span><br><span class="line"><span class="comment">注意点：namepace 必须 UserMapper全路径一致</span></span><br><span class="line"><span class="comment">注意点：接口中的方法名必须和id标识一致</span></span><br><span class="line"><span class="comment">--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mapper</span> <span class="attr">namespace</span>=<span class="string">"com.mapper.UserMapper"</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">    select 执行的查询</span></span><br><span class="line"><span class="comment">    id  唯一标识</span></span><br><span class="line"><span class="comment">    namepace+id = sql 的绝对路径</span></span><br><span class="line"><span class="comment">    resultType 返回值的数据</span></span><br><span class="line"><span class="comment">    --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"selectAll"</span> <span class="attr">resultType</span>=<span class="string">"com.pojo.User"</span>&gt;</span></span><br><span class="line">       select * from tb_user ;</span><br><span class="line">  <span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mapper</span>&gt;</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>测试文件执行</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line"><span class="comment">//      构建 SqlSessionFactory</span></span><br><span class="line">        String resource = <span class="string">"mybatis-config.xml"</span>;</span><br><span class="line">        InputStream inputStream = Resources.getResourceAsStream(resource);</span><br><span class="line">        SqlSessionFactory sqlSessionFactory = <span class="keyword">new</span> SqlSessionFactoryBuilder().build(inputStream);</span><br><span class="line"><span class="comment">//        获取SqlSession对象 执行sql</span></span><br><span class="line">        SqlSession sqlSession = sqlSessionFactory.openSession();</span><br><span class="line"><span class="comment">//        执行sql  SQL映射文件的名称空间地址</span></span><br><span class="line">        UserMapper mapper = sqlSession.getMapper(UserMapper<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">        List&lt;User&gt; users = mapper.selectAll();</span><br><span class="line">        </span><br><span class="line">        System.out.println(users);</span><br><span class="line"></span><br><span class="line">        sqlSession.close();</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-</blockquote>
-
-      
-      <!-- 打赏 -->
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2021/10/20/Day04_Maven%E5%92%8CMyBatis/" data-id="ckw20s8d5000m10ue9tl84zsq"
-        class="article-share-link">分享</a>
-        
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-  
-  
-
-  
-
-</article>
-    
-    <article id="post-day03_JDBC" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2021/10/19/day03_JDBC/"
-    >JDBC和连接池DUird</a
-  >
-</h2>
-  
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2021/10/19/day03_JDBC/" class="article-date">
-  <time datetime="2021-10-19T09:16:49.000Z" itemprop="datePublished">2021-10-19</time>
-</a>
-      
-      
-      
-      
-    </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-      <h3 id="1-JDBC"><a href="#1-JDBC" class="headerlink" title="1. JDBC"></a>1. JDBC</h3><h4 id="1-1-概述"><a href="#1-1-概述" class="headerlink" title="1.1 概述"></a>1.1 概述</h4><blockquote>
-<ul>
-<li>JDBC就是使用Java语言操作关系型数据库的一套API</li>
-</ul>
-<p>好处：</p>
-<ul>
-<li>各数据库厂商使用相同的接口，Java代码不需要针对不数据库分别开发</li>
-<li>可随时替代底层数据库，访问数据库的Java代码基本不变</li>
-</ul>
-</blockquote>
-<h5 id="1-2-基本使用"><a href="#1-2-基本使用" class="headerlink" title="1.2 基本使用"></a>1.2 基本使用</h5><blockquote>
-<p>DML的使用：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//        注册驱动</span></span><br><span class="line">       Class.forName(<span class="string">"mysql.JDBC"</span>);</span><br><span class="line">&gt;<span class="comment">//        获取连接</span></span><br><span class="line"> <span class="built_in">String</span> url = <span class="string">"jdbc:mysql://127.0.0.1:3306/demotest"</span>;</span><br><span class="line">       <span class="built_in">String</span> username = <span class="string">"root"</span>;</span><br><span class="line">       <span class="built_in">String</span> passwored = <span class="string">"root"</span>;</span><br><span class="line">       Connection conn = DriverManager.getConnection(url, username, passwored);</span><br><span class="line">&gt;<span class="comment">//        定义SQL语句</span></span><br><span class="line"> <span class="built_in">String</span> sql = <span class="string">"UPDATE stu set age = 22 WHERE id =1 "</span>;</span><br><span class="line">&gt;<span class="comment">//        获取执行SQL对象</span></span><br><span class="line">       Statement stmt = conn.createStatement();</span><br><span class="line">&gt;<span class="comment">//        执行SQL</span></span><br><span class="line">       int count = stmt.executeUpdate(sql);</span><br><span class="line">&gt;<span class="comment">//        返回结果</span></span><br><span class="line">       System.out.println(count);</span><br><span class="line">&gt;<span class="comment">//        结束资源</span></span><br><span class="line">       stmt.close();</span><br><span class="line">       conn.close();</span><br></pre></td></tr></table></figure>
-
-<p>DQL的使用：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="comment">//        注册驱动</span></span><br><span class="line">       Class.forName(<span class="string">"com.mysql.jdbc.Driver"</span>);</span><br><span class="line">&gt;<span class="comment">//        获取连接  </span></span><br><span class="line">&gt;<span class="comment">// 		默认本机端口 可以省略jdbc:mysql:///demotest</span></span><br><span class="line">       String url = <span class="string">"jdbc:mysql://127.0.0.1:3306/demotest"</span>;</span><br><span class="line">       String username = <span class="string">"root"</span>;</span><br><span class="line">       String password = <span class="string">"root"</span>;</span><br><span class="line">       Connection conn = DriverManager.getConnection(url, username, password);</span><br><span class="line">&gt;<span class="comment">//        定义SQL语句  DML</span></span><br><span class="line">       String sql = <span class="string">"UPDATE stu set age = 44 WHERE id =1 "</span>;</span><br><span class="line">&gt;<span class="comment">//        DQL</span></span><br><span class="line">       String sql1 = <span class="string">"SELECT * FROM stu"</span>;</span><br><span class="line">&gt;<span class="comment">//        创建对象</span></span><br><span class="line">       Statement stmt = conn.createStatement();</span><br><span class="line">&gt;<span class="comment">//        执行语句</span></span><br><span class="line">       <span class="keyword">int</span> i = stmt.executeUpdate(sql);</span><br><span class="line">       ResultSet resultSet = stmt.executeQuery(sql1);</span><br><span class="line">&gt;<span class="comment">//        处理结果</span></span><br><span class="line">       <span class="keyword">while</span> (resultSet.next()) &#123;</span><br><span class="line">&gt;<span class="comment">//            设置参数</span></span><br><span class="line">           String id = resultSet.getString(<span class="number">1</span>);</span><br><span class="line">           String name = resultSet.getString(<span class="number">2</span>);</span><br><span class="line">           String age = resultSet.getString(<span class="number">3</span>);</span><br><span class="line">           String sex = resultSet.getString(<span class="number">4</span>);</span><br><span class="line">           String address = resultSet.getString(<span class="number">5</span>);</span><br><span class="line"></span><br><span class="line">           System.out.println(id);</span><br><span class="line">           System.out.println(name);</span><br><span class="line">           System.out.println(age);</span><br><span class="line">           System.out.println(sex);</span><br><span class="line">           System.out.println(address);</span><br><span class="line"></span><br><span class="line">     System.out.println(<span class="string">"------------------------"</span>);</span><br><span class="line">       &#125;</span><br><span class="line">       System.out.println(i);</span><br><span class="line">&gt;<span class="comment">//        关闭资源</span></span><br><span class="line">       resultSet.close();</span><br><span class="line">       stmt.close();</span><br><span class="line">       conn.close();</span><br></pre></td></tr></table></figure>
-
-
-</blockquote>
-<h4 id="1-3-JDBC-API"><a href="#1-3-JDBC-API" class="headerlink" title="1.3 JDBC API"></a>1.3 JDBC API</h4><blockquote>
-<p>（1）DriverManager（驱动管理类）作用</p>
-<ul>
-<li><p>注册驱动</p>
-</li>
-<li><p>获取数据库连接</p>
-<ul>
-<li><pre><code class="java">jdbc:mysql:<span class="comment">//ip:端口/数据库名？自定义参数</span>
-&lt;!--￼<span class="number">2</span>--&gt;</code></pre>
-</li>
-<li><p>预编译SQL的执行SQL对象：防止SQL注入</p>
-</li>
-<li><pre><code class="java"><span class="function">PrepareStatement <span class="title">prepareStatement</span><span class="params">(sql)</span> </span>
-<span class="function"><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 执行存储过程对象</span><br><span class="line"></span><br><span class="line">- &#96;&#96;&#96;java</span><br><span class="line">  CallableStatement prepareCall(sql)</span><br></pre></td></tr></table></figure></span></code></pre>
-</li>
-</ul>
-</li>
-<li><p>事务管理</p>
-<ul>
-<li><p>MySQL事务管理</p>
-</li>
-<li><p>JDBC事务管理</p>
-</li>
-<li><pre><code>// true  自动提交 false 手动提交
-开启事务：   conn.setAutoCommit(bolean autoCommit);
-提交事务：    commit()
-回滚事务：    rollback()
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&#96;&#96;&#96;java</span><br><span class="line">        try &#123;</span><br><span class="line">&#x2F;&#x2F;            开启事务  手动开启</span><br><span class="line">            conn.setAutoCommit(false);</span><br><span class="line">&#x2F;&#x2F;        执行SQL</span><br><span class="line">            int count &#x3D; stmt.executeUpdate(sql);</span><br><span class="line">&#x2F;&#x2F;        返回结果</span><br><span class="line">            System.out.println(count &gt; 0);</span><br><span class="line">&#x2F;&#x2F;            提交事务</span><br><span class="line">            conn.commit();</span><br><span class="line">        &#125; catch (SQLException e) &#123;</span><br><span class="line">&#x2F;&#x2F;            回滚事务</span><br><span class="line">            conn.rollback();</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
-</code></pre></li>
-</ul>
-</li>
-</ul>
-<p>（3）Statement</p>
-<ul>
-<li><p>执行DDL、DML</p>
-<ul>
-<li><pre><code class="java"><span class="function"><span class="keyword">int</span> <span class="title">executeUpdate</span><span class="params">(sql)</span></span>
-<span class="function"><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 执行DQL</span><br><span class="line"></span><br><span class="line">  - &#96;&#96;&#96;java</span><br><span class="line">    ResultSet  stmt.executeQuery(sql)</span><br></pre></td></tr></table></figure></span>
-<span class="function"></span></code></pre>
-</li>
-</ul>
-</li>
-</ul>
-<p>（4）ResultSet(结果集对象)</p>
-<ul>
-<li><p>ResultSet作用</p>
-</li>
-<li><p>获取查询结果</p>
-<ul>
-<li><pre><code class="javascript">boolean next():（<span class="number">1</span>）光标从当前位置向前移动一行 （<span class="number">2</span>）判断当前行是否为有效行
-    返回值：
-     - <span class="literal">true</span>：有效行，当前行有数据
-     - <span class="literal">false</span>：无效行，当前没有数据
-&lt;!--￼<span class="number">6</span>--&gt;
-</code></pre>
-</li>
-</ul>
-</li>
-</ul>
-<p>（5）PreparedStatement</p>
-<p>sql注入：==’ ‘ or ‘1’ =  ‘ 1==</p>
-<ul>
-<li>PreparedStatament 作用<ul>
-<li>预编译SQL并执行SQL</li>
-<li>防止SQL注入：将铭感字符进行转义</li>
-</ul>
-</li>
-<li>PreparedStatament  预编译功能开启：useServerPrepStmts = true；</li>
-<li>PreparedStatament原理<ul>
-<li>在获取PreparedStatament对象时，将sql语句发送给mysql服务器进行检查，编译（这些步骤耗时）</li>
-<li>执行时就不用再进行步骤了，速度更快</li>
-<li>如果sql模块一样，则只需要进行一次检查、编译</li>
-</ul>
-</li>
-</ul>
-</blockquote>
-<h3 id="2-数据库连接池"><a href="#2-数据库连接池" class="headerlink" title="2.数据库连接池"></a>2.数据库连接池</h3><h5 id="2-1-数据库概述"><a href="#2-1-数据库概述" class="headerlink" title="2.1 数据库概述"></a>2.1 数据库概述</h5><blockquote>
-<p>简介;</p>
-<ul>
-<li>数据库连接池是个容器，负责分配，管理数据库连接</li>
-<li>她允许应用程序重复使用一个现有的数据库连接，而不是再重新建立一个</li>
-<li>释放空间时间超过最大空闲时间的数据连接来避免因为没有释放数据库连接而引起的数据库连接遗漏</li>
-</ul>
-<p>好处：</p>
-<ul>
-<li>资源再用</li>
-<li>提升系统响应速度</li>
-<li>避免数据库连接遗漏</li>
-</ul>
-</blockquote>
-<h5 id="2-2-数据库实现"><a href="#2-2-数据库实现" class="headerlink" title="2.2 数据库实现"></a>2.2 数据库实现</h5><blockquote>
-<p>标准接口：DataSource</p>
-<ul>
-<li><p>官方（SUN）提供的数据库连接池标准接口，由第三方组织实现此接口</p>
-</li>
-<li><p>功能：获取连接</p>
-<ul>
-<li><pre><code class="java">Connection getDConnection
-&lt;!--￼<span class="number">7</span>--&gt;
-</code></pre>
-</li>
-</ul>
-</li>
-</ul>
-</blockquote>
-
-      
-      <!-- 打赏 -->
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2021/10/19/day03_JDBC/" data-id="ckw20s8e2001g10ueaz1teodj"
-        class="article-share-link">分享</a>
-        
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a></li></ul>
 
     </footer>
 
